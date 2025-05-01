@@ -1,0 +1,83 @@
+<!-- contacto.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto - Global Transportes</title>
+  <link rel="stylesheet" href="css/estilo.css">
+  <script>
+    function validarFormulario(event) {
+      event.preventDefault();
+
+      const nombre = document.getElementById("nombre").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const mensaje = document.getElementById("mensaje").value.trim();
+
+      if (!nombre || !email || !mensaje) {
+        alert("Por favor, completá todos los campos obligatorios.");
+        return false;
+      }
+
+      // Simular envío
+      alert("¡Gracias por contactarte con nosotros, " + nombre + "! Te responderemos a la brevedad.");
+      document.querySelector(".formulario-contacto").reset();
+      return true;
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <div class="contenedor">
+      <div class="logo">
+        <a href="index.html"><img src="img/logo.png" alt="Logo Global Transportes" height="60"></a>
+      </div>
+      <h1>Global Transportes</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="nosotros.html">Quiénes Somos</a></li>
+          <li><a href="servicios.html">Servicios</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+          <li><a href="sistema/login.html">Acceso Clientes</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="contenido">
+    <h2>Contacto</h2>
+    <p>¿Tenés preguntas, necesitás asistencia o querés solicitar un presupuesto? Completá el siguiente formulario y te responderemos a la brevedad. También podés comunicarte directamente por los siguientes medios:</p>
+
+    <div class="contacto-info">
+      <ul>
+        <li><strong>📞 Teléfono:</strong> +54 11 5555 5555</li>
+        <li><strong>📧 Email:</strong> <a href="mailto:contacto@globaltransportes.com">contacto@globaltransportes.com</a></li>
+        <li><strong>📍 Dirección:</strong> Av. Transporte 1234, Buenos Aires, Argentina</li>
+        <li><strong>💬 WhatsApp:</strong> +54 9 11 6666 6666</li>
+        <li><strong>🕒 Horario:</strong> Lunes a viernes de 9 a 18 hs</li>
+      </ul>
+    </div>
+
+    <form class="formulario-contacto" onsubmit="validarFormulario(event)">
+      <label for="nombre">Nombre completo</label>
+      <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+
+      <label for="email">Correo electrónico</label>
+      <input type="email" id="email" name="email" placeholder="tucorreo@ejemplo.com" required>
+
+      <label for="telefono">Teléfono</label>
+      <input type="tel" id="telefono" name="telefono" placeholder="Tu teléfono">
+
+      <label for="mensaje">Mensaje</label>
+      <textarea id="mensaje" name="mensaje" rows="5" placeholder="Escribí tu consulta aquí..." required></textarea>
+
+      <button type="submit">Enviar mensaje</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Global Transportes. Todos los derechos reservados.</p>
+  </footer>
+</body>
+</html>
