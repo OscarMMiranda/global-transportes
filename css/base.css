@@ -1,0 +1,117 @@
+/* === VARIABLES DE COLOR === */
+:root {
+    --color-primario: #002a5c;
+    --color-secundario: #004a99;
+    --color-acento: #0066cc;
+    --color-hover: #004080;
+    --color-texto: #333;
+    --color-fondo: #f4f6f8;
+    --color-card: #f4f4f4;
+    --color-blanco: #fff;
+    --color-rojo: #dc3545;
+    --color-rojo-hover: #a71d2a;
+    --color-focus: #f4b400;
+  }
+  
+  /* === CONFIGURACIÓN GLOBAL === */
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+  }
+  
+  h1, h2, h3 {
+    color: var(--color-primario);
+  }
+  
+  a {
+    text-decoration: none;
+    color: var(--color-acento);
+  }
+  
+  a:hover {
+    color: var(--color-hover);
+  }
+  
+  /* === CONTENEDORES === */
+  .contenedor {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+  }
+  
+  /* === MENÚ DE NAVEGACIÓN === */
+  nav {
+    background-color: var(--color-primario);
+    padding: 15px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .nav-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  
+  .nav-menu li {
+    display: inline-block;
+  }
+  
+  .nav-menu a {
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    padding: 12px 18px;
+    border-radius: 8px;
+    background: linear-gradient(to right, var(--color-hover), var(--color-acento));
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .nav-menu a:hover {
+    background: linear-gradient(to right, var(--color-acento), var(--color-hover));
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* === BOTÓN GENERAL === */
+  .boton-accion {
+    display: inline-block;
+    padding: 10px 16px;
+    font-weight: bold;
+    background-color: var(--color-secundario);
+    color: white;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .boton-accion:hover {
+    background-color: var(--color-acento);
+    transform: translateY(-2px);
+  }
+  
+  /* === RESPONSIVE === */
+  @media (max-width: 768px) {
+    .contenedor {
+      width: 100%;
+      padding: 15px;
+    }
+  
+    .nav-menu {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .nav-menu a {
+      display: block;
+      padding: 10px;
+    }
+  }
+  
