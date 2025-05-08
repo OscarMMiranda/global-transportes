@@ -1,0 +1,64 @@
+.
+├── contacto.html
+├── css
+│   ├── estilo.css
+│   └── login.css
+├── estructura.txt
+├── img
+│   └── logo.png
+├── includes
+│   ├── auth.php
+│   ├── clientes_funciones.php
+│   ├── conexion.php
+│   ├── crear_usuarios.php
+│   ├── funciones.php
+│   └── seguridad.php
+├── index.html
+├── info.php
+├── js
+│   ├── login.js
+│   └── ubigeo.js
+├── modulos
+│   ├── clientes
+│   │   ├── clientes.php
+│   │   ├── crear_clientes.php
+│   │   ├── editar_clientes.php
+│   │   ├── eliminar_clientes.php
+│   │   ├── errores_php.log
+│   │   ├── guardar_clientes.php
+│   │   ├── listar_clientes.php
+│   │   ├── prueba.php
+│   │   └── test.php
+│   ├── conductores
+│   ├── destinos
+│   ├── empleados
+│   ├── erp_dashboard.php
+│   ├── mercaderias
+│   ├── ubicaciones
+│   │   ├── ajax_departamentos.php
+│   │   ├── ajax_distritos.php
+│   │   ├── ajax_provincias.php
+│   │   └── selec_ubicacion.php
+│   ├── vehiculos
+│   └── zonas
+├── nosotros.html
+├── servicios.html
+├── sistema
+│   ├── actualizar_claves.php
+│   ├── crear_usuario.php
+│   ├── dashboard.php
+│   ├── editar_usuario.php
+│   ├── eliminar_usuario.php
+│   ├── generar_password.php
+│   ├── login.php
+│   ├── login2.php
+│   ├── logout.php
+│   ├── panel_admin.php
+│   ├── panel_chofer.php
+│   ├── panel_cliente.php
+│   ├── panel_empleado.php
+│   ├── panel.php
+│   └── usuarios.php
+├── test.php
+└── users
+    └── perfil.php

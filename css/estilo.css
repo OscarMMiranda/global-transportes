@@ -1,12 +1,25 @@
-/* estilo.css */
+/* === VARIABLES DE COLOR === */
+:root {
+  --color-primario: #002a5c;
+  --color-secundario: #004a99;
+  --color-acento: #0066cc;
+  --color-hover: #004080;
+  --color-texto: #333;
+  --color-fondo: #f4f6f8;
+  --color-card: #f4f4f4;
+  --color-blanco: #fff;
+  --color-rojo: #dc3545;
+  --color-rojo-hover: #a71d2a;
+  --color-focus: #f4b400;
+}
 
-/* --- ESTRUCTURA GENERAL --- */
+/* === ESTRUCTURA GENERAL === */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f4f6f8;
-  color: #333;
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
 }
 
 main.contenido {
@@ -20,9 +33,15 @@ h1 {
   font-weight: 600;
 }
 
-/* --- ENCABEZADO --- */
+.titulo-pagina {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: var(--color-texto);
+}
+
+/* === ENCABEZADO === */
 header {
-  background-color: #002a5c;
+  background-color: var(--color-primario);
   color: white;
   padding: 15px 0;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -46,13 +65,14 @@ header {
   width: auto;
 }
 
-/* --- NAVEGACIÓN --- */
+/* === NAVEGACIÓN === */
 nav ul.nav-menu {
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
   gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .btn-nav {
@@ -61,21 +81,28 @@ nav ul.nav-menu {
   font-weight: 500;
   padding: 10px 16px;
   border-radius: 8px;
-  background: linear-gradient(to right, #004080, #0066cc);
+  background: linear-gradient(to right, #004080, var(--color-acento));
   transition: all 0.3s ease;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .btn-nav:hover {
-  background: linear-gradient(to right, #0066cc, #004080);
+  background: linear-gradient(to right, var(--color-acento), #004080);
   transform: translateY(-2px);
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
 }
 
-/* --- SECCIÓN BIENVENIDA --- */
+.btn-nav:focus,
+.boton-accion:focus,
+.btn-accion:focus {
+  outline: 2px dashed var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* === BIENVENIDA === */
 .bienvenida h2 {
   font-size: 2.2rem;
-  color: #002a5c;
+  color: var(--color-primario);
 }
 
 .bienvenida p {
@@ -84,12 +111,12 @@ nav ul.nav-menu {
   max-width: 800px;
 }
 
-/* --- BOTÓN DE ACCIÓN GENERAL --- */
+/* === BOTÓN DE ACCIÓN GENERAL === */
 .boton-accion {
   display: inline-block;
   margin-top: 10px;
   padding: 10px 20px;
-  background-color: #004a99;
+  background-color: var(--color-secundario);
   color: white;
   font-weight: bold;
   text-decoration: none;
@@ -98,15 +125,15 @@ nav ul.nav-menu {
 }
 
 .boton-accion:hover {
-  background-color: #0066cc;
+  background-color: var(--color-acento);
   transform: translateY(-2px);
 }
 
-/* --- SECCIÓN VENTAJAS / CARDS --- */
+/* === SECCIÓN VENTAJAS / CARDS === */
 .ventajas h3 {
   font-size: 1.8rem;
   margin-bottom: 1.5rem;
-  color: #002a5c;
+  color: var(--color-primario);
 }
 
 .cards {
@@ -117,7 +144,7 @@ nav ul.nav-menu {
 }
 
 .card {
-  background-color: #f4f4f4;
+  background-color: var(--color-card);
   border-radius: 10px;
   padding: 20px;
   width: 280px;
@@ -135,20 +162,10 @@ nav ul.nav-menu {
   margin-top: 0;
   margin-bottom: 10px;
   font-size: 1.2rem;
-  color: #002a5c;
+  color: var(--color-primario);
 }
 
-/* --- PIE DE PÁGINA --- */
-footer {
-  background-color: #002a5c;
-  color: white;
-  text-align: center;
-  padding: 1rem 0;
-  margin-top: 2rem;
-  font-size: 0.95rem;
-}
-
-/* --- FORMULARIO DE LOGIN --- */
+/* === LOGIN === */
 .login-form {
   max-width: 400px;
   margin: 2rem auto;
@@ -165,12 +182,11 @@ footer {
   border-radius: 8px;
   border: 1px solid #ccc;
   font-size: 1rem;
-  box-sizing: border-box;
   transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 .login-form .formulario input:focus {
-  border-color: #0066cc;
+  border-color: var(--color-acento);
   box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.2);
   outline: none;
 }
@@ -178,7 +194,7 @@ footer {
 .login-form .formulario button {
   width: 100%;
   padding: 12px;
-  background-color: #002a5c;
+  background-color: var(--color-primario);
   color: white;
   font-weight: 500;
   border: none;
@@ -189,97 +205,191 @@ footer {
 }
 
 .login-form .formulario button:hover {
-  background-color: #004a99;
+  background-color: var(--color-secundario);
   transform: translateY(-2px);
 }
 
-/* --- TABLA DE USUARIOS --- */
-.tabla-usuarios {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 2rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  overflow: hidden;
-}
 
-.tabla-usuarios thead {
-  background-color: #002a5c;
-  color: white;
-}
 
-.tabla-usuarios th,
-.tabla-usuarios td {
-  padding: 14px 16px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-}
-
-.tabla-usuarios tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
-
-.tabla-usuarios tr:hover {
-  background-color: #eef2f7;
-}
-
-/* --- ENLACES DE ACCIÓN --- */
+/* === BOTONES DE ACCIÓN === */
 .acciones a {
   margin-right: 10px;
   text-decoration: none;
-  color: #0066cc;
+  color: var(--color-acento);
   font-weight: 500;
   transition: color 0.3s ease;
 }
 
 .acciones a:hover {
-  color: #004080;
+  color: var(--color-hover);
   text-decoration: underline;
 }
 
-/* --- BOTONES DE ACCIÓN DENTRO DE LA TABLA --- */
 .btn-accion {
   display: inline-block;
-  padding: 6px 12px;
-  border-radius: 6px;
+  padding: 6px 10px;
+  border-radius: 4px;
   text-decoration: none;
-  color: white;
+  font-size: 13px;
   font-weight: 500;
-  font-size: 0.85rem;
-  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .btn-accion.editar {
-  background-color: #007bff;
+  background-color: #3498db;
+  color: #fff;
 }
 
 .btn-accion.editar:hover {
-  background-color: #0056b3;
+  background-color: #2980b9;
   transform: translateY(-2px);
 }
 
 .btn-accion.eliminar {
-  background-color: #dc3545;
+  background-color: var(--color-rojo);
+  color: #fff;
 }
 
 .btn-accion.eliminar:hover {
-  background-color: #a71d2a;
+  background-color: var(--color-rojo-hover);
   transform: translateY(-2px);
 }
 
-.boton-editar {
-  background-color: #3498db;
-  color: white;
-  padding: 5px 10px;
-  text-decoration: none;
-  border-radius: 4px;
-  margin-right: 5px;
+/* === CONTROLES Y RESPONSIVE === */
+.barra-superior {
+  background-color: var(--color-primario);
+  padding: 10px 20px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
-.boton-eliminar {
-  background-color: #e74c3c;
+.acciones-clientes {
+  margin-bottom: 15px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.contenedor-tabla {
+  overflow-x: auto;
+}
+
+/* === PIE DE PÁGINA === */
+.footer {
+  background-color: var(--color-primario);
   color: white;
-  padding: 5px 10px;
+  padding: 1rem 0;
+  text-align: center;
+  width: 100%;
+}
+
+.contenedor-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-nav {
+  margin-top: 10px;
+}
+
+.footer-nav a {
+  color: white;
   text-decoration: none;
-  border-radius: 4px;
+  margin: 0 10px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.footer-nav a:hover {
+  color: var(--color-focus);
+}
+
+/* === ANIMACIONES === */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s ease forwards;
+    }
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+       }
+    }
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .contenedor {
+        flex-direction: column;
+        align-items: flex-start;
+        }
+
+  .cards {
+        flex-direction: column;
+        align-items: center;
+        }
+
+  nav ul.nav-menu {
+        flex-direction: column;
+        gap: 0.5rem;
+        }
+
+  
+
+
+  
+.titulo-pagina{
+        font-size: 150% ;
+        font-family: 'Times New Roman', Times, serif;
+        font: bold;
+        }
+
+
+/* === TABLAS === */
+.tabla-usuarios,
+.tabla-estilizada {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 2rem;
+  font-size: 0.70rem;
+  background-color: var(--color-blanco);
+  box-shadow: 0 0 9px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.tabla-usuarios thead,
+.tabla-estilizada th {
+  background-color: var(--color-primario);
+  color: white;
+}
+
+.tabla-usuarios th,
+.tabla-usuarios td,
+.tabla-estilizada th,
+.tabla-estilizada td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.tabla-usuarios tr:nth-child(even),
+.tabla-estilizada tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.tabla-usuarios tr:hover,
+.tabla-estilizada tr:hover {
+  background-color: #eef2f7;
+}
+
+.tabla-estilizada th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
 }

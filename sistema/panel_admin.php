@@ -68,6 +68,11 @@ if (
           <p>Personalizá la plataforma según tus necesidades.</p>
           <a href="#" class="boton-accion">Próximamente</a>
         </div>
+        <div class="card">
+          <h4>🚀 Ingresar al ERP</h4>
+          <p>Accedé al sistema de gestión (ERP) completo.</p>
+          <a href="../modulos/erp_dashboard.php" class="boton-accion">Entrar</a>
+        </div>
       </div>
     </section>
   </main>

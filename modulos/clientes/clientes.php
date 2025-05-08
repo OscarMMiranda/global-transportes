@@ -1,39 +1,42 @@
 <?php
-session_start();
 require_once '../../includes/conexion.php';
 
-// Verificar rol
-if (!isset($_SESSION['rol']) || ($_SESSION['rol'] !== 'admin' && $_SESSION['rol'] !== 'empleado')) {
-    header("Location: ../login.php");
-    exit();
-}
+// Consulta con JOIN para mostrar nombres de ubicación
+$query = "SELECT c.id, c.nombre, c.ruc, c.direccion, c.telefono, c.correo, 
+                 d.nombre AS departamento, p.nombre AS provincia, dis.nombre AS distrito
+          FROM clientes c
+          LEFT JOIN departamentos d ON c.departamento_id = d.id
+          LEFT JOIN provincias p ON c.provincia_id = p.id
+          LEFT JOIN distritos dis ON c.distrito_id = dis.id
+          WHERE c.estado = 'Activo'
+          ORDER BY c.id DESC";
 
-$sql = "SELECT id, nombre, ruc, direccion, telefono, correo, distrito_id, provincia_id, departamento_id, estado, fecha_creacion FROM clientes ORDER BY id DESC";
-$resultado = $conn->query($sql);
+$resultado = mysqli_query($conn, $query);
 ?>
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Gestión de Clientes</title>
-    <link rel="stylesheet" href="../../css/estilo.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-</head>
-<body>
-<div class="container">
-    <h1>Clientes</h1>
+<link rel="stylesheet" href="../../css/estilo.css">
+
+<main class="contenido">
+    <div class="titulo-pagina">📋 Gestión de Clientes</div>
+    <div class="barra-superior acciones-clientes">
+        <div>
+            <a href="crear_clientes.php" class="boton-accion registrar-cliente">➕ Registrar Cliente</a>
+            <a href="../../modulos/erp_dashboard.php" class="boton-accion volver-modulo">🔙 Volver al Módulo</a>
+        </div>
+    </div>
 
     <?php if (isset($_GET['mensaje'])): ?>
-        <div class="mensaje-sistema success"><?= htmlspecialchars($_GET['mensaje']) ?></div>
+        <div class="mensaje-exito">
+            <?= htmlspecialchars($_GET['mensaje']) ?>
+        </div>
     <?php elseif (isset($_GET['error'])): ?>
-        <div class="mensaje-sistema error"><?= htmlspecialchars($_GET['error']) ?></div>
+        <div class="mensaje-error">
+            <?= htmlspecialchars($_GET['error']) ?>
+        </div>
     <?php endif; ?>
 
-    <a href="crear_cliente.php" class="boton-accion">➕ Crear Cliente</a>
-
-    <?php if ($resultado && $resultado->num_rows > 0): ?>
-        <table id="tablaClientes" class="display" style="width:100%">
+    <div class="contenedor-tabla">
+        <table class="tabla-usuarios tabla-estilizada">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -42,52 +45,39 @@ $resultado = $conn->query($sql);
                     <th>Dirección</th>
                     <th>Teléfono</th>
                     <th>Correo</th>
-                    <th>Distrito ID</th>
-                    <th>Provincia ID</th>
-                    <th>Departamento ID</th>
-                    <th>Estado</th>
-                    <th>Fecha creación</th>
+                    <th>Departamento</th>
+                    <th>Provincia</th>
+                    <th>Distrito</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-            <?php while ($cliente = $resultado->fetch_assoc()) : ?>
-                <tr>
-                    <td><?= $cliente['id'] ?></td>
-                    <td><?= htmlspecialchars($cliente['nombre']) ?></td>
-                    <td><?= htmlspecialchars($cliente['ruc']) ?></td>
-                    <td><?= htmlspecialchars($cliente['direccion']) ?></td>
-                    <td><?= htmlspecialchars($cliente['telefono']) ?></td>
-                    <td><?= htmlspecialchars($cliente['correo']) ?></td>
-                    <td><?= $cliente['distrito_id'] ?></td>
-                    <td><?= $cliente['provincia_id'] ?></td>
-                    <td><?= $cliente['departamento_id'] ?></td>
-                    <td><?= $cliente['estado'] ?></td>
-                    <td><?= $cliente['fecha_creacion'] ?></td>
-                    <td>
-                        <a href="editar_cliente.php?id=<?= $cliente['id'] ?>">Editar</a> |
-                        <a href="eliminar_cliente.php?id=<?= $cliente['id'] ?>" onclick="return confirm('¿Eliminar este cliente?');">Eliminar</a>
-                    </td>
-                </tr>
-            <?php endwhile; ?>
+                <?php if (mysqli_num_rows($resultado) > 0): ?>
+                    <?php while ($cliente = mysqli_fetch_assoc($resultado)): ?>
+                        <tr>
+                            <td><?= $cliente['id'] ?></td>
+                            <td><?= htmlspecialchars($cliente['nombre']) ?></td>
+                            <td><?= htmlspecialchars($cliente['ruc']) ?></td>
+                            <td><?= htmlspecialchars($cliente['direccion']) ?></td>
+                            <td><?= htmlspecialchars($cliente['telefono']) ?></td>
+                            <td><?= htmlspecialchars($cliente['correo']) ?></td>
+                            <td><?= htmlspecialchars($cliente['departamento']) ?></td>
+                            <td><?= htmlspecialchars($cliente['provincia']) ?></td>
+                            <td><?= htmlspecialchars($cliente['distrito']) ?></td>
+                            <td class="acciones">
+                                <a href="editar_clientes.php?id=<?= $cliente['id'] ?>" class="btn-accion editar" title="Editar">✏️</a>
+                                <a href="eliminar_clientes.php?id=<?= $cliente['id'] ?>" class="btn-accion eliminar" title="Eliminar" onclick="return confirm('¿Estás seguro de eliminar este cliente?');">🗑️</a>
+                            </td>
+                        </tr>
+                    <?php endwhile; ?>
+                <?php else: ?>
+                    <tr>
+                        <td colspan="10" class="sin-registros">No se encontraron clientes activos.</td>
+                    </tr>
+                <?php endif; ?>
             </tbody>
         </table>
-    <?php else: ?>
-        <p>No hay clientes registrados.</p>
-    <?php endif; ?>
-</div>
+    </div>
+</main>
 
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $('#tablaClientes').DataTable({
-            language: {
-                url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json"
-            },
-            pageLength: 10
-        });
-    });
-</script>
-</body>
-</html>
+<?php include '../../includes/footer.php'; ?>
