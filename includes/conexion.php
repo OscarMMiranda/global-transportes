@@ -13,6 +13,7 @@ if ($conn->connect_error) {
     die("Error de conexión: " . $conn->connect_error);
 }
 
+
 // Opcional: establecer juego de caracteres
 $conn->set_charset("utf8");
 

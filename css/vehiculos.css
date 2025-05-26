@@ -1,0 +1,97 @@
+/* === TABLA DE VEHÍCULOS === */
+.tabla-vehiculos {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 0.9rem;
+    background-color: var(--color-blanco);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .tabla-vehiculos thead {
+    background-color: var(--color-primario);
+    color: white;
+  }
+  
+  .tabla-vehiculos th,
+  .tabla-vehiculos td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .tabla-vehiculos tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .tabla-vehiculos tr:hover {
+    background-color: #eef2f7;
+  }
+  
+  /* === BOTONES DE ACCIÓN === */
+  .btn-vehiculo {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  
+  .btn-vehiculo.editar {
+    background-color: #3498db;
+    color: white;
+  }
+  
+  .btn-vehiculo.editar:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+  }
+  
+  .btn-vehiculo.eliminar {
+    background-color: var(--color-rojo);
+    color: white;
+  }
+  
+  .btn-vehiculo.eliminar:hover {
+    background-color: var(--color-rojo-hover);
+    transform: translateY(-2px);
+  }
+
+
+  body { font-family: Arial, sans-serif; }
+  .contenedor { width: 90%; margin: 20px auto; }
+  .tabla-vehiculos { width: 100%; border-collapse: collapse; }
+  th, td { border: 1px solid black; padding: 8px; text-align: center; }
+  th { background-color: #f2f2f2; }
+  .btn-editar { color: blue; text-decoration: none; margin-right: 10px; }
+  .btn-eliminar { color: red; text-decoration: none; }
+  
+
+  
+  /* === CONTENEDOR PRINCIPAL === */
+  .vehiculos-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+    background-color: var(--color-card);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* === RESPONSIVE === */
+  @media (max-width: 768px) {
+    .tabla-vehiculos th, 
+    .tabla-vehiculos td {
+      padding: 8px;
+      font-size: 0.85rem;
+    }
+  
+    .vehiculos-container {
+      padding: 15px;
+    }
+  }
+  

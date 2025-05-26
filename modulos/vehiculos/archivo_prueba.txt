@@ -1,0 +1,2 @@
+Este es un archivo de prueba para verificar la subida en registrar_vehiculos.php.
+Si se sube correctamente, significa que el formulario y la configuración son correctos.

@@ -23,7 +23,7 @@
   }
   
   h1, h2, h3 {
-    color: var(--color-primario);
+    color: var(--color-blanco);
   }
   
   a {
@@ -38,10 +38,26 @@
   /* === CONTENEDORES === */
   .contenedor {
     width: 90%;
+    height: 60%;
     max-width: 1200px;
     margin: auto;
     padding: 20px;
   }
+
+
+/* === LOGO DEL SISTEMA === */
+.logo {
+    display:contents;
+    align-items: center; /* Centra verticalmente */
+    gap: 10px;          /* Espaciado entre elementos */
+}
+
+.logo-img {
+    height: 100%; /* Tamaño fijo */
+    width: auto; /* Mantiene proporción */
+}
+
+
   
   /* === MENÚ DE NAVEGACIÓN === */
   nav {
@@ -85,7 +101,7 @@
   .boton-accion {
     display: inline-block;
     padding: 10px 16px;
-    font-weight: bold;
+    font-weight: bold;      
     background-color: var(--color-secundario);
     color: white;
     border-radius: 5px;
@@ -97,6 +113,9 @@
     transform: translateY(-2px);
   }
   
+  
+
+
   /* === RESPONSIVE === */
   @media (max-width: 768px) {
     .contenedor {
@@ -115,3 +134,21 @@
     }
   }
   
+  nav {
+    margin-top: 10px;
+}
+
+.btn-nav {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    padding: 10px 16px;
+    border-radius: 6px;
+    background-color: var(--color-secundario);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-nav:hover {
+    background-color: var(--color-acento);
+    transform: translateY(-2px);
+}

@@ -1,0 +1,138 @@
+<?php
+// Verifica si la conexión está establecida
+require_once 'conexion.php';
+
+/**
+ * Obtener la lista de vehículos desde la base de datos.
+ * @param mysqli $conn Conexión a la base de datos
+ * @return mysqli_result Resultado de la consulta SQL
+ */
+function obtenerVehiculos($conn) {
+    $sql = "SELECT id, placa, marca_id, modelo, tipo_id, anio, empresa_id FROM vehiculos";
+    $result = $conn->query($sql);
+
+    if (!$result) {
+        die("❌ Error en consulta SQL: " . $conn->error);
+    }
+
+    return $result;
+}
+
+/**
+ * Obtener detalles de un vehículo específico.
+ * @param mysqli $conn Conexión a la base de datos
+ * @param int $id ID del vehículo
+ * @return array|null Datos del vehículo o null si no existe
+ */
+function obtenerVehiculoPorId($conn, $id) {
+    $sql = "SELECT id, placa, marca_id, modelo, tipo_id, anio, empresa_id FROM vehiculos WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    return ($result->num_rows > 0) ? $result->fetch_assoc() : null;
+}
+
+/**
+ * Registrar un nuevo vehículo en la base de datos.
+ * @param mysqli $conn Conexión a la base de datos
+ * @param string $placa Placa del vehículo
+ * @param int $marca_id ID de la marca
+ * @param string $modelo Modelo del vehículo
+ * @param int $tipo_id ID del tipo
+ * @param int $anio Año del vehículo
+ * @param int $empresa_id ID de la empresa
+ * @return bool Éxito o fallo en la inserción
+ */
+function registrarVehiculo($conn, $placa, $marca_id, $modelo, $tipo_id, $anio, $empresa_id) {
+    $sql = "INSERT INTO vehiculos (placa, marca_id, modelo, tipo_id, anio, empresa_id) VALUES (?, ?, ?, ?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("sisiii", $placa, $marca_id, $modelo, $tipo_id, $anio, $empresa_id);
+
+    return $stmt->execute();
+}
+
+/**
+ * Editar los datos de un vehículo existente.
+ * @param mysqli $conn Conexión a la base de datos
+ * @param int $id ID del vehículo
+ * @param string $placa Nueva placa
+ * @param int $marca_id Nueva marca
+ * @param string $modelo Nuevo modelo
+ * @param int $tipo_id Nuevo tipo
+ * @param int $anio Nuevo año
+ * @param int $empresa_id Nueva empresa
+ * @return bool Éxito o fallo en la actualización
+ */
+function editarVehiculo($conn, $id, $placa, $marca_id, $modelo, $tipo_id, $anio, $empresa_id) {
+    $sql = "UPDATE vehiculos SET placa = ?, marca_id = ?, modelo = ?, tipo_id = ?, anio = ?, empresa_id = ? WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("sisiiii", $placa, $marca_id, $modelo, $tipo_id, $anio, $empresa_id, $id);
+
+    return $stmt->execute();
+}
+
+/**
+ * Eliminar un vehículo por su ID.
+ * @param mysqli $conn Conexión a la base de datos
+ * @param int $id ID del vehículo a eliminar
+ * @return bool Éxito o fallo en la eliminación
+ */
+function eliminarVehiculo($conn, $id) {
+    $sql = "DELETE FROM vehiculos WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $id);
+
+    return $stmt->execute();
+}
+
+
+
+function obtenerMarcaNombre($conn, $marca_id) {
+    $sql = "SELECT nombre FROM marca_vehiculo WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $marca_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    if ($row = $result->fetch_assoc()) {
+        return $row['nombre'];
+    } else {
+        return "Desconocido"; // Si no se encuentra la marca
+    }
+}
+
+
+function obtenerTipoNombre($conn, $tipo_id) {
+    $sql = "SELECT nombre FROM tipo_vehiculo WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $tipo_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    if ($row = $result->fetch_assoc()) {
+        return $row['nombre'];
+    } else {
+        return "Desconocido"; // Si no se encuentra el tipo
+    }
+}
+
+function obtenerEmpresaNombre($conn, $empresa_id) {
+    $sql = "SELECT razon_social FROM empresa WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $empresa_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    if ($row = $result->fetch_assoc()) {
+        return $row['razon_social'];
+    } else {
+        return "Desconocida"; // Si no se encuentra la empresa
+    }
+}
+
+
+
+
+?>

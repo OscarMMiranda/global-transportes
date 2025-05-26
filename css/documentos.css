@@ -1,0 +1,62 @@
+/* === TABLA DE DOCUMENTOS === */
+.tabla-estilizada {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    background-color: var(--color-blanco);
+    box-shadow: 0 0 9px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .tabla-estilizada thead {
+    background-color: var(--color-primario);
+    color: white;
+  }
+  
+  .tabla-estilizada th, 
+  .tabla-estilizada td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .tabla-estilizada tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .tabla-estilizada tr:hover {
+    background-color: #eef2f7;
+  }
+  
+  /* === BOTONES DE ACCIÓN === */
+  .btn-accion {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  
+  .btn-accion.editar {
+    background-color: #3498db;
+    color: #fff;
+  }
+  
+  .btn-accion.editar:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+  }
+  
+  .btn-accion.eliminar {
+    background-color: var(--color-rojo);
+    color: #fff;
+  }
+  
+  .btn-accion.eliminar:hover {
+    background-color: var(--color-rojo-hover);
+    transform: translateY(-2px);
+  }
+  

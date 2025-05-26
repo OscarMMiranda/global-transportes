@@ -29,8 +29,13 @@ main.contenido {
 
 h1 {
   margin: 0;
-  font-size: 1.8rem;
-  font-weight: 600;
+  font-size: 2rem;
+  font-weight: 400;
+  color: rgb(250, 250, 250);
+  font: bold;
+  text-align: left;
+  vertical-align: middle;
+  font: 300% san serif;
 }
 
 .titulo-pagina {
@@ -51,19 +56,31 @@ header {
 }
 
 .contenedor {
-  width: 90%;
+  width: 80%;
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-between; 
   flex-wrap: wrap;
 }
 
-.logo-img {
-  height: 50px;
-  width: 60px;
+
+
+.logo {
+  display: flex;
+  align-items: center; /* Centra verticalmente */
+  justify-content: center; /* Centra horizontalmente */
+  
+
 }
+
+.logo-img {
+  height: 100px; /* Ajusta el tamaño */
+  width: auto;
+  margin-right: 15px; /* Espaciado con el título */
+}
+
 
 /* === NAVEGACIÓN === */
 nav ul.nav-menu {
@@ -71,6 +88,7 @@ nav ul.nav-menu {
   padding: 0;
   margin: 0;
   display: flex;
+  width: auto;
   gap: 1rem;
   flex-wrap: wrap;
 }

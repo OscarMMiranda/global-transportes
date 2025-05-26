@@ -1,0 +1,64 @@
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Contenedor principal */
+.contenedor {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Encabezados */
+h1, h2 {
+    color: #007bff;
+}
+
+/* (Opcional) Estilos personalizados para botones adicionales */
+/* Nota: Si usas las clases de Bootstrap (.btn, .btn-primary, etc.), estos estilos son complementarios */
+.btn-custom {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px 0;
+    font-size: 16px;
+    text-decoration: none;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+.btn-custom:hover {
+    background-color: #0056b3;
+}
+
+/* Botón para finalizar asignación */
+.btn-finalizar {
+    background-color: #dc3545 !important;
+    color: #fff !important;
+    padding: 6px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+.btn-finalizar:hover {
+    background-color: #a71d2a !important;
+}
+
+/* Ajustes adicionales para tablas (Bootstrap ya ofrece estilos para tablas, pero aquí se pueden aplicar detalles extra) */
+.table-responsive {
+    margin-top: 20px;
+}
+
+/* Puedes mantener esta regla si deseas un margen inferior en las tablas en caso de usarlas sin Bootstrap, 
+   de lo contrario Bootstrap ya controla esto */
+table {
+    margin-bottom: 20px;
+}

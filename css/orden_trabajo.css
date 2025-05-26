@@ -1,0 +1,46 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* Reducción del tamaño de fuente en tablas */
+.tabla-ordenes {
+    font-size: 14px; /* Hace la fuente más compacta */
+}
+
+/* Mejoras en la tabla */
+.table {
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.table th {
+    text-align: center;
+    font-weight: bold;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #e9ecef;
+}
+
+/* Colores de estado */
+.table-dark th {
+    background-color: #343a40;
+    color: white;
+}
+
+.table-warning th {
+    background-color: #ffc107;
+}
+
+.table-danger th {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* Botones */
+.btn-lg {
+    font-size: 16px;
+    padding: 10px 20px;
+}

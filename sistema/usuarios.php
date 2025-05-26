@@ -1,20 +1,54 @@
 <?php
 session_start();
-include '../includes/conexion.php';
+require_once '../includes/conexion.php';
 
-// Verificar que el usuario esté logueado y sea admin por nombre de rol
-if (!isset($_SESSION['usuario']) || !isset($_SESSION['rol_nombre']) || $_SESSION['rol_nombre'] !== 'admin') {
+// Activar modo depuración (quitar en producción)
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('log_errors', 1);
+ini_set('error_log', 'error_log.txt');
+
+// Verificar acceso solo para administradores
+if (!isset($_SESSION['usuario']) || $_SESSION['rol_nombre'] !== 'admin') {
+    error_log("❌ Acceso no autorizado: " . $_SERVER['REMOTE_ADDR']);
     header("Location: login.php");
     exit();
 }
 
-// Obtener lista de usuarios y roles
+// Obtener lista de usuarios y roles con verificación de errores
 $sql = "SELECT u.id, u.nombre, u.apellido, u.usuario, u.correo, r.nombre AS rol, u.creado_en
         FROM usuarios u
         JOIN roles r ON u.rol = r.id
         ORDER BY u.id ASC";
 
 $resultado = $conn->query($sql);
+
+if (!$resultado) {
+    die("<h3>❌ Error al obtener usuarios: " . $conn->error . "</h3>");
+}
+
+// **Registrar acceso en historial_bd**
+$usuario = $_SESSION['usuario'];
+$accion = "Visualizó lista de usuarios";
+$ip_usuario = $_SERVER['REMOTE_ADDR'];
+$sql_historial = "INSERT INTO historial_bd (usuario, accion, ip_usuario) VALUES ('$usuario', '$accion', '$ip_usuario')";
+$conn->query($sql_historial);
+
+// Exportación a CSV
+if (isset($_GET['exportar']) && $_GET['exportar'] === 'csv') {
+    header('Content-Type: text/csv');
+    header('Content-Disposition: attachment; filename="usuarios.csv"');
+
+    $output = fopen('php://output', 'w');
+    fputcsv($output, ["ID", "Nombre", "Apellido", "Usuario", "Correo", "Rol", "Fecha Creación"]);
+
+    $result_csv = $conn->query($sql);
+    while ($fila = $result_csv->fetch_assoc()) {
+        fputcsv($output, $fila);
+    }
+    fclose($output);
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -23,26 +57,18 @@ $resultado = $conn->query($sql);
     <meta charset="UTF-8">
     <title>Lista de Usuarios</title>
     <link rel="stylesheet" href="../css/estilo.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 </head>
 <body>
 <div class="container">
     <h1>Lista de Usuarios</h1>
+    <a href="crear_usuario.php" class="boton-accion">➕ Crear Usuario</a>
+    <a href="usuarios.php?exportar=csv" class="boton-accion">📥 Exportar CSV</a>
 
-    <?php if (isset($_GET['mensaje'])): ?>
-        <div class="mensaje-sistema" style="background-color: #e6ffed; color: #007700; padding: 10px; margin-bottom: 15px;">
-            <?= htmlspecialchars($_GET['mensaje']) ?>
-        </div>
-    <?php elseif (isset($_GET['error'])): ?>
-        <div class="mensaje-sistema" style="background-color: #fee; color: #a00; padding: 10px; margin-bottom: 15px;">
-            <?= htmlspecialchars($_GET['error']) ?>
-        </div>
-    <?php endif; ?>
+    <h3>Buscar Usuario</h3>
+    <input type="text" id="buscarUsuario" onkeyup="filtrarUsuarios()" placeholder="🔍 Buscar por nombre o correo...">
 
-    <a href="crear_usuario.php" class="boton-accion">Crear Usuario</a>
-
-    <?php if ($resultado && $resultado->num_rows > 0): ?>
-        <table id="tablaUsuarios" class="display tabla-usuarios" style="width:100%">
+    <?php if ($resultado->num_rows > 0): ?>
+        <table id="tablaUsuarios">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -51,7 +77,7 @@ $resultado = $conn->query($sql);
                     <th>Usuario</th>
                     <th>Correo</th>
                     <th>Rol</th>
-                    <th>Fecha de Creación</th>
+                    <th>Fecha Creación</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -66,33 +92,29 @@ $resultado = $conn->query($sql);
                     <td><?= htmlspecialchars(ucfirst($fila['rol'])); ?></td>
                     <td><?= htmlspecialchars($fila['creado_en']); ?></td>
                     <td class="acciones">
-                        <a href="editar_usuario.php?id=<?= $fila['id']; ?>">Editar</a> |
-                        <a href="eliminar_usuario.php?id=<?= $fila['id']; ?>" onclick="return confirm('¿Eliminar este usuario?');">Eliminar</a>
+                        <a href="editar_usuario.php?id=<?= $fila['id']; ?>">✏️ Editar</a> |
+                        <a href="eliminar_usuario.php?id=<?= $fila['id']; ?>" onclick="return confirm('⚠️ ¿Eliminar este usuario?');">🗑 Eliminar</a>
                     </td>
                 </tr>
             <?php endwhile; ?>
             </tbody>
         </table>
     <?php else: ?>
-        <p>No hay usuarios registrados.</p>
+        <p>📌 No hay usuarios registrados.</p>
     <?php endif; ?>
 
     <p><a href="panel_admin.php" class="boton-accion">← Volver al Panel</a></p>
 </div>
 
-<!-- jQuery y DataTables -->
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 <script>
-    $(document).ready(function () {
-        $('#tablaUsuarios').DataTable({
-            language: {
-                url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json"
-            },
-            responsive: true,
-            pageLength: 10
+    function filtrarUsuarios() {
+        var input = document.getElementById("buscarUsuario").value.toLowerCase();
+        var filas = document.querySelectorAll("tbody tr");
+
+        filas.forEach(fila => {
+            fila.style.display = fila.textContent.toLowerCase().includes(input) ? "" : "none";
         });
-    });
+    }
 </script>
 </body>
 </html>

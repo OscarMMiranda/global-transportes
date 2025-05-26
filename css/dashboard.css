@@ -1,106 +1,136 @@
-/* === DASHBOARD: ENCABEZADO Y ESTRUCTURA === */
-.dashboard-container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 20px auto;
+/* === DASHBOARD: VARIABLES DE COLOR === */
+:root {
+    --color-primario: #002a5c;      /* Azul oscuro, usado en encabezados y fondo principal */
+    --color-secundario: #004a99;    /* Azul medio, usado en botones y elementos destacados */
+    --color-acento: #0066cc;        /* Azul brillante, usado en hover y detalles */
+    --color-hover: #004080;         /* Azul más oscuro, para efectos hover */
+    --color-texto: #333;            /* Color de texto estándar */
+    --color-fondo: #f4f6f8;         /* Fondo general del dashboard */
+    --color-card: #f4f4f4;          /* Fondo de las tarjetas de módulo */
+    --color-blanco: #fff;           /* Blanco puro, usado en contenedores */
+    --color-rojo: #dc3545;          /* Rojo para botones de eliminación */
+    --color-rojo-hover: #a71d2a;    /* Rojo oscuro para hover */
+    --color-focus: #f4b400;         /* Amarillo usado para enfoque en elementos */
   }
   
+  /* === DASHBOARD: ENCABEZADO Y ESTRUCTURA === */
+  .dashboard-container {
+    width: 90%;
+    height: 50%;
+    max-width: 1200px;              /* Define el ancho máximo del área de trabajo */
+    margin: 20px auto;              /* Centra el contenedor con margen superior e inferior */
+    padding: 20px;                  /* Espaciado interno */
+    background-color: var(--color-blanco); /* Fondo blanco */
+    border-radius: 10px;            /* Bordes redondeados */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Sombra suave para efecto elevado */
+  }
+
+  
+  
+  /* === ENCABEZADO DEL DASHBOARD === */
   .dashboard-header {
-    background-color: var(--color-primario);
-    color: white;
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    text-align: center;
+    background-color: var(--color-primario); /* Fondo azul oscuro */
+    color: white;                   /* Texto blanco */
+    padding: 15px;                    /* Espaciado interno */
+    border-radius: 10px;              /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Sombra para profundidad */
+    text-align: center;               /* Centra el contenido */
   }
   
   .dashboard-header h1 {
-    font-size: 24px;
-    font-weight: bold;
-    margin: 0;
-    height: 20px;
+    font-size: 24px;                /* Tamaño de fuente para el título */
+    font-weight: bold;              /* Hace el texto más grueso */
+    margin: 0;                      /* Elimina el margen para un ajuste más preciso */
+  }
+  
+ /* === SECCIÓN DE BIENVENIDA EN EL DASHBOARD === */
+ .bienvenida {
+    text-align: center; /* Centra el contenido */
+    padding: 20px; /* Espaciado interno */
+    background-color: var(--color-card); /* Fondo gris claro */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Sombra ligera */
+    margin-bottom: 20px; /* Espacio inferior */
+  }
+  
+  .bienvenida h2 {
+    font-size: 2rem; /* Tamaño del título */
+    color: var(--color-primario); /* Azul oscuro */
+    margin-bottom: 10px; /* Espaciado inferior */
+  }
+  
+  .bienvenida p {
+    font-size: 1.2rem; /* Tamaño del texto */
+    color: var(--color-texto); /* Color estándar de párrafos */
+    max-width: 800px; /* Limita el ancho del texto */
+    margin: auto; /* Centra el párrafo */
   }
 
-  
-  
-  /* === DASHBOARD: TARJETAS DE MÓDULOS === */
+
+
+
+
+  /* === TARJETAS DE MÓDULOS EN EL DASHBOARD === */
   .dashboard-cards {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
+    display: flex; /* Activa el diseño flexible */
+    flex-wrap: wrap; /* Permite que las tarjetas se acomoden en varias líneas */
+    gap: 20px; /* Espacio entre tarjetas */
+    justify-content: center; /* Centra las tarjetas */
   }
   
+  /* === ESTILO INDIVIDUAL DE CADA TARJETA === */
   .card-dashboard {
-    background-color: var(--color-card);
-    padding: 10px;
-    width: 280px;
-    height: auto;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    text-align: center;
-    transition: transform 0.2s ease;
+    background-color: var(--color-card); /* Fondo gris claro */
+    padding: 20px; /* Espaciado interno */
+    width: 280px; /* Tamaño estándar */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Sombra ligera */
+    text-align: center; /* Alineación del texto */
+    transition: transform 0.2s ease; /* Suaviza el efecto de hover */
   }
   
   .card-dashboard:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px); /* Eleva la tarjeta al pasar el mouse */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* Sombra más intensa */
   }
   
+  /* === TÍTULOS DE LAS TARJETAS === */
   .card-dashboard h4 {
-    font-size: 1.4rem;
-    color: var(--color-primario);
+    font-size: 1.4rem;              /* Tamaño del título */
+    color: var(--color-primario);   /* Azul oscuro */
   }
   
+  /* === DESCRIPCIÓN DENTRO DE LAS TARJETAS === */
   .card-dashboard p {
-    font-size: 1rem;
-    color: var(--color-texto);
+    font-size: 1rem;                /* Tamaño del texto */
+    color: var(--color-texto);      /* Color oscuro estándar */
   }
   
+  /* === BOTONES DE ACCIÓN DENTRO DE LAS TARJETAS === */
   .card-dashboard a {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 10px 16px;
-    background-color: var(--color-secundario);
-    color: white;
-    font-weight: bold;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: inline-block;          /* Evita que el enlace rompa la estructura */
+    margin-top: 10px;               /* Espaciado superior */
+    padding: 10px 10px;             /* Tamaño del botón */
+    background-color: var(--color-secundario); /* Fondo azul medio */
+    color: white; /* Texto blanco */
+    font-weight: bold; /* Hace el texto más grueso */
+    text-decoration: none; /* Elimina subrayado */
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Suaviza la animación */
   }
-
-  
   
   .card-dashboard a:hover {
-    background-color: var(--color-acento);
-    transform: translateY(-2px);
+    background-color: var(--color-acento); /* Cambia el color al pasar el mouse */
+    transform: translateY(-2px); /* Eleva ligeramente el botón */
   }
   
-  /* === BOTONES DE ACCIÓN === */
-  .dashboard-btn {
-    display: inline-block;
-    padding: 8px 14px;
-    font-size: 14px;
-    font-weight: bold;
-    text-decoration: none;
-    color: white;
-    background-color: var(--color-secundario);
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .dashboard-btn:hover {
-    background-color: var(--color-acento);
-    transform: translateY(-2px);
-  }
-
-  
-  
-  /* === RESPONSIVE === */
+  /* === RESPONSIVE: AJUSTE PARA MÓVILES === */
   @media (max-width: 768px) {
     .dashboard-cards {
-      flex-direction: column;
-      align-items: center;
+      flex-direction: column; /* Apila las tarjetas en pantallas pequeñas */
+      align-items: center; /* Centra las tarjetas */
     }
   }
   
+
+ 

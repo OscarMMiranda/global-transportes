@@ -1,0 +1,75 @@
+/* === FORMULARIOS: ESTILOS GENERALES === */
+.formulario-contenedor {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background-color: var(--color-blanco);
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  /* === CAMPOS DE FORMULARIO === */
+  .campo-form {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  label {
+    font-weight: bold;
+    color: var(--color-primario);
+  }
+  
+  .input-form {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+  }
+  
+  .input-form:focus {
+    border-color: var(--color-focus);
+    outline: none;
+  }
+  
+  /* === BOTÓN DE ENVÍO === */
+  .boton-accion {
+    padding: 12px;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: var(--color-secundario);
+    color: white;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .boton-accion:hover {
+    background-color: var(--color-acento);
+    transform: translateY(-3px);
+  }
+  
+  /* === MENSAJES DE ERROR === */
+  .mensaje-error {
+    color: var(--color-rojo);
+    font-size: 0.9rem;
+    margin-top: -10px;
+  }
+  
+  /* === RESPONSIVE === */
+  @media (max-width: 768px) {
+    .formulario-contenedor {
+      width: 95%;
+      padding: 15px;
+    }
+  }
+  
