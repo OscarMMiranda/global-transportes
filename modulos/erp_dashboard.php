@@ -1,15 +1,18 @@
 <?php
-session_start();
+   session_start();
 
-// Require header (si usas un header compartido)
-// require_once '../../includes/header_erp.php';
+   // Require header (si usas un header compartido)
+   // require_once '../../includes/header_erp.php';
 
-// Verificar acceso solo para administradores
-if (!isset($_SESSION['usuario']) || !isset($_SESSION['rol_nombre']) || $_SESSION['rol_nombre'] !== 'admin') {
-    header("Location: ../sistema/login.php");
-    exit();
-}
+   // Verificar acceso solo para administradores
+   if (!isset($_SESSION['usuario']) || !isset($_SESSION['rol_nombre']) || $_SESSION['rol_nombre'] !== 'admin') 
+      {
+      header("Location: ../sistema/login.php");
+      exit();
+      }
 ?>
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -19,6 +22,7 @@ if (!isset($_SESSION['usuario']) || !isset($_SESSION['rol_nombre']) || $_SESSION
     <link rel="stylesheet" href="../css/base.css">
     <link rel="stylesheet" href="../css/dashboard.css">
 </head>
+
 <body>
     <header class="dashboard-header">
         <div class="contenedor">
@@ -39,6 +43,26 @@ if (!isset($_SESSION['usuario']) || !isset($_SESSION['rol_nombre']) || $_SESSION
             </nav>
         </div>
     </header>
+
+    <body>
+    <aside class="sidebar">
+        <h2>Menú Principal</h2>
+        <nav class="sidebar-menu">
+            <ul>
+                <li><a href="../modulos/clientes/clientes.php">👥 Clientes</a></li>
+                <li><a href="../modulos/orden_trabajo/orden_trabajo.php">📋 Órdenes de Trabajo</a></li>
+                <li><a href="../modulos/vehiculos/vehiculos.php">🚛 Vehículos</a></li>
+                <li><a href="../modulos/mantenimiento/mantenimiento.php">🛠 Mantenimiento de Datos</a></li>
+                <li><a href="../sistema/panel_admin.php">⚙️ Administración</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="dashboard-content">
+        <!-- Aquí va el contenido principal del dashboard -->
+    </main>
+</body>
+
 
     <main class="dashboard-container">
         <section class="bienvenida">
@@ -114,8 +138,8 @@ if (!isset($_SESSION['usuario']) || !isset($_SESSION['rol_nombre']) || $_SESSION
             </div>
         </section>
 
-        <!-- Sección: Configuración y Administración -->
-        <section class="dashboard-section">
+         <!-- Sección: Configuración y Administración -->
+         <section class="dashboard-section">
             <h3>Configuración y Administración</h3>
             <div class="dashboard-cards">
                 <div class="card-dashboard">
@@ -129,7 +153,20 @@ if (!isset($_SESSION['usuario']) || !isset($_SESSION['rol_nombre']) || $_SESSION
                     <a href="../sistema/admin_db.php" class="dashboard-btn">Ir</a>
                 </div>
             </div>
-        </section>
+         </section>
+
+
+         <section class="dashboard-section">
+         <h3>⚙️ Mantenimiento de Datos</h3>
+    <div class="dashboard-cards">
+        <div class="card-dashboard">
+            <h4>📦 Tipo de Mercadería</h4>
+            <p>Editar y actualizar tipos de mercadería.</p>
+            <a href="../modulos/mantenimiento/mantenimiento.php" class="dashboard-btn">Actualizar</a>
+        </div>
+    </div>
+</section>
+
 
     </main>
 

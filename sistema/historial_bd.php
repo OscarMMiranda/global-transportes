@@ -13,7 +13,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol_nombre'] !== 'admin') {
     die("❌ Acceso denegado.");
 }
 
-// Validar existencia de `historial_bd`
+// Verificar existencia de `historial_bd`
 $sql_verificar = "SHOW TABLES LIKE 'historial_bd'";
 $resultado_verificar = $conn->query($sql_verificar);
 
@@ -21,25 +21,27 @@ if (!$resultado_verificar || $resultado_verificar->num_rows == 0) {
     die("❌ Error: La tabla 'historial_bd' no existe.");
 }
 
-// Obtener filtros de búsqueda si se envían
+// Obtener filtros de búsqueda si se envían y escaparlos
 $filtro_usuario = isset($_GET['usuario']) ? $conn->real_escape_string($_GET['usuario']) : '';
-$filtro_tabla = isset($_GET['tabla']) ? $conn->real_escape_string($_GET['tabla']) : '';
-$filtro_fecha = isset($_GET['fecha']) ? $conn->real_escape_string($_GET['fecha']) : '';
-$filtro_accion = isset($_GET['accion']) ? $conn->real_escape_string($_GET['accion']) : '';
+$filtro_tabla   = isset($_GET['tabla'])   ? $conn->real_escape_string($_GET['tabla'])   : '';
+$filtro_fecha   = isset($_GET['fecha'])   ? $conn->real_escape_string($_GET['fecha'])   : '';
+$filtro_accion  = isset($_GET['accion'])  ? $conn->real_escape_string($_GET['accion'])  : '';
 
-// Construir consulta SQL con filtros dinámicos
-$sql = "SELECT * FROM historial_bd WHERE 1=1";
-if ($filtro_usuario) $sql .= " AND usuario LIKE '%$filtro_usuario%'";
-if ($filtro_tabla) $sql .= " AND tabla_afectada LIKE '%$filtro_tabla%'";
-if ($filtro_fecha) $sql .= " AND DATE(fecha) = '$filtro_fecha'";
-if ($filtro_accion) $sql .= " AND accion LIKE '%$filtro_accion%'";
-$sql .= " ORDER BY fecha DESC";
+// Construir condiciones dinámicas y almacenarlas en una variable
+$filtros = "";
+if ($filtro_usuario) $filtros .= " AND usuario LIKE '%$filtro_usuario%'";
+if ($filtro_tabla)   $filtros .= " AND tabla_afectada LIKE '%$filtro_tabla%'";
+if ($filtro_fecha)   $filtros .= " AND DATE(fecha) = '$filtro_fecha'";
+if ($filtro_accion)  $filtros .= " AND accion LIKE '%$filtro_accion%'";
+
+// Consulta SQL con filtros dinámicos
+$sql = "SELECT * FROM historial_bd WHERE 1=1 $filtros ORDER BY fecha DESC";
 
 // Paginación
-$limite = 10;
-$pagina = isset($_GET['pagina']) && is_numeric($_GET['pagina']) ? (int) $_GET['pagina'] : 1;
-$inicio = ($pagina - 1) * $limite;
-$sql .= " LIMIT $inicio, $limite";
+$limite  = 10;
+$pagina  = isset($_GET['pagina']) && is_numeric($_GET['pagina']) ? (int) $_GET['pagina'] : 1;
+$inicio  = ($pagina - 1) * $limite;
+$sql    .= " LIMIT $inicio, $limite";
 
 $resultado = $conn->query($sql);
 
@@ -47,13 +49,19 @@ if (!$resultado) {
     die("❌ Error al obtener historial: " . $conn->error);
 }
 
-// Obtener total de registros para paginación
-$sql_total = "SELECT COUNT(*) as total FROM historial_bd WHERE 1=1";
+// Obtener total de registros para paginación (usando los mismos filtros)
+$sql_total = "SELECT COUNT(*) as total FROM historial_bd WHERE 1=1 $filtros";
 $resultado_total = $conn->query($sql_total);
 $total_registros = $resultado_total->fetch_assoc()['total'];
 $total_paginas = ceil($total_registros / $limite);
-?>
 
+// Construir cadena de parámetros GET para la paginación
+$params = "";
+if ($filtro_usuario) $params .= "&usuario=" . urlencode($filtro_usuario);
+if ($filtro_tabla)   $params .= "&tabla="   . urlencode($filtro_tabla);
+if ($filtro_fecha)   $params .= "&fecha="   . urlencode($filtro_fecha);
+if ($filtro_accion)  $params .= "&accion="  . urlencode($filtro_accion);
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -74,21 +82,21 @@ $total_paginas = ceil($total_registros / $limite);
     <h3>Filtrar Historial</h3>
     <form method="GET" action="historial_bd.php">
         <label for="usuario">Usuario:</label>
-        <input type="text" name="usuario" value="<?= $filtro_usuario ?>">
+        <input type="text" name="usuario" value="<?= htmlspecialchars($filtro_usuario) ?>">
 
         <label for="tabla">Tabla Afectada:</label>
-        <input type="text" name="tabla" value="<?= $filtro_tabla ?>">
+        <input type="text" name="tabla" value="<?= htmlspecialchars($filtro_tabla) ?>">
 
         <label for="fecha">Fecha (YYYY-MM-DD):</label>
-        <input type="date" name="fecha" value="<?= $filtro_fecha ?>">
+        <input type="date" name="fecha" value="<?= htmlspecialchars($filtro_fecha) ?>">
 
         <label for="accion">Acción:</label>
         <select name="accion">
             <option value="">Todas</option>
-            <option value="Creó tabla">Solo Creaciones</option>
-            <option value="Eliminó tabla">Solo Eliminaciones</option>
-            <option value="Agregó columna">Solo Adiciones</option>
-            <option value="Modificó columna">Solo Modificaciones</option>
+            <option value="Creó tabla" <?= $filtro_accion === "Creó tabla" ? "selected" : "" ?>>Solo Creaciones</option>
+            <option value="Eliminó tabla" <?= $filtro_accion === "Eliminó tabla" ? "selected" : "" ?>>Solo Eliminaciones</option>
+            <option value="Agregó columna" <?= $filtro_accion === "Agregó columna" ? "selected" : "" ?>>Solo Adiciones</option>
+            <option value="Modificó columna" <?= $filtro_accion === "Modificó columna" ? "selected" : "" ?>>Solo Modificaciones</option>
         </select>
 
         <button type="submit">🔍 Filtrar</button>
@@ -116,7 +124,7 @@ $total_paginas = ceil($total_registros / $limite);
 
     <h3>Paginación</h3>
     <?php for ($i = 1; $i <= $total_paginas; $i++) { ?>
-        <a href="historial_bd.php?pagina=<?= $i ?>"><?= $i ?></a>
+        <a href="historial_bd.php?pagina=<?= $i ?><?= $params ?>"><?= $i ?></a>
     <?php } ?>
 </main>
 

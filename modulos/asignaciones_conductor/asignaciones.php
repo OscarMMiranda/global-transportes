@@ -17,7 +17,7 @@ if (!$conn) {
     die("Error de conexión con la base de datos: " . mysqli_connect_error());
 }
 
-// OBTENER ESTADO "ACTIVO"
+// OBTENER EL ESTADO "ACTIVO"
 $sql_estado_activo = "SELECT id FROM estado_asignacion WHERE nombre = 'activo'";
 $result_estado_activo = $conn->query($sql_estado_activo);
 if (!$result_estado_activo) {
@@ -29,7 +29,7 @@ if ($result_estado_activo->num_rows === 0) {
 $row_estado_activo = $result_estado_activo->fetch_assoc();
 $estado_id_activo = $row_estado_activo['id'];
 
-// OBTENER ESTADO "FINALIZADO"
+// OBTENER EL ESTADO "FINALIZADO"
 $sql_estado_finalizado = "SELECT id FROM estado_asignacion WHERE nombre = 'finalizado'";
 $result_estado_finalizado = $conn->query($sql_estado_finalizado);
 if (!$result_estado_finalizado) {
@@ -83,7 +83,7 @@ if ($result_historial === false) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <!-- DataTables CSS -->
+    <!-- DataTables CSS (opcional, para mejor paginación y búsquedas) -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
     <!-- CSS Personalizado -->
     <link rel="stylesheet" href="../../css/asignaciones.css">
@@ -126,7 +126,8 @@ if ($result_historial === false) {
                             <td><?= htmlspecialchars($asignacion['fecha_inicio']) ?></td>
                             <td><?= htmlspecialchars($asignacion['estado']) ?></td>
                             <td>
-                                <a href="finalizar_asignacion.php?id=<?= $asignacion['id'] ?>" class="btn btn-danger btn-sm">
+                                <!-- Botón que activa el modal de confirmación -->
+                                <a href="#" data-finalizar-id="<?= $asignacion['id'] ?>" class="btn btn-danger btn-sm btn-finalizar">
                                     <i class="fas fa-times-circle"></i> Finalizar
                                 </a>
                             </td>
@@ -173,16 +174,35 @@ if ($result_historial === false) {
     <?php } ?>
 </div>
 
-<!-- jQuery (necesario para DataTables) -->
+<!-- Modal de Confirmación para Finalizar Asignación -->
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmModalLabel">Confirmar Finalización</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        ¿Estás seguro de que deseas finalizar esta asignación?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-danger" id="confirmBtn">Confirmar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- jQuery (necesario para DataTables y el manejo del modal) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<!-- DataTables JS -->
+<!-- DataTables JS (opcional) -->
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-<!-- Bootstrap JS Bundle -->
+<!-- Bootstrap JS Bundle (incluye Popper) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
 $(document).ready(function(){
-    // Inicializamos DataTables en cada tabla
+    // Inicializar DataTables (opcional)
     $('#tablaActivas').DataTable({
         "language": {
             "url": "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json"
@@ -192,6 +212,20 @@ $(document).ready(function(){
         "language": {
             "url": "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json"
         }
+    });
+    
+    // Modal de confirmación para finalizar asignación
+    var asignacionId;
+    $('.btn-finalizar').on('click', function(e){
+        e.preventDefault();
+        asignacionId = $(this).data('finalizar-id');
+        var confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+        confirmModal.show();
+    });
+
+    $('#confirmBtn').on('click', function(){
+        // Redirigir a finalizar_asignacion.php con el ID de asignación
+        window.location.href = "finalizar_asignacion.php?id=" + asignacionId;
     });
 });
 </script>
