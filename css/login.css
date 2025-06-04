@@ -1,0 +1,146 @@
+/* ==================================================
+   login.css – Estilos modernos para tu login.php
+   ================================================== */
+
+
+
+/* 1) Variables */
+    :root {
+        --clr-primary:      #337fdc;
+        --clr-bg:           #e6f0fa;
+        --clr-card:         #ffffff;
+        --clr-text:         #2d3e50;
+        --clr-muted:        #6c757d;
+        --clr-error-bg:     #fdecea;
+        --clr-error-text:   #c0392b;
+        --radius:           0.5rem;
+        --shadow-light:     rgba(0,0,0,0.05);
+        --shadow-strong:    rgba(0,0,0,0.1);
+        }
+
+/* 2) Reset & Body */
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+        }
+
+    body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: var(--clr-bg);
+        color: var(--clr-text);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        }
+
+/* 3) Wrapper centrado */
+    .login-wrapper {
+        width: 100%;
+        max-width: 400px;
+        }
+
+/* 4) Tarjeta */
+    .login-card {
+        background: var(--clr-card);    /* Color de fondo definido como variable CSS */
+        border-radius: var(--radius);   /* Bordes redondeados usando una variable */
+        box-shadow: 0 4px 12px var(--shadow-strong);    /* Sombra para dar profundidad */
+        overflow: hidden;               /* Oculta el contenido que se salga del borde redondeado */
+        }
+
+/* 5) Header de la tarjeta */
+    .login-card__header {
+        background-color: var(--clr-primary);
+        color: #fff;
+        text-align: center;
+        padding: 1.5rem 1rem;
+        }
+    .login-card__logo {
+        width: 80px;
+        margin-bottom: 0.5rem;
+        }
+    .login-card__title {
+        margin: 0;
+        font-size: 1.25rem;
+        letter-spacing: 1px;
+        }
+
+/* 6) Cuerpo */
+    .login-card__body {
+        padding: 1.5rem 1rem;
+        }
+    .login-card__body h2 {
+        text-align: center;
+        margin-bottom: 1.5rem;
+        font-size: 1.5rem;
+        color: var(--clr-text);
+        }
+
+/* Mensaje de error */
+    .login-card__error {
+        display: flex;
+        align-items: center;
+        background-color: var(--clr-error-bg);
+        color: var(--clr-error-text);
+        padding: 0.75rem 1rem;
+        border-radius: var(--radius);
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+        }
+    .login-card__error i {
+        margin-right: 0.5rem;
+        }       
+
+/* 7) Formulario */
+    .login-form__group {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.25rem;
+        border-bottom: 1px solid #ccc;
+        }
+    .login-form__group label {
+        width: 2rem;
+        text-align: center;
+        color: var(--clr-muted);
+        font-size: 1.1rem;
+        }
+    .login-form__group input {
+        flex: 1;
+        border: none;
+        padding: 0.5rem 0.5rem;
+        font-size: 1rem;
+        color: var(--clr-text);
+        }
+    .login-form__group input:focus {
+        outline: none;
+        border-bottom-color: var(--clr-primary);
+        }
+
+/* Botón */
+    .login-form__btn {
+        width: 100%;
+        background-color: var(--clr-primary);
+        color: #fff;
+        border: none;
+        padding: 0.75rem;
+        font-size: 1rem;
+        border-radius: var(--radius);
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+        }
+    .login-form__btn:hover {
+        background-color: #2868c7;
+        transform: translateY(-2px);
+        }
+
+/* 8) Footer de la tarjeta */
+    .login-card__footer {
+        text-align: center;
+        padding: 1rem;
+        font-size: 0.85rem;
+        color: var(--clr-muted);
+        background-color: var(--clr-bg);
+        }

@@ -1,91 +1,152 @@
 <?php
-session_start();
-require_once '../includes/conexion.php';
+	session_start();
+	require_once '../includes/conexion.php';
 
-// Mostrar errores en desarrollo (quitar en producción)
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+	// Mostrar errores en desarrollo (quitar en producción)
+	ini_set('display_errors', 1);
+	ini_set('display_startup_errors', 1);
+	error_reporting(E_ALL);
 
-// Validar que el usuario esté autenticado y tenga el rol adecuado
-if (!isset($_SESSION['usuario']) || $_SESSION['rol_nombre'] !== 'admin') {
-    error_log("❌ Intento de acceso sin permisos: " . $_SERVER['REMOTE_ADDR']);
-    header("Location: login.php");
-    exit();
-}
+	// Validar que el usuario esté autenticado y tenga el rol adecuado
+	if (!isset($_SESSION['usuario']) || $_SESSION['rol_nombre'] !== 'admin') 
+		{
+    	error_log("❌ Intento de acceso sin permisos: " . $_SERVER['REMOTE_ADDR']);
+    	header("Location: login.php");
+    	exit();
+		}
 
-// Registrar actividad en historial_bd
-$usuario = $_SESSION['usuario'];
-$accion = "Accedió al panel de administración";
-$ip_usuario = $_SERVER['REMOTE_ADDR'];
-$sql_historial = "INSERT INTO historial_bd (usuario, accion, ip_usuario) VALUES ('$usuario', '$accion', '$ip_usuario')";
-$conn->query($sql_historial);
+	// Registrar actividad en historial_bd
+	$usuario = $_SESSION['usuario'];
+	$accion = "Accedió al panel de administración";
+	$ip_usuario = $_SERVER['REMOTE_ADDR'];
+	$sql_historial = "INSERT INTO historial_bd (usuario, accion, ip_usuario) VALUES ('$usuario', '$accion', '$ip_usuario')";
+	$conn->query($sql_historial);
+
+	// 4) Incluir layout principal
+	//  require __DIR__ . '/partials/header.php';
 ?>
 
+
+
 <!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Panel de Administración - Global Transportes</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../css/estilo.css">
-</head>
-<body>
-  <header>
-    <div class="contenedor">
-      <div class="logo">
-        <a href="../index.html">
-          <img src="../img/logo.png" alt="Logo Global Transportes" class="logo-img">
-        </a>
-      </div>
-      <h1>Panel de Administración</h1>
-      <nav>
-        <ul class="nav-menu">
-          <li><a href="../index.html" class="btn-nav">🏠 Inicio</a></li>
-          <li><a href="logout.php" class="btn-nav">🔒 Cerrar Sesión</a></li>
-          <li><a href="usuarios.php" class="btn-nav">👤 Gestionar Usuarios</a></li>
-          <li><a href="historial_bd.php" class="btn-nav">📜 Auditoría</a></li>
-          <li><a href="panel_admin.php?exportar=csv" class="btn-nav">📥 Exportar Reportes</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+	<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+  		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+  		<title>Panel Administración – Global Transportes</title>
 
-  <main class="contenido">
-    <section class="bienvenida">
-      <h2>Bienvenido, <?= htmlspecialchars($_SESSION['usuario']) ?> (Admin)</h2>
-      <p>Desde este panel podés gestionar usuarios, ver reportes y configurar opciones del sistema.</p>
-    </section>
+  		<!-- Bootstrap 5 CSS -->
+  		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
 
-    <section class="ventajas">
-      <h3>Opciones disponibles</h3>
-      <div class="cards">
-        <div class="card">
-          <h4>👤 Gestión de Usuarios</h4>
-          <p>Agregar, editar o eliminar cuentas de usuario.</p>
-          <a href="usuarios.php" class="boton-accion">Ir</a>
-        </div>
-        <div class="card">
-          <h4>📜 Auditoría</h4>
-          <p>Ver registro de actividad de usuarios y administradores.</p>
-          <a href="historial_bd.php" class="boton-accion">Ver Auditoría</a>
-        </div>
-        <div class="card">
-          <h4>📊 Reportes</h4>
-          <p>Visualizar estadísticas del sistema y exportar datos.</p>
-          <a href="panel_admin.php?exportar=csv" class="boton-accion">Exportar Reporte</a>
-        </div>
-        <div class="card">
-          <h4>🚀 Ingresar al ERP</h4>
-          <p>Accedé al sistema de gestión completo.</p>
-          <a href="../modulos/erp_dashboard.php" class="boton-accion">Entrar</a>
-        </div>
-      </div>
-    </section>
-  </main>
+		<!-- Font Awesome -->
+  		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
 
-  <footer>
-    <p>&copy; 2025 Global Transportes. Todos los derechos reservados.</p>
-  </footer>
-</body>
+  		<!-- Tu CSS -->
+  		<!-- <link rel="stylesheet" href="../css/estilo.css" /> -->
+		<?php require __DIR__ . '/partials/header.php'; ?>
+	</head>
+
+	<body class="bg-light">
+		<header>
+  			<div class="contenedor">
+    			<h1>Panel de Administración</h1>   			
+				<!-- <a class="navbar-brand" href="../index.html">
+      				<img src="../img/logo.png" alt="Logo" width="32" class="d-inline-block align-text-top">
+      				Global Transportes
+    			</a> -->
+				<div>
+    				<a href="?exportar=csv"      class="btn btn-success me-2">
+						<i class="fa fa-download me-1">
+						</i> Exportar CSV
+					</a>
+    				<a href="logout.php"         class="btn btn-outline-danger">
+						<i class="fa fa-sign-out-alt me-1">
+						</i> Cerrar Sesión
+					</a>
+    			</div>					
+  			</div>
+		</header>
+
+  		<!-- <main class="contenido"> -->
+		<main class="container flex-fill py-2">
+    	
+			<!-- <section class="bienvenida"> -->
+			<div class="d-flex justify-content-between align-items-center mb-4">
+    			<!-- <h1 class="h3 mb-0">Panel de Administración</h1> -->
+    		
+				<nav>
+					<section class="bienvenida mb-5">
+    					<h3>Bienvenido, <?= htmlspecialchars($_SESSION['usuario']) ?> (Admin)</h3>
+    					<p>Desde este panel podés gestionar usuarios, ver reportes y configurar opciones del sistema.
+						</p>
+  					</section>	
+				</nav>	
+  			</div>
+
+
+<section class="ventajas mb-5">
+  <h3 class="mb-4">Opciones disponibles</h3>
+  <div class="row g-4 cards">
+    <div class="col-sm-6 col-lg-3">
+    	<div class="card h-100 shadow-sm text-center">
+        	<div class="card-body">
+          		<i class="fa fa-users fa-2x text-primary mb-2"></i>
+        		<h5 class="card-title">Gestión de Usuarios</h5>
+          		<p class="card-text">Crear, editar o eliminar cuentas.</p>
+          		<a href="usuarios.php" class="btn btn-primary">Ir</a>
+        	</div>
+      	</div>
+	</div>
+    	<!-- Repite para las otras 3 tarjetas -->
+ 		<!-- Auditoría -->
+    			<div class="col-sm-6 col-lg-3">
+        			<div class="card h-100 shadow-sm text-center">
+        				<div class="card-body">
+            				<i class="fa fa-clipboard-list fa-2x text-secondary mb-2"></i>
+            				<h5 class="card-title">Auditoría</h5>
+            				<p class="card-text">Ver registro de actividad.</p>
+            				<a href="historial_bd.php" class="btn btn-secondary">Ver</a>
+          				</div>
+        			</div>
+      			</div>
+		
+		<!-- Reportes -->
+    			<div class="col-sm-6 col-lg-3">
+        			<div class="card h-100 shadow-sm text-center">
+          				<div class="card-body">
+            				<i class="fa fa-chart-line fa-2x text-success mb-2"></i>
+            				<h5 class="card-title">Reportes</h5>
+            				<p class="card-text">Estadísticas y reportes del sistema.</p>
+            				<a href="?exportar=csv" class="btn btn-success">Exportar</a>
+          				</div>
+        			</div>
+      			</div>
+
+		<!-- ERP Dashboard -->
+      			<div class="col-sm-6 col-lg-3">
+        			<div class="card h-100 shadow-sm text-center">
+        				<div class="card-body">
+            				<i class="fa fa-rocket fa-2x text-info mb-2"></i>
+            				<h5 class="card-title">ERP Dashboard</h5>
+            				<p class="card-text">Acceso al módulo ERP completo.</p>
+            				<a href="../modulos/erp_dashboard.php" class="btn btn-info">Entrar</a>
+          				</div>
+        			</div>
+      			</div>
+
+	
+  </div>
+</section>
+
+			<section class="row g-4">	
+		
+			</section>
+  		</main>
+	</body>
+
+	<footer class="bg-white text-center py-3 mt-auto">
+    	<div class="container">
+    		<small class="text-muted">&copy; 2025 Global Transportes. Todos los derechos reservados.</small>
+    	</div>
+  	</footer>
 </html>

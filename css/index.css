@@ -1,0 +1,182 @@
+/* ==================================================
+   VARIABLES GLOBALES
+   ================================================== */
+:root {
+  --color-primary:    #337fdc;      /* Azul corporativo */
+  --color-light:      #f8f9fa;      /* Fondo claro */
+  --color-dark:       #212529;      /* Sidebar y footer */
+  --color-muted:      #6c757d;      /* Hover sidebar */
+  --color-white:      #ffffff;      /* Texto blanco */
+  --color-shadow:     rgba(0, 0, 0, 0.1);
+
+  --navbar-height:    70px;         /* Debe coincidir con CSS */
+  --sidebar-width:    240px;
+  --logo-width:       100px;        /* Ajusta tamaño del logo */
+
+  --font-base:        'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ==================================================
+   RESET & ESTILOS BASE
+   ================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding-top: var(--navbar-height);
+  font-family: var(--font-base);
+  background-color: var(--color-light);
+  color: var(--color-dark);
+}
+
+/* ==================================================
+   NAVBAR
+   ================================================== */
+.navbar {
+  background-color: var(--color-primary);
+  height: var(--navbar-height);
+  box-shadow: 0 2px 4px var(--color-shadow);
+  padding: 0 1rem;
+}
+
+.navbar-brand .logo-img {
+  width: var(--logo-width);
+  height: auto;
+  margin-top: -10px; 
+}
+
+.navbar .navbar-brand img {
+    width: var(--logo-width);   /* ya tenías esto para el ancho */
+    height: auto;
+    margin-top: -10px;          /* Sube el logo 10px; ajusta el valor según necesites */
+}
+
+.navbar .nav-link {
+  color: var(--color-white) !important;
+}
+.navbar .nav-link:hover {
+  opacity: 0.8;
+}
+
+/* ==================================================
+   WRAPPER (layout flex)
+   ================================================== */
+.app-wrapper {
+  display: flex;
+}
+
+/* ==================================================
+   SIDEBAR
+   ================================================== */
+.sidebar {
+  position: fixed;
+  top: var(--navbar-height);
+  left: 0;
+  width: var(--sidebar-width);
+  height: calc(100vh - var(--navbar-height));
+  background-color: var(--color-dark);
+  padding: 1rem 0;
+}
+
+.sidebar .nav-link {
+  color: var(--color-white);
+  padding: 0.75rem 1rem;
+  transition: background 0.3s;
+}
+.sidebar .nav-link:hover {
+  background-color: var(--color-muted);
+}
+
+/* ==================================================
+   CONTENIDO PRINCIPAL
+   ================================================== */
+.app-content {
+  margin-left: var(--sidebar-width);
+  padding: 2rem;
+}
+
+/* ==================================================
+   HERO SECTION
+   ================================================== */
+.hero-section {
+  background-color: var(--color-white);
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px var(--color-shadow);
+  margin-bottom: 3rem;
+}
+
+/* ==================================================
+   VENTAJAS (cards)
+   ================================================== */
+.ventajas h3 {
+  color: var(--color-primary);
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+.ventajas .card {
+  border: none;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 5px var(--color-shadow);
+  transition: transform 0.3s, box-shadow 0.3s;
+  height: 100%;
+}
+.ventajas .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ==================================================
+   BOTONES
+   ================================================== */
+.btn-primary {
+  background-color: var(--color-primary);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  border-radius: 0.3rem;
+}
+.btn-primary:hover {
+  background-color: #2868c7;
+  transform: scale(1.03);
+}
+
+/* ==================================================
+   FOOTER
+   ================================================== */
+footer {
+  background-color: var(--color-dark);
+  color: var(--color-white);
+  text-align: center;
+  padding: 1rem 0;
+}
+
+/* ==================================================
+   RESPONSIVIDAD
+   ================================================== */
+@media (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
+  .app-content {
+    margin-left: 0;
+    padding: 1rem;
+  }
+  .hero-section,
+  .ventajas .card {
+    margin-bottom: 1.5rem;
+  }
+}
+
+
+/* ================================================
+   AJUSTE VERTICAL DEL LOGO
+   ================================================ */
+.navbar .navbar-brand img {
+    width: var(--logo-width);   /* ya tenías esto para el ancho */
+    height: auto;
+    margin-top: -10px;          /* Sube el logo 10px; ajusta el valor según necesites */
+}

@@ -4,6 +4,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+// Conexión a la base de datos //
 include '../includes/conexion.php';
 
 $error = '';
@@ -82,39 +83,94 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Acceso al Sistema - Global Transportes</title>
-  <link rel="stylesheet" href="../css/estilo.css">
-</head>
-<body>
-  <header>
-    <div class="contenedor">
-      <div class="logo">
-        <a href="../index.html"><img src="../img/logo.png" alt="Logo Global Transportes" class="logo-img"></a>
-      </div>
-      <h1>Acceso al Sistema</h1>
-    </div>
-  </header>
 
-  <main class="contenido">
-    <div class="login-form">
-      <h2>Iniciar Sesión</h2>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Acceso al Sistema - Global Transportes</title>
 
-      <?php if ($error): ?>
-        <p style="color: red; font-weight: bold;"><?= htmlspecialchars($error) ?></p>
-      <?php endif; ?>
+        <!-- FontAwesome para íconos -->
+        <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        rel="stylesheet"
+        />
 
-      <form action="login.php" method="post" class="formulario">
-        <input type="text" name="usuario" placeholder="Usuario" required>
-        <input type="password" name="clave" placeholder="Contraseña" required>
-        <button type="submit">Ingresar</button>
-      </form>
-    </div>
-  </main>
+        <!-- CSS personalizado -->
+        <link rel="stylesheet" href="../css/login.css">
+    </head>
 
-  <footer>
-    <p>&copy; 2025 Global Transportes. Todos los derechos reservados.</p>
-  </footer>
-</body>
+    <body>
+        <div class="login-wrapper">
+            <div class="login-card">
+                
+
+                <!-- CABECERA con logo y nombre -->
+                <div class="login-card__header">
+                    <img src="../img/logo.png" alt="Logo" class="login-card__logo">
+                    <h1 class="login-card__title">M I GLOBAL TRANSPORTES</h1>
+                </div>
+        
+		        <!-- <header> -->
+    		        <div class="login-card__body">
+                        <h2>Acceso al Sistema</h2>
+    			        <!-- <a href="../index.html" class="logo">
+    				        <img src="../img/logo.png" alt="Logo" class="logo-img">
+    			        </a> -->
+    			        
+    		        </div>
+
+  		        <!-- </header> -->
+
+                <main class="contenido">
+                    <div class="login-form">
+
+                        <?php if ($error): ?>
+                            <div class="login-card__error">
+                                <i class="fa fa-exclamation-triangle"></i>
+                                <?= htmlspecialchars($error) ?>
+                            </div>
+                        <?php endif; ?>
+        
+                        <form action="login.php" method="post" class="formulario">
+        
+                            <!-- CSRF token -->
+                            <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token']) ?>">
+
+                            <!-- formulario para el campo de usuario -->
+		                    <div class="login-form__group">
+        	                    <label for="usuario"><i class="fa fa-user"></i></label>
+                                <input
+            	                    type="text"
+              	                    id="usuario"
+              	                    name="usuario"
+              	                    placeholder="Usuario"
+              	                    required autofocus
+                                >
+                            </div>
+
+                            <div class="login-form__group">
+                                <label for="clave"><i class="fa fa-lock"></i></label>
+                                <input
+                                    type="password"
+                                    id="clave"
+                                    name="clave"
+                                    placeholder="Contraseña"
+                                    required
+                                >
+                            </div>
+
+		                    <button type="submit" class="login-form__btn">Ingresar</button>
+
+                        </form>
+                    </div>
+                </main>
+
+                <footer>
+                    <div class="login-card__footer">
+                        &copy; 2025 Global Transportes. Todos los derechos reservados.
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </body>
 </html>

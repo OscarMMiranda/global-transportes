@@ -1,178 +1,144 @@
 <?php
-   session_start();
+session_start();
 
-   // Require header (si usas un header compartido)
-   // require_once '../../includes/header_erp.php';
-
-   // Verificar acceso solo para administradores
-   if (!isset($_SESSION['usuario']) || !isset($_SESSION['rol_nombre']) || $_SESSION['rol_nombre'] !== 'admin') 
-      {
-      header("Location: ../sistema/login.php");
-      exit();
-      }
+// Verificar acceso solo para administradores
+if (!isset($_SESSION['usuario']) || !isset($_SESSION['rol_nombre']) || $_SESSION['rol_nombre'] !== 'admin') {
+    header("Location: ../sistema/login.php");
+    exit();
+}
 ?>
 
 
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>ERP - Global Transportes</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/base.css">
-    <link rel="stylesheet" href="../css/dashboard.css">
-</head>
+	<head>
+    	<meta charset="UTF-8">
+    	<title>ERP - Global Transportes</title>
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    	<!-- Bootstrap CSS -->
+    	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    	<!-- Estilos personalizados -->
+    	<link rel="stylesheet" href="../css/dashboard.css">
+	</head>
+	
+	<body>
+	<!-- Navbar superior -->
+    	<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        	<div class="container-fluid">
+            	<a class="navbar-brand" href="../index.html">
+            		<img src="../img/logo.png" alt="Logo Global Transportes" width="40" class="me-2">
+            			ERP Global Transportes
+            	</a>
+            	<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                	data-bs-target="#navbarTop" aria-controls="navbarTop" aria-expanded="false" aria-label="Toggle navigation">
+                	<span class="navbar-toggler-icon"></span>
+            	</button>
+            	<div class="collapse navbar-collapse" id="navbarTop">
+                	<ul class="navbar-nav ms-auto">
+                    	<li class="nav-item"><a class="nav-link" href="../index.html">🏠 Inicio</a></li>
+						<li class="nav-item"><a class="nav-link" href="../sistema/logout.php">🔒 Cerrar Sesión</a></li>
+                    	<li class="nav-item"><a class="nav-link" href="../sistema/panel_admin.php">⚙️ Panel Admin</a></li>
+                    	<li class="nav-item"><a class="nav-link" href="../documentos/documentos.php">📄 Documentos</a></li>
+                    	<li class="nav-item"><a class="nav-link" href="../sistema/admin_db.php">🛠 Gestionar BD</a></li>
+                	</ul>
+            	</div>
+        	</div>
+			</nav>
 
-<body>
-    <header class="dashboard-header">
-        <div class="contenedor">
-            <div class="logo">
-                <a href="../index.html">
-                    <img src="../img/logo.png" alt="Logo Global Transportes" class="logo-img">
-                </a>
-            </div>
-            <h1>ERP Global Transportes</h1>
-            <nav>
-                <ul class="nav-menu">
-                    <li><a href="../index.html" class="btn-nav">🏠 Inicio</a></li>
-                    <li><a href="../sistema/logout.php" class="btn-nav">🔒 Cerrar Sesión</a></li>
-                    <li><a href="../sistema/panel_admin.php" class="btn-nav">⚙️ Panel Admin</a></li>
-                    <li><a href="../documentos/documentos.php" class="btn-nav">📄 Documentos</a></li>
-                    <li><a href="../sistema/admin_db.php" class="btn-nav">🛠 Gestionar BD</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+	<!-- Contenedor principal -->
+	<div class="container-fluid app-container">
+		<div class="row">
+        	<!-- Sidebar -->
+        	<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse">
+            	<div class="position-sticky pt-3">
+					<h2 class="h5 px-3">Menú Principal</h2>
+                    <ul class="nav flex-column px-3">
+                        <li class="nav-item"><a href="../modulos/clientes/clientes.php" class="nav-link">👥 Clientes</a></li>
+                        <li class="nav-item"><a href="../modulos/orden_trabajo/orden_trabajo.php" class="nav-link">📋 Órdenes de Trabajo</a></li>
+                        <li class="nav-item"><a href="../modulos/vehiculos/vehiculos.php" class="nav-link">🚛 Vehículos</a></li>
+                        <li class="nav-item"><a href="../modulos/mantenimiento/mantenimiento.php" class="nav-link">🛠 Mantenimiento de Datos</a></li>
+                        <li class="nav-item"><a href="../sistema/panel_admin.php" class="nav-link">⚙️ Administración</a></li>
+                    </ul>
+				</div>
+			</nav>
 
-    <body>
-    <aside class="sidebar">
-        <h2>Menú Principal</h2>
-        <nav class="sidebar-menu">
-            <ul>
-                <li><a href="../modulos/clientes/clientes.php">👥 Clientes</a></li>
-                <li><a href="../modulos/orden_trabajo/orden_trabajo.php">📋 Órdenes de Trabajo</a></li>
-                <li><a href="../modulos/vehiculos/vehiculos.php">🚛 Vehículos</a></li>
-                <li><a href="../modulos/mantenimiento/mantenimiento.php">🛠 Mantenimiento de Datos</a></li>
-                <li><a href="../sistema/panel_admin.php">⚙️ Administración</a></li>
-            </ul>
-        </nav>
-    </aside>
+            <!-- Contenido principal -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <!-- Sección de Bienvenida -->
+                <section class="my-4">
+                    <h2>Bienvenido al ERP, <?= htmlspecialchars($_SESSION['usuario']) ?></h2>
+                    <p>Accede a la gestión completa de tu empresa de transporte.</p>
+               </section>
 
-    <main class="dashboard-content">
-        <!-- Aquí va el contenido principal del dashboard -->
-    </main>
-</body>
+               <!-- Sección: Gestión Administrativa -->
+               <section class="mb-4">
+                  <h3>Gestión Administrativa</h3>
+                  <div class="row row-cols-1 row-cols-md-3 g-4">
+            
+                     <div class="col">
+                        <div class="card card-dashboard">
+                           <h4>🚛 Vehículos</h4>
+                           <p>Registrar y controlar la flota de transporte.</p>
+                           <a href="../modulos/vehiculos/vehiculos.php" class="btn btn-primary">Ir</a>
+                        </div>
+                     </div>
+                     <div class="col">
+                        <div class="card card-dashboard">
+                           <h4>📋 Órdenes de Trabajo (OT)</h4>
+                           <p>Gestiona las órdenes de trabajo y los viajes de transporte.</p>
+                           <a href="../modulos/orden_trabajo/orden_trabajo.php" class="btn btn-primary">Ir</a>
+                        </div>
+                     </div>
+                     <div class="col">
+                        <div class="card card-dashboard">
+                           <h4>📄 Documentos Vehiculares</h4>
+                           <p>Registrar y administrar documentos de cada vehículo.</p>
+                           <a href="../modulos/documentos/documentos.php" class="btn btn-primary">Ir</a>
+                        </div>
+                     </div>
+                  </div>
 
+               </section>
 
-    <main class="dashboard-container">
-        <section class="bienvenida">
-            <h2>Bienvenido al ERP, <?= htmlspecialchars($_SESSION['usuario']) ?></h2>
-            <p>Accede a la gestión completa de tu empresa de transporte.</p>
-        </section>
-
-        <!-- Sección: Gestión Administrativa -->
-        <section class="dashboard-section">
-            <h3>Gestión Administrativa</h3>
-            <div class="dashboard-cards">
-                <div class="card-dashboard">
-                    <h4>👥 Clientes</h4>
-                    <p>Gestiona tus clientes.</p>
-                    <a href="../modulos/clientes/clientes.php" class="dashboard-btn">Ir</a>
-                </div>
-                <div class="card-dashboard">
-                    <h4>🧑‍💼 Empleados</h4>
-                    <p>Ver o registrar personal de la empresa.</p>
-                    <a href="../modulos/empleados/empleados.php" class="dashboard-btn">Ir</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Sección: Gestión de Conductores -->
-        <section class="dashboard-section">
-            <h3>Gestión de Conductores</h3>
-            <div class="dashboard-cards">
-                <div class="card-dashboard">
-                    <h4>🚦 Conductores</h4>
-                    <p>Registrar y administrar la lista de conductores.</p>
-                    <a href="../modulos/conductores/conductores.php" class="dashboard-btn">Ir</a>
-                </div>
-                <div class="card-dashboard">
-                    <h4>🔄 Asignación de Conductores</h4>
-                    <p>Gestiona la asignación de conductores a vehículos.</p>
-                    <a href="../modulos/asignaciones_conductor/asignaciones.php" class="dashboard-btn">Ir</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Sección: Operaciones y Logística -->
-        <section class="dashboard-section">
-            <h3>Operaciones y Logística</h3>
-            <div class="dashboard-cards">
-                <div class="card-dashboard">
-                    <h4>🚛 Vehículos</h4>
-                    <p>Registrar y controlar la flota de transporte.</p>
-                    <a href="../modulos/vehiculos/vehiculos.php" class="dashboard-btn">Ir</a>
-                </div>
-                <div class="card-dashboard">
-                    <h4>📋 Órdenes de Trabajo (OT)</h4>
-                    <p>Gestiona las órdenes de trabajo y los viajes de transporte.</p>
-                    <a href="../modulos/orden_trabajo/orden_trabajo.php" class="dashboard-btn">Ir</a>
-                </div>
-                <div class="card-dashboard">
-                    <h4>📄 Documentos Vehiculares</h4>
-                    <p>Registrar y administrar documentos de cada vehículo.</p>
-                    <a href="../modulos/documentos/documentos.php" class="dashboard-btn">Ir</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Sección: Localizaciones -->
-        <section class="dashboard-section">
-            <h3>Localizaciones</h3>
-            <div class="dashboard-cards">
-                <div class="card-dashboard">
-                    <h4>📍 Destinos</h4>
-                    <p>Administrar rutas y zonas de entrega.</p>
-                    <a href="../modulos/lugares/lugares.php" class="dashboard-btn">Ir</a>
-                </div>
-            </div>
-        </section>
-
-         <!-- Sección: Configuración y Administración -->
-         <section class="dashboard-section">
-            <h3>Configuración y Administración</h3>
-            <div class="dashboard-cards">
-                <div class="card-dashboard">
-                    <h4>⚙️ Panel Admin</h4>
-                    <p>Administrar permisos, usuarios y configuraciones.</p>
-                    <a href="../sistema/panel_admin.php" class="dashboard-btn">Ir</a>
-                </div>
-                <div class="card-dashboard">
-                    <h4>🛠 Gestión de Base de Datos</h4>
-                    <p>Administrar y optimizar la base de datos.</p>
-                    <a href="../sistema/admin_db.php" class="dashboard-btn">Ir</a>
-                </div>
-            </div>
-         </section>
-
-
-         <section class="dashboard-section">
-         <h3>⚙️ Mantenimiento de Datos</h3>
-    <div class="dashboard-cards">
-        <div class="card-dashboard">
-            <h4>📦 Tipo de Mercadería</h4>
-            <p>Editar y actualizar tipos de mercadería.</p>
-            <a href="../modulos/mantenimiento/mantenimiento.php" class="dashboard-btn">Actualizar</a>
+               <!-- Sección: Operaciones y Logística -->
+               <section class="mb-4">
+                  <h3>Operaciones y Logística</h3>
+                  <div class="row row-cols-1 row-cols-md-3 g-4">
+                        <div class="col">
+                            <div class="card card-dashboard p-3">
+                                <h4>🚛 Vehículos</h4>
+                                <p>Registrar y controlar la flota de transporte.</p>
+                                <a href="../modulos/vehiculos/vehiculos.php" class="btn btn-primary">Ir</a>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card card-dashboard p-3">
+                                <h4>📋 Órdenes de Trabajo (OT)</h4>
+                                <p>Gestiona las órdenes de trabajo y los viajes de transporte.</p>
+                                <a href="../modulos/orden_trabajo/orden_trabajo.php" class="btn btn-primary">Ir</a>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card card-dashboard p-3">
+                                <h4>📄 Documentos Vehiculares</h4>
+                                <p>Registrar y administrar documentos de cada vehículo.</p>
+                                <a href="../modulos/documentos/documentos.php" class="btn btn-primary">Ir</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
         </div>
     </div>
-</section>
 
-
-    </main>
-
-    <footer class="footer">
-        <p>&copy; 2025 Global Transportes. Todos los derechos reservados.</p>
+    <!-- Footer -->
+    <footer class="footer bg-dark text-white text-center py-3">
+        <div class="container">
+            <p class="mb-0">&copy; 2025 Global Transportes. Todos los derechos reservados.</p>
+        </div>
     </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
