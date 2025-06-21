@@ -3,7 +3,7 @@
     require_once __DIR__ . '/../../includes/conexion.php';
 
     // Solo admins
-    if (empty($_SESSION['usuario']) || $_SESSION['rol_nombre'] !== 'admin') 
+    if (!isset($_SESSION['usuario']) || $_SESSION['rol_nombre'] !== 'admin') 
         {
         header('Location: ../sistema/login.php');
         exit;
@@ -12,20 +12,29 @@
 
 <!DOCTYPE html>
 	<html lang="es">
+		
 		<head>
-			<meta charset="UTF-8">
- 			<meta name="viewport" content="width=device-width, initial-scale=1">
-  			<title>Mantenimiento de Datos – Global Transportes</title>
+    		<meta charset="UTF-8">
+    		<meta name="viewport" content="width=device-width, initial-scale=1">
+    		<title>Mantenimiento de Datos – Global Transportes</title>
 
-  			<!-- Bootstrap 5 -->
-  			<link 
-    			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" 
-    			rel="stylesheet"
-  			/>
-  			<!-- Tu CSS -->
-  			<link rel="stylesheet" href="../css/base.css">
-  			<link rel="stylesheet" href="../css/dashboard.css">
+    		<!-- Bootstrap 5 -->
+    		<link 
+        		href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" 
+        		rel="stylesheet"
+    		/>
+    		<!-- FontAwesome (si usas iconos como <i class="fas fa-arrow-left"></i>) -->
+    		<link 
+        		rel="stylesheet" 
+        		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    		/>
+    		<!-- Estilos locales -->
+    		<link rel="stylesheet" href="../../css/base.css">
+    		<link rel="stylesheet" href="../../css/dashboard.css">
 		</head>
+
+
+
 		
 		<body class="bg-light d-flex flex-column min-vh-100">
 
@@ -88,12 +97,12 @@
         				<div class="col">
           					<article class="card card-dashboard h-100 shadow-sm">
             					<div class="card-body d-flex flex-column">
-              						<h3 class="card-title h6">📦 Categorías de Mercadería</h3>
+              						<h3 class="card-title h6">📦 Agencia de Aduanas</h3>
               						<p class="card-text flex-fill">
-                						Gestionar categorías de productos.
+                						Gestionar agencias de aduanas.
               						</p>
               						<a 
-                						href="editar_categorias.php" 
+                						href="editar_agencia_aduana.php" 
                 						class="btn dashboard-btn btn-primary mt-3"
               						>
                 						Actualizar

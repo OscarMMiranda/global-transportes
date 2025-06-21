@@ -88,10 +88,6 @@ body {
   width: calc(100% - 240px);
 }
 
-
-
-
-
 /* === ENCABEZADO === */
 header {
   background-color: var(--color-primario);
@@ -113,25 +109,20 @@ header {
   justify-content: space-between;
   flex-wrap: wrap;
 }
- /* -----------       --------*/
-
-
-
-
-
-
-
-
-/* -----------       --------*/
+ 
 .logo {
   display: flex;
   align-items: center;
 }
 
+
 .logo-img {
-    height: 60px; /* Ajusta el tamaño del logo */
-    width: auto;
+    height: 120px !important;  /* Altura fija del logo */
+    width: auto;      /* Que no exceda su contenedor */
+    max-height: 100px;
+    object-fit: contain;  /* Ajuste correcto del contenido */
 }
+
 
 .fixed-top {
     width: 80%;

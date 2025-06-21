@@ -7,58 +7,91 @@
 	session_start();
 	require_once __DIR__ . '/../../includes/conexion.php';
 
-	// Acceso restringido solo a administradores
-	if (empty($_SESSION['usuario']) || $_SESSION['rol_nombre'] !== 'admin') 
-		{
-	    header('Location: ../sistema/login.php');
-	    exit;
-		}
-
 	// Verificar conexión (esto puede removerse en producción)
-	if (!$conexion) 
+	if (!$conn) 
 		{
 	    die("Error en la conexión: " . mysqli_connect_error());
 		}
 
-// -------------------------------------------------------------------------
-// Procesamiento de acciones: Edición y Eliminación
-// -------------------------------------------------------------------------
+	// Acceso restringido solo a administradores
+	if (empty($_SESSION['usuario']) || $_SESSION['rol_nombre'] !== 'admin') 
+		{
+		header('Location: ../sistema/login.php');
+	    exit;
+		}
 
-// Si se solicita editar un registro (por ejemplo: editar_tipo_mercaderia.php?editar=3)
-if (isset($_GET['editar'])) {
-    $id = (int) $_GET['editar'];
+	// -------------------------------------------------------------------------
+	// Procesamiento de acciones: Edición, Eliminación y Agregar
+	// -------------------------------------------------------------------------
+
+	// Procesar la inserción de nueva mercadería
+	if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['agregar'])) 
+		{
+    	$nombre = trim($_POST['nombre']);
+    	$descripcion = trim($_POST['descripcion']);
+
+    	// Validación mínima
+    	if (empty($nombre)) 
+			{
+    	    $error = "El nombre es obligatorio para agregar una nueva mercadería.";
+    		}
+		if (!isset($error)) 
+			{
+        	$stmtInsert = $conn->prepare("INSERT INTO tipos_mercaderia (nombre, descripcion) VALUES (?, ?)");
+        	if (!$stmtInsert) 
+				{
+            	die("Error en la preparación para insertar: " . $conn->error);
+        		}
+			$stmtInsert->bind_param("ss", $nombre, $descripcion);
+        	if ($stmtInsert->execute()) {
+            	header("Location: editar_tipo_mercaderia.php?msg=agregado");
+            	exit;
+        		} 
+			else 
+				{
+            	$error = "Error al agregar la mercadería: " . $conn->error;
+        		}
+    		}
+		}
+
+	// Si se solicita editar un registro (por ejemplo: editar_tipo_mercaderia.php?editar=3)
+	if (isset($_GET['editar'])) 
+		{
+    	$id = (int) $_GET['editar'];
     
-    // Preparar consulta para obtener el registro a editar
-    $stmt = $conexion->prepare("SELECT * FROM tipos_mercaderia WHERE id = ?");
-    if (!$stmt) {
-        die("Error en la preparación: " . $conexion->error);
-    }
-    $stmt->bind_param("i", $id);
-    $stmt->execute();
-    $resultado = $stmt->get_result();
+		// Preparar consulta para obtener el registro a editar
+    	$stmt = $conn->prepare("SELECT * FROM tipos_mercaderia WHERE id = ?");
+    	if (!$stmt) 
+			{
+        	die("Error en la preparación: " . $conn->error);
+    		}
+			$stmt->bind_param("i", $id);
+    		$stmt->execute();
+    		$resultado = $stmt->get_result();
     
-    // Si no se encuentra el registro, se redirige a la lista
-    if ($resultado->num_rows === 0) {
-        header("Location: editar_tipo_mercaderia.php");
-        exit;
-    }
+    	// Si no se encuentra el registro, se redirige a la lista
+    	if ($resultado->num_rows === 0) 
+			{
+        	header("Location: editar_tipo_mercaderia.php");
+        	exit;
+    		}
     
-    $registro = $resultado->fetch_assoc();
+    	$registro = $resultado->fetch_assoc();
     
-    // Si se ha enviado el formulario de actualización
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $nombre = trim($_POST['nombre']);
-        $descripcion = trim($_POST['descripcion']);
+    	// Si se ha enviado el formulario de actualización
+    	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        	$nombre = trim($_POST['nombre']);
+        	$descripcion = trim($_POST['descripcion']);
         
         // Validación mínima
         if (empty($nombre)) {
             $error = "El nombre es obligatorio.";
-        }
+        	}
         
         if (!isset($error)) {
-            $stmtUpdate = $conexion->prepare("UPDATE tipos_mercaderia SET nombre = ?, descripcion = ? WHERE id = ?");
+            $stmtUpdate = $conn->prepare("UPDATE tipos_mercaderia SET nombre = ?, descripcion = ? WHERE id = ?");
             if (!$stmtUpdate) {
-                die("Error en la preparación para actualizar: " . $conexion->error);
+                die("Error en la preparación para actualizar: " . $conn->error);
             }
             $stmtUpdate->bind_param("ssi", $nombre, $descripcion, $id);
             if ($stmtUpdate->execute()) {
@@ -70,18 +103,18 @@ if (isset($_GET['editar'])) {
         }
     }
     ?>
-    <!DOCTYPE html>
-    <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Editar Tipo de Mercadería – Global Transportes</title>
-        <!-- Bootstrap 5 -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-        <!-- CSS del sistema -->
-        <link rel="stylesheet" href="../css/base.css">
-        <link rel="stylesheet" href="../css/dashboard.css">
-    </head>
+<!DOCTYPE html>
+	<html lang="es">
+    	<head>
+    		<meta charset="UTF-8">
+        	<meta name="viewport" content="width=device-width, initial-scale=1">
+        	<title>Editar Tipo de Mercadería – Global Transportes</title>
+        	<!-- Bootstrap 5 -->
+        	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        	<!-- CSS del sistema -->
+        	<link rel="stylesheet" href="../css/base.css">
+        	<link rel="stylesheet" href="../css/dashboard.css">
+    	</head>
     <body class="bg-light">
         <!-- HEADER -->
         <header class="dashboard-header bg-white shadow-sm py-3">
@@ -92,33 +125,33 @@ if (isset($_GET['editar'])) {
                 </a>
             </div>
         </header>
-
+    
         <!-- MAIN -->
         <main class="container py-4">
             <?php if (isset($error)): ?>
                 <div class="alert alert-danger"><?php echo $error; ?></div>
             <?php endif; ?>
             <form method="post" action="editar_tipo_mercaderia.php?editar=<?php echo $id; ?>">
-                <div class="mb-3">
+                <div class="mb-3 row align-items-center">
                     <label for="nombre" class="form-label">Nombre</label>
                     <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo htmlspecialchars($registro['nombre']); ?>" required>
                 </div>
                 <div class="mb-3">
                     <label for="descripcion" class="form-label">Descripción</label>
-                    <textarea class="form-control" id="descripcion" name="descripcion" rows="4"><?php echo htmlspecialchars($registro['descripcion']); ?></textarea>
+                    <textarea class="form-control" id="descripcion" name="descripcion" rows="2"><?php echo htmlspecialchars($registro['descripcion']); ?></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Actualizar</button>
                 <a href="editar_tipo_mercaderia.php" class="btn btn-secondary">Cancelar</a>
             </form>
         </main>
-
+    
         <!-- FOOTER -->
         <footer class="footer bg-white text-center py-3 mt-auto">
             <div class="container">
                 <small class="text-muted">&copy; 2025 Global Transportes. Todos los derechos reservados.</small>
             </div>
         </footer>
-
+    
         <!-- JS de Bootstrap -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     </body>
@@ -128,22 +161,25 @@ if (isset($_GET['editar'])) {
 } // Fin de acción "editar"
 
 // Si se solicita eliminar un registro (por ejemplo: editar_tipo_mercaderia.php?eliminar=3)
-if (isset($_GET['eliminar'])) {
-    $id = (int) $_GET['eliminar'];
+	if (isset($_GET['eliminar'])) {
+    	$id = (int) $_GET['eliminar'];
     
-    $stmtDel = $conexion->prepare("DELETE FROM tipos_mercaderia WHERE id = ?");
-    if (!$stmtDel) {
-        die("Error en la preparación para eliminar: " . $conexion->error);
-    }
-    $stmtDel->bind_param("i", $id);
-    if ($stmtDel->execute()) {
-         header("Location: editar_tipo_mercaderia.php?msg=eliminado");
-         exit;
-    } else {
-         $error = "Error al eliminar el registro.";
-    }
-}
+    	$stmtDel = $conn->prepare("DELETE FROM tipos_mercaderia WHERE id = ?");
+    	if (!$stmtDel) {
+        	die("Error en la preparación para eliminar: " . $conn->error);
+        }
+    	$stmtDel->bind_param("i", $id);
+    	if ($stmtDel->execute()) {
+        	header("Location: editar_tipo_mercaderia.php?msg=eliminado");
+        	exit;
+    		} 
+		else {
+        	$error = "Error al eliminar el registro.";
+    	}
+	}
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -179,18 +215,39 @@ if (isset($_GET['eliminar'])) {
         elseif (isset($_GET['msg']) && $_GET['msg'] == 'eliminado'):
         ?>
             <div class="alert alert-success">Registro eliminado correctamente.</div>
-        <?php endif; ?>
-
-        <?php if (isset($error)): ?>
+        <?php
+        elseif (isset($_GET['msg']) && $_GET['msg'] == 'agregado'):
+        ?>
+            <div class="alert alert-success">Nueva mercadería agregada correctamente.</div>
+        <?php
+        endif;
+        if (isset($error)):
+        ?>
             <div class="alert alert-danger"><?php echo $error; ?></div>
         <?php endif; ?>
+        
+        <!-- Formulario para agregar nueva mercadería -->
+        <h2 class="h5 mb-4">Agregar Nueva Mercadería</h2>
+        <form method="post" action="editar_tipo_mercaderia.php">
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" required>
+            </div>
+            <div class="mb-3">
+                <label for="descripcion" class="form-label">Descripción</label>
+                <textarea class="form-control" id="descripcion" name="descripcion" rows="4" required></textarea>
+            </div>
+            <button type="submit" name="agregar" class="btn btn-success">Agregar Mercadería</button>
+        </form>
+
+        <hr>
 
         <div class="table-responsive">
             <?php
             // Ejecutar la consulta y depurar el número de registros
-            $resultado = $conexion->query("SELECT * FROM tipos_mercaderia");
+            $resultado = $conn->query("SELECT * FROM tipos_mercaderia");
             if (!$resultado) {
-                die("Error en la consulta: " . $conexion->error);
+                die("Error en la consulta: " . $conn->error);
             }
             // Depuración: mostrar cantidad de registros devueltos
             echo "<p>Número de registros encontrados: " . $resultado->num_rows . "</p>";

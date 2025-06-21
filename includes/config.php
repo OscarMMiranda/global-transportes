@@ -1,19 +1,16 @@
 <?php
-	// Configura tus datos de conexión aquí
+	// archivo: includes/conexion.php
 	$host = 'localhost';
 	$usuario = 'wi010232_ommz';
 	$contrasena = 'Samantha2304';
 	$base_de_datos = 'wi010232_sistema';
 
-	// Crear conexión
 	$conn = new mysqli($host, $usuario, $contrasena, $base_de_datos);
 
-	// Verificar conexión
 	if ($conn->connect_error) {
-		die("Error de conexión: " . $conn->connect_error);
+		error_log("Error de conexión: " . $conn->connect_error);
+		die("Error al conectar a la base de datos.");
 	}
 
-	// Opcional: establecer juego de caracteres
 	$conn->set_charset("utf8");
 ?>
-

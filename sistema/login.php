@@ -1,65 +1,82 @@
 <?php
-session_start();
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+	// 1. Iniciar sesión y configurar entorno
+	session_start();
 
-// Conexión a la base de datos //
-include '../includes/conexion.php';
 
-$error = '';
+	// Sólo mostramos errores en local
+	if ($_SERVER['SERVER_NAME'] === 'localhost') {
+    	ini_set('display_errors', 1);
+    	ini_set('display_startup_errors', 1);
+    	error_reporting(E_ALL);
+		}
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (!$conn) {
-        die("Error de conexión con la base de datos.");
-    }
+// // Conexión a la base de datos //
+// include '../includes/conexion.php';
 
-    $usuario = trim($_POST['usuario']);
-    $clave = $_POST['clave'];
 
-    $stmt = $conn->prepare("
-        SELECT u.id, u.usuario, u.contrasena AS clave, u.rol AS rol_id, r.nombre AS rol_nombre
-        FROM usuarios u
-        JOIN roles r ON u.rol = r.id
-        WHERE u.usuario = ?
-    ");
 
-    if (!$stmt) {
-        die("Error en la preparación de la consulta: " . $conn->error);
-    }
+	// 4. Conectar a la base de datos (ruta absoluta)
+	require_once __DIR__ . '/../includes/conexion.php';
+	$error = '';
 
-    $stmt->bind_param("s", $usuario);
-    $stmt->execute();
-    $resultado = $stmt->get_result();
 
-    if ($resultado->num_rows === 1) {
-        $fila = $resultado->fetch_assoc();
-        if (password_verify($clave, $fila['clave'])) {
-            // Inicio de sesión exitoso
-            $_SESSION['usuario'] = $fila['usuario'];
-            $_SESSION['id'] = $fila['id'];
-            $_SESSION['rol'] = $fila['rol_id'];
-            $_SESSION['rol_nombre'] = $fila['rol_nombre'];
+	// 5. Procesar POST
+	if ($_SERVER['REQUEST_METHOD'] === 'POST') 
+		{
+    	if (!$conn) 
+			{
+        	die("Error de conexión con la base de datos.");
+    		}
 
-            // Verifica que el archivo de destino exista
-            $ruta = '';
-            switch ($fila['rol_nombre']) {
-                case 'admin':
-                    $ruta = 'panel_admin.php';
-                    break;
-                case 'chofer':
-                    $ruta = 'panel_chofer.php';
-                    break;
-                case 'cliente':
-                    $ruta = 'panel_cliente.php';
-                    break;
-                case 'empleado':
-                    $ruta = 'panel_empleado.php';
-                    break;
-                default:
-                    $ruta = 'panel.php';
-                    break;
-            }
+		// 5.2 Sanitizar entrada
+        $usuario = trim($_POST['usuario']);
+        $clave   = $_POST['clave'];
+
+
+    	$stmt = $conn->prepare("
+        	SELECT u.id, u.usuario, u.contrasena AS clave, u.rol AS rol_id, r.nombre AS rol_nombre
+        	FROM usuarios u
+        	JOIN roles r ON u.rol = r.id
+        	WHERE u.usuario = ?
+    		");
+
+    	if (!$stmt) {
+        	die("Error en la preparación de la consulta: " . $conn->error);
+    		}
+
+    	$stmt->bind_param("s", $usuario);
+    	$stmt->execute();
+    	$resultado = $stmt->get_result();
+
+    	if ($resultado->num_rows === 1) {
+        	$fila = $resultado->fetch_assoc();
+        	if (password_verify($clave, $fila['clave'])) {
+            	// Inicio de sesión exitoso
+            	$_SESSION['usuario'] 	= $fila['usuario'];
+            	$_SESSION['id'] 		= $fila['id'];
+            	$_SESSION['rol'] 		= $fila['rol_id'];
+            	$_SESSION['rol_nombre'] = $fila['rol_nombre'];
+
+            	// Verifica que el archivo de destino exista
+            	$ruta = '';
+            	switch ($fila['rol_nombre']) 
+					{
+            	    case 'admin':
+                	    $ruta = 'panel_admin.php';
+                    	break;
+                	case 'chofer':
+                	    $ruta = 'panel_chofer.php';
+                	    break;
+                	case 'cliente':
+                	    $ruta = 'panel_cliente.php';
+                	    break;
+                	case 'empleado':
+                	    $ruta = 'panel_empleado.php';
+                	    break;
+                	default:
+                	    $ruta = 'panel.php';
+                	    break;
+            		}
 
             // Verifica si el archivo existe antes de redirigir
             if (file_exists($ruta)) {
@@ -103,7 +120,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="login-wrapper">
             <div class="login-card">
                 
-
                 <!-- CABECERA con logo y nombre -->
                 <div class="login-card__header">
                     <img src="../img/logo.png" alt="Logo" class="login-card__logo">
@@ -113,14 +129,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		        <!-- <header> -->
     		        <div class="login-card__body">
                         <h2>Acceso al Sistema</h2>
-    			        <!-- <a href="../index.html" class="logo">
-    				        <img src="../img/logo.png" alt="Logo" class="logo-img">
-    			        </a> -->
-    			        
     		        </div>
 
   		        <!-- </header> -->
-
                 <main class="contenido">
                     <div class="login-form">
 
@@ -134,7 +145,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <form action="login.php" method="post" class="formulario">
         
                             <!-- CSRF token -->
-                            <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token']) ?>">
+                            <input 
+								type="hidden" 
+								name="csrf_token" 
+								value="<?= htmlspecialchars($_SESSION['csrf_token']) ?>">
 
                             <!-- formulario para el campo de usuario -->
 		                    <div class="login-form__group">
@@ -158,9 +172,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     required
                                 >
                             </div>
-
-		                    <button type="submit" class="login-form__btn">Ingresar</button>
-
+							
+							<button type="submit" class="login-form__btn">Ingresar</button>
+		                   
+                            <div class="text-center my-3">
+              					<button type="button" onclick="window.history.back()" class="btn btn-secondary">
+                					⬅ Volver
+    							</button>
+							</div>
                         </form>
                     </div>
                 </main>
@@ -172,5 +191,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </footer>
             </div>
         </div>
+
+<script>
+    setTimeout(function() {
+        window.history.back();
+    }, 15000); // Redirige después de 15 segundos
+</script>
+
+
     </body>
 </html>

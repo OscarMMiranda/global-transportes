@@ -16,12 +16,14 @@
 		}
 
 	// Registrar actividad en historial_bd
-	$usuario = $_SESSION['usuario'];
-	$accion = "Accedió al panel de administración";
-	$ip_usuario = $_SERVER['REMOTE_ADDR'];
-	$sql_historial = "INSERT INTO historial_bd (usuario, accion, ip_usuario) VALUES ('$usuario', '$accion', '$ip_usuario')";
-	$conn->query($sql_historial);
+		$usuario = $_SESSION['usuario'];
+		$accion = "Accedió al panel de administración";
+		$ip_usuario = $_SERVER['REMOTE_ADDR'];
+		$sql_historial = "INSERT INTO historial_bd (usuario, accion, ip_usuario) VALUES ('$usuario', '$accion', '$ip_usuario')";
+		$conn->query($sql_historial);
 
+	
+	
 	// 4) Incluir layout principal
 	//  require __DIR__ . '/partials/header.php';
 ?>
@@ -42,7 +44,8 @@
   		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
 
   		<!-- Tu CSS -->
-  		<!-- <link rel="stylesheet" href="../css/estilo.css" /> -->
+  		<link rel="stylesheet" href="../css/styles.css" /> 
+		
 		<?php require __DIR__ . '/partials/header.php'; ?>
 	</head>
 

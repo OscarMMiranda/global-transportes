@@ -33,20 +33,20 @@ session_start();
     $observaciones = trim($_POST['observaciones']);
 
 // Actualizar el vehículo en la base de datos
-    $sql = "UPDATE vehiculos SET placa = ?, tipo_id = ?, marca_id = ?, estado_id = ?, configuracion_id = ?, modelo = ?, anio = ?, empresa_id = ?, observaciones = ? WHERE id = ?";
+    $sql = "UPDATE vehiculos 
+    	SET placa = ?, tipo_id = ?, marca_id = ?, estado_id = ?, configuracion_id = ?, modelo = ?, anio = ?, empresa_id = ?, observaciones = ? 
+    	WHERE id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("siiississi", $placa, $tipo_id, $marca_id, $estado_id, $configuracion_id, $modelo, $anio, $empresa_id, $observaciones, $vehiculo_id);
 
-
-
     if ($stmt->execute())
         {
-            echo "<p style='color: green;'>✅ Vehículo actualizado correctamente.</p>";
-            header("Refresh:3; url=vehiculos.php");
-            exit();
+        echo "<p style='color: green;'>✅ Vehículo actualizado correctamente.</p>";
+        header("Refresh:1; url=vehiculos.php");
+        exit();
         } 
     else {
-            echo "<p style='color: red;'>❌ Error al actualizar el vehículo: " . $stmt->error . "</p>";
+        echo "<p style='color: red;'>❌ Error al actualizar el vehículo: " . $stmt->error . "</p>";
         }
     
     }

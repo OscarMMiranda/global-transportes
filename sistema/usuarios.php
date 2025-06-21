@@ -165,9 +165,9 @@
                     	<td><?= htmlspecialchars($fila['usuario']); ?></td>
                     	<td><?= htmlspecialchars($fila['correo']); ?></td>
                     	<td><?= htmlspecialchars(ucfirst($fila['rol'])); ?></td>
-                    	<td><?= htmlspecialchars($fila['creado_en']); ?></td>
-                    	<div class="btn-group" role="group" aria-label="Acciones">
-							<td class="acciones">
+                    	<td><?= htmlspecialchars($fila['creado_en']); ?></td>                   	
+						<td class="acciones">
+								<div class="btn-group" role="group" aria-label="Acciones"></div>
                         		<a 
                      				href="editar_usuario.php?id=<?= urlencode($fila['id']) ?>" 
                       				class="btn btn-sm btn-outline-primary" 
@@ -183,8 +183,8 @@
                     			>
                       				<i class="fa fa-trash"></i>
                     			</a>
-                    		</td>
-						</div>
+                    		</div>
+						</td>		
                 	</tr>
             	<?php endwhile; ?>
         	</tbody>

@@ -8,6 +8,14 @@ ini_set('display_errors', 1);
 
 // Obtener la lista de vehículos
 $vehiculos = obtenerVehiculos($conn);
+
+registrarEnHistorial(
+    $_SESSION['usuario'],
+    'Visualizó listado de vehículos',
+    'vehiculos',
+    $_SERVER['REMOTE_ADDR']
+    );
+
 ?>
 
 <div class="container mt-4">
