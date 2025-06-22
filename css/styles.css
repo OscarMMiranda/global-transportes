@@ -7,10 +7,10 @@
 
 :root {
 	/* colores */
-		--color-primary:   #337fdc;
+		--color-primary:   #75adf1;
     	--color-secondary: #6c757d;
     	--color-accent:    #0066cc;
-  		--color-hover:     #2868c7;
+  		--color-hover:     #619cf5;
   		--color-light:     #f8f9fa;
   		--color-dark:      #212529;
   		--color-muted:     #6c757d;
@@ -115,6 +115,20 @@
   		opacity: .8;
 		}
 
+
+
+	.fade-in {
+  		opacity: 0;
+  		animation: fadeIn ease 1s forwards;
+		}
+
+	@keyframes fadeIn {
+		to {
+    		opacity: 1;
+  		}
+	}
+
+
 /*==================================================
   LAYOUT FLEX (SIDEBAR + CONTENIDO)
 ==================================================*/
@@ -164,6 +178,11 @@
   border-radius: var(--radius);
   box-shadow: 0 4px 6px var(--color-shadow);
   margin-bottom: 3rem;
+}
+
+.hero-section img {
+  height: 100%;
+  object-fit: cover;
 }
 
 /*==================================================

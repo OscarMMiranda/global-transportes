@@ -102,10 +102,18 @@
   		<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4"> -->
 
 		<div class="container">
-			<a class="navbar-brand d-flex align-items-center" href="panel_admin.php">
+			<!-- <a class="navbar-brand d-flex align-items-center" href="panel_admin.php">
         		<img src="../img/logo.png" width="100" class="me-2" alt="Logo">
         		Global Transportes
-      		</a>
+      		</a> -->
+
+			<a class="navbar-brand d-flex align-items-center py-1" href="panel_admin.php">
+  				<img src="../img/logo.png" 
+					width="150" 
+					class="me-2" 
+					alt="Logo">
+  					Global Transportes
+			</a>
 
 			<button 
         		class="navbar-toggler" 
@@ -128,83 +136,87 @@
         		</ul>
       		</div>
 
-
-    		<h1 class="mb-4">Lista de Usuarios</h1>
-
-    		<a href="crear_usuario.php" class="boton-accion">➕ Crear Usuario</a>
-    		<a href="usuarios.php?exportar=csv" class="boton-accion">📥 Exportar CSV</a>
-
-    		<?php if ($resultado->num_rows > 0): ?>
-        	
+			<div class="sticky-header mb-4">
+  			<div class="d-flex justify-content-between align-items-center">
+    			<h1 class="h3">Lista de Usuarios</h1>
+				<div>
+    				<a href="crear_usuario.php" class="btn btn-primary me-2">
+						<i class="fa fa-plus"></i> Crear Usuario</a>
+    				<a href="usuarios.php?exportar=csv" class="btn btn-success">
+						<i class="fa fa-file-csv"></i> Exportar CSV</a>
+    				<?php if ($resultado->num_rows > 0): ?>
+				</div>
+			</div>
 			
-			<table 
-        		id="tablaUsuarios" 
-        		class="table table-striped table-bordered table-hover mb-0"
-        		style="width:100%;"
-      		>
-            	<thead class="table-primary">
-                	<tr>
-                    	<th>ID</th>
-                    	<th>Nombre</th>
-                    	<th>Apellido</th>
-                    	<th>Usuario</th>
-                    	<th>Correo</th>
-                    	<th>Rol</th>
-                    	<th>Fecha Creación</th>
-                    	<th>Acciones</th>
-                	</tr>
-            	</thead>
-            	<tbody>
-			
-			
-            	<?php while ($fila = $resultado->fetch_assoc()) : ?>
-                	<tr>
-                    	<td><?= htmlspecialchars($fila['id']); ?></td>
-                    	<td><?= htmlspecialchars($fila['nombre']); ?></td>
-                    	<td><?= htmlspecialchars($fila['apellido']); ?></td>
-                    	<td><?= htmlspecialchars($fila['usuario']); ?></td>
-                    	<td><?= htmlspecialchars($fila['correo']); ?></td>
-                    	<td><?= htmlspecialchars(ucfirst($fila['rol'])); ?></td>
-                    	<td><?= htmlspecialchars($fila['creado_en']); ?></td>                   	
-						<td class="acciones">
-								<div class="btn-group" role="group" aria-label="Acciones"></div>
-                        		<a 
-                     				href="editar_usuario.php?id=<?= urlencode($fila['id']) ?>" 
-                      				class="btn btn-sm btn-outline-primary" 
-                      				title="Editar"
-                    			>
-                      				<i class="fa fa-pencil-alt"></i>
-                    			</a> |
-                        		<a 
-                      				href="eliminar_usuario.php?id=<?= urlencode($fila['id']) ?>" 
-                      				onclick="return confirm('⚠️ ¿Eliminar este usuario?');" 
-                      				class="btn btn-sm btn-outline-danger" 
-                      				title="Eliminar"
-                    			>
-                      				<i class="fa fa-trash"></i>
-                    			</a>
-                    		</div>
-						</td>		
-                	</tr>
-            	<?php endwhile; ?>
-        	</tbody>
-    	</table>
-    	<?php else: ?>
-        	<p>📌 No hay usuarios registrados.</p>
-    	<?php endif; ?>
-    	<p>
-			<a href="panel_admin.php" class="btn btn-outline-secondary">← Volver al Panel
-			</a>
-		</p>
-	
-	
+		<div class="container-fluid px-1">
+			<!-- <div class="card shadow-sm"> -->
+  				<div class="card-body p-0">
+					<table 
+        				id="tablaUsuarios" 
+						class="table table-striped table-hover mb-0"
+        				style="min-width:100%;"
+      				>
+            			<thead class="table-primary">
+                			<tr>
+                    			<th>ID</th>
+                    			<th>Nombre</th>
+                    			<th>Apellido</th>
+                    			<th>Usuario</th>
+                    			<th>Correo</th>
+                    			<th>Rol</th>
+                    			<th>Fecha Creación</th>
+                    			<th class="text-center">Acciones</th>
+                			</tr>
+            			</thead>
+            		
+						<tbody>
+            				<?php while ($fila = $resultado->fetch_assoc()) : ?>
+                			<tr>
+                    			<td><?= htmlspecialchars($fila['id']); ?></td>
+                    			<td><?= htmlspecialchars($fila['nombre']); ?></td>
+                    			<td><?= htmlspecialchars($fila['apellido']); ?></td>
+                    			<td><?= htmlspecialchars($fila['usuario']); ?></td>
+                    			<td><?= htmlspecialchars($fila['correo']); ?></td>
+                    			<td><?= htmlspecialchars(ucfirst($fila['rol'])); ?></td>
+                    			<td><?= htmlspecialchars($fila['creado_en']); ?></td>                   	
+								<td class="acciones">
+									<div class="btn-group" role="group" aria-label="Acciones"></div>
+                        				<a 
+                     						href="editar_usuario.php?id=<?= urlencode($fila['id']) ?>" 
+                      						class="btn btn-sm btn-outline-primary" 
+                      						title="Editar"
+                    					>
+                      						<i class="fa fa-pencil-alt"></i>
+                    					</a> |
+                        				<a 
+                      						href="eliminar_usuario.php?id=<?= urlencode($fila['id']) ?>" 
+                      						onclick="return confirm('⚠️ ¿Eliminar este usuario?');" 
+                      						class="btn btn-sm btn-outline-danger" 
+                      						title="Eliminar"
+                    					>
+                      						<i class="fa fa-trash"></i>
+                    					</a>
+                    				</div>
+								</td>		
+                			</tr>
+            				<?php endwhile; ?>
+        				</tbody>
+    				</table>
+				</div>
+			</div>
+		
 
+    		<?php else: ?>
+        		<p>📌 No hay usuarios registrados.</p>
+    		<?php endif; ?>
+    		<p>
+				<a href="panel_admin.php" class="btn btn-outline-secondary">← Volver al Panel
+				</a>
+			</p>
 	
-	</div>
+		</div>
 
 	<!-- FOOTER -->
-  
-
 	<!-- jQuery (necesario para DataTables) -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<!-- DataTables JS -->

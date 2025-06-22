@@ -4,7 +4,6 @@
     	<meta charset="UTF-8">
     	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     	<title>Inicio - Global Transportes</title>
-
     	<meta name="description" content="Global Transportes: logística y transporte de cargas a nivel nacional e internacional.">
 
         <!-- Open Graph -->
@@ -30,28 +29,24 @@
     		integrity="sha384-…"
     		crossorigin="anonymous"
   			/>
-  		<link rel="stylesheet" href="css/styles.min.css" />
-
-
+  		<link rel="stylesheet" 
+			href="css/styles.min.css" 
+			/>
 
     	<link rel="shortcut icon" href="img/favicon.ico">
     	<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
     	<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
-
 		<link rel="stylesheet" href="css/styles.css">
-
-
 	</head>
 
 	<body>
     	<!-- HEADER / NAVBAR -->
     	<header role="banner">
+			
         	<nav role= navigation class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
             	<div class="container-fluid">
                 	
-					<!-- Navbar Brand -->
-			
-
+				<!-- Navbar Brand -->
 				<a class="navbar-brand logo text-center text-md-start" href="index.html" aria-label="Inicio Global Transportes">
     				<img 
         				src="img/logo.png" 
@@ -72,7 +67,7 @@
                 	>
                     	<span class="navbar-toggler-icon"></span>
                 	</button>
-
+					<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top d-lg-none"> -->
                 	<div class="collapse navbar-collapse" id="navbarTop">
                     	<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         	<li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
@@ -83,6 +78,7 @@
                         	<li class="nav-item"><a class="nav-link" href="sistema/login.php">Sistema</a></li>
                     	</ul>
                 	</div>
+					<!-- </nav> -->
             	</div>
         	</nav>
     	</header>
@@ -105,12 +101,18 @@
 
         <!-- MAIN CONTENT -->
         <main id="mainContent" role="main" class="app-content">
-            <!-- Hero Section -->
-            <section class="hero-section p-5 mb-5">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-lg-6">
-                            <h1 class="display-4">Bienvenidos a Global Transportes</h1>
+           
+			<!-- Hero Section -->
+
+            <!-- <section class="hero-section p-5 mb-5"> -->
+			<section class="hero-section mb-5">
+                <!-- <div class="container"> -->
+				<div class="container-fluid px-0">
+                    <!-- <div class="row align-items-center"> -->
+					<div class="row align-items-center gx-0">
+                        <!-- <div class="col-lg-6"> -->
+						<div class="col-lg-6 p-5">
+                            <h1 class="display-7">Bienvenidos a Global Transportes</h1>
                             <p class="lead">
                                 Especialistas en logística y transporte de cargas a nivel nacional.
                             </p>
@@ -122,7 +124,8 @@
                             <img 
                                 src="img/truck_image.jpg" 
                                 alt="Transporte" 
-                                class="img-fluid rounded shadow"
+                               
+								class="img-fluid w-100 h-100 object-fit-cover"
                                 loading="lazy"
                             />
                         </div>
@@ -131,37 +134,40 @@
             </section>
 
             <!-- Ventajas Section -->
-            <section class="ventajas mb-5">
-                <h3 class="text-center mb-4">¿Por qué elegirnos?</h3>
+            
+			<!-- <section class="ventajas mb-5"> -->
+			<section class="ventajas py-2 bg-light">
+                <h2 class="text-center mb-6">¿Por qué elegirnos?</h2>
                 <div class="row g-4">
                     <div class="col-sm-6 col-lg-3">
-                        <div class="card h-100">
+                        <div class="card h-100 text-center shadow-sm p-3">
                             <div class="card-body text-center">
-                                <h4 class="card-title">🚛 Flota Moderna</h4>
+								<i class="fas fa-truck fa-2x text-primary mb-3"></i>
+                                <h5 class="card-title">🚛 Flota Moderna</h5>
                                 <p class="card-text">Vehículos equipados con tecnología de punta.</p>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-6 col-lg-3">
-                        <div class="card h-100">
+                        <div class="card h-100 text-center shadow-sm p-3">
                             <div class="card-body text-center">
-                                <h4 class="card-title">⏱ Seguimiento en Tiempo Real</h4>
+                                <h5 class="card-title">⏱ Seguimiento en Tiempo Real</h5>
                                 <p class="card-text">Estado y ubicación de tu envío en todo momento.</p>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-6 col-lg-3">
-                        <div class="card h-100">
+                        <div class="card h-100 text-center shadow-sm p-3">
                             <div class="card-body text-center">
-                                <h4 class="card-title">📦 Transporte Seguro</h4>
+                                <h5 class="card-title">📦 Transporte Seguro</h5>
                                 <p class="card-text">Garantizamos un traslado eficiente y protegido.</p>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-6 col-lg-3">
-                        <div class="card h-100">
+                        <div class="card h-100 text-center shadow-sm p-3">
                             <div class="card-body text-center">
-                                <h4 class="card-title">🌍 Cobertura Nacional</h4>
+                                <h5 class="card-title">🌍 Cobertura Nacional</h5>
                                 <p class="card-text">Llegamos a todos los rincones del país con puntualidad.</p>
                             </div>
                         </div>
