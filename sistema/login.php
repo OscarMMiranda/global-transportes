@@ -102,28 +102,56 @@
 <html lang="es">
 
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <title>Acceso al Sistema - Global Transportes</title>
 
         <!-- FontAwesome para íconos -->
         <link
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-        rel="stylesheet"
-        />
+    		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+			rel="stylesheet"
+		/>
+
+        <!-- Bootstrap CSS -->
+    	<link
+    		href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    		rel="stylesheet"
+  		/>
 
         <!-- CSS personalizado -->
         <link rel="stylesheet" href="../css/login.css">
+
+		<style>
+    		body {
+      			min-height:100vh;
+      			display:flex;
+      			align-items:center;
+      			justify-content:center;
+      			background: linear-gradient(135deg,#0052D4,#4364F7);
+    			}
+    		.card-login {
+      			width: 100%;
+      			max-width: 400px;
+      			border-radius: .5rem;
+      			box-shadow: 0 0 20px rgba(0,0,0,.1);
+    			}
+    		.login-logo {
+      			max-width: 120px;
+    		}
+  		</style>
+
     </head>
 
     <body>
-        <div class="login-wrapper">
+		<div class="card card-login p-4 bg-white">
+        <!-- <div class="login-wrapper"> -->
             <div class="login-card">
                 
                 <!-- CABECERA con logo y nombre -->
                 <div class="login-card__header">
                     <img src="../img/logo.png" alt="Logo" class="login-card__logo">
-                    <h1 class="login-card__title">M I GLOBAL TRANSPORTES</h1>
+                    <!-- <h1 class="login-card__title">M I GLOBAL TRANSPORTES</h1> -->
+					<h4 class="mt-2 fw-bold">Global Transportes</h4>
                 </div>
         
 		        <!-- <header> -->
@@ -149,10 +177,12 @@
 								type="hidden" 
 								name="csrf_token" 
 								value="<?= htmlspecialchars($_SESSION['csrf_token']) ?>">
-
+							<form method="post" novalidate>
                             <!-- formulario para el campo de usuario -->
-		                    <div class="login-form__group">
-        	                    <label for="usuario"><i class="fa fa-user"></i></label>
+		                    <!-- <div class="login-form__group"> -->
+							<div class="mb-3 input-group">
+								<span class="input-group-text"><i class="fa fa-user"></i></span>
+        	                    <!-- <label for="usuario"><i class="fa fa-user"></i></label> -->
                                 <input
             	                    type="text"
               	                    id="usuario"
@@ -162,8 +192,10 @@
                                 >
                             </div>
 
-                            <div class="login-form__group">
-                                <label for="clave"><i class="fa fa-lock"></i></label>
+                            <!-- <div class="login-form__group"> -->
+							<div class="mb-3 input-group">
+								<span class="input-group-text"><i class="fa fa-lock"></i></span>
+                                <!-- <label for="clave"><i class="fa fa-lock"></i></label> -->
                                 <input
                                     type="password"
                                     id="clave"
@@ -172,23 +204,45 @@
                                     required
                                 >
                             </div>
+
+							 <div class="mb-3 form-check">
+        						<input
+          							type="checkbox"
+          							class="form-check-input"
+          							id="rememberMe"
+          							name="remember_me"
+        						/>
+        						<label class="form-check-label" for="rememberMe">
+          							Recordarme
+        						</label>
+      						</div>
 							
-							<button type="submit" class="login-form__btn">Ingresar</button>
+							<button type="submit" class="btn btn-primary w-100">
+								Ingresar
+							</button>
+
+							<div class="mt-3 text-center">
+        						<a href="forgot_password.php" class="link-secondary">
+          							¿Olvidaste tu contraseña?
+        						</a>
+      						</div>
 		                   
                             <div class="text-center my-3">
               					<button type="button" onclick="window.history.back()" class="btn btn-secondary">
                 					⬅ Volver
     							</button>
 							</div>
+							</form>
                         </form>
                     </div>
                 </main>
 
                 <footer>
-                    <div class="login-card__footer">
+                    <footer class="mt-4 text-center small text-muted">
                         &copy; 2025 Global Transportes. Todos los derechos reservados.
-                    </div>
+                   
                 </footer>
+				 </div>
             </div>
         </div>
 

@@ -66,7 +66,7 @@
                 						Editar y actualizar tipos de mercadería.
               						</p>
               						<a 
-                						href="editar_tipo_mercaderia.php" 
+                						href="tipo_mercaderia/editar_tipo_mercaderia.php" 
                 						class="btn dashboard-btn btn-primary mt-3"
               						>
                 						Actualizar
@@ -84,7 +84,7 @@
                 						Gestionar tipo de vehiculos.
               						</p>
               						<a 
-                						href="editar_tipo_vehiculo.php" 
+                						href="tipo_vehiculo/editar_tipo_vehiculo.php" 
                 						class="btn dashboard-btn btn-primary mt-3"
               						>
                 						Actualizar
@@ -102,7 +102,7 @@
                 						Gestionar agencias de aduanas.
               						</p>
               						<a 
-                						href="editar_agencia_aduana.php" 
+                						href="agencia_aduana/editar_agencia_aduana.php" 
                 						class="btn dashboard-btn btn-primary mt-3"
               						>
                 						Actualizar

@@ -35,7 +35,7 @@
 
   	/* layout */
   		--navbar-height: 70px;
-  		--sidebar-width: 240px;
+  		--sidebar-width: 180px;
   		--logo-width:    150px;
   		--radius:        0.5rem;
 
@@ -142,7 +142,7 @@
   		position: fixed;
   		top: var(--navbar-height);
   		left: 0;
-  		width: var(--sidebar-width);
+  		width: calc (var(--sidebar-width) );
   		height: calc(100vh - var(--navbar-height));
   		background-color: var(--color-dark);
 		background: var(--color-dark);
@@ -161,14 +161,22 @@
   		background-color: var(--color-muted);
 		}
 
+	.sidebar-custom {
+    	width: 180px !important;
+    	min-width: 100px !important;
+    	max-width: 180px !important;
+}
+
+
 /*==================================================
   CONTENIDO PRINCIPAL
 ==================================================*/
 .app-content {
-  margin-left: var(--sidebar-width);
+  margin-left: var(--sidebar-width );
   padding: 2rem;
   flex: 1;
 }
+
 
 /*==================================================
   HERO SECTION

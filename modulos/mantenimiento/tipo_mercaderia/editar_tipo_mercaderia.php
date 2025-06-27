@@ -5,7 +5,7 @@
 	error_reporting(E_ALL);
 
 	session_start();
-	require_once __DIR__ . '/../../includes/conexion.php';
+	require_once __DIR__ . '/../../../includes/conexion.php';
 
 	// Verificar conexión (esto puede removerse en producción)
 	if (!$conn) 
@@ -16,7 +16,7 @@
 	// Acceso restringido solo a administradores
 	if (empty($_SESSION['usuario']) || $_SESSION['rol_nombre'] !== 'admin') 
 		{
-		header('Location: ../sistema/login.php');
+		header('Location: ../../sistema/login.php');
 	    exit;
 		}
 
