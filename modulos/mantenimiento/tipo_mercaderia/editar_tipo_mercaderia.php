@@ -7,6 +7,7 @@
 	session_start();
 	require_once __DIR__ . '/../../../includes/conexion.php';
 
+	
 	// Verificar conexión (esto puede removerse en producción)
 	if (!$conn) 
 		{
@@ -103,6 +104,8 @@
         }
     }
     ?>
+
+
 <!DOCTYPE html>
 	<html lang="es">
     	<head>
@@ -120,7 +123,7 @@
         <header class="dashboard-header bg-white shadow-sm py-3">
             <div class="container d-flex align-items-center justify-content-between">
                 <h1 class="h4 mb-0">📦 Editar Tipo de Mercadería</h1>
-                <a href="editar_tipo_mercaderia.php" class="btn btn-outline-primary btn-sm">
+                <a href="/editar_tipo_mercaderia.php" class="btn btn-outline-primary btn-sm">
                     <i class="fas fa-arrow-left me-1"></i> Volver
                 </a>
             </div>
@@ -198,7 +201,7 @@
     <header class="dashboard-header bg-white shadow-sm py-3">
         <div class="container d-flex align-items-center justify-content-between">
             <h1 class="h4 mb-0">📦 Editar Tipo de Mercadería</h1>
-            <a href="../mantenimiento/mantenimiento.php" class="btn btn-outline-primary btn-sm">
+            <a href="/../../modulos/mantenimiento/mantenimiento.php" class="btn btn-outline-primary btn-sm">
                 <i class="fas fa-arrow-left me-1"></i> Volver al Mantenimiento
             </a>
         </div>

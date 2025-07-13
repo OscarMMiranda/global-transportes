@@ -1,80 +1,55 @@
 <?php
-require_once '../../includes/conexion.php';
 session_start();
+require_once '../../includes/conexion.php';
 
-// Activar depuración
+// Mostrar errores en desarrollo
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-ini_set('log_errors', 1);
-ini_set('error_log', __DIR__ . '/error_log.txt');
 
-// Verificar sesión
-if (!isset($_SESSION['usuario']) || $_SESSION['rol_nombre'] !== 'admin') 
-    {
-    die("❌ Acceso denegado.");
-    }
+// 1) Validar usuario autenticado (y rol si aplica)
+if (!isset($_SESSION['usuario'])) {
+    die("❌ Acceso no autorizado.");
+}
 
-// Validar método de solicitud
-if ($_SERVER["REQUEST_METHOD"] !== "POST") 
-    {
-    die("❌ Método no permitido.");
-    }
+// 2) Validar método POST y parámetro id
+if ($_SERVER['REQUEST_METHOD'] !== 'POST' 
+    || empty($_POST['id']) 
+    || !is_numeric($_POST['id'])
+) {
+    die("❌ Solicitud inválida.");
+}
+$vehiculo_id = (int) $_POST['id'];
 
-// Validar ID del vehículo
-if (empty($_POST['id']) || !is_numeric($_POST['id'])) 
-    {
-    die("❌ ID de vehículo no válido.");
-    }
+// 3) Comprobar que el vehículo exista y esté activo
+$stmt = $conn->prepare(
+    "SELECT placa 
+       FROM vehiculos 
+      WHERE id = ? 
+        AND activo = 1"
+);
+$stmt->bind_param("i", $vehiculo_id);
+$stmt->execute();
+$result = $stmt->get_result();
+if ($result->num_rows === 0) {
+    die("❌ Vehículo no encontrado o ya eliminado.");
+}
+$registro = $result->fetch_assoc();
 
-$vehiculo_id = intval($_POST['id']);
+// 4) Ejecutar actualización para marcar activo = 0
+$stmt = $conn->prepare(
+    "UPDATE vehiculos 
+        SET activo = 0 
+      WHERE id = ?"
+);
+if (!$stmt) {
+    die("❌ Error al preparar actualización: " . $conn->error);
+}
+$stmt->bind_param("i", $vehiculo_id);
+if (!$stmt->execute()) {
+    die("❌ Error al ejecutar baja lógica: " . $stmt->error);
+}
 
-// Verificar si el vehículo existe en la base de datos
-$sql_verificar = "SELECT placa FROM vehiculos WHERE id = ?";
-$stmt_verificar = $conn->prepare($sql_verificar);
-$stmt_verificar->bind_param("i", $vehiculo_id);
-$stmt_verificar->execute();
-$result = $stmt_verificar->get_result();
-
-if ($result->num_rows === 0) 
-    {
-    die("❌ El vehículo no existe en la base de datos.");
-    }
-
-$vehiculo = $result->fetch_assoc();
-$placa = $vehiculo['placa'];
-
-// Intentar eliminar el vehículo
-$sql_eliminar = "DELETE FROM vehiculos WHERE id = ?";
-$stmt_eliminar = $conn->prepare($sql_eliminar);
-$stmt_eliminar->bind_param("i", $vehiculo_id);
-
-
-
-//  if (!$stmt_eliminar->execute()) 
-//    {
-//    die("❌ Error al eliminar el vehículo: " . $stmt_eliminar->error);
-//    }
-//  echo "✅ Vehículo eliminado correctamente.<br>";
-
-if ($stmt_eliminar->execute())
-    {
-    echo "<p style='color: green;'>✅ Vehículo eliminado correctamente.</p>";
-    header("Refresh:2; url=vehiculos.php");
-    exit();
-    } 
-else 
-    {
-    echo "<p style='color: red;'>❌ Error al eliminar el vehículo: " . $stmt->error . "</p>";
-    }
-
-
-
-exit();
-
-
-
-
-?>
-
-
-
+// 5) Flash message y redirección
+$_SESSION['msg'] = "Vehículo “{$registro['placa']}” eliminado lógicamente.";
+header("Location: vehiculos.php");
+exit;

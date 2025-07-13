@@ -38,7 +38,7 @@ if (!isset($_SESSION['usuario']) || !isset($_SESSION['rol_nombre']) || $_SESSION
                     	<li class="nav-item"><a class="nav-link" href="../index.html">🏠 Inicio</a></li>
 						<li class="nav-item"><a class="nav-link" href="../sistema/logout.php">🔒 Cerrar Sesión</a></li>
                     	<li class="nav-item"><a class="nav-link" href="../sistema/panel_admin.php">⚙️ Panel Admin</a></li>
-                    	<li class="nav-item"><a class="nav-link" href="../documentos/documentos.php">📄 Documentos</a></li>
+                    	<li class="nav-item"><a class="nav-link" href="../modulos/documentos/documentos.php">📄 Documentos</a></li>
                     	<li class="nav-item"><a class="nav-link" href="../sistema/admin_db.php">🛠 Gestionar BD</a></li>
                 	</ul>
             	</div>
@@ -91,9 +91,9 @@ if (!isset($_SESSION['usuario']) || !isset($_SESSION['rol_nombre']) || $_SESSION
                      </div>
                      <div class="col">
                         <div class="card card-dashboard">
-                           <h4>📄 Documentos Vehiculares</h4>
-                           <p>Registrar y administrar documentos de cada vehículo.</p>
-                           <a href="../modulos/documentos/documentos.php" class="btn btn-primary">Ir</a>
+                           <h4>📄 Asignacion de Conductores</h4>
+                           <p>Registrar y administrar conductores.</p>
+                           <a href="../modulos/conductores/conductores.php" class="btn btn-primary">Ir</a>
                         </div>
                      </div>
                   </div>

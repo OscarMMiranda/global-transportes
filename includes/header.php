@@ -1,5 +1,14 @@
 <?php
-session_start(); // Iniciar sesión si se requiere autenticación
+// session_start(); 
+
+// Iniciar sesión si se requiere autenticación
+
+// includes/header.php
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -11,6 +20,8 @@ session_start(); // Iniciar sesión si se requiere autenticación
     <!-- Enlace a Bootstrap para mejor diseño -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../css/base.css"> <!-- Tus estilos personalizados -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 </head>
 <body>
 

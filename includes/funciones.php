@@ -7,13 +7,36 @@
 	 * @param mysqli $conn Conexión a la base de datos
 	 * @return mysqli_result Resultado de la consulta SQL
 	 */
-	function obtenerVehiculos($conn) {
-    	$sql = "SELECT id, placa, marca_id, modelo, tipo_id, anio, empresa_id FROM vehiculos";
-    	$result = $conn->query($sql);
+
+	function obtenerVehiculos($conn, $activo = 1) {
+		$activo = (int) $activo;
+		$sql = 
+			"SELECT 
+        		v.id, 
+				v.placa, 
+				v.modelo, 
+				v.anio, 
+				v.observaciones,
+        		m.nombre    AS marca,
+        		t.nombre    AS tipo,
+        		e.razon_social AS empresa,
+        		ev.nombre   AS estado_operativo,
+				v.activo 
+      			FROM vehiculos v
+      			JOIN marca_vehiculo m ON v.marca_id = m.id
+      			JOIN tipo_vehiculo  t ON v.tipo_id  = t.id
+      			JOIN empresa        e ON v.empresa_id = e.id
+      			JOIN estado_vehiculo ev ON v.estado_id = ev.id
+      			WHERE v.activo = $activo
+      			ORDER BY v.placa
+    			";
+    	
+		$result = $conn->query($sql);
     	if (!$result) {
-    	    die("❌ Error en consulta SQL: " . $conn->error);
+        	die("Error en obtenerVehiculos: " . $conn->error);
     		}
     	return $result;
+
 		}
 
 	/**
@@ -23,7 +46,10 @@
 	 * @return array|null Datos del vehículo o null si no existe
 	 */
 	function obtenerVehiculoPorId($conn, $id) {
-    	$sql = "SELECT id, placa, marca_id, modelo, tipo_id, anio, empresa_id FROM vehiculos WHERE id = ?";
+    	$sql = 
+			"SELECT id, placa, marca_id, modelo, tipo_id, anio, empresa_id, activo 
+			FROM vehiculos 
+			WHERE id = ?";
     	$stmt = $conn->prepare($sql);
     	$stmt->bind_param("i", $id);
     	$stmt->execute();
@@ -43,7 +69,9 @@
 	 * @return bool Éxito o fallo en la inserción
 	 */
 	function registrarVehiculo($conn, $placa, $marca_id, $modelo, $tipo_id, $anio, $empresa_id) {
-    	$sql = "INSERT INTO vehiculos (placa, marca_id, modelo, tipo_id, anio, empresa_id) VALUES (?, ?, ?, ?, ?, ?)";
+    	$sql = 
+			"INSERT INTO vehiculos (placa, marca_id, modelo, tipo_id, anio, empresa_id) 
+			VALUES (?, ?, ?, ?, ?, ?)";
     	$stmt = $conn->prepare($sql);
     	$stmt->bind_param("sisiii", $placa, $marca_id, $modelo, $tipo_id, $anio, $empresa_id);
     	return $stmt->execute();
@@ -62,7 +90,15 @@
 	 * @return bool Éxito o fallo en la actualización
 	 */
 	function editarVehiculo($conn, $id, $placa, $marca_id, $modelo, $tipo_id, $anio, $empresa_id) {
-    	$sql = "UPDATE vehiculos SET placa = ?, marca_id = ?, modelo = ?, tipo_id = ?, anio = ?, empresa_id = ? WHERE id = ?";
+    	$sql = 
+			"UPDATE vehiculos 
+			SET placa = ?, 
+				marca_id = ?, 
+				modelo = ?, 
+				tipo_id = ?, 
+				anio = ?, 
+				empresa_id = ? 
+			WHERE id = ?";
     	$stmt = $conn->prepare($sql);
     	$stmt->bind_param("sisiiii", $placa, $marca_id, $modelo, $tipo_id, $anio, $empresa_id, $id);
 		return $stmt->execute();
@@ -75,7 +111,14 @@
  	* @return bool Éxito o fallo en la eliminación
  	*/
 	function eliminarVehiculo($conn, $id) {
-    	$sql = "DELETE FROM vehiculos WHERE id = ?";
+    	// $sql = "DELETE FROM vehiculos WHERE id = ?";
+    	// $stmt = $conn->prepare($sql);
+    	// $stmt->bind_param("i", $id);
+    	// return $stmt->execute();
+		 $sql = 
+		 	"UPDATE vehiculos 
+			SET activo = 0 
+			WHERE id = ?";
     	$stmt = $conn->prepare($sql);
     	$stmt->bind_param("i", $id);
     	return $stmt->execute();
@@ -147,6 +190,14 @@
     	$stmt->bind_param("ssss", $usuario, $accion, $tabla_afectada, $ip);
     	return $stmt->execute();
 	}
+
+	function restaurarVehiculo($conn, $id) {
+    $sql = "UPDATE vehiculos SET activo = 1 WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $id);
+    return $stmt->execute();
+}
+
 
 
 

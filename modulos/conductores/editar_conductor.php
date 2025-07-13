@@ -88,8 +88,9 @@ if (!$conductor) {
     <h2>Editar Conductor</h2>
 
     <form action="procesar_edicion.php" method="POST" enctype="multipart/form-data">
-        <input type="hidden" name="id" value="<?= $conductor['id'] ?>">
-
+        <input type="hidden" 
+                name="id" 
+                value="<?= $conductor['id'] ?>">
         <div class="campo">
             <label for="nombres">Nombres:</label>
             <input type="text" name="nombres" id="nombres" required value="<?= htmlspecialchars($conductor['nombres']) ?>" onkeyup="this.value = this.value.toUpperCase();">

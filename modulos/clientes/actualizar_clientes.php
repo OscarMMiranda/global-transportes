@@ -1,10 +1,77 @@
 <?php
-require_once '../../includes/conexion.php';
 
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
+	error_reporting(E_ALL);
+	ini_set('display_errors', 1);
+	ini_set('display_startup_errors', 1);
 
-// Verificar conexión
-if (!$conn) {
-    die("Error de conexión a la base de datos: " . mysqli_connect_error());
+    // session_start();
+
+    // require_once '../../includes/conexion.php';
+    require_once '../../includes/conexion.php';
+
+$id         = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
+// $nombre     = trim($_POST['nombre'] ?? '');
+$nombre = isset($_POST['nombre']) ? trim($_POST['nombre']) : '';
+// $ruc        = trim($_POST['ruc'] ?? '');
+// $direccion  = trim($_POST['direccion'] ?? '');
+// $telefono   = trim($_POST['telefono'] ?? '');
+// $correo     = trim($_POST['correo'] ?? '');
+$ruc       = isset($_POST['ruc'])       ? trim($_POST['ruc'])       : '';
+$direccion = isset($_POST['direccion']) ? trim($_POST['direccion']) : '';
+$telefono  = isset($_POST['telefono'])  ? trim($_POST['telefono'])  : '';
+$correo    = isset($_POST['correo'])    ? trim($_POST['correo'])    : '';
+$dpto_id    = filter_input(
+		INPUT_POST, 'departamento_id', 
+		FILTER_VALIDATE_INT,
+		['options' => ['default' => 0]]);
+$prov_id    = filter_input(
+		INPUT_POST, 'provincia_id', 
+		FILTER_VALIDATE_INT,
+		['options' => ['default' => 0]]);
+$dist_id    = filter_input(
+		INPUT_POST, 'distrito_id', 
+		FILTER_VALIDATE_INT,
+		['options' => ['default' => 0]]);
+
+// Validaciones básicas
+if (!$id || $nombre === '') {
+    header("Location: editar_clientes.php?id=$id&msg=error");
+    exit;
 }
+
+$sql = "
+    UPDATE clientes
+    SET nombre           = ?,
+        ruc              = ?,
+        direccion        = ?,
+        telefono         = ?,
+        correo           = ?,
+        departamento_id  = ?,
+        provincia_id     = ?,
+        distrito_id      = ?
+    WHERE id = ?
+";
+
+$stmt = $conn->prepare($sql);
+$stmt->bind_param(
+    "sssssiiii",
+    $nombre,
+    $ruc,
+    $direccion,
+    $telefono,
+    $correo,
+    $dpto_id,
+    $prov_id,
+    $dist_id,
+    $id
+);
+
+if ($stmt->execute()) {
+    header("Location: clientes.php?id=$id&msg=ok");
+} else {
+    // Para debug, imprime el error real
+    echo "Error en UPDATE: " . $stmt->error;
+    // Luego redirige o gestiona el fallo
+    // header("Location: editar_cliente.php?id=$id&msg=error");
+}
+exit;

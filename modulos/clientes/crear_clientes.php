@@ -1,160 +1,165 @@
 <?php
+// crear_clientes.php (PHP 5.6 + Bootstrap 5)
 session_start();
-
 ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-ini_set('log_errors', 1);
-ini_set('error_log', __DIR__ . '/errores_php.log');
 error_reporting(E_ALL);
-
 require_once '../../includes/conexion.php';
 
+// Control de acceso
 if (!isset($_SESSION['rol_nombre']) || !in_array($_SESSION['rol_nombre'], ['admin', 'empleado'])) {
     header("Location: ../../sistema/login.php");
     exit();
 }
 
+// Carga de departamentos
 $departamentos = $conn->query("SELECT id, nombre FROM departamentos ORDER BY nombre");
+
+// Flash messages
+function flash($key) {
+    if (isset($_SESSION[$key])) {
+        $type = $key === 'mensaje' ? 'alert-success' : 'alert-danger';
+        echo "<div class='alert {$type} alert-dismissible fade show' role='alert'>"
+           . htmlspecialchars($_SESSION[$key])
+           . "<button type='button' class='btn-close' data-bs-dismiss='alert'></button>"
+           . "</div>";
+        unset($_SESSION[$key]);
+    }
+}
 ?>
+<link rel="stylesheet" href="../../css/estilo.css">
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Crear Cliente</title>
-    <link rel="stylesheet" href="../../css/estilo.css">
-    <style>
-        .formulario {
-            max-width: 600px;
-            margin: auto;
-            background-color: #ffffff;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
+<!-- Si tienes reglas en estilo.css que limitan .container o .contenido,
+     forzamos override aquí mismo: -->
+<style>
+  /* Forzar que MAIN ocupe todo el ancho */
+  main.fullwidth {
+    width: 100%;
+    max-width: none !important;
+    padding: 2rem 5%;
+  }
 
-        .formulario h1 {
-            text-align: center;
-            margin-bottom: 1.5rem;
-            color: #333;
-        }
+  /* La tarjeta será 90% del viewport y centrada, con un max-width cómodo */
+  .wide-card {
+    width: 90vw;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+</style>
 
-        .formulario label {
-            display: block;
-            margin-top: 1rem;
-            font-weight: bold;
-            color: #444;
-        }
+<main class="fullwidth">
+  <h2 class="titulo-pagina text-center mb-4">➕ Registrar Cliente</h2>
 
-        .formulario input,
-        .formulario select {
-            width: 100%;
-            padding: 0.6rem;
-            margin-top: 0.3rem;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
+  <?php
+    flash('mensaje');
+    flash('error');
+  ?>
 
-        .formulario button,
-        .formulario .boton-accion {
-            display: inline-block;
-            margin-top: 1.5rem;
-            padding: 0.7rem 1.5rem;
-            border: none;
-            border-radius: 5px;
-            background-color: #007BFF;
-            color: #fff;
-            text-decoration: none;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
+  <div class="card shadow-sm wide-card">
+    <div class="card-body">
+      <form action="guardar_clientes.php" method="POST" id="formCliente">
+        <div class="row gx-4 gy-4">
+          <div class="col-md-6 mb-3">
+            <label for="nombre" class="form-label">Nombre <span class="text-danger">*</span></label>
+            <input type="text" id="nombre" name="nombre"
+                   class="form-control" required maxlength="100">
+          </div>
 
-        .formulario .boton-accion {
-            background-color: #6c757d;
-            margin-left: 1rem;
-        }
+          <div class="col-md-6 mb-3">
+            <label for="ruc" class="form-label">RUC <span class="text-danger">*</span></label>
+            <input type="text" id="ruc" name="ruc"
+                   class="form-control" required pattern="\d{11}"
+                   title="11 dígitos numéricos" maxlength="11">
+          </div>
 
-        .formulario button:hover,
-        .formulario .boton-accion:hover {
-            background-color: #0056b3;
-        }
+          <div class="col-md-6 mb-3">
+            <label for="direccion" class="form-label">Dirección</label>
+            <input type="text" id="direccion" name="direccion"
+                   class="form-control" maxlength="150">
+          </div>
 
-        body {
-            background-color: #f4f4f4;
-            font-family: Arial, sans-serif;
-        }
+          <div class="col-md-6 mb-3">
+            <label for="telefono" class="form-label">Teléfono</label>
+            <input type="text" id="telefono" name="telefono"
+                   class="form-control" pattern="\d+"
+                   title="Solo dígitos" maxlength="15">
+          </div>
 
-        .container {
-            padding: 2rem 1rem;
-        }
-    </style>
-</head>
-<body>
-<div class="container">
-    <form method="POST" action="guardar_clientes.php" class="formulario">
-        <h1>Registrar Cliente</h1>
+          <div class="col-md-6 mb-3">
+            <label for="correo" class="form-label">Correo</label>
+            <input type="email" id="correo" name="correo"
+                   class="form-control" maxlength="100">
+          </div>
 
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" required>
+          <div class="col-md-6 mb-3">
+            <label for="departamento" class="form-label">
+              Departamento <span class="text-danger">*</span>
+            </label>
+            <select id="departamento" name="departamento_id"
+                    class="form-select" required>
+              <option value="">Seleccione</option>
+              <?php while ($dep = $departamentos->fetch_assoc()): ?>
+                <option value="<?= $dep['id'] ?>">
+                  <?= htmlspecialchars($dep['nombre']) ?>
+                </option>
+              <?php endwhile; ?>
+            </select>
+          </div>
 
-        <label for="ruc">RUC:</label>
-        <input type="text" id="ruc" name="ruc" maxlength="11" required>
+          <div class="col-md-6 mb-3">
+            <label for="provincia" class="form-label">
+              Provincia <span class="text-danger">*</span>
+            </label>
+            <select id="provincia" name="provincia_id"
+                    class="form-select" required>
+              <option value="">Seleccione un departamento</option>
+            </select>
+          </div>
 
-        <label for="direccion">Dirección:</label>
-        <input type="text" id="direccion" name="direccion" required>
+          <div class="col-md-6 mb-3">
+            <label for="distrito" class="form-label">
+              Distrito <span class="text-danger">*</span>
+            </label>
+            <select id="distrito" name="distrito_id"
+                    class="form-select" required>
+              <option value="">Seleccione una provincia</option>
+            </select>
+          </div>
+        </div>
 
-        <label for="telefono">Teléfono:</label>
-        <input type="text" id="telefono" name="telefono" required>
+        <div class="mt-4">
+          <button type="submit" class="btn btn-success">💾 Guardar Cliente</button>
+          <a href="clientes.php" class="btn btn-outline-secondary ms-2">
+            ⬅ Cancelar
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
 
-        <label for="correo">Correo:</label>
-        <input type="email" id="correo" name="correo" required>
-
-        <label for="departamento">Departamento:</label>
-        <select name="departamento_id" id="departamento" required>
-            <option value="">Seleccione</option>
-            <?php while ($dep = $departamentos->fetch_assoc()): ?>
-                <option value="<?= $dep['id'] ?>"><?= htmlspecialchars($dep['nombre']) ?></option>
-            <?php endwhile; ?>
-        </select>
-
-        <label for="provincia">Provincia:</label>
-        <select name="provincia_id" id="provincia" required>
-            <option value="">Seleccione un departamento</option>
-        </select>
-
-        <label for="distrito">Distrito:</label>
-        <select name="distrito_id" id="distrito" required>
-            <option value="">Seleccione una provincia</option>
-        </select>
-
-        <button type="submit">Guardar Cliente</button>
-        <a href="clientes.php" class="boton-accion">Cancelar</a>
-    </form>
-</div>
-
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
+</script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
-$(document).ready(function () {
-    $('#departamento').change(function () {
-        const depId = $(this).val();
-        if (depId) {
-            $('#provincia').load('../ubicaciones/ajax_provincias.php?departamento_id=' + depId);
-            $('#distrito').html('<option value="">Seleccione una provincia</option>');
-        } else {
-            $('#provincia').html('<option value="">Seleccione un departamento</option>');
-            $('#distrito').html('<option value="">Seleccione una provincia</option>');
-        }
-    });
-
-    $('#provincia').change(function () {
-        const provId = $(this).val();
-        if (provId) {
-            $('#distrito').load('../ubicaciones/ajax_distritos.php?provincia_id=' + provId);
-        } else {
-            $('#distrito').html('<option value="">Seleccione una provincia</option>');
-        }
-    });
+$(function(){
+  $('#departamento').on('change', function() {
+    $('#provincia').load(
+      '../ubicaciones/ajax_provincias.php?departamento_id='+$(this).val()
+    );
+    $('#distrito').html(
+      '<option value="">Seleccione una provincia</option>'
+    );
+  });
+  $('#provincia').on('change', function() {
+    $('#distrito').load(
+      '../ubicaciones/ajax_distritos.php?provincia_id='+$(this).val()
+    );
+  });
 });
 </script>
-</body>
-</html>
+
+<?php
+require_once '../../includes/footer.php';
+$conn->close();
+?>

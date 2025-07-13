@@ -1,16 +1,27 @@
 <?php
-	// archivo: includes/conexion.php
-	$host = 'localhost';
-	$usuario = 'wi010232_ommz';
-	$contrasena = 'Samantha2304';
-	$base_de_datos = 'wi010232_sistema';
+// includes/config.php
+// includes/config.php
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
+define('INCLUDES_PATH', __DIR__);
+require_once INCLUDES_PATH . '/conexion.php';
+// 1. Ruta absoluta a /includes
+if (! defined('INCLUDES_PATH')) {
+    define('INCLUDES_PATH', __DIR__);
+}
 
-	$conn = new mysqli($host, $usuario, $contrasena, $base_de_datos);
+// 2. Ruta pública (ajusta 'public_html' si tu carpeta se llama distinto)
+if (! defined('ROOT_PATH')) {
+    define('ROOT_PATH', realpath(__DIR__ . '/public_html'));
+}
 
-	if ($conn->connect_error) {
-		error_log("Error de conexión: " . $conn->connect_error);
-		die("Error al conectar a la base de datos.");
-	}
+// 3. Iniciar sesión
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
-	$conn->set_charset("utf8");
-?>
+// 4. Cargar conexión
+require_once INCLUDES_PATH . '/conexion.php';
+
+// (Opcional) Autoloaders, constantes extra, configuración de timezone…

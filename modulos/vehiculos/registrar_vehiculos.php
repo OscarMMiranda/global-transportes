@@ -16,7 +16,9 @@ $configuracion_id = 1;
 $modelo           = strtoupper(trim($_POST['modelo']));
 $anio             = intval($_POST['anio']);
 $empresa_id       = intval($_POST['empresa_id']);
-$observaciones    = trim($_POST['observaciones']);
+$observaciones    = isset($_POST['observaciones'])
+                    	? trim($_POST['observaciones'])
+    					: null;
 
 // Primero, verificar si la placa ya existe en la base de datos
 $dup_sql = "SELECT id FROM vehiculos WHERE placa = ?";
@@ -45,8 +47,10 @@ if ($dup_stmt->num_rows > 0) {
 }
 $dup_stmt->close();
 
-// Preparar la consulta de inserción
-$sql = "INSERT INTO vehiculos (placa, tipo_id, marca_id, estado_id, configuracion_id, modelo, anio, empresa_id, observaciones) 
+	// Preparar la consulta de inserción
+	$sql = 
+		"INSERT INTO 
+			vehiculos (placa, tipo_id, marca_id, estado_id, configuracion_id, modelo, anio, empresa_id, observaciones) 
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 $stmt = $conn->prepare($sql);
 if (!$stmt) {
@@ -58,7 +62,17 @@ if (!$stmt) {
     exit();
 }
 
-$stmt->bind_param("siiissssi", $placa, $tipo_id, $marca_id, $estado_id, $configuracion_id, $modelo, $anio, $empresa_id, $observaciones);
+	$stmt->bind_param(
+		"siiissssi", 
+			$placa, 
+			$tipo_id, 
+			$marca_id, 
+			$estado_id, 
+			$configuracion_id, 
+			$modelo, 
+			$anio, 
+			$empresa_id, 
+			$observaciones);
 
 if ($stmt->execute()) {
     $respuesta = [

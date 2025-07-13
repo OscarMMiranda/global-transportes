@@ -153,3 +153,15 @@ input {
     border: 1px solid #ccc;
     border-radius: 5px;
 }
+
+#modalConductor input[type="text"] {
+  text-transform: uppercase;
+}
+
+
+/* Fuerza mayúsculas en los inputs del modal de conductores */
+#c_nombres,
+#c_apellidos,
+#c_licencia_conducir {
+  text-transform: uppercase;
+}
