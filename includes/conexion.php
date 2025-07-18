@@ -15,5 +15,8 @@
 
 	// Opcional: establecer juego de caracteres
 	$conn->set_charset("utf8");
+
+
+	
 ?>
 

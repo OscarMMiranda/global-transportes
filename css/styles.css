@@ -7,14 +7,14 @@
 
 :root {
 	/* colores */
-		--color-primary:   #75adf1;
+		--color-primary:   #1f8890;
     	--color-secondary: #6c757d;
-    	--color-accent:    #0066cc;
-  		--color-hover:     #619cf5;
+    	--color-accent:    #c5d2df;
+  		--color-hover:     #1562d7;
   		--color-light:     #f8f9fa;
-  		--color-dark:      #212529;
+  		--color-dark:      #8492a0;
   		--color-muted:     #6c757d;
-  		--color-white:     #ffffff;
+  		--color-white:     #95dbe9;
   		--color-shadow:    rgba(0,0,0,0.1);
 
   	/* tipografía */
@@ -99,6 +99,10 @@
 		z-index: 1000;
 		}
 
+	.bg-global {
+  		background-color: #003366 !important; /* O el color que prefieras */
+		}
+
 	.navbar-brand .logo-img {
   		width: var(--logo-width);
   		height: auto;
@@ -107,6 +111,7 @@
 
 	.navbar .nav-link {
   		color: var(--color-white) !important;
+
 		padding: var(--space-sm) var(--space-md);
   		transition: opacity .2s;
 		}
@@ -115,7 +120,13 @@
   		opacity: .8;
 		}
 
-
+	.navbar-brand span {
+		color: #ffffff;
+		}
+	
+	.navbar-toggler-icon {
+  		filter: invert(1); /* Asegura que el ícono se vea sobre fondo oscuro */
+		}
 
 	.fade-in {
   		opacity: 0;
@@ -125,8 +136,9 @@
 	@keyframes fadeIn {
 		to {
     		opacity: 1;
-  		}
-	}
+  			}
+		}
+
 
 
 /*==================================================
@@ -269,7 +281,7 @@ footer {
 ==================================================*/
 
 	[data-theme="dark"] {
-  		--color-light: #121212;
+  		--color-light: #581717;
   		--color-dark:  #e0e0e0;
   		--color-primary: #5599ff;
   		--color-shadow: rgba(0,0,0,0.5);

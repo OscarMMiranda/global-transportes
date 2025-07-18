@@ -1,0 +1,117 @@
+/* public_html/assets/css/clientes.css */
+
+/* -------------------------------------------------------------- 
+   Estilos para el módulo “Clientes”
+   -------------------------------------------------------------- */
+
+/* Título de página */
+.titulo-pagina {
+  font-size: 1.75rem;
+  font-weight: 500;
+  color: #343a40;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Flash messages */
+.mensaje-exito,
+.alert-success {
+  background-color: #d1e7dd;
+  border-color: #badbcc;
+  color: #0f5132;
+  padding: 0.75rem 1rem;
+  border-radius: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.mensaje-error,
+.alert-danger {
+  background-color: #f8d7da;
+  border-color: #f5c2c7;
+  color: #842029;
+  padding: 0.75rem 1rem;
+  border-radius: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+/* Botones de acción */
+.btn-ver {
+  color: #fff;
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+  transition: background-color 0.2s ease;
+}
+
+.btn-ver:hover,
+.btn-ver:focus {
+  background-color: #138496;
+  border-color: #117a8b;
+  color: #fff;
+}
+
+/* Tabla */
+.table thead th {
+  vertical-align: middle;
+  text-align: left;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(0,0,0,.05);
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(0,0,0,.075);
+}
+
+/* Sticky header (Bootstrap .sticky-top ya lo cubre, pero ajustamos z-index) */
+.table thead.sticky-top {
+  z-index: 1020;
+}
+
+/* Centrado de acciones */
+td .btn {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Modal detalle */
+.modal-body dl {
+  margin-bottom: 0;
+}
+
+.modal-body dt {
+  font-weight: 600;
+  color: #495057;
+}
+
+.modal-body dd {
+  margin-bottom: 0.75rem;
+  color: #212529;
+}
+
+/* Responsive tweaks */
+@media (max-width: 576px) {
+  .titulo-pagina {
+    font-size: 1.5rem;
+  }
+  .btn {
+    font-size: 0.85rem;
+    padding: 0.35rem 0.5rem;
+  }
+}
+
+/* Espaciado extra */
+.container.mt-4 {
+  margin-top: 1.5rem !important;
+}
+
+#tablaClientes tfoot input {
+  width: 100%;
+  padding: 4px;
+  font-size: 0.9em;
+  box-sizing: border-box;
+}

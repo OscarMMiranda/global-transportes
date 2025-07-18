@@ -30,10 +30,10 @@
     		integrity="sha384-…"
     		crossorigin="anonymous"
   			/>
-  		<link rel="stylesheet" 
+  		 <link 
+            rel="stylesheet" 
 			href="css/styles.min.css" 
-			/>
-
+			/> 
     	<link rel="shortcut icon" href="img/favicon.ico">
     	<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
     	<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
@@ -44,39 +44,86 @@
     	<!-- HEADER / NAVBAR -->
     	<header role="banner">
 			
-        	<nav role= navigation class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        	<nav role= navigation class="navbar navbar-expand-lg bg-global fixed-top">
             	<div class="container-fluid">
-                	
-				<!-- Navbar Brand -->
-				<a class="navbar-brand logo text-center text-md-start" href="index.html" aria-label="Inicio Global Transportes">
-    				<img 
-        				src="img/logo.png" 
-        				alt="Logo Global Transportes" 
-        				class="logo-img me-2"
-    				/>
-    				<span class="fw-bold fs-5">Global Transportes S.A.C.</span>
-				</a>
+ 
+                	<a 
+						href="index.html" 
+						class="navbar-brand d-flex align-items-center gap-2" 
+						aria-label="Inicio Global Transportes"
+					>
+    					<img 
+        					src="img/logo.png" 
+        					alt="Logo Global Transportes" 
+        				
+                        	class="img-fluid"
+                        	style="height: 50px;"
+    					/>
+                    	<span 
+							class="fw-bold fs-5 mb-0">
+							Global Transportes S.A.C.
+						</span>
+					</a>
 
                 	<button 
-                    	class="navbar-toggler" 
+						class="navbar-toggler border-0" 
                     	type="button" 
                     	data-bs-toggle="collapse" 
                     	data-bs-target="#navbarTop" 
                     	aria-controls="navbarTop" 
                     	aria-expanded="false" 
-                    	aria-label="Toggle navigation"
+						aria-label="Menú"
                 	>
                     	<span class="navbar-toggler-icon"></span>
                 	</button>
 					<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top d-lg-none"> -->
-                	<div class="collapse navbar-collapse" id="navbarTop">
-                    	<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        	<li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
-                        	<li class="nav-item"><a class="nav-link" href="nosotros.html">Quiénes Somos</a></li>
-                        	<li class="nav-item"><a class="nav-link" href="servicios.html">Servicios</a></li>
-                        	<li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
-                        	<li class="nav-item"><a class="nav-link" href="http://correo.globaltransportes.com">Correo</a></li>
-                        	<li class="nav-item"><a class="nav-link" href="sistema/login.php">Sistema</a></li>
+                	<div 
+						class="collapse navbar-collapse navbar-dark" 
+						id="navbarTop"
+					>
+						<ul class="navbar-nav ms-auto mb-2 mb-md-0 gap-2">
+                        	<li class="nav-item">
+								<a 
+									class="nav-link btn btn-sm btn-primary text-white px-3 ms-md-2" 
+									href="index.html">
+									Inicio
+								</a>
+							</li>
+                        	<li class="nav-item">
+								<a 
+									class="nav-link btn btn-sm btn-primary text-white px-3 ms-md-2" 
+									href="nosotros.html">
+									Quiénes Somos
+								</a>
+							</li>
+                        	<li class="nav-item">
+								<a 
+									class="nav-link btn btn-sm btn-primary text-white px-3 ms-md-2" 
+									href="servicios.html">
+									Servicios
+								</a>
+							</li>
+                        	<li class="nav-item">
+								<a 
+									class="nav-link btn btn-sm btn-primary text-white px-3 ms-md-2" 
+									href="contacto.html">
+									Contacto
+								</a>
+							</li>
+                        	<li class="nav-item">
+								<a 
+									class="nav-link btn btn-sm btn-primary text-white px-3 ms-md-2" 
+									href="http://correo.globaltransportes.com">
+									Correo
+								</a>
+							</li>
+                        	<li class="nav-item">
+								<a 
+									class="nav-link btn btn-sm btn-primary text-white px-3 ms-md-2"
+									href="sistema/login.php">
+									Sistema
+								</a>
+							</li>
                     	</ul>
                 	</div>
 					<!-- </nav> -->
@@ -89,15 +136,18 @@
         
         <!-- SIDEBAR -->
 
-        <aside id="sidebarMenu" class="sidebar collapse d-md-block sidebar-custom">
- 
-
-            <section class="bg-light py-5 px-3 rounded shadow-sm h-100">
-                 <h5 class="mb-4 text-dark fw-bold fs-5">🌐 Navegación</h5>
-                <ul class="nav flex-column">
+        <aside 
+            id="sidebarMenu"
+            role="complementary"
+            class="sidebar collapse d-md-block bg-light shadow-sm h-100 px-3 py-4 rounded"
+  			aria-label="Menú lateral"
+        >
+        	<section class="bg-light py-5 px-3 rounded shadow-sm h-100">
+				<h5 class="text-dark fw-bold fs-5 mb-4">🌐 OPCIONES</h5>
+				<ul class="nav flex-column gap-2">
                     <li class="nav-item">
-                        <a class="nav-link fw-semibold fs-6 text-dark" href="index.html">🏠 Inicio</a>
-                    </li>
+                    	<a class="nav-link fw-semibold fs-6 d-flex text-dark" href="index.html">🏠 Inicio</a>
+					</li>
                     <li class="nav-item">
                         <a class="nav-link fw-semibold fs-6 text-dark" href="nosotros.html">📖 Quiénes Somos</a>
                     </li>
@@ -114,7 +164,11 @@
         </aside>
 
         <!-- MAIN CONTENT -->
-        <main id="mainContent" role="main" class="app-content">
+        <main 
+            id="mainContent" 
+            role="main" 
+            class="app-content"
+        >
            
 			<!-- Hero Section -->
 
@@ -126,7 +180,7 @@
 					<div class="row align-items-center gx-0">
                         <!-- <div class="col-lg-6"> -->
 						<div class="col-lg-6 p-5">
-                            <h1 class="display-7">Bienvenidos a Global Transportes</h1>
+                            <h1 class="display-4">Bienvenidos a Global Transportes</h1>
                             <p class="lead">
                                 Especialistas en logística y transporte de cargas a nivel nacional.
                             </p>
@@ -151,7 +205,7 @@
             
 			<!-- <section class="ventajas mb-5"> -->
 			<section class="ventajas py-2 bg-light">
-                <h2 class="text-center mb-6">¿Por qué elegirnos?</h2>
+                <h2 class="text-center mb-5">¿Por qué elegirnos?</h2>
                 <div class="row g-4">
                     <div class="col-sm-6 col-lg-3">
                         <div class="card h-100 text-center shadow-sm p-3">
@@ -192,8 +246,11 @@
     </div>
 
     <!-- FOOTER -->
-    <footer role="contentinfo">
-        <div class="container text-center py-3">
+    <footer 
+        role="contentinfo"
+    >
+        <div 
+            class="container text-center py-3">
             <p class="mb-0">&copy; 2025 Global Transportes. Todos los derechos reservados.</p>
         </div>
     </footer>
@@ -214,10 +271,6 @@
         console.warn("Cache API no está disponible en este entorno.");
     }
 </script>
-
 <script src="js/script.js"></script>
-
-
-
 </body>
 </html>

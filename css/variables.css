@@ -1,0 +1,11 @@
+:root {
+  	--color-primario	:	#ff0000;
+  	--bg-claro			: 	#f9f9f9;
+  	--fuente-base		: 	'Inter', sans-serif;
+  	--espaciado			: 	1rem;
+	}
+
+
+.bg-global {
+  background-color: var(--color-primario);
+}

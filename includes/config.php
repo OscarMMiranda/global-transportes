@@ -25,3 +25,8 @@ if (session_status() === PHP_SESSION_NONE) {
 require_once INCLUDES_PATH . '/conexion.php';
 
 // (Opcional) Autoloaders, constantes extra, configuración de timezone…
+
+// Ruta base de la app (desde la raíz del dominio)
+// Si tu ERP vive directo en “public_html”, deja: '/'
+// Si está en subcarpeta '/erp/', pon '/erp/'
+define('BASE_URL', '/');

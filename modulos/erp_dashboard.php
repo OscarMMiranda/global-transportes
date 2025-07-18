@@ -48,13 +48,27 @@ if (!isset($_SESSION['usuario']) || !isset($_SESSION['rol_nombre']) || $_SESSION
 	<!-- Contenedor principal -->
 	<div class="container-fluid app-container">
 		<div class="row">
-        	<!-- Sidebar -->
+        	
+            <!-- Sidebar -->
         	<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse">
             	<div class="position-sticky pt-3">
 					<h2 class="h5 px-3">Menú Principal</h2>
                     <ul class="nav flex-column px-3">
-                        <li class="nav-item"><a href="../modulos/clientes/clientes.php" class="nav-link">👥 Clientes</a></li>
-                        <li class="nav-item"><a href="../modulos/orden_trabajo/orden_trabajo.php" class="nav-link">📋 Órdenes de Trabajo</a></li>
+                        <li class="nav-item">
+							<a 
+								href="../modulos/clientes/index.php"  
+								class="nav-link">👥 Clientes
+							</a>
+						</li>
+                        <li class="nav-item">
+							<a 
+								href="../modulos/asignaciones/index.php" 
+								class="nav-link">
+    							<i class="fas fa-users me-2"></i> 
+								ASIGNACIONES
+  							</a>
+						</li>
+   						<li class="nav-item"><a href="../modulos/orden_trabajo/orden_trabajo.php" class="nav-link">📋 Órdenes de Trabajo</a></li>
                         <li class="nav-item"><a href="../modulos/vehiculos/vehiculos.php" class="nav-link">🚛 Vehículos</a></li>
                         <li class="nav-item"><a href="../modulos/mantenimiento/mantenimiento.php" class="nav-link">🛠 Mantenimiento de Datos</a></li>
                         <li class="nav-item"><a href="../sistema/panel_admin.php" class="nav-link">⚙️ Administración</a></li>
@@ -91,7 +105,7 @@ if (!isset($_SESSION['usuario']) || !isset($_SESSION['rol_nombre']) || $_SESSION
                      </div>
                      <div class="col">
                         <div class="card card-dashboard">
-                           <h4>📄 Asignacion de Conductores</h4>
+                           <h4>📄 Conductores</h4>
                            <p>Registrar y administrar conductores.</p>
                            <a href="../modulos/conductores/conductores.php" class="btn btn-primary">Ir</a>
                         </div>
@@ -113,9 +127,9 @@ if (!isset($_SESSION['usuario']) || !isset($_SESSION['rol_nombre']) || $_SESSION
                         </div>
                         <div class="col">
                             <div class="card card-dashboard p-3">
-                                <h4>📋 Órdenes de Trabajo (OT)</h4>
+                                <h4>📋 Asignaciones </h4>
                                 <p>Gestiona las órdenes de trabajo y los viajes de transporte.</p>
-                                <a href="../modulos/orden_trabajo/orden_trabajo.php" class="btn btn-primary">Ir</a>
+                                <a href="../modulos/asignaciones_conductor/asignaciones.php" class="btn btn-primary">Ir</a>
                             </div>
                         </div>
                         <div class="col">
@@ -139,6 +153,12 @@ if (!isset($_SESSION['usuario']) || !isset($_SESSION['rol_nombre']) || $_SESSION
     </footer>
 
     <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
+	<!-- Bootstrap CSS -->
+<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> 
+
 </body>
 </html>

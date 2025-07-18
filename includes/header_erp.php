@@ -1,21 +1,56 @@
 <?php
-	session_start(); // Iniciar sesión para gestionar autenticación
+	//session_start(); // Iniciar sesión para gestionar autenticación
+
+	if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
 	<head>
 		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta 
+			name="viewport" 
+			content="width=device-width, initial-scale=1.0">
 		<title>ERP Global Transportes</title>
     
-	<!-- Enlace a Bootstrap para mejor diseño -->
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+		<!-- Bootstrap CSS -->
+		<link
+    		href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    		rel="stylesheet"
+  		>
+		
 		<link rel="stylesheet" href="../../css/base.css"> <!-- Tus estilos personalizados -->
-	</head>
-	<body>
+	
+		<!-- FontAwesome (opcional) -->
+  		<link
+    		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    		rel="stylesheet"
+    		integrity="sha512-…"
+    		crossorigin="anonymous"
+    		referrerpolicy="no-referrer"
+  		>
+	
+		<!-- Tus estilos específicos -->
+  		<link
+    		href="<?= BASE_URL ?>assets/css/clientes.css"
+    			rel="stylesheet"
+  		>
 
+		<?php if (defined('MODULE_CSS')): ?>
+  			<link rel="stylesheet" href="<?= BASE_URL ?>assets/css/<?= MODULE_CSS ?>">
+		<?php endif; ?>
+
+
+
+	</head>
+	
+	<body>
 	<!-- Barra superior de sesión -->
-	<nav class="navbar navbar-dark bg-primary p-2">
+	<!-- <nav class="navbar navbar-dark bg-primary p-2"> -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     	<div class="container-fluid d-flex justify-content-between">
         	<span class="navbar-brand mb-0 h1">ERP Global Transportes</span>
         	<div>

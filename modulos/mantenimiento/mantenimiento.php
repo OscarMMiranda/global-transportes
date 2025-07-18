@@ -93,8 +93,7 @@
                 						Editar y actualizar tipos de mercadería.
               						</p>
               						<a 
-                						href="tipo_mercaderia/editar_tipo_mercaderia.php"
-										 
+                						href="tipo_mercaderia/index.php"
                 						class="btn dashboard-btn btn-primary mt-2"
               						>
                 						Actualizar
