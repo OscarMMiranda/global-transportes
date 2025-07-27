@@ -1,0 +1,48 @@
+/* 🧹 Reset básico de estilos por defecto */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: var(--font-principal);
+  line-height: 1.5;
+  background-color: var(--bg-claro);
+  color: var(--color-texto);
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+input, button, textarea, select {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+/* 🧭 Elementos semánticos para compatibilidad */
+article, aside, footer, header, nav, section {
+  display: block;
+}

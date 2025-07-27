@@ -25,7 +25,7 @@ if (!isset($_SESSION['usuario']) || !isset($_SESSION['rol_nombre']) || $_SESSION
 	<!-- Navbar superior -->
     	<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
         	<div class="container-fluid">
-            	<a class="navbar-brand" href="../index.html">
+            	<a class="navbar-brand" href="../index.php">
             		<img src="../img/logo.png" alt="Logo Global Transportes" width="40" class="me-2">
             			ERP Global Transportes
             	</a>
@@ -35,11 +35,11 @@ if (!isset($_SESSION['usuario']) || !isset($_SESSION['rol_nombre']) || $_SESSION
             	</button>
             	<div class="collapse navbar-collapse" id="navbarTop">
                 	<ul class="navbar-nav ms-auto">
-                    	<li class="nav-item"><a class="nav-link" href="../index.html">🏠 Inicio</a></li>
+                    	<li class="nav-item"><a class="nav-link" href="../index.php">🏠 Inicio</a></li>
 						<li class="nav-item"><a class="nav-link" href="../sistema/logout.php">🔒 Cerrar Sesión</a></li>
-                    	<li class="nav-item"><a class="nav-link" href="../sistema/panel_admin.php">⚙️ Panel Admin</a></li>
+                    	<li class="nav-item"><a class="nav-link" href="../paneles/panel_admin.php">⚙️ Panel Admin</a></li>
                     	<li class="nav-item"><a class="nav-link" href="../modulos/documentos/documentos.php">📄 Documentos</a></li>
-                    	<li class="nav-item"><a class="nav-link" href="../sistema/admin_db.php">🛠 Gestionar BD</a></li>
+                    	<li class="nav-item"><a class="nav-link" href="../admin/audits/admin_bd.php">🛠 Gestionar BD</a></li>
                 	</ul>
             	</div>
         	</div>
@@ -71,7 +71,7 @@ if (!isset($_SESSION['usuario']) || !isset($_SESSION['rol_nombre']) || $_SESSION
    						<li class="nav-item"><a href="../modulos/orden_trabajo/orden_trabajo.php" class="nav-link">📋 Órdenes de Trabajo</a></li>
                         <li class="nav-item"><a href="../modulos/vehiculos/vehiculos.php" class="nav-link">🚛 Vehículos</a></li>
                         <li class="nav-item"><a href="../modulos/mantenimiento/mantenimiento.php" class="nav-link">🛠 Mantenimiento de Datos</a></li>
-                        <li class="nav-item"><a href="../sistema/panel_admin.php" class="nav-link">⚙️ Administración</a></li>
+                        <li class="nav-item"><a href="../paneles/panel_admin.php" class="nav-link">⚙️ Administración</a></li>
                     </ul>
 				</div>
 			</nav>

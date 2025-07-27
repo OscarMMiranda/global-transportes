@@ -1,5 +1,6 @@
 <?php
 	// public_html/modules/clientes/index.php
+	// ****** archivo /clientes/index.php
 	
 	require_once __DIR__ . '/../../includes/config.php';
 

@@ -1,0 +1,2 @@
+# Prioriza index.php antes que index.html
+DirectoryIndex index.php index.html

@@ -1,53 +1,98 @@
-# 📦 Módulo de Asignaciones – Conductor, Tracto y Carreta
+# Módulo Asignaciones
 
-Este módulo forma parte del sistema ERP de transporte y permite gestionar de forma auditable las asignaciones entre conductores, vehículos tracto, y carretas o plataformas. Cada asignación está ligada a un período de tiempo y conserva historial completo para trazabilidad.
-
----
-
-## 📁 Estructura de archivos
-
-| Archivo                   | Descripción                                                                 |
-|---------------------------|-----------------------------------------------------------------------------|
-| `asignaciones.php`        | Vista principal: incluye la tabla de historial, botón para nueva asignación |
-| `form_asignacion.php`     | Modal Bootstrap con formulario dinámico para nueva asignación               |
-| `procesar_asignacion.php` | Backend PHP que valida y registra la asignación                             |
-| `finalizar_asignacion.php`| Marca una asignación como finalizada registrando fecha de término           |
-| `listar_asignaciones.php` | Genera JSON para tabla DataTable filtrable                                  |
-| `api.php`                 | Enrutador central de peticiones AJAX mediante `method=`                     |
-| `asignaciones.js`         | Script JS: controla modales, carga dinámica y envío por AJAX                |
-| `README.md`               | Este archivo: documentación técnica del módulo                              |
+Este README.md describe la estructura, instalación y uso del módulo **Asignaciones** siguiendo un patrón modular, limpio y profesional.
 
 ---
 
-## 🧠 Lógica de negocio
+## Descripción
 
-- Cada asignación vincula: **1 conductor + 1 tracto + 1 carreta/plataforma**
-- El período se define por `fecha_inicio` y `fecha_fin` (opcional mientras esté activa)
-- Un conductor puede mantener el mismo tracto pero cambiar de carreta
-- Solo se permite **una asignación activa** por conductor y por tracto al mismo tiempo
-- Las asignaciones finalizadas conservan historial para auditoría y consultas
+El módulo Asignaciones permite gestionar y auditar el proceso de asignación de conductores, tractos y carretas. Cada acción queda registrada en un historial de auditoría, garantizando trazabilidad y seguridad.
 
 ---
 
-## 📅 Esquema de base de datos
+## Características
 
-```sql
-CREATE TABLE asignaciones (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  id_conductor INT NOT NULL,
-  id_vehiculo_tracto INT NOT NULL,
-  id_vehiculo_carreta INT NOT NULL,
-  fecha_inicio DATE NOT NULL,
-  fecha_fin DATE DEFAULT NULL,
-  estado ENUM('activo', 'finalizado') DEFAULT 'activo',
-  observaciones TEXT,
-
-  FOREIGN KEY (id_conductor) REFERENCES conductores(id),
-  FOREIGN KEY (id_vehiculo_tracto) REFERENCES vehiculos(id),
-  FOREIGN KEY (id_vehiculo_carreta) REFERENCES vehiculos(id)
-);
+- Creación, edición y eliminación de asignaciones  
+- Validación de disponibilidad de recursos antes de asignar  
+- Listado de asignaciones activas e históricas  
+- Registro de cada acción en historial de actividades  
+- Soporte para estados: activa, terminada y cancelada  
 
 ---
 
-**Autor:** Oscar  
-**Última edición:** [Fecha automática o manual]  
+## Requisitos
+
+- PHP 5.6 o superior con extensiones `mysqli` y `openssl`  
+- Composer con soporte PSR-4 autoloading  
+- Base de datos MySQL con tablas:
+  - `asignaciones`
+  - `usuarios`
+  - `roles`
+  - `tractos`
+  - `carretas`
+  - `historial_actividades`
+
+---
+
+## Estructura de carpetas
+
+
+
+
+
+---
+
+## Instalación
+
+1. Copiar `modulos/asignaciones` al directorio raíz de tu proyecto.  
+
+2. Agregar entrada PSR-4 en `composer.json`:
+
+   ```json
+   {
+     "autoload": {
+       "psr-4": {
+         "Modules\\Asignaciones\\": "modulos/asignaciones/src/"
+       }
+     }
+   }
+
+
+
+
+
+
+modulos/asignaciones/
+├── config/                   # Configuración del módulo (estados y mensajes)
+│   └── module.php
+├── routes/                   # Definición de rutas y endpoints
+│   └── routes.php
+├── src/
+│   ├── Controller/           # Gestión de solicitudes HTTP
+│   │   └── AsignacionesController.php
+│   ├── Service/              # Lógica de negocio
+│   │   └── AsignacionService.php
+│   ├── Repository/           # Acceso a datos
+│   │   ├── AsignacionRepositoryInterface.php
+│   │   └── MySQLAsignacionRepository.php
+│   ├── Model/                # Entidades del dominio
+│   │   └── Asignacion.php
+│   ├── DTO/                  # Objetos de Transferencia de Datos
+│   │   └── AsignacionDTO.php
+│   └── Validator/            # Reglas de validación
+│       └── AsignacionValidator.php
+├── views/                    # Plantillas de interfaz (MVC)
+│   └── asignaciones/
+│       ├── index.php
+│       ├── create.php
+│       ├── edit.php
+│       └── _form.php
+├── public/
+│   └── js/
+│       └── asignaciones.js   # Scripts de interacción y AJAX
+└── tests/                    # Pruebas unitarias y de integración
+    ├── Controller/
+    ├── Service/
+    └── Repository/
+
+

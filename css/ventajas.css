@@ -1,0 +1,85 @@
+/* 🚚 Ventajas competitivas y diferenciales */
+
+.ventajas-section {
+    padding             :   4rem 2rem;
+    background-color    :   var(--bg-claro);
+    margin-top          :   0;                    /* elimina espacio innecesario */
+    border-top          :   1px solid #dee2e6;
+    padding-top         :   2rem;
+    }
+
+.ventajas-section h2 {
+    font-size: var(--font-size-lg);
+    color: var(--color-primario);
+    margin-bottom: 2rem;
+    text-align: center;
+    font-family: var(--font-secundaria);
+}
+
+/* 📦 Tarjetas de ventaja */
+
+.ventaja-card {
+  background-color: #63a0eb;
+  border: 1px solid #dee2e6;
+  border-left: 5px solid var(--color-acento);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  text-align: left;
+  transition: transform 0.2s ease;
+}
+
+.ventaja-card:hover {
+  transform: translateY(-5px);
+}
+
+.ventaja-card h3 {
+  font-size: var(--font-size-md);
+  color: var(--color-primario);
+  margin-bottom: 1rem;
+}
+
+.ventaja-card h5 {
+  font-size: var(--font-size-md);
+  color: var(--color-primario);
+  margin-bottom: 1rem;
+}
+
+.ventaja-card p {
+  font-size: var(--font-size-sm);
+  color: var(--color-texto);
+  margin: 0;
+}
+
+/* 🎯 Íconos si se usan */
+
+.ventaja-icon {
+  font-size: 2rem;
+  color: var(--color-acento);
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+/* 🧱 Layout de columnas */
+
+.ventaja-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+/* 📱 Responsividad */
+
+@media (max-width: 768px) {
+  .ventajas-section {
+    padding: 2rem 1rem;
+  }
+
+  .ventaja-card {
+    padding: 1.5rem;
+  }
+
+  .ventaja-card h3 {
+    font-size: var(--font-size-md);
+  }
+}

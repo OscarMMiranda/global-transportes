@@ -76,7 +76,7 @@
 
         	<div class="collapse navbar-collapse" id="menuERP">
             	<ul class="navbar-nav ms-auto">
-                	<li class="nav-item"><a class="nav-link" href="../../sistema/panel_admin.php">Dashboard</a></li>
+                	<li class="nav-item"><a class="nav-link" href="../../modulos/erp_dashboard.php">Dashboard</a></li>
                 	<li class="nav-item"><a class="nav-link" href="../vehiculos/vehiculos.php">Vehículos</a></li>
                 	<li class="nav-item"><a class="nav-link" href="../clientes/clientes.php">Clientes</a></li>
                 	<li class="nav-item"><a class="nav-link" href="../documentos/documentos.php">Documentos</a></li>
@@ -84,7 +84,7 @@
                 	<!-- 
                 	    <li class="nav-item"><a class="nav-link" href="../sistema/historial_bd.php">Historial BD</a></li>
                 	-->
-                	<li class="nav-item"><a class="nav-link" href="../sistema/ayuda.php">Ayuda</a></li>
+                	<li class="nav-item"><a class="nav-link" href="../../sistema/ayuda.php">Ayuda</a></li>
             	</ul>
         	</div>
     	</div>

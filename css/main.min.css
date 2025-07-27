@@ -1,0 +1,31 @@
+/* === Reset minimal y ajustes generales === */
+body, html { margin: 0; padding: 0; font-family: 'Roboto', sans-serif; }
+
+/* === Layout principal === */
+.container-fluid { padding-left: 0; padding-right: 0; }
+.row > [class*='col-'] { padding: 1rem; }
+
+/* === Sidebar personalizado === */
+.sidebar { background: #f8f9fa; min-height: 100vh; border-right: 1px solid #dee2e6; }
+
+/* === Hero horizontal === */
+.hero { display: flex; align-items: center; justify-content: center; background: #e9ecef; padding: 2rem; }
+.hero h1 { font-size: 2rem; margin-bottom: 1rem; }
+
+/* === Tarjetas de ventajas === */
+.card .fa-2x { color: #007bff; }
+.card-title { font-weight: 600; }
+.card:hover { transform: translateY(-4px); transition: all 0.3s ease; }
+
+/* === Footer minimal === */
+footer { background: #343a40; color: white; text-align: center; padding: 1rem 0; font-size: 0.9rem; }
+
+/* === Responsive tweaks === */
+@media (max-width: 768px) {
+  .sidebar { min-height: auto; }
+  .hero { flex-direction: column; text-align: center; }
+}
+
+.bg-primary-subtle {
+  background-color: #e3f2fd; /* Azul claro Bootstrap o personalizado */
+}

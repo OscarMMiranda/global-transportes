@@ -1,0 +1,71 @@
+/* 🔠 Tipografía base y jerarquía */
+
+body {
+  	font-family: var(--font-principal);
+  	font-size: var(--font-size-base);
+  	line-height: 1.6;
+  	color: var(--color-texto);
+  	background-color: var(--bg-claro);
+  	-webkit-font-smoothing: antialiased;
+}
+
+/* 🧷 Enlaces */
+a {
+  	color: var(--color-link);
+  	text-decoration: none;
+}
+a:hover {
+  	color: var(--color-link-hover);
+  	text-decoration: underline;
+}
+
+/* 🧱 Encabezados */
+h1, h2, h3, h4, h5, h6 {
+  	font-family: var(--font-secundaria);
+  	color: var(--color-primario);
+  	margin-bottom: 1rem;
+  	line-height: 1.2;
+}
+
+h1 { font-size: var(--font-size-xl); }
+h2 { font-size: var(--font-size-lg); }
+h3 { font-size: var(--font-size-md); }
+h4 { font-size: var(--font-size-sm); }
+h5 { font-size: 0.75rem; }
+h6 { font-size: 0.65rem; }
+
+/* 📝 Párrafos y textos */
+p {
+  	margin-bottom: 1rem;
+  	font-size: var(--font-size-md);
+}
+.lead {
+  	font-size: var(--font-size-lg);
+  	font-weight: var(--font-weight-light);
+  	color: var(--color-texto);
+}
+
+/* 🧩 Utilidades tipográficas */
+.text-center   { text-align: center; }
+.text-right    { text-align: right; }
+.text-left     { text-align: left; }
+.text-uppercase { text-transform: uppercase; }
+.text-muted    { color: #6c757d; }
+.fw-light      { font-weight: var(--font-weight-light); }
+.fw-normal     { font-weight: var(--font-weight-normal); }
+.fw-bold       { font-weight: var(--font-weight-bold); }
+
+
+.titulo-principal {
+  	font-family	: 	'Georgia', serif;
+  	color		: 	#002f57;
+  	font-size	: 	2.625rem; /* igual a 42px */
+  	line-height	: 	1.2;
+  	margin-bottom:	 1rem;
+	}
+
+@media (max-width: 768px) {
+  	.titulo-principal {
+    	font-size: 2rem; /* reduce a 32px en pantallas pequeñas */
+  		}
+	}

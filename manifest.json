@@ -1,0 +1,55 @@
+{
+  "manifest_version": 3,
+  "name": "Global Transportes Enhancer",
+  "description": "Añade mejoras de interacción (menú móvil, modales, listeners de chrome.storage) a Global Transportes S.A.C.",
+  "version": "1.0.0",
+
+  "icons": {
+    "16":  "icons/icon-16.png",
+    "48":  "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+
+  "permissions": [
+    "storage",
+    "scripting",
+    "activeTab"
+  ],
+
+  "host_permissions": [
+    "*://*.globaltransportes.com/*"
+  ],
+
+  "content_scripts": [
+    {
+      "matches": ["*://*.globaltransportes.com/*"],
+      "js": ["js/app.js"],
+      "run_at": "document_end"
+    }
+  ],
+
+  "background": {
+    "service_worker": "js/background.js"
+  },
+
+  "action": {
+    "default_icon": {
+      "16":  "icons/icon-16.png",
+      "48":  "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    },
+    "default_title": "Global Transportes",
+    "default_popup": "popup.html"
+  },
+
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "css/*.css",
+        "img/*.png",
+        "icons/*"
+      ],
+      "matches": ["*://*.globaltransportes.com/*"]
+    }
+  ]
+}

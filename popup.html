@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+  		<meta charset="UTF-8" />
+  		<title>Global Transportes</title>
+  		<link rel="stylesheet" href="css/popup.css" />
+  		<style>
+    		body {
+      			font-family: sans-serif;
+      			margin: 1rem;
+      			min-width: 220px;
+    			}
+    		.btn {
+      			display: block;
+      			width: 100%;
+      			padding: 0.5rem;
+      			margin-top: 0.5rem;
+      			background: #0052D4;
+      			color: #fff;
+      			border: none;
+      			border-radius: 4px;
+      			text-align: center;
+      			cursor: pointer;
+    			}
+  		</style>
+	</head>
+	<body>
+  		<h3>Global Transportes</h3>
+  		<p>Acceso rápido:</p>
+  		<button class="btn" onclick="openPanel()">Abrir Panel</button>
+  		<button class="btn" onclick="goToContacto()">Ir a Contacto</button>
+
+  		<script>
+    		function openPanel() {
+      			chrome.tabs.create({ url: "https://www.globaltransportes.com/sistema/login.php" });
+    			}
+    		function goToContacto() {
+      			chrome.tabs.create({ url: "https://www.globaltransportes.com/contacto.php" });
+    			}
+  		</script>
+	</body>
+</html>

@@ -1,0 +1,77 @@
+/* 🧭 Estilos para el panel lateral (sidebar) */
+
+.sidebar {
+	top: 0;
+  	left: 0;
+	/* position: fixed;			Fijo en la ventana, no en el flujo del documento */
+	position	: 	sticky;
+	width		: 	250px;				/* Ancho del menú */
+	height		: 	400vh;				/* Altura completa de la ventana */
+	background-color: var(--bg-navbar);
+  	flex-shrink	: 	0;				/* Aunque no aplica aquí por ser fijo */
+  	color		: 	var(--color-texto-claro);
+  	font-family	: 	var(--font-principal);
+	font-size	: 	var(--font-size-md);
+	font-weight	: 	var(--font-weight-bold);
+  	z-index		: 	1000;				/* Aparece encima del resto */
+  	padding		: 	2rem 1rem;
+  	overflow-y	: 	auto;			/* Scroll si el contenido es muy largo */
+  	transition	: 	all 0.3s ease;	/* Suaviza animaciones (útil si lo colapsas) */
+	}
+
+.sidebar h3 {
+  	font-size: var(--font-size-md);
+  	color: var(--color-warning);
+  	margin-bottom: 2rem;
+  	text-transform: uppercase;
+	}
+
+.sidebar nav ul {
+  	list-style: none;
+  	padding-left: 0;
+	}
+
+.sidebar nav ul li {
+  	margin-bottom: 1rem;
+	}	
+
+.sidebar nav ul li a {
+  	color: var(--color-texto-claro);
+  	text-decoration: none;
+  	display: block;
+  	padding: 0.5rem 1rem;
+  	border-radius: 4px;
+  	transition: background-color 0.2s ease;
+	}
+
+.sidebar nav ul li a:hover,
+.sidebar nav ul li a.active {
+  	background-color: var(--color-link-hover);
+  	color: var(--color-texto-claro);
+	}
+
+/* 📱 Sidebar en móviles */
+@media (max-width: 768px) 
+	{
+	.sidebar {
+    	position: relative;
+    	width: 100%;
+    	height: auto;
+    	padding: 1.5rem;
+  		}
+
+	.sidebar h3 {
+    	text-align: center;
+  		}
+
+	.sidebar nav ul {
+    	display: flex;
+    	flex-direction: column;
+    	align-items: center;
+  		}
+
+	.sidebar nav ul li a {
+    	text-align: center;
+    	width: 100%;
+  		}
+	}

@@ -1,0 +1,202 @@
+/* ==========================================================================
+   custom.css
+   - Definiciones de marca, utilidades propias y overrides específicos
+   - Cargar al final de la cadena de estilos para que prevalezcan
+   ========================================================================== */
+
+/*--------------------------------------------------------------
+  1. Variables de marca
+--------------------------------------------------------------*/
+:root {
+  /* Colores principales */
+  --gt-primary:      #0052D4;
+  --gt-secondary:    #4364F7;
+  --gt-accent:       #FFD600;
+  --gt-dark:         #1F1F1F;
+  --gt-light:        #F8F9FA;
+
+  /* Fondos sutiles */
+  --gt-bg-subtle:    rgba(0,82,212,0.1);
+
+  /* Tipografía */
+  --gt-font-heading: 'Segoe UI', Arial, sans-serif;
+  --gt-font-body:    'Roboto', sans-serif;
+
+  /* Espacios base */
+  --gt-spacer:       1rem;
+}
+
+/*--------------------------------------------------------------
+  2. Clases de utilidad de marca
+--------------------------------------------------------------*/
+
+/* Fondos y texto */
+.bg-gt-primary      { background-color: var(--gt-primary)   !important; color: #fff !important; }
+.bg-gt-secondary    { background-color: var(--gt-secondary) !important; color: #fff !important; }
+.bg-gt-light        { background-color: var(--gt-light)     !important; }
+.bg-gt-subtle       { background-color: var(--gt-bg-subtle) !important; }
+
+.text-gt-primary    { color: var(--gt-primary)   !important; }
+.text-gt-secondary  { color: var(--gt-secondary) !important; }
+.text-gt-dark       { color: var(--gt-dark)      !important; }
+.text-gt-light      { color: var(--gt-light)     !important; }
+
+/* Enlaces de marca */
+.link-gt {
+  color: var(--gt-primary);
+  text-decoration: none;
+  transition: color .2s ease;
+}
+.link-gt:hover {
+  color: var(--gt-secondary);
+}
+
+/* Botones de marca */
+.btn-gt {
+  display: inline-block;
+  background-color: var(--gt-primary);
+  color: #fff;
+  border: none;
+  padding: .5rem 1rem;
+  font-family: var(--gt-font-body);
+  font-size: 1rem;
+  border-radius: .25rem;
+  transition: background-color .2s ease, box-shadow .2s ease;
+  text-align: center;
+  cursor: pointer;
+}
+.btn-gt:hover {
+  background-color: var(--gt-secondary);
+  box-shadow: 0 4px 12px rgba(0,82,212,0.15);
+}
+
+/* Bordes y sombras */
+.border-gt-primary  { border-color: var(--gt-primary) !important; }
+.shadow-gt {
+  box-shadow: 0 4px 12px rgba(0,82,212,0.15) !important;
+}
+
+/*--------------------------------------------------------------
+  3. Overrides de componentes
+--------------------------------------------------------------*/
+
+/* Encabezados de sección con marca */
+.section-title {
+  font-family: var(--gt-font-heading);
+  color: var(--gt-primary);
+  font-size: 2rem;
+  margin-bottom: var(--gt-spacer);
+  line-height: 1.2;
+}
+
+/* Línea separadora personalizada */
+.section-divider {
+  width: 60px;
+  height: 4px;
+  background-color: var(--gt-primary);
+  margin: 1rem auto 2rem;
+}
+
+/* Contenedor ancho extra para secciones clave */
+.container-wide {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Navbar: aplica colores de marca */
+.navbar.bg-global {
+  background-color: var(--gt-primary) !important;
+}
+.navbar.bg-global .navbar-brand span {
+  color: #fff;
+}
+.navbar.bg-global .nav-link.btn {
+  background-color: var(--gt-secondary);
+}
+
+/* Footer global */
+footer {
+  background-color: var(--gt-dark);
+  color: #fff;
+  padding: 2rem 1rem;
+  font-size: 0.875rem;
+  text-align: center;
+}
+footer a {
+  color: var(--gt-accent);
+  text-decoration: none;
+}
+footer a:hover {
+  text-decoration: underline;
+}
+
+/*--------------------------------------------------------------
+  4. Helpers específicos adicionales
+--------------------------------------------------------------*/
+
+/* Centrados vertical y horizontal rápidos */
+.flex-center {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+/* Texto en mayúsculas con espaciado */
+.text-uppercase-lg {
+  text-transform: uppercase !important;
+  letter-spacing: .1em !important;
+}
+
+/* Tarjetas de marca */
+.card-gt {
+  border: 1px solid var(--gt-secondary);
+}
+.card-gt .card-header {
+  background-color: var(--gt-primary);
+  color: #fff;
+}
+.card-gt .card-footer {
+  background-color: var(--gt-light);
+}
+
+/* Tabla de marca */
+.table-gt th {
+  background-color: var(--gt-primary);
+  color: #fff;
+}
+.table-gt tbody tr:hover {
+  background-color: var(--gt-bg-subtle);
+}
+
+/* Formulario de búsqueda */
+.input-search {
+  border: 1px solid var(--gt-primary);
+  padding-right: 2.5rem;
+  position: relative;
+}
+.input-search .search-icon {
+  position: absolute;
+  top: 50%;
+  right: .75rem;
+  transform: translateY(-50%);
+  color: var(--gt-primary);
+}
+
+/*--------------------------------------------------------------
+  5. Animaciones suaves
+--------------------------------------------------------------*/
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-in-up {
+  animation: fadeInUp .6s ease both;
+}

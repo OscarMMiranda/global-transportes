@@ -1,0 +1,56 @@
+/* 📊 Estilos para tablas */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  font-family: var(--font-principal);
+  font-size: var(--font-size-sm);
+  color: var(--color-texto);
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+thead {
+  background-color: var(--color-primario);
+  color: var(--color-texto-claro);
+  text-align: left;
+}
+
+thead th {
+  padding: 0.75rem;
+  font-weight: var(--font-weight-bold);
+  border-bottom: 2px solid var(--color-primario);
+}
+
+tbody td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #dee2e6;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+/* 📌 Hover en filas */
+tbody tr:hover {
+  background-color: var(--color-info);
+  color: #fff;
+  cursor: default;
+}
+
+/* 🔠 Alineaciones específicas */
+.text-left   { text-align: left; }
+.text-center { text-align: center; }
+.text-right  { text-align: right; }
+
+/* ✅ Colores por estado */
+tr.exito td {
+  background-color: var(--color-exito);
+  color: #fff;
+}
+
+tr.error td {
+  background-color: var(--color-error);
+  color: #fff;
+}

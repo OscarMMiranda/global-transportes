@@ -6,8 +6,8 @@
         </div>
         
         <div class="text-end">
-            <a href="../../sistema/panel_admin.php" class="btn btn-outline-light btn-sm me-2">Administración</a>
-            <a href="../../sistema/historial_bd.php" class="btn btn-outline-light btn-sm me-2">Historial</a>
+            <a href="../../paneles/panel_admin.php" class="btn btn-outline-light btn-sm me-2">Administración</a>
+            <a href="../../admin/audits/historial_bd.php" class="btn btn-outline-light btn-sm me-2">Historial</a>
             <a href="../../sistema/ayuda.php" class="btn btn-warning btn-sm">📖 Ayuda</a>
         </div>
     </div>

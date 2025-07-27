@@ -1,0 +1,106 @@
+/* 🎴 Card component básico */
+
+.card {
+  background-color: var(--bg-claro);
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* 🗂️ Secciones internas */
+
+.card-header {
+  background-color: var(--color-primario);
+  color: var(--color-texto-claro);
+  padding: 1rem 1.5rem;
+  font-family: var(--font-secundaria);
+  font-size: var(--font-size-md);
+}
+
+.card-body {
+  flex-grow: 1;
+  padding: 1.5rem;
+  font-family: var(--font-principal);
+  color: var(--color-texto);
+}
+
+.card-footer {
+  background-color: var(--bg-light);
+  border-top: 1px solid #dee2e6;
+  padding: 1rem 1.5rem;
+  font-size: var(--font-size-sm);
+  text-align: right;
+}
+
+/* 🔠 Tipografía */
+
+.card-title {
+  font-size: var(--font-size-lg);
+  margin-bottom: 0.75rem;
+  color: var(--color-primario);
+}
+
+.card-subtitle {
+  font-size: var(--font-size-md);
+  margin-bottom: 1rem;
+  font-weight: var(--font-weight-normal);
+  color: #6c757d;
+}
+
+.card-text {
+  font-size: var(--font-size-sm);
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+/* 🖼️ Imágenes */
+
+.card-img-top {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* 🌐 Layout de grupo de cards */
+
+.card-group {
+  display: flex;
+  gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .card-group {
+    flex-direction: column;
+  }
+}
+
+/* 🎨 Variantes de estilo */
+
+.card-accent {
+  border-left: 5px solid var(--color-acento);
+}
+
+.card-primary {
+  border-top: 3px solid var(--color-primario);
+}
+
+.card-dark {
+  background-color: var(--bg-navbar);
+  color: var(--color-texto-claro);
+}
+
+.card-dark .card-header,
+.card-dark .card-footer {
+  background-color: transparent;
+  color: var(--color-texto-claro);
+}

@@ -66,8 +66,8 @@ body {
    WRAPPER (layout flex)
    ================================================== */
 .app-wrapper {
-  display: flex;
-}
+	display		: 	flex;
+	}
 
 /* ==================================================
    SIDEBAR

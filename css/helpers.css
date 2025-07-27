@@ -1,0 +1,49 @@
+/* ✨ Helpers visuales y espaciales */
+
+/* Espaciados */
+.m-0  { margin: 0 !important; }
+.mt-1 { margin-top: 0.5rem !important; }
+.mb-1 { margin-bottom: 0.5rem !important; }
+.ml-1 { margin-left: 0.5rem !important; }
+.mr-1 { margin-right: 0.5rem !important; }
+
+.p-0  { padding: 0 !important; }
+.pt-1 { padding-top: 0.5rem !important; }
+.pb-1 { padding-bottom: 0.5rem !important; }
+.pl-1 { padding-left: 0.5rem !important; }
+.pr-1 { padding-right: 0.5rem !important; }
+
+/* Display */
+.d-block     { display: block !important; }
+.d-inline    { display: inline !important; }
+.d-inline-block { display: inline-block !important; }
+.d-flex      { display: flex !important; }
+.d-none      { display: none !important; }
+
+/* Alineación */
+.text-left    { text-align: left !important; }
+.text-center  { text-align: center !important; }
+.text-right   { text-align: right !important; }
+
+.align-start   { align-items: flex-start !important; }
+.align-center  { align-items: center !important; }
+.align-end     { align-items: flex-end !important; }
+
+.justify-start  { justify-content: flex-start !important; }
+.justify-center { justify-content: center !important; }
+.justify-end    { justify-content: flex-end !important; }
+
+/* Visibilidad y opacidad */
+.visible    { visibility: visible !important; }
+.invisible  { visibility: hidden !important; }
+
+.opacity-0  { opacity: 0 !important; }
+.opacity-50 { opacity: 0.5 !important; }
+.opacity-100 { opacity: 1 !important; }
+
+/* Otros */
+.cursor-pointer { cursor: pointer !important; }
+.border-0       { border: none !important; }
+.rounded        { border-radius: 0.25rem !important; }
+.shadow-sm      { box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important; }
+.shadow-lg      { box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important; }

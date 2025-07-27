@@ -7,7 +7,7 @@
 
 
 	<div class="container">
-    	<a class="navbar-brand d-flex align-items-center" href="../index.html" aria-label="Inicio">
+    	<a class="navbar-brand d-flex align-items-center" href="../index.php" aria-label="Inicio">
       		<img src="../img/logo.png" alt="Logo Global Transportes" width="250" class="me-2" />
       		<span class="fw-bold fs-5">Global Transportes</span>
     	</a>
@@ -19,10 +19,11 @@
   			data-bs-target="#navMenu"      <!-- El ID del elemento que se colapsa/expande -->
   			aria-controls="navMenu"        <!-- Accesibilidad: indica qué controla -->
   			aria-expanded="false"          <!-- Accesibilidad: estado del menú (false por defecto) -->
-  			aria-label="Mostrar navegación"<!-- Descripción accesible para lectores de pantalla -->
+  			aria-label 						<!--"Mostrar navegación"Descripción accesible para lectores de pantalla -->
 		>
-  <span class="navbar-toggler-icon"></span> <!-- Ícono del botón (hamburguesa) -->
-</button>
+  			<span class="navbar-toggler-icon"></span> <!-- Ícono del botón (hamburguesa) -->
+			<i class="fas fa-bars"></i> <!-- Ícono de "menú" -->
+		</button>
 
     <div class="collapse navbar-collapse" 
 		id="navMenu">

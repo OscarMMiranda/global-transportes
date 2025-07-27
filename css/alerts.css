@@ -1,0 +1,63 @@
+/* 🚨 Alertas globales */
+
+/* Contenedor base */
+.alert {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background-color: var(--bg-light);
+  color: var(--color-texto);
+  border-radius: 0.25rem;
+  border-left: 0.5rem solid var(--color-primario);
+  margin-bottom: 1rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  font-family: var(--font-principal);
+  line-height: 1.4;
+}
+
+/* Variante de color según tipo */
+.alert-success { border-left-color: var(--color-exito); }
+.alert-info    { border-left-color: var(--color-info); }
+.alert-warning { border-left-color: var(--color-warning); }
+.alert-danger  { border-left-color: var(--color-error); }
+
+/* Icono opcional al inicio */
+.alert-icon {
+  display: inline-block;
+  margin-right: 0.75rem;
+  font-size: 1.25rem;
+  line-height: 1;
+  vertical-align: middle;
+}
+
+/* Encabezado destacado dentro de la alerta */
+.alert-heading {
+  font-weight: var(--font-weight-bold);
+  margin-right: 0.5rem;
+}
+
+/* Botón de cierre */
+.alert-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  line-height: 1;
+  color: var(--color-texto);
+  cursor: pointer;
+}
+
+/* Ajuste tipográfico en móviles */
+@media (max-width: 768px) {
+  .alert {
+    font-size: var(--font-size-sm);
+    padding: 0.75rem 1rem;
+  }
+
+  .alert-icon {
+    margin-right: 0.5rem;
+  }
+}

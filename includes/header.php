@@ -43,7 +43,7 @@ if (session_status() === PHP_SESSION_NONE) {
 <!-- Menú de navegación -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-        <a class="navbar-brand" href="../../index.html">
+        <a class="navbar-brand" href="../../index.php">
             <img src="../../img/logo.png" alt="Global Transportes" width="120">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNavbar">
@@ -52,7 +52,7 @@ if (session_status() === PHP_SESSION_NONE) {
         
         <div class="collapse navbar-collapse" id="menuNavbar">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="../../index.html">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../index.php">Inicio</a></li>
                 <li class="nav-item"><a class="nav-link" href="../../nosotros.html">Nosotros</a></li>
                 <li class="nav-item"><a class="nav-link" href="../../servicios.html">Servicios</a></li>
                 <li class="nav-item"><a class="nav-link" href="../../contacto.html">Contacto</a></li>

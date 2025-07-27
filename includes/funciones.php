@@ -1,6 +1,16 @@
 <?php
-	// Verifica si la conexión está establecida
-	require_once 'conexion.php';
+	
+	require_once 'conexion.php';	// Verifica si la conexión está establecida
+	// require_once 'helpers.php';    	// donde está registrarActividad()
+	
+
+
+// Solo iniciar si no hay sesión activa
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+
 
 	/**
 	 * Obtener la lista de vehículos desde la base de datos.
@@ -106,9 +116,9 @@
 
 	/**
 	* Eliminar un vehículo por su ID.
- 	* @param mysqli $conn Conexión a la base de datos
- 	* @param int $id ID del vehículo a eliminar
- 	* @return bool Éxito o fallo en la eliminación
+ 	* @param mysqli $conn 	Conexión a la base de datos
+ 	* @param int $id 		ID del vehículo a eliminar
+ 	* @return bool 			Éxito o fallo en la eliminación
  	*/
 	function eliminarVehiculo($conn, $id) {
     	// $sql = "DELETE FROM vehiculos WHERE id = ?";
@@ -197,6 +207,54 @@
     $stmt->bind_param("i", $id);
     return $stmt->execute();
 }
+
+/**
+ * handleExportCSV
+ *
+ * Verifica si se solicitó exportar en CSV (vía GET) y registra la acción.
+ * Luego lanza la lógica básica de exportación para una tabla.
+ *
+ * @param mysqli $conn Conexión activa a la base de datos
+ */
+// function handleExportCSV($conn) {
+//     if (isset($_GET['exportar']) && $_GET['exportar'] === 'csv') {
+//         // 1. Registrar en historial
+//         if (isset($_SESSION['usuario'])) {
+//             registrarActividad($conn, $_SESSION['usuario'], ACCION_EXPORTAR_CSV);
+//         }
+
+//         // 2. Exportar datos (aquí ejemplo básico para tabla "usuarios")
+//         header('Content-Type: text/csv; charset=utf-8');
+//         header('Content-Disposition: attachment; filename=usuarios_export.csv');
+
+//         $salida = fopen('php://output', 'w');
+
+//         // Encabezados CSV
+//         fputcsv($salida, array('ID', 'Nombre', 'Email', 'Rol'));
+
+//         $query = "SELECT id, nombre, email, rol_nombre FROM usuarios";
+//         $resultado = mysqli_query($conn, $query);
+
+//         while ($fila = mysqli_fetch_assoc($resultado)) {
+//             fputcsv($salida, $fila);
+//         }
+
+//         fclose($salida);
+//         exit();
+//     }
+// }
+
+
+function verificarAdmin() {
+    session_start();
+    if (!isset($_SESSION['usuario']) || $_SESSION['rol_nombre'] !== 'admin') {
+        error_log("❌ Acceso denegado desde IP: " . $_SERVER['REMOTE_ADDR']);
+        header("Location: login.php");
+        exit();
+    }
+}
+
+
 
 
 

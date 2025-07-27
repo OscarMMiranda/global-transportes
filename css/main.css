@@ -1,0 +1,37 @@
+/* ===============================================
+   🎨 GLOBAL STYLESHEET: main.css
+   Este archivo importa todos los módulos visuales
+   del sistema y define el flujo visual principal.
+   =============================================== */
+
+/* 🔧 Variables globales */
+@import url("variables.css");
+
+/* 🧹 Reset y normalización */
+@import url("reset.css"); /* Usa normalize.css o un reset propio */
+
+/* 🔠 Tipografía */
+@import url("typography.css");
+
+/* 📐 Layout base */
+@import url("grid.css");       /* Contenedores, flexbox, columnas */
+
+/* 🧭 Estructura */
+@import url("navbar.css");
+@import url("sidebar.css");
+@import url("footer.css");
+@import url("hero.css");       /* Si usas bloques tipo portada */
+
+/* 🧩 Componentes */
+@import url("buttons.css");
+@import url("cards.css");
+@import url("tables.css");
+@import url("modals.css");
+@import url("alerts.css");
+
+/* ✨ Utilidades */
+@import url("helpers.css");    /* Margin, padding, display, etc. */
+
+/* 🛠 Personalizaciones finales */
+@import url("custom.css");     /* Overrides específicos del cliente o módulo */
+

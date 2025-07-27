@@ -1,0 +1,78 @@
+/* 📄 Estilos para páginas internas de contenido */
+
+.page-section {
+  padding: 4rem 2rem;
+  background-color: var(--bg-claro);
+}
+
+.page-section h2 {
+  font-size: var(--font-size-lg);
+  color: var(--color-primario);
+  font-family: var(--font-secundaria);
+  margin-bottom: 1.5rem;
+}
+
+.page-section p {
+  font-size: var(--font-size-md);
+  color: var(--color-texto);
+  margin-bottom: 1rem;
+}
+
+/* 🧭 Navegación interna tipo breadcrumb */
+.breadcrumb {
+  background-color: transparent;
+  padding: 0.5rem 0;
+  font-size: var(--font-size-sm);
+}
+
+.breadcrumb a {
+  color: var(--color-link);
+}
+.breadcrumb a:hover {
+  color: var(--color-link-hover);
+  text-decoration: underline;
+}
+
+/* 🧱 Listas de servicios o ítems */
+.page-list {
+  padding-left: 1rem;
+  margin-bottom: 2rem;
+}
+
+.page-list li {
+  margin-bottom: 0.75rem;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.page-list li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--color-primario);
+}
+
+/* 🧾 Bloques destacados */
+.page-box {
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  border-left: 5px solid var(--color-primario);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* 📱 Responsividad */
+@media (max-width: 768px) {
+  .page-section {
+    padding: 2rem 1rem;
+  }
+
+  .page-section h2 {
+    font-size: var(--font-size-md);
+  }
+
+  .page-box {
+    padding: 1rem;
+  }
+}

@@ -1,0 +1,49 @@
+
+project-root/
+├── index.php
+├── partials/
+│   ├── head.php
+│   ├── header.php
+│   ├── sidebar.php
+│   ├── hero.php
+│   ├── footer.php
+│   └── scripts.php
+├── css/
+│   ├── main.css
+│   ├── variables.css
+│   └── [otros módulos].css
+├── js/
+│   └── main.js
+├── img/
+│   └── [logos, íconos, fondos]
+├── fonts/
+│   └── [fuentes personalizadas]
+├── assets/
+│   └── [archivos extras, PDF, CSV, etc.]
+├── inc/
+│   └── config.php          ← conexión DB, constantes, etc.
+└── README.md               ← documentación técnica
+
+
+
+
+
+
+
+Dentro de css/, puedes organizar los estilos de esta manera:
+
+css/
+├── main.css              ← Archivo maestro que importa todos los módulos
+├── variables.css         ← Variables globales (`:root`)
+├── reset.css             ← Normalización (opcional)
+├── typography.css        ← Tipografía y tamaños
+├── grid.css              ← Layout base: contenedores, columnas
+├── navbar.css            ← Estilos del menú superior
+├── sidebar.css           ← Estilos del panel lateral
+├── footer.css            ← Pie de página
+├── buttons.css           ← Botones reutilizables
+├── cards.css             ← Tarjetas o bloques de contenido
+├── alerts.css            ← Mensajes tipo éxito/error
+├── modals.css            ← Estilos de ventanas modales
+├── helpers.css           ← Utilidades como `.m-0`, `.text-right`
+└── custom.css            ← Ajustes específicos del sitio o cliente
