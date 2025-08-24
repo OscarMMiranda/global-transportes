@@ -1,11 +1,18 @@
 <?php
-	// Habilitar visualización de errores (solo en desarrollo)
-	ini_set('display_errors', 1);
-	ini_set('display_startup_errors', 1);
-	error_reporting(E_ALL);
+	// archivo	/mantenimiento/tipo_mercaderia/index.php
 
 	session_start();
-	require_once __DIR__ . '/../../../includes/conexion.php';
+
+	// 1) Modo depuración (solo DEV)
+	error_reporting(E_ALL);
+	ini_set('display_errors', 1);
+	ini_set('log_errors',     1);
+	ini_set('error_log',      __DIR__ . '/error_log.txt');
+
+	// 2) Cargar configuración y conexión
+	require_once __DIR__ . '/../../../includes/config.php';
+	
+	$conn = getConnection();
 
 	// depuración:
 	if (session_status() !== PHP_SESSION_ACTIVE) {
@@ -37,20 +44,26 @@
     	<meta charset="UTF-8">
     	<title>Tipos de Mercadería</title>
     	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
 	</head>
 
-
 	<body class="bg-light">
-
     	<div class="container py-4">
-
 			<!-- Cabecera con botón de retorno -->
 		 	<div class="d-flex justify-content-between align-items-center mb-3">
-        		<h1 class="h4 mb-4">📦 Tipos de Mercadería</h1>
-				<a href="../mantenimiento.php" 
+        		<h1 class="h4 mb-4">
+  					<i class="fas fa-box me-2"></i> 
+					Tipos de Mercadería
+				</h1>
+
+				<a 
+					href="../mantenimiento.php" 
 					class="btn btn-outline-primary btn-sm">
-        			← Volver al Mantenimiento
-      			</a>
+  					<i class="fas fa-arrow-left"></i> 
+					Volver al Mantenimiento
+				</a>
+
 			</div>
 
 	  		<!-- Mensajes flash -->
@@ -62,28 +75,15 @@
         	<?php endif; ?>
 
 			<!-- Botón para abrir el modal de agregar -->
-    		<button type="button" 
+    		<button 
+				type="button" 
 				class="btn btn-success mb-3" 
 				data-bs-toggle="modal" 
-				data-bs-target="#modalAgregar">
-      			Agregar Nueva Mercadería
-    		</button>
-
-
-
-			<!-- AQUÍ: Formulario de filtro de inactivos -->
-  			<form class="d-inline mb-3" method="get">
-    			<label class="form-label me-2">
-      				<input type="checkbox" name="verInactivos"
-        			<?php if (isset($_GET['verInactivos'])) echo 'checked'; ?>>
-      					Mostrar inactivos
-    			</label>
-    			<button class="btn btn-sm btn-link">Actualizar</button>
-  			</form>
-
-			<!-- <form method="post" action="procesar_formulario.php">
-			</form> -->
-
+				data-bs-target="#modalAgregar"
+			>
+  				<i class="fas fa-plus me-2"></i> 
+				Agregar Nueva Mercadería
+			</button>
 
 			<!-- Nav tabs e integración de tablas -->
     	<ul class="nav nav-tabs mb-3" id="tabTipos" role="tablist">
@@ -91,17 +91,21 @@
         		<button 
 					class="nav-link active" 
 					data-bs-toggle="tab" 
-					data-bs-target="#activos">
-          			Activos
-        		</button>
+					data-bs-target="#activos"
+				>
+  					<i class="bi bi-check-circle me-2"></i> 
+					Activos
+				</button>
       		</li>
       		<li class="nav-item">
         		<button 
 					class="nav-link" 
 					data-bs-toggle="tab" 
-					data-bs-target="#inactivos">
-          			Inactivos
-        		</button>
+					data-bs-target="#inactivos"
+				>
+  					<i class="fas fa-ban me-2"></i> 
+					Inactivos
+				</button>
       		</li>
     	</ul>
     	
@@ -131,136 +135,78 @@
                 				<td><?= htmlspecialchars($r['descripcion']) ?></td>
                 				<td>
 									<!-- Botón Editar (modal o página) -->
-              						<button 
-                						class="btn btn-warning btn-sm btn-editar" 
-                						data-id="<?= $r['id'] ?>">
-                						Editar
-              						</button>
-
+              						<button class="btn btn-warning btn-sm btn-editar" data-id="<?= $r['id'] ?>">
+  										<i class="fas fa-edit"></i> 
+										Editar
+									</button>
 									 <!-- Formulario Eliminar (soft delete) -->
               						<form method="post" action="eliminar.php" class="d-inline">
                 						<input type="hidden" name="id" value="<?= $r['id'] ?>">
-                						<button
-                  							type="submit"
-                  							class="btn btn-danger btn-sm"
-                  							onclick="return confirm('¿Deseas eliminar este registro?')">
-                  							Eliminar
-                						</button>
+                						<button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Deseas eliminar este registro?')">
+  											<i class="fas fa-trash-alt"></i> 
+											Eliminar
+										</button>
               						</form>
-
-
 								</td>
             				</tr>
               				<?php endwhile; ?>
             			</tbody>
-          </table>
-        </div>
-      </div>
-	  <div class="tab-pane fade" id="inactivos">
-        <div class="table-responsive">
-          <table class="table table-striped">
-            <thead>
-				<tr>
-					<th>ID</th>
-					<th>Nombre</th>
-					<th>Descripción</th>
-					<th>Acciones</th>
-				</tr>
-			</thead>
-            <tbody>
-              <?php
-              $res2 = $conn->query(
-					"SELECT id,nombre,descripcion,estado 
-					FROM tipos_mercaderia 
-					WHERE estado=0 
-					ORDER BY nombre");
-              while($r2 = $res2->fetch_assoc()): ?>
-              <tr class="text-muted">
-                <td><?= $r2['id'] ?></td>
-                <td><?= htmlspecialchars($r2['nombre']) ?></td>
-                <td><?= htmlspecialchars($r2['descripcion']) ?></td>
-                <td>…acciones (p.ej. restaurar)…</td>
-				   <td>
-              <!-- Botón Restaurar -->
-              <form method="post" action="restaurar.php" class="d-inline">
-                <input type="hidden" name="id" value="<?= $r2['id'] ?>">
-                <button
-                  type="submit"
-                  class="btn btn-success btn-sm"
-                  onclick="return confirm('¿Restaurar este registro?')">
-                  Restaurar
-                </button>
-              </form>
-            </td>
-              </tr>
-              <?php endwhile; ?>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-
-
-
-        	
-
-
-			<!-- Listado de tipo de mercaderia -->
-			<hr>
-        	<h2 class="h5">Listado</h2>
-
-
-        	<table class="table table-striped">
-            	<thead>
-                	<tr>
-						<th>ID</th>
-						<th>Nombre</th>
-						<th>Descripción</th>
-						<th>Acciones</th>
-					</tr>
-            	</thead>
-        		<tbody>
-                	<?php while ($row = $resultado->fetch_assoc()): ?>
-            	    <tr>
-            	    	<td><?php echo htmlspecialchars($row['id']); ?></td>
-
-            	        <!-- <td><?php echo htmlspecialchars($row['nombre']); ?></td> -->
-
-						<td>
-        					<?php echo htmlspecialchars($row['nombre']) ?>
-        					<?php if ($row['estado'] == 0): ?>
-          					<span class="badge bg-secondary ms-2">Inactivo</span>
-        					<?php endif; ?>
-      					</td>
-
-                	   	<td><?php echo htmlspecialchars($row['descripcion']); ?></td>
-                    	<td>
-            	    	    <!-- <a href="editar.php?id=<?php echo $row['id']; ?>" 
-								class="btn btn-warning btn-sm">
-								Editar</a> -->
-							<button 
-    							class="btn btn-warning btn-sm btn-editar" 
-    							data-id="<?php echo $row['id']; ?>">
-    							Editar
-  							</button>
-                    	    
-							<!-- <a href="eliminar.php?id=<?php echo $row['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar este registro?')">Eliminar</a> -->
-        	        	
-							<form method="post" action="./eliminar.php" class="d-inline">
-    							<input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-    							<button type="submit" 
-									class="btn btn-danger btn-sm" 
-									onclick="return confirm('¿Eliminar este registro?')">
-									Eliminar
-								</button>
-							</form>
-						</td>
-        	    	</tr>
-					<?php endwhile; ?>
-            	</tbody>
-        	</table>
+          			</table>
+        		</div>
+      		</div>
+	  		<div class="tab-pane fade" id="inactivos">
+        		<div class="table-responsive">
+          			<table class="table table-striped">
+            			<thead>
+							<tr>
+								<th>ID</th>
+								<th>Nombre</th>
+								<th>Descripción</th>
+								<th>Acciones</th>
+							</tr>
+						</thead>
+            			<tbody>
+              				<?php
+              					$res2 = $conn->query(
+								"SELECT id,nombre,descripcion,estado 
+								FROM tipos_mercaderia 
+								WHERE estado=0 
+								ORDER BY nombre");
+              					while($r2 = $res2->fetch_assoc()): 
+							?>
+              				<tr class="text-muted">
+                				<td><?= $r2['id'] ?></td>
+                				<td><?= htmlspecialchars($r2['nombre']) ?></td>
+                				<td><?= htmlspecialchars($r2['descripcion']) ?></td>
+                				<td>…acciones (p.ej. restaurar)…</td>
+								<td>
+              						<!-- Botón Restaurar -->
+              						<form 
+										method="post" 
+										action="restaurar.php" 
+										class="d-inline"
+									>
+                						<input 
+											type="hidden" 
+											name="id" 
+											value="<?= $r2['id'] ?>"
+										>
+                						<button
+                  							type="submit"
+                  							class="btn btn-success btn-sm"
+                  							onclick="return confirm('¿Restaurar este registro?')">
+                  							Restaurar
+                						</button>
+              						</form>
+            					</td>
+             	 			</tr>
+              				<?php endwhile; ?>
+            			</tbody>
+        			</table>
+        		</div>
+      		</div>
     	</div>
+	</div>
 		
 		<!-- Modal: Agregar Nueva Mercadería -->
   		<div class="modal fade" id="modalAgregar" tabindex="-1" aria-labelledby="tituloModalAgregar" aria-hidden="true">

@@ -1,0 +1,2 @@
+[Tue Jul 29 01:01:02 2025] PHP Notice:  Undefined index: usuario_id in /var/www/html/index.php on line 5
+[Tue Jul 29 01:05:10 2025] PHP Fatal error:  Uncaught Exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'asignacion_id' in 'field list' in /var/www/html/modelo.php on line 42

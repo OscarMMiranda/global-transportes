@@ -2,13 +2,18 @@
 // /admin/users/usuarios_eliminados.php
 
 session_start();
-require_once '/../../includes/conexion.php';
 
-// 01. Activar modo depuración (quitar en producción)
+// 2) Modo depuración (solo DEV)
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-ini_set('log_errors', 1);
-ini_set('error_log', 'error_log.txt');
+ini_set('log_errors',     1);
+ini_set('error_log',      __DIR__ . '/error_log.txt');
+
+// 3) Cargar config.php (define getConnection() y rutas)
+require_once __DIR__ . '/../../includes/config.php';
+
+// 4) Obtener la conexión
+$conn = getConnection();
 
 // 02. Verificar acceso solo para administradores
 if (!isset($_SESSION['usuario']) || $_SESSION['rol_nombre'] !== 'admin') {

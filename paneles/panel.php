@@ -1,11 +1,14 @@
 <?php
 session_start();
 
-// Verifica que el usuario esté logueado
-if (!isset($_SESSION['usuario'])) {
-    header("Location: login.php");
-    exit();
-}
+
+// // Validar que el usuario esté autenticado y tenga el rol adecuado
+	if (!isset($_SESSION['usuario']) || $_SESSION['rol_nombre'] !== 'admin') 
+		{
+    	error_log("❌ Intento de acceso sin permisos: " . $_SERVER['REMOTE_ADDR']);
+    	header("Location: login.php");
+    	exit();
+		}
 ?>
 
 <!DOCTYPE html>

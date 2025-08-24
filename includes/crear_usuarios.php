@@ -4,7 +4,10 @@ include '../includes/conexion.php';
 
 // Solo admin puede acceder
 if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin') {
-    header("Location: login.php");
+
+    header("Location: http://www.globaltransportes.com/login");
+
+    // header("Location: login.php");
     exit();
 }
 

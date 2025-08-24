@@ -1,13 +1,21 @@
 <?php
-	// 1) Mostrar errores para depuración (desactivar en producción)
-		ini_set('display_errors', 1);
-		ini_set('display_startup_errors', 1);
-		error_reporting(E_ALL);
 	
 	// /modulos/mantenimiento/agencia_aduana/editar_agencia_aduana.php
 
 		session_start();
-		require_once __DIR__ . '/../../../includes/conexion.php';
+
+		// 1) Modo depuración (solo DEV)
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('log_errors',     1);
+ini_set('error_log',      __DIR__ . '/error_log.txt');
+
+// 2) Cargar configuración y conexión
+require_once __DIR__ . '/../../../includes/config.php';
+// require_once __DIR__ . '/../../../includes/config.php';
+$conn = getConnection();
+
+
 
 
 	// 2) Verificar conexión y permisos

@@ -1,10 +1,11 @@
 <?php
-	// public_html/modules/clientes/controllers/ListController.php
+	// archivo	:	/modulos/clientes/controllers/ListController.php
 
 	// ─── 0) Mostrar todos los errores (solo en desarrollo) ────────────────────
 	error_reporting(E_ALL);
 	ini_set('display_errors', 1);
 
+	
 	// ─── 1) Configuración global ───────────────────────────────────────────────
 	// Usa DOCUMENT_ROOT para no depender de ../../..
 	$config = rtrim($_SERVER['DOCUMENT_ROOT'], '/\\') . '/includes/config.php';

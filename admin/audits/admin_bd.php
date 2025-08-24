@@ -9,8 +9,14 @@ ini_set('error_log', 'error_log.txt');
 
 session_start();
 
+
 // 2) Cargar conexión y helpers
 require_once __DIR__ . '/../../includes/conexion.php';
+
+
+// 4) Obtener la conexión
+    $conn = getConnection();
+
 require_once __DIR__ . '/../../includes/helpers.php';
 
 error_log("⚙️ SESSION en admin_db.php: " . print_r($_SESSION, true));

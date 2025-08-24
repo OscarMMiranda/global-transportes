@@ -1,9 +1,14 @@
 <?php
-session_start();
-if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'empleado') {
-    header("Location: login.php");
-    exit();
-}
+	session_start();
+
+	if (!isset($_SESSION['usuario']) || $_SESSION['rol_nombre'] !== 'empleado') 
+		{
+    	error_log("❌ Intento de acceso sin permisos: " . $_SERVER['REMOTE_ADDR']);
+    	header("Location: login.php");
+    	exit();
+		}
+
+
 $usuario = $_SESSION['usuario'];
 ?>
 
@@ -18,7 +23,7 @@ $usuario = $_SESSION['usuario'];
 <header>
     <div class="contenedor">
         <div class="logo">
-            <a href="../index.html"><img src="../img/logo.png" alt="Logo Global Transportes" class="logo-img"></a>
+            <a href="/../index.php"><img src="/../img/logo.png" alt="Logo Global Transportes" class="logo-img"></a>
         </div>
         <h1>Bienvenido, <?= htmlspecialchars($usuario) ?></h1>
     </div>
@@ -29,9 +34,9 @@ $usuario = $_SESSION['usuario'];
         <h2>Panel de Empleado</h2>
         <p>Selecciona una opción para continuar:</p>
         <div class="opciones-panel">
-            <a href="ordenes_trabajo.php" class="boton-accion">Órdenes de Trabajo</a>
-            <a href="mi_perfil.php" class="boton-accion">Mi Perfil</a>
-            <a href="logout.php" class="boton-accion salir">Cerrar Sesión</a>
+            <a href="/../modulos/orden_trabajo/orden_trabajos.php" class="boton-accion">Órdenes de Trabajo</a>
+            <a href="/../modulos/empleado/mi_perfil.php" class="boton-accion">Mi Perfil</a>
+            <a href="/../logout.php" class="boton-accion salir">Cerrar Sesión</a>
         </div>
     </div>
 </main>

@@ -1,11 +1,17 @@
 <?php
 	// clientes.php
 
-	// Conexión y cabecera
-	// require_once '../../includes/conexion.php';
+	// 2) Modo depuración (solo DEV)
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+    ini_set('log_errors',     1);
+    ini_set('error_log',      __DIR__ . '/error_log.txt');
 
-	// 1) Carga conexión
-require_once rtrim($_SERVER['DOCUMENT_ROOT'], '/\\') . '/includes/conexion.php';
+    // 3) Cargar config.php (define getConnection() y rutas)
+    require_once __DIR__ . '/../../includes/config.php';
+
+    // 4) Obtener la conexión
+    $conn = getConnection();
 
 	// require_once '../../includes/header_erp.php';
 

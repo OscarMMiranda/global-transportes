@@ -1,55 +1,48 @@
 <?php 
-	require_once '../../includes/conexion.php'; 
+	// 2) Modo depuración (solo DEV)
+	error_reporting(E_ALL);
+	ini_set('display_errors', 1);
+	ini_set('log_errors',     1);
+	ini_set('error_log',      __DIR__ . '/error_log.txt');
+
+	// 3) Cargar config.php (define getConnection() y rutas)
+	require_once __DIR__ . '/../../includes/config.php';
+
+	// 4) Obtener la conexión
+	$conn = getConnection();
+
+
+
+	$editando = false;
+$vehiculo = [];
+
+if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+    $editando = true;
+    $id = (int) $_GET['id'];
+
+    $stmt = $conn->prepare("SELECT * FROM vehiculos WHERE id = ?");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $res = $stmt->get_result();
+
+    if ($res && $res->num_rows === 1) {
+        $vehiculo = $res->fetch_assoc();
+    } else {
+        // Si el ID no existe, redirigir al listado
+        header("Location: vehiculos.php");
+        exit;
+    }
+
+    $stmt->close();
+}
+
+
 	require_once '../../includes/header_erp.php'; 
 	require_once '../../includes/funciones.php'; 
 ?>
 
 	<!-- Opcional: Generación del token CSRF -->
-<?php 
-	// if (!isset($_SESSION['csrf_token'])) {
-	//     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-	// } 
 
-	// 1) Generar token CSRF si no existe
-	// if (!isset($_SESSION['csrf_token'])) {
-    // 	$_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-	// 	}
-
-	// 2) Si vienen por GET?id=… cargamos datos para edición
-	// $editando = false;
-	// if (isset($_GET['id'])) {
-    // 	$editando = true;
-    // 	$idVeh = (int) $_GET['id'];
-    // 	$stmt = $conn->prepare("SELECT * FROM vehiculos WHERE id = ?");
-    // 	$stmt->bind_param("i", $idVeh);
-    // 	$stmt->execute();
-    // 	$vehiculo = $stmt->get_result()->fetch_assoc() ?: null;
-    // 	$stmt->close();
-    // 	if (!$vehiculo) {
-    //     	$_SESSION['error'] = "Vehículo no encontrado";
-    //     	header("Location: vehiculos.php");
-    //     	exit;
-    // 		}
-	// 	}
-
-?>
-
-
-<!-- <script>
-	document.addEventListener("DOMContentLoaded", function () {
-    // Convertir a mayúsculas todos los inputs de texto, número y selects (excepto observaciones)
-    const inputs = document.querySelectorAll("input[type='text'], input[type='number'], select");
-    inputs.forEach(input => {
-    	if (input.name !== "observaciones") 
-			{
-        	input.addEventListener("input", function () 
-				{
-                this.value = this.value.toUpperCase();
-            	});
-        	}
-    	});
-	});
-</script> -->
 
 
 <script>

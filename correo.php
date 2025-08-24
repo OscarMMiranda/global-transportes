@@ -1,18 +1,30 @@
 <?php
 	// correo.php
 
-	ini_set('display_errors', 1);
-	ini_set('display_startup_errors', 1);
+	// 2) Modo depuración (solo DEV)
 	error_reporting(E_ALL);
+	ini_set('display_errors', 1);
+	ini_set('log_errors',     1);
+	ini_set('error_log',      __DIR__ . '/error_log.txt');
 
+	// 3) Cargar config.php (define getConnection() y rutas)
 	require_once __DIR__ . '/includes/config.php';
-	require_once __DIR__ . '/includes/conexion.php';
+
+	// 4) Obtener la conexión
+	$conn = getConnection();
+
+
 	require_once __DIR__ . '/includes/helpers.php';
 	require_once __DIR__ . '/partials/head.php';
 
-	if (session_status() === PHP_SESSION_NONE) {
-	    session_start();
-	}
+
+// Validación de conexión
+if (!$conn) {
+    die("❌ Error de conexión: " . mysqli_connect_error());
+}
+
+
+
 
 	if (isset($_SESSION['usuario'])) {
 	    registrarActividad($conn, $_SESSION['usuario'], 'Accedió al módulo de correo');

@@ -1,6 +1,11 @@
 <?php
-session_start(); // Iniciar sesión para gestionar autenticación
+
+// session_start(); // Iniciar sesión para gestionar autenticación
+
 ?>
+
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>

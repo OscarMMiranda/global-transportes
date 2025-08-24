@@ -2,36 +2,29 @@
 	// includes/conexion.php
 
 	/**
- 	* Retorna una instancia única de mysqli
- 	*
- 	* @return mysqli
- 	*/
-
+	 * Devuelve una única instancia de mysqli
+	 * @return mysqli
+	 */
+	function getConnection() 
+		{
     	static $conn;
 
     	if ($conn instanceof mysqli) {
-        	return $conn;
+			return $conn;
     		}
 
-	// Configura tus datos de conexión aquí
-	$host 			= 'localhost';
-	$usuario 		= 'wi010232_ommz';
-	$contrasena 	= 'Samantha2304';
-	$base_de_datos 	= 'wi010232_sistema';
+		$host       = 'localhost';
+		$usuario    = 'wi010232_ommz';
+		$contrasena = 'Samantha2304';
+		$base       = 'wi010232_sistema';
 
-	// Crear conexión
-	$conn = new mysqli($host, $usuario, $contrasena, $base_de_datos);
+		$conn = new mysqli($host, $usuario, $contrasena, $base);
+		if ($conn->connect_error) {
+			die("Error de conexión: " . $conn->connect_error);
+			}
 
-	// Verificar conexión
-	if ($conn->connect_error) {
-		die("Error de conexión: " . $conn->connect_error);
+		// Charset UTF-8
+		$conn->set_charset("utf8");
+
+		return $conn;
 		}
-
-	// Opcional: establecer juego de caracteres
-	$conn->set_charset("utf8");
-	
-	return $conn;
-
-
-?>
-

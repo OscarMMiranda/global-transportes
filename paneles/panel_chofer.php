@@ -1,11 +1,13 @@
 <?php
 session_start();
 
-// Verificar que el usuario esté logueado y sea chofer
-if (!isset($_SESSION['usuario']) || !isset($_SESSION['rol_nombre']) || $_SESSION['rol_nombre'] !== 'chofer') {
-    header("Location: login.php");
-    exit();
-}
+// // Validar que el usuario esté autenticado y tenga el rol adecuado
+	if (!isset($_SESSION['usuario']) || $_SESSION['rol_nombre'] !== 'chofer') 
+		{
+    	error_log("❌ Intento de acceso sin permisos: " . $_SERVER['REMOTE_ADDR']);
+    	header("Location: login.php");
+    	exit();
+		}
 ?>
 
 <!DOCTYPE html>
@@ -13,19 +15,19 @@ if (!isset($_SESSION['usuario']) || !isset($_SESSION['rol_nombre']) || $_SESSION
 <head>
   <meta charset="UTF-8">
   <title>Panel del Chofer - Global Transportes</title>
-  <link rel="stylesheet" href="../css/estilo.css">
+  <link rel="stylesheet" href="/../css/estilo.css">
 </head>
 <body>
   <header>
     <div class="contenedor">
       <div class="logo">
-        <a href="../index.html"><img src="../img/logo.png" alt="Logo Global Transportes" class="logo-img"></a>
+        <a href="/../index.php"><img src="../img/logo.png" alt="Logo Global Transportes" class="logo-img"></a>
       </div>
       <h1>Panel del Chofer</h1>
       <nav>
         <ul class="nav-menu">
-          <li><a href="../index.html" class="btn-nav">Inicio</a></li>
-          <li><a href="logout.php" class="btn-nav">Cerrar Sesión</a></li>
+          <li><a href="/../index.php" class="btn-nav">Inicio</a></li>
+          <li><a href="/../logout.php" class="btn-nav">Cerrar Sesión</a></li>
         </ul>
       </nav>
     </div>

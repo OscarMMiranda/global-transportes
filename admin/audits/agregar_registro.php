@@ -1,46 +1,56 @@
 <?php
-session_start();
+	session_start();
+
+// 1) Modo depuración (solo DEV)
+	error_reporting(E_ALL);
+	ini_set('display_errors', 1);
+	ini_set('log_errors',     1);
+	ini_set('error_log',      __DIR__ . '/error_log.txt');
+
+// 2) Cargar configuración y conexión
+	require_once __DIR__ . '/../../includes/config.php';
+
+	$conn = getConnection();
 
 // 2) Cargar conexión y helpers
-require_once __DIR__ . '/../../includes/conexion.php';
-require_once __DIR__ . '/../../includes/helpers.php';
+	require_once __DIR__ . '/../../includes/helpers.php';
 
 // Verificar acceso solo para administradores
-if (!isset($_SESSION['usuario']) || $_SESSION['rol_nombre'] !== 'admin') {
-    die("❌ Acceso denegado.");
-}
+	if (!isset($_SESSION['usuario']) || $_SESSION['rol_nombre'] !== 'admin') {
+		die("❌ Acceso denegado.");
+		}
 
 // Validar si se recibió el nombre de la tabla
-if (!isset($_GET['tabla'])) {
-    die("❌ Error: No se ha especificado una tabla.");
-}
+	if (!isset($_GET['tabla'])) {
+    	die("❌ Error: No se ha especificado una tabla.");
+		}
 
-$tabla = htmlspecialchars($_GET['tabla']);
+	$tabla = htmlspecialchars($_GET['tabla']);
 
 // Obtener las columnas de la tabla
-$sql = "SHOW COLUMNS FROM `$tabla`";
-$resultado = $conn->query($sql);
+	$sql = "SHOW COLUMNS FROM `$tabla`";
+	$resultado = $conn->query($sql);
 
-if (!$resultado) {
-    die("❌ Error en consulta SQL: " . $conn->error);
-}
+	if (!$resultado) {
+    	die("❌ Error en consulta SQL: " . $conn->error);
+	}
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Agregar Registro - <?= $tabla ?></title>
-    <link rel="stylesheet" href="../css/base.css">
-</head>
-<body>
-<header>
-    <h1>➕ Agregar Registro en <?= $tabla ?></h1>
-    <nav>
-        <a href="admin_db.php" class="btn-nav">🏠 Panel Principal</a>
-        <a href="ver_datos.php?tabla=<?= $tabla ?>" class="btn-nav">🔍 Ver Datos</a>
-    </nav>
-</header>
+	<head>
+    	<meta charset="UTF-8">
+    	<title>Agregar Registro - <?= $tabla ?></title>
+		<link rel="stylesheet" href="../css/base.css">
+	</head>
+	<body>
+	<header>
+    	<h1>➕ Agregar Registro en <?= $tabla ?></h1>
+    	<nav>
+        	<a href="admin_bd.php" class="btn-nav">🏠 Panel Principal</a>
+        	<a href="ver_datos.php?tabla=<?= $tabla ?>" class="btn-nav">🔍 Ver Datos</a>
+    	</nav>
+	</header>
 
 <main>
     <h3>Nuevo Registro</h3>

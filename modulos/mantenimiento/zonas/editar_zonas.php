@@ -1,14 +1,24 @@
 <?php
 
-	// Mostrar todos los errores (sólo en desarrollo)
-	ini_set('display_errors', 1);
-	ini_set('display_startup_errors', 1);
-	error_reporting(E_ALL);
 
 	session_start();
+
+	// 1) Modo depuración (solo DEV)
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('log_errors',     1);
+ini_set('error_log',      __DIR__ . '/error_log.txt');
+
+// 2) Cargar configuración y conexión
+require_once __DIR__ . '/../../../includes/config.php';
+// require_once __DIR__ . '/../../../includes/config.php';
+$conn = getConnection();
+
+
+
+
 	require_once __DIR__ . '/controllers/zonas_controller.php';
-	// require_once __DIR__ . '/../../../../includes/conexion.php';
-	require_once __DIR__ . '/../../../includes/conexion.php';
+
 
 	if (!isset($_SESSION['usuario']) || $_SESSION['rol_nombre'] !== 'admin') {
   		header('Location: ../sistema/login.php'); exit;

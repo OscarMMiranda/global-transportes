@@ -8,6 +8,11 @@
 	session_start();
 	require_once __DIR__ . '/../../../includes/conexion.php';
 
+	// 2) Cargar configuración y conexión
+	require_once __DIR__ . '/../../../includes/config.php';
+	// require_once __DIR__ . '/../../../includes/config.php';
+	$conn = getConnection();
+
 	// Verificar conexión antes de continuar
 	if (!$conn || $conn->connect_error) {
     	die("Error de conexión a la base de datos: " . $conn->connect_error);
@@ -15,7 +20,7 @@
 
 	// 3) Control de acceso (solo admin)
 	if (empty($_SESSION['usuario']) || $_SESSION['rol_nombre'] !== 'admin') {
-    	header('Location: ../../sistema/login.php');
+    	header('Location: ../../login.php');
     	exit;
 		}
 

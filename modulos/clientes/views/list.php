@@ -1,5 +1,5 @@
 <?php
-	// public_html/modules/clientes/views/list.php
+	//	archivo	:	/modulos/clientes/views/list.php
 ?>
 
 <link 
@@ -27,6 +27,9 @@
 	src="<?= BASE_URL ?>assets/js/clientes.js" 
 	defer>
 </script>
+
+
+
 
 <main class="container mt-4">
 	<h2 class="text-center mb-4">

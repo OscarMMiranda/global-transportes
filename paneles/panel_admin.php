@@ -3,12 +3,22 @@
 	session_start();
 
 	// 1)	Mostrar errores en desarrollo (quitar en producción)
-	ini_set('display_errors', 1);
-	ini_set('display_startup_errors', 1);
+	ini_set('display_errors', 			1);
+	ini_set('display_startup_errors', 	1);
 	error_reporting(E_ALL);
 
 	// 2) 	Incluir conexión y helpers
-	require_once '../includes/conexion.php';
+	// require_once '../includes/conexion.php';
+
+	// 2) Cargar config y obtener la conexión
+	require_once __DIR__ . '/../includes/config.php';
+
+
+	// config.php ya hace `require_once 'conexion.php'`
+	// y define la función getConnection()
+	$conn = getConnection();
+
+	// 3) Cargar helpers y funciones
 	require_once '../includes/helpers.php';
 	require_once '../includes/funciones.php';
 
@@ -145,7 +155,7 @@
     							<i class="fa fa-rocket fa-2x text-info mb-2"></i>
     		    				<h5 class="card-title">ERP Dashboard</h5>
     	   	 					<p class="card-text">Acceso al módulo ERP completo.</p>
-    	   	 					<a href="../modulos/erp_dashboard.php" class="btn btn-info">Entrar</a>
+    	   	 					<a href="../views/dashboard/erp_dashboard.php" class="btn btn-info">Entrar</a>
     	      				</div>
     	    			</div>
     				</div>

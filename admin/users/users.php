@@ -10,12 +10,24 @@ ini_set('display_errors', 1);
 ini_set('log_errors', 1);
 ini_set('error_log', 'error_log.txt');
 
+// 02. Cargar configuración global
+require_once __DIR__ . '/../../includes/config.php';
+
+// 03. Obtener la conexión
+$conn = getConnection();
+
+
+
 // 02. Verificar acceso solo para administradores
 if (!isset($_SESSION['usuario']) || $_SESSION['rol_nombre'] !== 'admin') {
     error_log("❌ Acceso no autorizado: " . $_SERVER['REMOTE_ADDR']);
     header("Location: ../login.php");
     exit();
 }
+
+// 05. Cargar helpers y funciones
+require_once INCLUDES_PATH . '/helpers.php';
+require_once INCLUDES_PATH . '/funciones.php';
 
 // 03. Consulta para obtener usuarios activos
 $sql_activos = "

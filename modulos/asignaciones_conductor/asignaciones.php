@@ -1,15 +1,22 @@
 <?php
 	session_start();
-	require_once '../../includes/conexion.php'; // Conectar a la base de datos
+	
+	// 2) Modo depuración (solo DEV)
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+    ini_set('log_errors',     1);
+    ini_set('error_log',      __DIR__ . '/error_log.txt');
 
-	// ACTIVAR VISUALIZACIÓN DE ERRORES
-	error_reporting(E_ALL);
-	ini_set('display_errors', 1);
+    // 3) Cargar config.php (define getConnection() y rutas)
+    require_once __DIR__ . '/../../includes/config.php';
+
+    // 4) Obtener la conexión
+    $conn = getConnection();
 
 	// VERIFICAR QUE EL USUARIO SEA ADMINISTRADOR
 	if (!isset($_SESSION['usuario']) || !isset($_SESSION['rol_nombre']) || $_SESSION['rol_nombre'] !== 'admin') 
 		{
-    	header("Location: ../sistema/login.php");
+    	header("Location: /login.php");
     	exit();
 		}
 
@@ -190,16 +197,16 @@
       			<div class="modal-header">
         			<h5 class="modal-title" id="confirmModalLabel">Confirmar Finalización</h5>
         			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-      			</div>
-      			<div class="modal-body">
-        			¿Estás seguro de que deseas finalizar esta asignación?
-      			</div>
-      			<div class="modal-footer">
-        			<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        			<button type="button" class="btn btn-danger" id="confirmBtn">Confirmar</button>
-      			</div>
-    		</div>
-  		</div>
+</div>
+<div class="modal-body">
+¿Estás seguro de que deseas finalizar esta asignación?
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+<button type="button" class="btn btn-danger" id="confirmBtn">Confirmar</button>
+</div>
+</div>
+</div>
 	</div>
 
 	<!-- jQuery (necesario para DataTables y el manejo del modal) -->
@@ -215,14 +222,14 @@
 		// Inicializar DataTables (opcional)
     	$('#tablaActivas').DataTable(
 			{
-        	"language": 
+"language": 
 				{
-        	    "url": "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json"
+"url": "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json"
         		}
     		});
     	$('#tablaHistorial').DataTable({
         "language": {
-            "url": "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json"
+"url": "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json"
         }
     });
     

@@ -1,15 +1,21 @@
 <?php
 session_start();
 
-// 2) Cargar conexión y helpers
-require_once __DIR__ . '/../../includes/conexion.php';
-require_once __DIR__ . '/../../includes/helpers.php';
 
-// Activar modo depuración
+// 1) Modo depuración (solo DEV)
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-ini_set('log_errors', 1);
-ini_set('error_log', 'error_log.txt');
+ini_set('log_errors',     1);
+ini_set('error_log',      __DIR__ . '/error_log.txt');
+
+// 2) Cargar configuración y conexión
+require_once __DIR__ . '/../../includes/config.php';
+
+$conn = getConnection();
+// 2) Cargar conexión y helpers
+
+require_once __DIR__ . '/../../includes/helpers.php';
+
 
 // Verificar acceso solo para administradores
 if (!isset($_SESSION['usuario']) || $_SESSION['rol_nombre'] !== 'admin') {

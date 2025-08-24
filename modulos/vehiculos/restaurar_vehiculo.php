@@ -1,6 +1,11 @@
 <?php
 	session_start();
-	require_once '../../includes/conexion.php';
+
+ 	// 3) Cargar config.php (define getConnection() y rutas)
+    require_once __DIR__ . '/../../includes/config.php';
+
+    // 4) Obtener la conexión
+    $conn = getConnection();
 
 	// Validar llegada por POST
 	if ($_SERVER['REQUEST_METHOD'] !== 'POST' || empty($_POST['id'])) {

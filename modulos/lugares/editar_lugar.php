@@ -1,6 +1,18 @@
 <?php
-require_once '../../includes/conexion.php';
-require_once '../../includes/header_lugares.php';
+
+// 1) Modo depuración (solo DEV)
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('log_errors',     1);
+ini_set('error_log',      __DIR__ . '/error_log.txt');
+
+// 2) Cargar configuración y conexión
+
+require_once __DIR__ . '/../../includes/config.php';
+
+$conn = getConnection();
+
+
 
 // Verificar si el ID del lugar está presente
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {

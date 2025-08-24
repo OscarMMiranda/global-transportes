@@ -1,41 +1,50 @@
 <?php
-// login.php
+// archivo	:	/login.php
 
-// 1. Mostrar errores para depuración
+
+// 	1. 	Mostrar errores para depuración
 ini_set('display_errors',    1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-session_start();
 
-// 2. Incluir conexión (tu archivo original devuelve $conn)
-$conn = require_once __DIR__ . '/includes/conexion.php';
+//	2.	Cargar la configuración global
+require_once __DIR__ . '/includes/config.php';
 
-// 3. Generar o recuperar token CSRF
+// 	3. 	(Opcional) Si config.php no arranca la sesión, la iniciamos aquí
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+	}
+
+// 	4. 	Obtener la conexión
+$conn = getConnection();
+
+
+//	5.	Generar o recuperar token CSRF
 if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(openssl_random_pseudo_bytes(32));
 }
 $csrf = $_SESSION['csrf_token'];
 
-// 4. Inicializar variables
+// 	6. 	Variables iniciales
 $error   = '';
 $usuario = isset($_POST['usuario']) ? trim($_POST['usuario']) : '';
 $clave    = isset($_POST['clave'])   ? $_POST['clave']          : '';
 
-// 5. Procesar envío
+// 	7. 	Procesar envío
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // 5.1 Validar CSRF
+    // 	7.1 	Validar CSRF
     if (! isset($_POST['csrf_token']) || 
          ! hash_equals($csrf, $_POST['csrf_token'])
     ) {
         $error = 'Token de seguridad inválido.';
     }
-    // 5.2 Validar campos
+    // 	7.2 	Validar campos
     elseif ($usuario === '' || $clave === '') {
         $error = 'Usuario y contraseña son requeridos.';
-    }
+    	}
     else {
-        // 5.3 Preparar y ejecutar consulta
+        // 	7.3 	Preparar y ejecutar consulta
         $sql = "
             SELECT 
                 u.id,
@@ -54,22 +63,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         $stmt->bind_param('s', $usuario);
         $stmt->execute();
+
+
+		// En PHP 5.6, asegúrate de usar mysqlnd para get_result()
         $res = $stmt->get_result();
 
         // 5.4 Verificar existencia de usuario
         if ($res && $res->num_rows === 1) {
             $fila = $res->fetch_assoc();
 
-            // 5.5 Verificar contraseña
+            // 	7.4 	Verificar contraseña
             if (password_verify($clave, $fila['clave_hash'])) {
-                // 5.6 Guardar datos en sesión
+                
+				// 7.5 Guardar datos en sesión
                 session_regenerate_id(true);
-                $_SESSION['id']          = $fila['id'];
-                $_SESSION['usuario']     = $fila['usuario'];
-                $_SESSION['rol']         = $fila['rol_id'];
-                $_SESSION['rol_nombre']  = $fila['rol_nombre'];
+                $_SESSION['id']           = $fila['id'];
+                $_SESSION['usuario_id']   = $fila['id']; // ← Esta es la que necesita el controlador
 
-                // 5.7 Redireccionar según rol
+                $_SESSION['usuario']      = $fila['usuario'];
+                $_SESSION['rol']          = $fila['rol_id'];
+                $_SESSION['rol_nombre']   = $fila['rol_nombre'];
+
+                $_SESSION['login_time']   = date('Y-m-d H:i:s');
+                $_SESSION['ip_origen']    = $_SERVER['REMOTE_ADDR'];
+
+
+                // 7.6 Redireccionar según rol
                 switch ($fila['rol_nombre']) {
                     case 'admin':
                         $dest = '/paneles/panel_admin.php'; break;
@@ -82,6 +101,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     default:
                         $dest = '/paneles/panel.php';
                 }
+
+
+
+
 
                 // Verificar existencia y redirigir
                 if (file_exists(__DIR__ . $dest)) {
@@ -100,11 +123,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->close();
     }
 }
-
-
-
-
-
 
 // 6. Cerrar conexión
 $conn->close();
@@ -160,10 +178,5 @@ $conn->close();
       <button type="submit" class="btn btn-primary w-100">Ingresar</button>
     </form>
   </div>
-
-
-
-  
-
 </body>
 </html>

@@ -1,10 +1,22 @@
 <?php
-	// Habilitar visualización de errores (solo en desarrollo)
-		ini_set('display_errors', 1);
-		ini_set('display_startup_errors', 1);
-		error_reporting(E_ALL);
 	
 	session_start();
+
+	// 1) Modo depuración (solo DEV)
+	error_reporting(E_ALL);
+	ini_set('display_errors', 1);
+	ini_set('log_errors',     1);
+	ini_set('error_log',      __DIR__ . '/error_log.txt');
+
+	// 2) Cargar configuración y conexión
+
+	require_once __DIR__ . '/../../../includes/config.php';
+	
+	$conn = getConnection();	
+    
+
+
+
 	require_once __DIR__ . '/controllers/tipo_documento_controller.php';
 
 	// sólo admin…
