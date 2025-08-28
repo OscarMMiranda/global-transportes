@@ -31,17 +31,15 @@
   			rel="stylesheet"
   			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
 		>
-
 	</head>
 	<body>
 		<div class="container my-5">
-    		<h1 class="mb-4 text-primary d-flex align-items-center">
-    			<i class="fas fa-exchange-alt me-2"></i>
-    			Asignaciones 
-    			<small 
-					class="text-muted ms-2">(Conductor - Tracto - Remolque)
-				</small>
-			</h1>
+    		<h1 class="mb-4 text-primary fw-bold d-flex align-items-center">
+  <i class="fas fa-exchange-alt me-2"></i>
+  Asignaciones
+  <span class="h6 text-muted ms-2 fw-normal">(Conductor - Tracto - Remolque)</span>
+</h1>
+
 
 			<?php if (!empty($flash)): ?>
     			<div 
@@ -104,7 +102,11 @@
                             	    	<i class="fas fa-times-circle"></i> 
 										Finalizar
                             		</button>
+
                         		</td>
+
+									
+
                     		</tr>
                 		<?php endwhile; ?>
                 	</tbody>
@@ -116,8 +118,6 @@
         		No hay asignaciones activas.
     		</div>
 		<?php endif; ?>
-
-
 
     	<!-- Historial de Asignaciones -->
 		<h2 class="mt-5 mb-3 text-primary d-flex align-items-center border-bottom pb-2">

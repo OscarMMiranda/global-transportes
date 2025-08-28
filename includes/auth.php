@@ -15,10 +15,7 @@ function requireLogin()
     }
 
     if (empty($_SESSION['usuario'])) {
-
-        header("Location: http://www.globaltransportes.com/login");
-
-        // header('Location: ' . BASE_URL . 'sistema/login.php');
+        header("Location: http://www.globaltransportes.com/login.php");
         exit;
     }
 }
@@ -39,7 +36,7 @@ function requireAdmin()
     // Verifica rol
     if (empty($_SESSION['rol_nombre']) || strtolower($_SESSION['rol_nombre']) !== 'admin') {
 
-        header("Location: http://www.globaltransportes.com/login");
+        header("Location: http://www.globaltransportes.com/login.php");
 
         // header('Location: ' . BASE_URL . 'login.php');
         exit;

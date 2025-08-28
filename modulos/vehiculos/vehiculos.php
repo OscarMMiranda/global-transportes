@@ -30,13 +30,14 @@
 ?>
 
 <div class="container mt-4">
-	<h2 class="text-center mb-4">Listado de Vehículos</h2>
-	
+	<h2 class="text-center mb-4">
+    	<i class="fas fa-truck"></i> Listado de Vehículos
+	</h2>
+
 	<div class="d-flex justify-content-end mb-3">
-    	<a href="form_vehiculos.php" 
-			class="btn btn-primary">
-			+ Agregar Nuevo Vehículo
-		</a>
+    	<a href="form_vehiculos.php" class="btn btn-success shadow">
+        	<i class="fas fa-plus-circle"></i> Agregar Nuevo Vehículo
+    	</a>
 	</div>
 
 	<!-- Nav tabs -->
@@ -52,7 +53,7 @@
 				aria-controls="activos"
         		aria-selected="true"
 				>
-        		🟢 Activos
+        		<i class="fas fa-check-circle text-success"></i> Activos
       		</button>
     	</li>
     	<li class="nav-item" role="presentation">
@@ -66,13 +67,13 @@
 				aria-controls="inactivos"
         		aria-selected="false"
 				>
-        		🔘 Inactivos
+        		<i class="fas fa-times-circle text-secondary"></i> Inactivos
       		</button>
     	</li>
 	</ul>
 
 	<!-- Tab panes -->
-	<div class="tab-content">
+	<div class="tab-content" id="tabVehiculosContent">
     	<!-- Activos -->
     	<div 
 			class="tab-pane fade show active" 
@@ -131,14 +132,21 @@
         		<td><?= htmlspecialchars($row['anio']) ?></td>
         		<td><?= htmlspecialchars($row['empresa']) ?></td>
         		<td>
-          			<a href="ver_vehiculo.php?id=<?= $row['id'] ?>"
-             			class="btn btn-info btn-sm">
-					 	👁️ Ver
+          			<a href="ver_vehiculo.php?id=<?= $row['id'] ?>" 
+   						class="btn btn-info btn-sm">
+   						<i class="fas fa-eye"></i>
 					</a>
 
+
+
           			<?php if ($activo): ?>
-            			<a href="editar_vehiculo.php?id=<?= $row['id'] ?>" class="btn btn-warning btn-sm">✏️ Editar</a>
-            			<form 
+						 <!-- Botón Editar -->
+            			<a href="editar_vehiculo.php?id=<?= $row['id'] ?>" 
+       						class="btn btn-warning btn-sm">
+        					<i class="fas fa-edit"></i>
+    					</a>
+	
+						<form 
 							action="eliminar_vehiculo.php" 
 							method="post" 
 							class="d-inline">
@@ -149,7 +157,7 @@
               				<button 
 								class="btn btn-danger btn-sm"
                 	    	  	onclick="return confirm('¿Eliminar este vehículo?')">
-                				🗑️
+                				<i class="fas fa-trash"></i>
               				</button>
             			</form>
 
@@ -165,7 +173,7 @@
               				<button 
 								class="btn btn-success btn-sm"
                 	      		onclick="return confirm('¿Restaurar este vehículo?')">
-                				✅
+                				 <i class="fas fa-undo"></i> 
               				</button>
             			</form>
           			<?php endif; ?>

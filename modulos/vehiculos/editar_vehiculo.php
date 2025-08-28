@@ -66,7 +66,7 @@ $vehiculo = $result->fetch_assoc();
                 <select name="tipo_id" class="form-select">
                     <option value="" disabled>Seleccione un tipo...</option>
                     <?php
-                    $sqlTipos = "SELECT id, nombre FROM tipo_vehiculo ORDER BY nombre ASC";
+                    $sqlTipos = "SELECT id, nombre FROM tipo_vehiculo WHERE fecha_borrado IS NULL ORDER BY nombre ASC";
                     $resultTipos = $conn->query($sqlTipos);
                     while ($tipo = $resultTipos->fetch_assoc()) {
                         $selected = ($tipo['id'] == $vehiculo['tipo_id']) ? "selected" : "";

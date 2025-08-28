@@ -1,17 +1,9 @@
 <?php
 // modelo.php
 
-// Obtiene la conexión mysqli de includes/config.php
-    
-    require_once __DIR__ . '/../../includes/config.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/config.php';
 
-//  Obtener la conexión
-    $conn = getConnection();
-
-
-/**
- * Retorna el ID de un estado según su nombre.
- */
+// 🔍 Estados
 function getEstadoId($conn, $nombre) {
     $sql  = "SELECT id FROM estado_asignacion WHERE nombre = ?";
     $stmt = $conn->prepare($sql);
@@ -24,9 +16,7 @@ function getEstadoId($conn, $nombre) {
     return $res->fetch_assoc()['id'];
 }
 
-/**
- * Trae las asignaciones activas.
- */
+// 🚚 Asignaciones activas
 function getAsignacionesActivas($conn, $estadoId) {
     $sql = "
         SELECT ac.id,
@@ -38,24 +28,18 @@ function getAsignacionesActivas($conn, $estadoId) {
         FROM asignaciones_conductor ac
         JOIN vehiculos vt ON ac.vehiculo_tracto_id = vt.id
         JOIN vehiculos vr ON ac.vehiculo_remolque_id = vr.id
-        JOIN conductores c           ON ac.conductor_id = c.id
-        JOIN estado_asignacion es    ON ac.estado_id = es.id
+        JOIN conductores c ON ac.conductor_id = c.id
+        JOIN estado_asignacion es ON ac.estado_id = es.id
         WHERE ac.estado_id = ?
         ORDER BY ac.fecha_inicio DESC
     ";
     $stmt = $conn->prepare($sql);
-    if (!$stmt) {
-        error_log("Error en prepare (getAsignacionesActivas): " . $conn->error);
-        return false;
-    }
     $stmt->bind_param('i', $estadoId);
     $stmt->execute();
     return $stmt->get_result();
 }
 
-/**
- * Trae el historial de asignaciones finalizadas.
- */
+// 📜 Historial de asignaciones
 function getHistorialAsignaciones($conn, $estadoId) {
     $sql = "
         SELECT ac.id,
@@ -68,72 +52,28 @@ function getHistorialAsignaciones($conn, $estadoId) {
         FROM asignaciones_conductor ac
         JOIN vehiculos vt ON ac.vehiculo_tracto_id = vt.id
         JOIN vehiculos vr ON ac.vehiculo_remolque_id = vr.id
-        JOIN conductores c           ON ac.conductor_id = c.id
-        JOIN estado_asignacion es    ON ac.estado_id = es.id
+        JOIN conductores c ON ac.conductor_id = c.id
+        JOIN estado_asignacion es ON ac.estado_id = es.id
         WHERE ac.estado_id = ?
         ORDER BY ac.fecha_fin DESC
     ";
     $stmt = $conn->prepare($sql);
-    if (!$stmt) {
-        error_log("Error en prepare (getHistorialAsignaciones): " . $conn->error);
-        return false;
-    }
     $stmt->bind_param('i', $estadoId);
     $stmt->execute();
     return $stmt->get_result();
 }
 
-
-/**
- * finalizarAsignacion
- *
- * @param mysqli $conn
- * @param int    $asignacionId
- * @param int    $userId
- * @return bool
- */
-function finalizarAsignacion($conn, $asignacionId, $userId)
-{
-    try {
-        $conn->begin_transaction();
-
-        // 1) Actualizar estado
-        $sql1 = "
-            UPDATE asignaciones_conductor
-            SET estado_id = (
-                SELECT id FROM estado_asignacion
-                WHERE LOWER(nombre) = 'finalizado' LIMIT 1
-            )
-            WHERE id = ?
-        ";
-        $stmt1 = $conn->prepare($sql1);
-        $stmt1->bind_param('i', $asignacionId);
-        $stmt1->execute();
-
-        // 2) Insertar trazabilidad
-        $sql2 = "
-            INSERT INTO asignaciones_historial
-                (asignacion_id, usuario_id, accion, fecha)
-            VALUES (?, ?, 'Finalizado', NOW())
-        ";
-        $stmt2 = $conn->prepare($sql2);
-        $stmt2->bind_param('ii', $asignacionId, $userId);
-        $stmt2->execute();
-
-        $conn->commit();
-        return true;
-
-    } catch (Exception $e) {
-        $conn->rollback();
-        error_log($e->getMessage());
-        return false;
-    }
-}
-
+// ✅ Obtener una asignación por ID (para edición)
 function getAsignacionPorId($conn, $id) {
     $sql = "
-        SELECT ac.*,
-               CONCAT(c.nombres, ' ', c.apellidos) AS conductor,
+        SELECT ac.id,
+               ac.conductor_id,
+               ac.vehiculo_tracto_id,
+               ac.vehiculo_remolque_id,
+               ac.estado_id,
+               ac.fecha_inicio,
+               ac.fecha_fin,
+               CONCAT(c.nombres, ' ', c.apellidos) AS nombre_conductor,
                vt.placa AS tracto_placa,
                vr.placa AS remolque_placa
         FROM asignaciones_conductor ac
@@ -143,13 +83,79 @@ function getAsignacionPorId($conn, $id) {
         WHERE ac.id = ?
     ";
     $stmt = $conn->prepare($sql);
-    if (!$stmt) {
-        error_log("Error en prepare (getAsignacionPorId): " . $conn->error);
-        return false;
-    }
-    $stmt->bind_param('i', $id);
+    $stmt->bind_param("i", $id);
     $stmt->execute();
     return $stmt->get_result()->fetch_assoc();
+}
+
+// 🚛 Vehículos por categoría (1 = tracto, 2 = remolque)
+function getVehiculosPorCategoria($conn, $categoria_id) {
+    $sql = "
+        SELECT v.id, v.placa
+        FROM vehiculos v
+        JOIN tipo_vehiculo tv ON v.tipo_id = tv.id
+        WHERE tv.categoria_id = ?
+          AND v.estado_id = (SELECT id FROM estado_vehiculo WHERE nombre = 'activo')
+        ORDER BY v.placa ASC
+    ";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $categoria_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $vehiculos = array();
+    while ($row = $result->fetch_assoc()) {
+        $vehiculos[] = $row;
+    }
+    return $vehiculos;
+}
+
+// 👤 Lista de conductores
+function getConductores($conn) {
+    $sql = "SELECT id, nombres, apellidos FROM conductores ORDER BY nombres ASC";
+    $result = $conn->query($sql);
+    $lista = array();
+    while ($row = $result->fetch_assoc()) {
+        $lista[] = $row;
+    }
+    return $lista;
+}
+
+// 🛑 Finalizar asignación con trazabilidad
+function finalizarAsignacion($conn, $asignacionId, $userId) {
+    $conn->autocommit(false);
+
+    $sql1 = "
+        UPDATE asignaciones_conductor
+           SET estado_id     = 2,
+               fecha_fin     = NOW(),
+               updated_at    = NOW(),
+               fecha_borrado = NOW(),
+               borrado_por   = ?
+         WHERE id = ?
+    ";
+    $stmt1 = $conn->prepare($sql1);
+    $stmt1->bind_param('ii', $userId, $asignacionId);
+    if (! $stmt1->execute()) {
+        $conn->rollback();
+        return false;
+    }
+    $stmt1->close();
+
+    $sql2 = "
+        INSERT INTO asignaciones_historial
+            (asignacion_id, usuario_id, accion, fecha)
+        VALUES (?, ?, 'Finalizado', NOW())
+    ";
+    $stmt2 = $conn->prepare($sql2);
+    $stmt2->bind_param('ii', $asignacionId, $userId);
+    if (! $stmt2->execute()) {
+        $conn->rollback();
+        return false;
+    }
+    $stmt2->close();
+
+    $conn->commit();
+    return true;
 }
 
 /**

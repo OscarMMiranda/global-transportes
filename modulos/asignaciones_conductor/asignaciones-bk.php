@@ -55,36 +55,64 @@
 	$row_estado_finalizado = $result_estado_finalizado->fetch_assoc();
 	$estado_id_finalizado = $row_estado_finalizado['id'];
 
-	// CONSULTA PARA OBTENER ASIGNACIONES ACTIVAS
-	$sql_activos = "SELECT ac.id, v.placa, v.modelo, c.nombres, c.apellidos, ac.fecha_inicio, es.nombre AS estado
-			FROM asignaciones_conductor ac
-            JOIN vehiculos v ON ac.vehiculo_id = v.id
-            JOIN conductores c ON ac.conductor_id = c.id
-            JOIN estado_asignacion es ON ac.estado_id = es.id
-            WHERE ac.estado_id = ?
-            ORDER BY ac.fecha_inicio DESC";
-	$stmt_activos = $conn->prepare($sql_activos);
-	$stmt_activos->bind_param("i", $estado_id_activo);
-	$stmt_activos->execute();
-	$result_activos = $stmt_activos->get_result();
-	if ($result_activos === false) 
-		{
-    	die("Error en la consulta SQL de asignaciones activas: " . $conn->error);
-		}
+	// 1.1) Asignaciones Activas
+$sql_activos = "
+  SELECT 
+    ac.id,
+    vt.placa   AS tracto_placa,
+    vr.placa   AS remolque_placa,
+    vt.modelo  AS tracto_modelo,
+    vr.modelo  AS remolque_modelo,
+    CONCAT(c.nombres, ' ', c.apellidos) AS conductor,
+    ac.fecha_inicio,
+    es.nombre   AS estado
+  FROM asignaciones_conductor ac
+  JOIN vehiculos vt         ON ac.vehiculo_tracto_id   = vt.id
+  JOIN vehiculos vr         ON ac.vehiculo_remolque_id = vr.id
+  JOIN conductores c        ON ac.conductor_id         = c.id
+  JOIN estado_asignacion es ON ac.estado_id            = es.id
+  WHERE ac.estado_id = ?
+  ORDER BY ac.fecha_inicio DESC
+";
+$stmt_activos = $conn->prepare($sql_activos);
+if (! $stmt_activos) {
+    die("Error al preparar consulta de asignaciones activas: " . $conn->error);
+}
+$stmt_activos->bind_param("i", $estado_id_activo);
+$stmt_activos->execute();
+$result_activos = $stmt_activos->get_result();
 
-	// CONSULTA PARA OBTENER HISTORIAL DE ASIGNACIONES
-	$sql_historial = "SELECT ac.id, v.placa, v.modelo, c.nombres, c.apellidos, ac.fecha_inicio, 
-            COALESCE(ac.fecha_fin, 'En uso') AS fecha_fin, es.nombre AS estado
-            FROM asignaciones_conductor ac
-            JOIN vehiculos v ON ac.vehiculo_id = v.id
-            JOIN conductores c ON ac.conductor_id = c.id
-            JOIN estado_asignacion es ON ac.estado_id = es.id
-            WHERE ac.estado_id = ?
-            ORDER BY ac.fecha_fin DESC";
-	$stmt_historial = $conn->prepare($sql_historial);
-	$stmt_historial->bind_param("i", $estado_id_finalizado);
-	$stmt_historial->execute();
-	$result_historial = $stmt_historial->get_result();
+
+// 1.2) Historial de Asignaciones
+$sql_historial = "
+  SELECT 
+    ac.id,
+    vt.placa   AS tracto_placa,
+    vr.placa   AS remolque_placa,
+    vt.modelo  AS tracto_modelo,
+    vr.modelo  AS remolque_modelo,
+    CONCAT(c.nombres, ' ', c.apellidos) AS conductor,
+    ac.fecha_inicio,
+    COALESCE(ac.fecha_fin, 'En uso') AS fecha_fin,
+    es.nombre   AS estado
+  FROM asignaciones_conductor ac
+  JOIN vehiculos vt         ON ac.vehiculo_tracto_id   = vt.id
+  JOIN vehiculos vr         ON ac.vehiculo_remolque_id = vr.id
+  JOIN conductores c        ON ac.conductor_id         = c.id
+  JOIN estado_asignacion es ON ac.estado_id            = es.id
+  WHERE ac.estado_id = ?
+  ORDER BY ac.fecha_fin DESC
+";
+$stmt_historial = $conn->prepare($sql_historial);
+if (! $stmt_historial) {
+    die("Error al preparar consulta de historial: " . $conn->error);
+}
+$stmt_historial->bind_param("i", $estado_id_finalizado);
+$stmt_historial->execute();
+$result_historial = $stmt_historial->get_result();
+
+
+
 	if ($result_historial === false) 
 		{
     	die("Error en la consulta SQL de historial de asignaciones: " . $conn->error);
@@ -134,22 +162,26 @@
                     	</tr>
                 	</thead>
                 	<tbody>
-                    	<?php while ($asignacion = $result_activos->fetch_assoc()) { ?>
-                        	<tr>
-                            	<td><?= htmlspecialchars($asignacion['placa']) ?></td>
-                            	<td><?= htmlspecialchars($asignacion['modelo']) ?></td>
-                            	<td><?= htmlspecialchars($asignacion['nombres'] . ' ' . $asignacion['apellidos']) ?></td>
-                            	<td><?= htmlspecialchars($asignacion['fecha_inicio']) ?></td>
-                            	<td><?= htmlspecialchars($asignacion['estado']) ?></td>
-                            	<td>
-                                	<!-- Botón que activa el modal de confirmación -->
-                                	<a href="#" data-finalizar-id="<?= $asignacion['id'] ?>" class="btn btn-danger btn-sm btn-finalizar">
-                                	    <i class="fas fa-times-circle"></i> Finalizar
-                                	</a>
-                            	</td>
-                        	</tr>
-                    	<?php } ?>
-                	</tbody>
+  <?php while ($a = $result_activos->fetch_assoc()): ?>
+    <tr>
+      <td>
+        <?= htmlspecialchars($a['tracto_placa'] . ' / ' . $a['remolque_placa']) ?>
+      </td>
+      <td>
+        <?= htmlspecialchars($a['tracto_modelo'] . ' / ' . $a['remolque_modelo']) ?>
+      </td>
+      <td><?= htmlspecialchars($a['conductor']) ?></td>
+      <td><?= htmlspecialchars($a['fecha_inicio']) ?></td>
+      <td><?= htmlspecialchars($a['estado']) ?></td>
+      <td>
+        <button class="btn btn-danger btn-sm btn-finalizar"
+                data-finalizar-id="<?= $a['id'] ?>">
+          <i class="fas fa-times-circle"></i> Finalizar
+        </button>
+      </td>
+    </tr>
+  <?php endwhile; ?>
+</tbody>
             	</table>
         	</div>
     	<?php } else { ?>

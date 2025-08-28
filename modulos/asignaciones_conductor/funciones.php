@@ -17,8 +17,6 @@
     	) 	{
         	setFlash('danger', 'Usuario no autenticado.');
 			header("Location: http://www.globaltransportes.com/login.php");
-
-        	// header('Location: ' . BASE_URL . 'login.php');
         	exit;
     		}
 		}

@@ -19,6 +19,7 @@ if (session_status() === PHP_SESSION_NONE) {
 // 	4. 	Obtener la conexión
 $conn = getConnection();
 
+// $_SESSION['usuario_id'] = $usuario['id'];
 
 //	5.	Generar o recuperar token CSRF
 if (empty($_SESSION['csrf_token'])) {

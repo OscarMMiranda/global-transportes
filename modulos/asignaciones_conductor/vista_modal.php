@@ -4,18 +4,9 @@
     	<div class="modal-content">
       		<div class="modal-header">
         		<h5 class="modal-title">Confirmar Finalización</h5>
-        		<!-- <button
-          			type="button"
-          			class="btn-close"
-          			data-bs-dismiss="modal"
-          			aria-label="Cerrar"
-        		>
-	
-				</button> -->
-
 				<button 
 					type="button" 
-					class="btn btn-light d-flex align-items-center gap-1" 
+  					class="btn btn-outline-secondary d-flex align-items-center gap-1" 
 					data-bs-dismiss="modal" 
 					aria-label="Cerrar"
 				>
@@ -34,7 +25,6 @@
   					<i class="fas fa-times me-2"></i> 
 					Cancelar
 				</button>
-
         		<button
           			type="button"
           			class="btn btn-danger"
@@ -42,25 +32,19 @@
         		>
           			Confirmar
         		</button>
-
-				
       		</div>
     	</div>
-
-		
-
-
   	</div>
 </div>
 
 <!-- Formulario oculto para finalizar asignación -->
-		<form 
-			id="finalizarForm" 
-			method="POST" 
-			action="/asignaciones_conductor/finalizar_asignacion.php"
-			style="display:none;">
-  			<input 
-				type="hidden" 
-				name="asignacion_id" 
-				id="inputAsignacionId">
-		</form>
+<form 
+	id="finalizarForm" 
+	method="POST" 
+	action="/asignaciones_conductor/finalizar_asignacion.php"
+	style="display:none;">
+	<input 
+		type="hidden" 
+		name="asignacion_id" 
+		id="inputAsignacionId">
+</form>

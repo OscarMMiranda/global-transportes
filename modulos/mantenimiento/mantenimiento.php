@@ -233,6 +233,22 @@
   							</article>
 						</div>
 
+						<!-- Lugares -->
+						<div class="col">
+  							<article class="card card-dashboard h-100 shadow-sm">
+    							<div class="card-body d-flex flex-column">
+      								<h3 class="card-title h6">Lugares</h3>
+      								<p class="card-text flex-fill">
+        								Almacenes, depositos, terminales.
+      								</p>
+      								<a href="tipo_mercaderia/index.php" 
+         								class="btn dashboard-btn btn-primary mt-3">
+        									Actualizar
+      								</a>
+    							</div>
+  							</article>
+						</div>
+
 
       				</div>
     			</section>

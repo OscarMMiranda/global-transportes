@@ -26,11 +26,6 @@
 	// 6. Función de redirección (opcional)
 	function redirectToLogin()
 		{
-		header("Location: http://www.globaltransportes.com/login");
-
-		// header("Location: " . BASE_URL . "login.php");
-
-
-    	// header("Location: " . BASE_URL . "login.php");
+		header("Location: http://www.globaltransportes.com/login.php");
     	exit;
 		}

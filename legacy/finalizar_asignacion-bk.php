@@ -18,11 +18,7 @@ if (!isset($_SESSION['usuario']) || !isset($_SESSION['rol_nombre']) || $_SESSION
     if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == "xmlhttprequest") {
         responder_json(false, "Acceso denegado.");
     } else {
-        // header("Location: ../sistema/login.php");
-
         header("Location: http://www.globaltransportes.com/login.php");
-
-        
         exit();
     }
 }

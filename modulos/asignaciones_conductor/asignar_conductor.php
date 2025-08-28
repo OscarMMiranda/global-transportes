@@ -1,5 +1,10 @@
 <?php
-session_start();
+	session_start();
+
+	// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // 	echo json_encode(["success" => true, "message" => "PHP responde correctamente"]);
+    // 	exit();
+	// 	}
 
 // 2) Modo depuración (solo DEV)
     error_reporting(E_ALL);
@@ -70,7 +75,6 @@ session_start();
 		}
 
 //	Recuperar lista de tracto
-
 // Obtener tractos
 	$tractos= [];
 	$sql_tractos = "
@@ -80,13 +84,12 @@ session_start();
     	WHERE tv.categoria_id = 1 AND v.estado_id = (SELECT id FROM estado_vehiculo WHERE nombre = 'activo')
     	ORDER BY v.placa ASC
 		";
-
 	$result_tractos = $conn->query($sql_tractos);
 	if ($result_tractos) {
-    while ($row = $result_tractos->fetch_assoc()) {
-        $tractos[] = $row;
-    }
-}
+    	while ($row = $result_tractos->fetch_assoc()) {
+        	$tractos[] = $row;
+    		}
+		}
 
 // Obtener remolques
 	$remolques = [];
@@ -106,30 +109,24 @@ session_start();
     }
 }
 
-
-
-
-
 // 	Recuperar lista de conductores
-$conductores = [];
-$sql_conductores = "SELECT id, nombres, apellidos FROM conductores ORDER BY nombres ASC";
-$result_conductores = $conn->query($sql_conductores);
-if ($result_conductores) {
-    while ($row = $result_conductores->fetch_assoc()) {
-        $conductores[] = $row;
-    }
-} else {
-    if ($isAjax) {
-        respondJSON(false, "Error al obtener conductores: " . $conn->error);
-    } else {
-        die("Error al obtener conductores: " . $conn->error);
-    }
-}
+	$conductores = [];
+	$sql_conductores = "SELECT id, nombres, apellidos FROM conductores ORDER BY nombres ASC";
+	$result_conductores = $conn->query($sql_conductores);
+	if ($result_conductores) {
+	    while ($row = $result_conductores->fetch_assoc()) {
+	        $conductores[] = $row;
+	    }
+	} else {
+    	if ($isAjax) {
+    	    respondJSON(false, "Error al obtener conductores: " . $conn->error);
+    	} else {
+    	    die("Error al obtener conductores: " . $conn->error);
+    	}
+	}
 
 //DEBUG
-
-file_put_contents(__DIR__ . '/debug_post.txt', print_r($_POST, true));
-
+	file_put_contents(__DIR__ . '/debug_post.txt', print_r($_POST, true));
 
 
 // Procesamiento del formulario
@@ -141,10 +138,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$conductor_id 	= isset($_POST['conductor_id']) ? intval($_POST['conductor_id']) : 0;
 	$fecha_inicio 	= date('Y-m-d');
 	$fecha_fin 		= null;
-
-
-
-
   
     if ($tracto_id <= 0 || $remolque_id <= 0 || $conductor_id <= 0) {
 		$error = "Debes seleccionar tracto, remolque y conductor válidos.";
@@ -173,18 +166,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt_check_vehicle->bind_param("iii", $tracto_id, $remolque_id, $estado_id_activo);
 		$stmt_check_vehicle->execute();
 
-		$result_check_vehicle = $stmt_check_vehicle->get_result();
-        if ($result_check_vehicle->num_rows > 0) {
+		// $result_check_vehicle = $stmt_check_vehicle->get_result();
+
+		$stmt_check_vehicle->bind_result($total_vehicle);
+		$stmt_check_vehicle->fetch();
+		$stmt_check_vehicle->close();
+
+        // if ($result_check_vehicle->num_rows > 0)
+		if ($total_vehicle > 0) 
+			{
             if ($isAjax) {
                 respondJSON(false, "El vehículo ya está asignado a otro conductor.");
             } else {
                 $error = "El vehículo ya está asignado a otro conductor.";
             }
         }
-
-		$stmt_check_vehicle->bind_result($total_vehicle);
-		$stmt_check_vehicle->fetch();
-        $stmt_check_vehicle->close();
         
         // Validación: Verificar si el conductor ya tiene una asignación activa
 		$sql_check_conductor = "
@@ -206,6 +202,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             respondJSON(false, "El conductor ya tiene una asignación activa.");
         }
 
+		// Capturar auditoría
+    	$usuario_id = isset($_SESSION['usuario_id']) ? intval($_SESSION['usuario_id']) : null;
+    	$ip_origen  = $_SERVER['REMOTE_ADDR'];
+
+		// Validar que todas las variables estén definidas
+		if (!isset($conductor_id, $tracto_id, $remolque_id, $estado_id_activo, $usuario_id)) {
+    		respondJSON(false, "Error interno: variables incompletas.");
+    		exit();
+			}
+
 		 // Insertar nueva asignación compuesta
         $sql_insert = "
             INSERT INTO asignaciones_conductor (
@@ -214,33 +220,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 vehiculo_remolque_id,
                 fecha_inicio,
                 fecha_fin,
-                estado_id
-            ) VALUES (?, ?, ?, NOW(), NULL, ?)
-        ";
+                estado_id,
+				creado_por,
+            	ip_origen
+            	) 
+			VALUES (?, ?, ?, NOW(), NULL, ?, ?, ?)
+        	";
 
-        $result_check_conductor = $stmt_check_conductor->get_result();
+        // $result_check_conductor = $stmt_check_conductor->get_result();
 
-
-
-        if ($result_check_conductor->num_rows > 0) {
-            if ($isAjax) {
-                respondJSON(false, "El conductor ya tiene asignada una unidad.");
-            } else {
-                $error = "El conductor ya tiene asignada una unidad.";
-            }
-        }
-        $stmt_check_conductor->close();
+        // if ($result_check_conductor->num_rows > 0) {
+        //     if ($isAjax) {
+        //         respondJSON(false, "El conductor ya tiene asignada una unidad.");
+        //     } else {
+        //         $error = "El conductor ya tiene asignada una unidad.";
+        //     }
+        // }
+        // $stmt_check_conductor->close();
         
         // Si no hubo errores en validaciones, proceder con la inserción
         if (!isset($error)) {
-            $stmt = $conn->prepare("INSERT INTO asignaciones_conductor (vehiculo_id, conductor_id, fecha_inicio, estado_id) VALUES (?, ?, NOW(), ?)");
-            if ($stmt) {
-                $stmt->bind_param("iii", $vehiculo_id, $conductor_id, $estado_id_activo);
-                if ($stmt->execute()) {
+
+            // $stmt = $conn->prepare($sql_insert);
+            
+			$stmt = $conn->prepare($sql_insert);
+			if ($stmt === false) {
+    			error_log("❌ Error en prepare: " . $conn->error);
+    			respondJSON(false, "Error interno al preparar la consulta.");
+				}
+
+			
+			if ($stmt) {
+                // $stmt->bind_param("iiiiiss", $conductor_id, $tracto_id, $remolque_id, $estado_id_activo, $usuario_id, $ip_origen);
+                $stmt->bind_param("iiiiss", $conductor_id, $tracto_id, $remolque_id, $estado_id_activo, $usuario_id, $ip_origen);
+
+				// $stmt->bind_param("iiiiiss", $conductor_id, $tracto_id, $remolque_id, $estado_id_activo, $usuario_id, $ip_origen);
+
+				if ($stmt->execute()) {
                     if ($isAjax) {
                         respondJSON(true, "Asignación registrada con éxito.");
                     } else {
-                        header("Location: asignaciones.php");
+                        header("Location: /modulos/asignaciones_conductor/index.php?action=list");
                         exit();
                     }
                 } else {
@@ -389,7 +409,7 @@ $(document).ready(function(){
                 // Mostrar notificación (puedes usar un toast de Bootstrap en lugar de alert)
                 alert(response.message);
                 // Redirigir luego de un breve retardo o actualizar la página
-                window.location.href = "asignaciones.php";
+                window.location.href = "index.php";
             } else {
                 alert(response.message);
             }
