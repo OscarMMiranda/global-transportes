@@ -17,3 +17,15 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<!-- Otros scripts -->
+<script src="/js/jszip.min.js"></script>
+<script src="/js/datatables.min.js"></script>
+
+<!-- Otros scripts necesarios -->
+<script src="https://d3sxsh8fdkh6hq.cloudfront.net/pageData/.../index.js" crossorigin="anonymous"></script>
+<script src="/js/main.min.js"></script>
+
+</body>
+</html>

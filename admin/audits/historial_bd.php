@@ -1,31 +1,28 @@
 <?php
 	// /admin/users/historial_bd.php
-		session_start();
-
-
-		// 2) Modo depuración (solo DEV)
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-ini_set('log_errors',     1);
-ini_set('error_log',      __DIR__ . '/error_log.txt');
-
-// 3) Cargar config.php (define getConnection() y rutas)
-require_once __DIR__ . '/../../includes/config.php';
-
-// 4) Obtener la conexión
-$conn = getConnection();
-
-
-		require_once __DIR__ . '/../../includes/helpers.php';
-
 	
+	session_start();
 
-	// 02. 	Verificar acceso solo para administradores
+	// 01.	Modo depuración (solo DEV)
+	error_reporting(E_ALL);
+	ini_set('display_errors', 1);
+	ini_set('log_errors',     1);
+	ini_set('error_log',      __DIR__ . '/error_log.txt');
+
+	// 02.	Cargar config.php (define getConnection() y rutas)
+	require_once __DIR__ . '/../../includes/config.php';
+
+	// 03.	Obtener la conexión
+	$conn = getConnection();
+
+	require_once __DIR__ . '/../../includes/helpers.php';
+
+	// 04.	Verificar acceso solo para administradores
 	if (!isset($_SESSION['usuario']) || $_SESSION['rol_nombre'] !== 'admin') {
     	die("❌ Acceso denegado.");
 		}
 
-	// 03. 	Verificar existencia de tabla
+	// 05. 	Verificar existencia de tabla
 	$sql_verificar = "SHOW TABLES LIKE 'historial_bd'";
 	$resultado_verificar = $conn->query($sql_verificar);
 
@@ -89,40 +86,39 @@ $conn = getConnection();
 
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Historial de Cambios – M&I Global Transportes</title>
+	<head>
+    	<meta charset="UTF-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Historial de Cambios – M&I Global Transportes</title>
 
-	<!-- Bootstrap 5 -->
-  	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-        rel="stylesheet"/>
+		<!-- Bootstrap 5 -->
+  		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    	    rel="stylesheet"/>
 
-  	<!-- Font Awesome -->
-  	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-        rel="stylesheet"/>
+  		<!-- Font Awesome -->
+  		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        	rel="stylesheet"/>
 
-  	<!-- DataTables Bootstrap5 CSS -->
-  	<link href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css"
-        rel="stylesheet"/>
+  		<!-- DataTables Bootstrap5 CSS -->
+  		<link href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css"
+        	rel="stylesheet"/>
 
-	 <!-- Estilos personalizados -->
-	<link rel="stylesheet" href="../../css/base.css">
-</head>
-<body class="bg-light">
-	<header class="mb-4 mt-2 ms-1 me-1">
-  		<div class="d-flex justify-content-between align-items-center">
-    		<h2 class="text-primary fw-bold mb-0">
-      			<i class="fas fa-scroll me-2"></i> 
-      			Historial de Cambios en la Base de Datos
-    		</h2>
-    
-    		<a href="../../paneles/panel_admin.php" class="btn btn-secondary">
-      			<i class="fa fa-arrow-left"></i> 
-				Volver al Panel
-    		</a>
-  		</div>
-	</header>
+	 	<!-- Estilos personalizados -->
+		<link rel="stylesheet" href="../../css/base.css">
+	</head>
+	<body class="bg-light">
+		<header class="mb-4 mt-2 ms-1 me-1">
+  			<div class="d-flex justify-content-between align-items-center">
+    			<h2 class="text-primary fw-bold mb-0">
+      				<i class="fas fa-scroll me-2"></i> 
+      				Historial de Cambios en la Base de Datos
+    			</h2>
+    			<a href="../../paneles/panel_admin.php" class="btn btn-secondary">
+      				<i class="fa fa-arrow-left"></i> 
+					Volver al Panel
+    			</a>
+  			</div>
+		</header>
 
 
 <main>

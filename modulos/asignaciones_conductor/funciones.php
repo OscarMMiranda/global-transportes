@@ -67,3 +67,45 @@
 			}
 		return null;
 		}
+
+
+		function registrarHistorialAsignacion($conn, $asignacion_id, $accion, $estado_anterior, $estado_nuevo, $motivo = null) {
+    $usuario_id   = isset($_SESSION['usuario_id']) ? intval($_SESSION['usuario_id']) : null;
+    $rol_usuario  = isset($_SESSION['rol_nombre']) ? $_SESSION['rol_nombre'] : 'desconocido';
+    $ip_origen    = $_SERVER['REMOTE_ADDR'];
+    $fecha        = date('Y-m-d H:i:s');
+
+    $sql = "
+        INSERT INTO asignaciones_historial (
+            asignacion_id,
+            usuario_id,
+            accion,
+            fecha,
+            ip_origen,
+            estado_anterior,
+            estado_nuevo,
+            motivo,
+            rol_usuario
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ";
+
+    $stmt = $conn->prepare($sql);
+    if ($stmt) {
+        $stmt->bind_param(
+            "iisssssss",
+            $asignacion_id,
+            $usuario_id,
+            $accion,
+            $fecha,
+            $ip_origen,
+            $estado_anterior,
+            $estado_nuevo,
+            $motivo,
+            $rol_usuario
+        );
+        $stmt->execute();
+        $stmt->close();
+    } else {
+        error_log("❌ Error al preparar historial: " . $conn->error);
+    }
+}

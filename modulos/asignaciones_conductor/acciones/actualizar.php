@@ -6,7 +6,6 @@ require_once __DIR__ . '/../modelo.php';
 require_once __DIR__ . '/../funciones.php';
 
 validarSesionAdmin();
-
 $conn = getConnection();
 
 // Validar ID desde GET
@@ -61,11 +60,22 @@ if (! $stmt->execute()) {
 $stmt->close();
 
 // Registrar trazabilidad
-$sql2 = "
-    INSERT INTO asignaciones_historial
-        (asignacion_id, usuario_id, accion, fecha)
-    VALUES (?, ?, 'Editado', NOW())
-";
+$estado_anterior = 'activo'; // puedes obtenerlo dinámicamente si lo necesitas
+$estado_nuevo    = 'activo'; // sigue siendo activo tras la edición
+$motivo          = isset($_POST['motivo']) ? trim($_POST['motivo']) : 'Edición de asignación';
+
+registrarHistorialAsignacion(
+    $conn,
+    $id,
+    'Editado',
+    $estado_anterior,
+    $estado_nuevo,
+    $motivo
+);
+
+
+
+
 $stmt2 = $conn->prepare($sql2);
 if ($stmt2) {
     $stmt2->bind_param('ii', $id, $usuario_id);

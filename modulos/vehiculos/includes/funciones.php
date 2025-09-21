@@ -1,55 +1,77 @@
 <?php
-// funciones.php — Utilidades globales
+// modulos/vehiculos/includes/funciones.php
+// Helpers globales para el módulo Vehículos – sin acceso directo a datos
 
-// echo 'funciones.php cargado correctamente';
+// 1) Iniciar sesión si no está activa
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
-// ✅ Validar sesión de usuario admin
+// 2) Validar sesión activa y rol admin
 function validarSesionAdmin() {
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
-    if (!isset($_SESSION['usuario']) || $_SESSION['rol_nombre'] !== 'admin') {
-        header('Location: /login.php');
-        exit;
+
+    if (!isset($_SESSION['usuario']) || !is_array($_SESSION['usuario'])) {
+        error_log("❌ Sesión no iniciada desde IP: " . $_SERVER['REMOTE_ADDR']);
+        header("Location: /login.php");
+        exit();
+    }
+
+    if (!isset($_SESSION['usuario']['rol_nombre']) || 
+        strtolower($_SESSION['usuario']['rol_nombre']) !== 'admin') {
+        error_log("❌ Acceso denegado. Rol incorrecto desde IP: " . $_SERVER['REMOTE_ADDR']);
+        header("Location: /login.php");
+        exit();
     }
 }
 
-// 🧼 Sanitizar texto (compatible con PHP 5.6)
+// 3) Obtener ID del usuario logueado
+function obtenerUsuarioId() {
+    return (isset($_SESSION['usuario']['id']) && is_numeric($_SESSION['usuario']['id']))
+        ? intval($_SESSION['usuario']['id'])
+        : 0;
+}
+
+// 4) Obtener IP del cliente
+function obtenerIP() {
+    return isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '0.0.0.0';
+}
+
+// 5) Sanitizar texto para salida segura en HTML
 function sanitize($texto) {
     return htmlspecialchars(trim($texto), ENT_QUOTES, 'UTF-8');
 }
 
-// 🧾 Registrar acción en historial general
-function registrarEnHistorial($usuario, $accion, $modulo, $ip) {
-    $conn = getConnection();
+// 6) Formatear fecha YYYY-MM-DD a DD/MM/YYYY
+function formatearFecha($fecha) {
+    if (empty($fecha) || $fecha === '0000-00-00') {
+        return '—';
+    }
+    return date('d/m/Y', strtotime($fecha));
+}
+
+// 7) Validar que un ID sea entero positivo
+function validarId($id) {
+    return is_numeric($id) && intval($id) > 0;
+}
+
+// 8) Registrar acción genérica en historial del ERP
+function registrarEnHistorial($conn, $usuario, $accion, $modulo, $ip) {
     $sql = "
         INSERT INTO historial_erp
             (usuario, accion, modulo, ip_origen, fecha)
         VALUES (?, ?, ?, ?, NOW())
     ";
     $stmt = $conn->prepare($sql);
+    if (! $stmt) {
+        error_log("❌ Error al preparar historial: " . $conn->error);
+        return false;
+    }
+
     $stmt->bind_param('ssss', $usuario, $accion, $modulo, $ip);
-    $stmt->execute();
+    $ok = $stmt->execute();
     $stmt->close();
-}
-
-// 🧠 Obtener IP del cliente
-function obtenerIP() {
-    return isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '0.0.0.0';
-}
-
-// 📅 Formatear fecha para visualización
-function formatearFecha($fecha) {
-    if (!$fecha || $fecha === '0000-00-00') return '—';
-    return date('d/m/Y', strtotime($fecha));
-}
-
-// 🔐 Validar que un ID sea entero positivo
-function validarId($id) {
-    return isset($id) && is_numeric($id) && intval($id) > 0;
-}
-
-
-function obtenerUsuarioId() {
-    return isset($_SESSION['usuario_id']) ? intval($_SESSION['usuario_id']) : 0;
+    return $ok;
 }

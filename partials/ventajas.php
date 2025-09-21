@@ -41,18 +41,19 @@
     		<?php foreach ($ventajas as $ventaja): ?>
       		
 			<div class="col-md-6 col-lg-3 mb-4">
-        	<!-- <div class="card h-100 text-center border-0 shadow-sm"> -->
           		<div class="card h-100 text-center shadow-sm p-3">
-
 					<div class="card-body text-center">
+						<i class="<?= $ventaja['icon'] ?> fa-2x mb-3 text-primary" aria-hidden="true"></i>
+            			 <!-- Visible para usuarios -->
+						<h5 class="card-title"><?= $ventaja['titulo'] ?></h5>
 
-            			<i class="<?= $ventaja['icon'] ?> fa-2x mb-3 text-primary"></i>
-            			<h5 class="card-title"><?= $ventaja['titulo'] ?></h5>
-            			<p class="card-text"><?= $ventaja['descripcion'] ?></p>
-						
+						<!-- Solo para lectores de pantalla -->
+            			<span class="visually-hidden"><?= $ventaja['titulo'] ?></span>
+						<p class="card-text"><?= $ventaja['descripcion'] ?></p>
           			</div>
         		</div>
       		</div>
     		<?php endforeach; ?>
   		</div>
 	</div>
+

@@ -2,24 +2,21 @@
   	id="sidebarMenu"
   	role="complementary"
 	aria-labelledby="titulo-menu"
-  	class="sidebar collapse d-md-block bg-light shadow-sm h-100 px-3 py-2 rounded"
+  	class="sidebar bg-light shadow-sm h-100 px-3 py-4 rounded"
   	aria-label="Menú lateral"
 >
   	<section 
-		class=" py-5 px-3 rounded shadow-sm h-100">
-	
-    	<h5 
-			id="titulo-menu"
-			class="text-dark fw-bold fs-5 mb-4"
-		>
-			<i class="fas fa-globe me-2"></i> 
+		class=" py-5 px-3 rounded shadow-sm h-100"
+	>
+    	<h5 id="titulo-menu"
+			class="text-dark fw-bold fs-5 mb-4"	>
+			<i 	class="fas fa-globe me-2"></i> 
 			OPCIONES
 			<!-- 🌐 OPCIONES -->
 		</h5>
     	<ul class="nav flex-column gap-2">
       		<li class="nav-item">
-        		<a
-          			class="nav-link active fw-semibold fs-6 d-flex align-items-center text-dark"
+        		<a	class="nav-link active fw-semibold fs-6 d-flex align-items-center text-dark"
           			href="index.php"
         		>
 					<i class="fas fa-home me-2"></i>

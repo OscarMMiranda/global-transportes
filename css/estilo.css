@@ -189,3 +189,26 @@ footer {
     align-items: center;
   }
 }
+
+
+
+/* Estilo para las tarjetas de Misión, Visión y Valores */
+.card-info {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 1rem;
+}
+
+.card-info:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+.card-title {
+  font-size: 1.3rem;
+  color: #333;
+}
+
+.card-text, .list-unstyled li {
+  font-size: 1rem;
+  color: #555;
+}

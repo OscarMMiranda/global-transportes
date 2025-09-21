@@ -4,6 +4,8 @@
 		<!-- Define la codificación de caracteres -->
   		<meta charset="UTF-8" />
 		
+		<meta name="google-site-verification" content="Vk5hVRxpv-pvJfOLCAdZgt3vpUz6kZSZbBosYvbi7kI" />
+
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 		<?php

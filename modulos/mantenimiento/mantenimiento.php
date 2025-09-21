@@ -130,7 +130,7 @@
           					</article>
         				</div>
 
-						<!-- Categorías de Mercadería -->
+						<!-- Agencias de aduana -->
         				<div class="col">
           					<article class="card card-dashboard h-100 shadow-sm">
             					<div class="card-body d-flex flex-column">
@@ -201,7 +201,7 @@
   							</article>
 						</div>
 
-						<!-- Valores Referenciales -->
+						<!-- Conductores -->
 						<div class="col">
   							<article class="card card-dashboard h-100 shadow-sm">
     							<div class="card-body d-flex flex-column">
@@ -217,15 +217,15 @@
   							</article>
 						</div>
 
-						<!-- Valores Referenciales -->
+						<!-- Tipo de lugar -->
 						<div class="col">
   							<article class="card card-dashboard h-100 shadow-sm">
     							<div class="card-body d-flex flex-column">
-      								<h3 class="card-title h6">🧍 T D M</h3>
+      								<h3 class="card-title h6">Tipo de lugar</h3>
       								<p class="card-text flex-fill">
-        								Administración TDM.
+        								Tipos de lugares.
       								</p>
-      								<a href="tipo_mercaderia/index.php" 
+      								<a href="tipo_lugares/index.php" 
          								class="btn dashboard-btn btn-primary mt-3">
         									Actualizar
       								</a>
@@ -233,15 +233,15 @@
   							</article>
 						</div>
 
-						<!-- Lugares -->
+						<!-- Entidades -->
 						<div class="col">
   							<article class="card card-dashboard h-100 shadow-sm">
     							<div class="card-body d-flex flex-column">
-      								<h3 class="card-title h6">Lugares</h3>
+      								<h3 class="card-title h6">Entidades</h3>
       								<p class="card-text flex-fill">
         								Almacenes, depositos, terminales.
       								</p>
-      								<a href="tipo_mercaderia/index.php" 
+      								<a href="entidades/index.php" 
          								class="btn dashboard-btn btn-primary mt-3">
         									Actualizar
       								</a>

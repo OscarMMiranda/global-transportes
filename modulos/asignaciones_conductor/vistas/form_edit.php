@@ -34,9 +34,9 @@ if (!isset($asignacion)) {
       <select name="vehiculo_tracto_id" id="vehiculo_tracto_id" class="form-select" required>
         <option value="">Seleccione un tracto</option>
         <?php foreach ($tractos as $t): ?>
-          <option value="<?= $t['id'] ?>" <?= $t['id'] == $asignacion['vehiculo_tracto_id'] ? 'selected' : '' ?>>
-            <?= htmlspecialchars($t['placa']) ?>
-          </option>
+          <option value="<?= $t['id'] ?>" <?= $t['id'] == $asignacion['vehiculo_tracto_id'] ? 'selected' : '' ?> <?= $t['ocupado'] && $t['id'] != $asignacion['vehiculo_tracto_id'] ? 'disabled' : '' ?>>
+  <?= htmlspecialchars($t['placa']) ?> <?= $t['ocupado'] && $t['id'] != $asignacion['vehiculo_tracto_id'] ? '(Asignado)' : '' ?>
+</option>
         <?php endforeach; ?>
       </select>
       <div class="invalid-feedback">Seleccione un tracto válido.</div>
@@ -48,9 +48,12 @@ if (!isset($asignacion)) {
       <select name="vehiculo_remolque_id" id="vehiculo_remolque_id" class="form-select" required>
         <option value="">Seleccione un remolque</option>
         <?php foreach ($remolques as $r): ?>
-          <option value="<?= $r['id'] ?>" <?= $r['id'] == $asignacion['vehiculo_remolque_id'] ? 'selected' : '' ?>>
-            <?= htmlspecialchars($r['placa']) ?>
-          </option>
+          <option value="<?= $r['id'] ?>"
+  <?= ($r['id'] == $asignacion['vehiculo_remolque_id']) ? 'selected' : '' ?>
+  <?= (isset($r['ocupado']) && $r['ocupado'] == 1 && $r['id'] != $asignacion['vehiculo_remolque_id']) ? 'disabled' : '' ?>>
+  <?= htmlspecialchars($r['placa']) ?>
+  <?= (isset($r['ocupado']) && $r['ocupado'] == 1 && $r['id'] != $asignacion['vehiculo_remolque_id']) ? '(Asignado)' : '' ?>
+</option>
         <?php endforeach; ?>
       </select>
       <div class="invalid-feedback">Seleccione un remolque válido.</div>
@@ -62,13 +65,36 @@ if (!isset($asignacion)) {
       <select name="conductor_id" id="conductor_id" class="form-select" required>
         <option value="">Seleccione un conductor</option>
         <?php foreach ($conductores as $c): ?>
-          <option value="<?= $c['id'] ?>" <?= $c['id'] == $asignacion['conductor_id'] ? 'selected' : '' ?>>
-            <?= htmlspecialchars($c['nombres'] . ' ' . $c['apellidos']) ?>
-          </option>
+          <option value="<?= $c['id'] ?>"
+  <?= ($c['id'] == $asignacion['conductor_id']) ? 'selected' : '' ?>
+  <?= (isset($c['ocupado']) && $c['ocupado'] == 1 && $c['id'] != $asignacion['conductor_id']) ? 'disabled' : '' ?>>
+  <?= htmlspecialchars($c['nombres'] . ' ' . $c['apellidos']) ?>
+  <?= (isset($c['ocupado']) && $c['ocupado'] == 1 && $c['id'] != $asignacion['conductor_id']) ? '(Asignado)' : '' ?>
+</option>
         <?php endforeach; ?>
+
+        <?php
+    $ids_renderizados = array_map(function($c) { return $c['id']; }, $conductores);
+
+if (!in_array($asignacion['conductor_id'], $ids_renderizados)):
+  // Si el conductor actual no está en la lista (por estar inactivo), lo mostramos manualmente
+$nombre = isset($asignacion['conductor_nombre']) ? htmlspecialchars($asignacion['conductor_nombre']) : 'Conductor inactivo';?>
+  <option value="<?= $asignacion['conductor_id'] ?>" selected disabled>
+    <?= $nombre ?> (Inactivo)
+  </option>
+<?php endif; ?>
+
+
       </select>
       <div class="invalid-feedback">Seleccione un conductor válido.</div>
     </div>
+
+
+	<div class="mb-3">
+  <label for="motivo" class="form-label">Motivo del cambio</label>
+  <textarea name="motivo" id="motivo" class="form-control" rows="2" required></textarea>
+</div>
+
 
     <button type="submit" class="btn btn-primary">
       <i class="fas fa-save me-1"></i> Guardar Cambios

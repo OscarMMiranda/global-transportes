@@ -75,15 +75,22 @@
 		}
 
 //	Recuperar lista de tracto
-// Obtener tractos
 	$tractos= [];
 	$sql_tractos = "
-    	SELECT v.id, v.placa
-    	FROM vehiculos v
-    	JOIN tipo_vehiculo tv ON v.tipo_id = tv.id
-    	WHERE tv.categoria_id = 1 AND v.estado_id = (SELECT id FROM estado_vehiculo WHERE nombre = 'activo')
-    	ORDER BY v.placa ASC
-		";
+    SELECT v.id, v.placa,
+        CASE 
+            WHEN EXISTS (
+                SELECT 1 FROM asignaciones_conductor ac
+                WHERE ac.vehiculo_tracto_id = v.id AND ac.estado_id = $estado_id_activo
+            ) THEN 1
+            ELSE 0
+        END AS ocupado
+    FROM vehiculos v
+    JOIN tipo_vehiculo tv ON v.tipo_id = tv.id
+    WHERE tv.categoria_id = 1
+      AND v.estado_id = (SELECT id FROM estado_vehiculo WHERE nombre = 'activo')
+    ORDER BY v.placa ASC
+";
 	$result_tractos = $conn->query($sql_tractos);
 	if ($result_tractos) {
     	while ($row = $result_tractos->fetch_assoc()) {
@@ -94,10 +101,16 @@
 // Obtener remolques
 	$remolques = [];
 	$sql_remolques = "
-    	SELECT v.id, v.placa
+    	SELECT v.id, v.placa,
+        CASE 
+            WHEN v.id IN (
+                SELECT vehiculo_remolque_id FROM asignaciones_conductor WHERE estado_id = $estado_id_activo
+            	) THEN 1
+            ELSE 0
+        	END AS ocupado
     	FROM vehiculos v
     	JOIN tipo_vehiculo tv ON v.tipo_id = tv.id
-    	WHERE tv.categoria_id = 2 AND v.estado_id = (SELECT id FROM estado_vehiculo WHERE nombre = 'activo')
+    	WHERE tv.categoria_id = 2
     	ORDER BY v.placa ASC
 		";
 
@@ -111,7 +124,19 @@
 
 // 	Recuperar lista de conductores
 	$conductores = [];
-	$sql_conductores = "SELECT id, nombres, apellidos FROM conductores ORDER BY nombres ASC";
+	$sql_conductores = "
+    SELECT c.id, c.nombres, c.apellidos,
+        CASE 
+            WHEN EXISTS (
+                SELECT 1 FROM asignaciones_conductor ac
+                WHERE ac.conductor_id = c.id AND ac.estado_id = $estado_id_activo
+            ) THEN 1
+            ELSE 0
+        END AS ocupado
+    FROM conductores c
+    WHERE c.activo = 1
+    ORDER BY c.nombres ASC
+";
 	$result_conductores = $conn->query($sql_conductores);
 	if ($result_conductores) {
 	    while ($row = $result_conductores->fetch_assoc()) {
@@ -323,9 +348,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     	<select name="vehiculo_tracto_id" id="vehiculo_tracto_id" class="form-select" required>
     	    <option value="">Seleccione un tracto</option>
         	<?php foreach ($tractos as $tracto): ?>
-            	<option value="<?= $tracto['id'] ?>">
-                	<?= htmlspecialchars($tracto['placa']) ?>
-            	</option>
+            	<option value="<?= $tracto['id'] ?>" <?= $tracto['ocupado'] ? 'disabled' : '' ?>>
+        			<?= htmlspecialchars($tracto['placa']) ?> <?= $tracto['ocupado'] ? '(Asignado)' : '' ?>
+    			</option>
         	<?php endforeach; ?>
     	</select>
     	<div class="invalid-feedback">Por favor, seleccione un tracto.</div>
@@ -337,9 +362,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     	<select name="vehiculo_remolque_id" id="vehiculo_remolque_id" class="form-select" required>
 			<option value="">Seleccione un remolque</option>
         	<?php foreach ($remolques as $remolque): ?>
-            <option value="<?= $remolque['id'] ?>">
-                	<?= htmlspecialchars($remolque['placa']) ?>
-            </option>
+            <option value="<?= $remolque['id'] ?>" <?= $remolque['ocupado'] ? 'disabled' : '' ?>>
+        <?= htmlspecialchars($remolque['placa']) ?> <?= $remolque['ocupado'] ? '(Asignado)' : '' ?>
+    </option>
         	<?php endforeach; ?>
     	</select>
     	<div class="invalid-feedback">Por favor, seleccione un remolque.</div>
@@ -350,9 +375,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <select name="conductor_id" id="conductor_id" class="form-select" required>
             <option value="">Seleccione un conductor</option>
             <?php foreach ($conductores as $conductor): ?>
-            <option value="<?= $conductor['id'] ?>">
-                <?= htmlspecialchars($conductor['nombres'] . ' ' . $conductor['apellidos']) ?>
-            </option>
+            <option value="<?= $conductor['id'] ?>" <?= $conductor['ocupado'] ? 'disabled' : '' ?>>
+        <?= htmlspecialchars($conductor['nombres'] . ' ' . $conductor['apellidos']) ?> <?= $conductor['ocupado'] ? '(Asignado)' : '' ?>
+    </option>
             <?php endforeach; ?>
         </select>
         <div class="invalid-feedback">

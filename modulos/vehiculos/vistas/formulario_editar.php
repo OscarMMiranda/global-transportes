@@ -1,25 +1,10 @@
 <?php
 // formulario_editar.php — Formulario para editar un vehículo existente
+
+require_once __DIR__ . '/../layout/header_vehiculos.php';
+
 ?>
 
-<head>
-	<meta charset="UTF-8">
-	<title>Listado de Vehículos</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	<!-- Bootstrap CSS -->
-  	<link 
-    	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" 
-    	rel="stylesheet">
-  	<!-- FontAwesome -->
-  	<link 
-    	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
-    	rel="stylesheet">
-  	<!-- DataTables CSS -->
-  	<link 
-    	rel="stylesheet" 
-    	href="https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css">
-</head>
 
 <div class="container mt-4">
   	<div class="card shadow-sm">
@@ -30,7 +15,9 @@
 
 		<div class="card-body">
       		<form action="index.php?action=update&id=<?= $vehiculo['id'] ?>" method="POST" class="needs-validation" novalidate>
-        		<div class="row g-3">
+        		<input type="hidden" name="id" value="<?= $vehiculo['id'] ?>">
+
+				<div class="row g-3">
           	
 					<!-- Placa -->
           			<div class="col-md-4">
@@ -38,7 +25,8 @@
             	  			<i class="fas fa-id-card-alt text-secondary me-1"></i> Placa
             			</label>
             			<input type="text" name="placa" id="placa" value="<?= htmlspecialchars($vehiculo['placa']) ?>" class="form-control" required>
-          			</div>
+						<div class="invalid-feedback">Ingrese la placa.</div>
+					</div>
 
           			<!-- Modelo -->
           			<div class="col-md-4">
@@ -46,7 +34,8 @@
             	  			<i class="fas fa-car-side text-secondary me-1"></i> Modelo
             			</label>
             			<input type="text" name="modelo" id="modelo" value="<?= htmlspecialchars($vehiculo['modelo']) ?>" class="form-control" required>
-          			</div>
+						<div class="invalid-feedback">Ingrese el modelo.</div>
+					</div>
 
           			<!-- Año -->
           			<div class="col-md-4">
@@ -54,24 +43,26 @@
             	  			<i class="fas fa-calendar-alt text-secondary me-1"></i> Año
             			</label>
             			<input type="number" name="anio" id="anio" value="<?= intval($vehiculo['anio']) ?>" class="form-control" min="1990" max="2099" required>
-          			</div>
+						<div class="invalid-feedback">Ingrese un año válido.</div>
+					</div>
 
           			<!-- Tipo -->
           			<div class="col-md-4">
             			<label for="tipo_id" class="form-label">
             	  			<i class="fas fa-truck-moving text-secondary me-1"></i> Tipo de Vehículo
             			</label>
-            			<select name="tipo_id" class="form-select">
-                    <option value="" disabled>Seleccione un tipo...</option>
-                    <?php
-                    $sqlTipos = "SELECT id, nombre FROM tipo_vehiculo WHERE fecha_borrado IS NULL ORDER BY nombre ASC";
-                    $resultTipos = $conn->query($sqlTipos);
-                    while ($tipo = $resultTipos->fetch_assoc()) {
-                        $selected = ($tipo['id'] == $vehiculo['tipo_id']) ? "selected" : "";
-                        echo "<option value='{$tipo['id']}' {$selected}>{$tipo['nombre']}</option>";
-                    }
-                    ?>
-                </select>
+            			<select name="tipo_id" id="tipo_id" class="form-select" required>
+                    		<option value="" disabled>Seleccione un tipo...</option>
+                    		<?php
+                    			$sqlTipos = "SELECT id, nombre FROM tipo_vehiculo WHERE fecha_borrado IS NULL ORDER BY nombre ASC";
+                    			$resultTipos = $conn->query($sqlTipos);
+                    			while ($tipo = $resultTipos->fetch_assoc()) {
+                        			$selected = ($tipo['id'] == $vehiculo['tipo_id']) ? "selected" : "";
+                        			echo "<option value='{$tipo['id']}' {$selected}>{$tipo['nombre']}</option>";
+                    				}
+                    		?>
+                		</select>
+						<div class="invalid-feedback">Seleccione un tipo.</div>
           			</div>
 
           			<!-- Marca -->
@@ -79,7 +70,7 @@
             			<label for="marca_id" class="form-label">
             	  			<i class="fas fa-industry text-secondary me-1"></i> Marca
             			</label>
-            			<select name="marca_id" class="form-select">
+            			<select name="marca_id" id="marca_id" class="form-select">
                     		<option value="" disabled>Seleccione una marca...</option>
                     		<?php
                     			$sqlMarcas = "SELECT id, nombre FROM marca_vehiculo ORDER BY nombre ASC";
@@ -90,6 +81,7 @@
                     			}
                     		?>
                 		</select>
+						<div class="invalid-feedback">Seleccione una marca.</div>
           			</div>
 
           			<!-- Empresa -->
@@ -97,7 +89,7 @@
             			<label for="empresa_id" class="form-label">
             	  			<i class="fas fa-building text-secondary me-1"></i> Empresa
             			</label>
-            			<select name="empresa_id" class="form-select">
+            			<select name="empresa_id" id="empresa_id"  class="form-select">
                     		<option value="" disabled>Seleccione una empresa...</option>
                     		<?php
                     			$sqlEmpresas = "SELECT id, razon_social FROM empresa ORDER BY razon_social ASC";
@@ -108,7 +100,29 @@
                     				}
                     		?>
                 		</select>
+						<div class="invalid-feedback">Seleccione una empresa.</div>
           			</div>
+
+					<!-- Estado Operativo -->
+         			<div class="mb-3">
+            			<label for="estado_id" class="form-label">
+							<i class="fas fa-traffic-light"></i> Estado del Vehículo
+						</label>
+            			<select name="estado_id" id="estado_id" class="form-select" required>
+               				<option value="" disabled <?= !$editando ? 'selected' : '' ?>>
+              					Seleccione un estado...
+            				</option>
+							<?php
+                				$sqlEstados = "SELECT id, nombre FROM estado_vehiculo ORDER BY nombre ASC";
+								$resultEstados = $conn->query($sqlEstados);
+              					while ($estado = $resultEstados->fetch_assoc()) {
+                					$selected = ($estado['id'] == $vehiculo['estado_id']) ? "selected" : "";
+                					echo "<option value='{$estado['id']}' {$selected}>{$estado['nombre']}</option>";
+              					}
+                			?>
+            			</select>
+						<div class="invalid-feedback">Seleccione un estado.</div>
+         			</div>
 
           			<!-- Observaciones -->
           			<div class="col-md-12">

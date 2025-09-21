@@ -1,16 +1,11 @@
 <?php
 	
-	require_once 'conexion.php';	// Verifica si la conexión está establecida
-	// require_once 'helpers.php';    	// donde está registrarActividad()
-	
+	require_once 'conexion.php';
 
-
-// Solo iniciar si no hay sesión activa
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
-
+	// Solo iniciar si no hay sesión activa
+	if (session_status() === PHP_SESSION_NONE) {
+    	session_start();
+		}
 
 	/**
 	 * Obtener la lista de vehículos desde la base de datos.
@@ -32,21 +27,20 @@ if (session_status() === PHP_SESSION_NONE) {
         		e.razon_social AS empresa,
         		ev.nombre   AS estado_operativo,
 				v.activo 
-      			FROM vehiculos v
-      			JOIN marca_vehiculo m ON v.marca_id = m.id
-      			JOIN tipo_vehiculo  t ON v.tipo_id  = t.id
-      			JOIN empresa        e ON v.empresa_id = e.id
-      			JOIN estado_vehiculo ev ON v.estado_id = ev.id
-      			WHERE v.activo = $activo
-      			ORDER BY v.placa
-    			";
+      		FROM vehiculos v
+      		JOIN marca_vehiculo m ON v.marca_id = m.id
+      		JOIN tipo_vehiculo  t ON v.tipo_id  = t.id
+      		JOIN empresa        e ON v.empresa_id = e.id
+      		JOIN estado_vehiculo ev ON v.estado_id = ev.id
+      		WHERE v.activo = $activo
+      		ORDER BY v.placa
+    		";
     	
 		$result = $conn->query($sql);
     	if (!$result) {
         	die("Error en obtenerVehiculos: " . $conn->error);
     		}
     	return $result;
-
 		}
 
 	/**
@@ -188,18 +182,17 @@ if (session_status() === PHP_SESSION_NONE) {
  	* @param string $ip Dirección IP del usuario
  	* @return bool Éxito o fallo del registro
  	*/
-	function registrarEnHistorial($usuario, $accion, $tabla_afectada = null, $ip) {
-    	global $conn;
-
-    	$sql = "INSERT INTO historial_bd (usuario, accion, tabla_afectada, ip_usuario) VALUES (?, ?, ?, ?)";
-    	$stmt = $conn->prepare($sql);
-    	if (!$stmt) {
-    	    error_log("❌ Error al preparar el insert en historial: " . $conn->error);
-        	return false;
-    		}
-    	$stmt->bind_param("ssss", $usuario, $accion, $tabla_afectada, $ip);
-    	return $stmt->execute();
-	}
+	
+	function registrarEnHistorial($conn, $usuario, $accion, $modulo, $ip) {
+    $sql = "INSERT INTO historial_bd (usuario, accion, tabla_afectada, ip_usuario) VALUES (?, ?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    if (! $stmt) {
+        error_log("❌ Error al preparar historial: " . $conn->error);
+        return false;
+    }
+    $stmt->bind_param("ssss", $usuario, $accion, $modulo, $ip);
+    return $stmt->execute();
+}
 
 	function restaurarVehiculo($conn, $id) {
     $sql = "UPDATE vehiculos SET activo = 1 WHERE id = ?";
@@ -254,9 +247,14 @@ function verificarAdmin() {
     }
 }
 
-
-
-
-
+/**
+ * Obtener la IP del cliente actual
+ * @return string Dirección IP
+ */
+function obtenerIP() {
+    return isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '0.0.0.0';
+}
 
 ?>
+
+

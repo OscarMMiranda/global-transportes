@@ -39,7 +39,7 @@
                         <!-- Ver -->
                         <a href="index.php?action=view&id=<?= $row['id'] ?>"
                         	class="btn btn-info btn-sm">
-                        	<i class="fas fa-eye"></i>
+                        	<i class="fas fa-eye"></i> Ver
                         </a>
 
                         <!-- Editar -->
@@ -49,13 +49,10 @@
 						</a>
 
                         <!-- Eliminar -->
-                        <form action="index.php?action=delete" method="post" class="d-inline">
-                            <input type="hidden" name="id" value="<?= $row['id'] ?>">
-                            <button type="submit" class="btn btn-danger btn-sm"
-                              onclick="return confirm('¿Eliminar este vehículo?')">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </form>
+                        <a href="vistas/formulario_eliminar.php?id=<?= $row['id'] ?>" 
+   class="btn btn-danger btn-sm">
+    <i class="fas fa-trash"></i> Eliminar
+</a>
                     </td>
                 </tr>
             <?php endwhile; ?>

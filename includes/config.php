@@ -1,5 +1,5 @@
 <?php
-	// includes/config.php
+	// archivo	:	/includes/config.php
 
 	// 1. Errores en pantalla (solo DEV)
 	ini_set('display_errors',         '1');
@@ -16,6 +16,10 @@
 	define('INCLUDES_PATH', BASE_PATH . '/includes');
 	define('PUBLIC_PATH',   BASE_PATH . '/public_html');
 	define('BASE_URL',      '/');
+
+
+	// includes/config.php
+	// define('BASE_URL', 'https://www.globaltransportes.com');
 
 	// 4. Zona horaria
 	date_default_timezone_set('America/Lima');

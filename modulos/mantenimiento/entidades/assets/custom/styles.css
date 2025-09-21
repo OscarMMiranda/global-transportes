@@ -1,0 +1,84 @@
+/* === Paneles y encabezados === */
+.panel-heading {
+  background-color: #337ab7;
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 10px 15px;
+}
+
+.panel-info {
+  border-color: #bce8f1;
+}
+
+/* === Botones contextuales === */
+.btn-xs {
+  padding: 3px 8px;
+  font-size: 12px;
+}
+
+.btn-info {
+  background-color: #5bc0de;
+  border-color: #46b8da;
+  color: #fff;
+}
+
+.btn-default {
+  background-color: #f5f5f5;
+  border-color: #ccc;
+  color: #333;
+}
+
+/* === Tablas limpias === */
+.table-bordered th {
+  background-color: #337ab7;
+  color: #fff;
+  font-weight: bold;
+}
+
+.table-striped > tbody > tr:nth-child(odd) {
+  background-color: #f7f7f7;
+}
+
+/* === Formularios modales === */
+.modal-header {
+  background-color: #337ab7;
+  color: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+.modal-footer {
+  background-color: #f5f5f5;
+  border-top: 1px solid #ddd;
+}
+
+/* === Estados visuales === */
+.estado-activo {
+  color: #3c763d;
+  font-weight: bold;
+}
+
+.estado-inactivo {
+  color: #a94442;
+  font-weight: bold;
+}
+
+/* === Íconos FontAwesome === */
+.fa {
+  margin-right: 5px;
+}
+
+/* === Pestañas === */
+.nav-tabs > li.active > a {
+  background-color: #eee;
+  font-weight: bold;
+}
+
+/* === Espaciado general === */
+.mt-20 {
+  margin-top: 20px;
+}
+
+.mb-10 {
+  margin-bottom: 10px;
+}

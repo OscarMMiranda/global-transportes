@@ -1,19 +1,17 @@
 <?php
-// public_html/modulos/clientes/models/Cliente.php
+	// public_html/modulos/clientes/models/Cliente.php
 
-class Cliente
-{
-    /** @var mysqli Conexión activa */
-    protected static $conn;
+	class Cliente
+	{
+    	/** @var mysqli Conexión activa */
+    	protected static $conn;
 
     /**
      * Inicializa la conexión (llámalo en el controller)
      * @param mysqli $mysqli
      */
     public static function init($mysqli)
-    	{
-        self::$conn = $mysqli;
-    	}
+    	{self::$conn = $mysqli;}
 
     /**
      * Devuelve todos los clientes activos, con nombres de ubigeo.
@@ -326,5 +324,25 @@ class Cliente
     	return $ok;
 		}
 
+
+
+	public static function whereEstado($estado) {
+		global $conn;
+    	$sql = "SELECT * FROM clientes WHERE estado = ?";
+    	$stmt = $conn->prepare($sql);
+    	$stmt->bind_param("s", $estado);
+    	$stmt->execute();
+    	$result = $stmt->get_result();
+    	$clientes = [];
+    	while ($row = $result->fetch_assoc()) {
+        	$clientes[] = $row;
+    		}
+    	$stmt->close();
+    	return $clientes;
+		}
+
 }
+
+
+
 

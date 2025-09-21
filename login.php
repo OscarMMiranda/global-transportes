@@ -88,6 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['login_time']   = date('Y-m-d H:i:s');
                 $_SESSION['ip_origen']    = $_SERVER['REMOTE_ADDR'];
 
+                $_SESSION['nombre_completo'] = $fila['usuario'] . ' ' . $fila['apellido'];
 
                 // 7.6 Redireccionar según rol
                 switch ($fila['rol_nombre']) {

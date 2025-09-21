@@ -27,14 +27,22 @@
 	Cliente::init($conn);
 
 	// ─── 4) Recuperar datos ───────────────────────────────────────────────────
+	$estado = isset($_GET['estado']) ? $_GET['estado'] : 'todos';
+
 	try {
-    	$clientes = Cliente::all();
-		} 
-	catch (Exception $e) {
-    	error_log("ListController error: " . $e->getMessage());
-    	$clientes = [];
-    	$errorMsg = "No se pudieron cargar los clientes.";
-		}
+    	if ($estado === 'Activo') {
+        	$clientes = Cliente::whereEstado('Activo');
+    	} elseif ($estado === 'Inactivo') {
+        	$clientes = Cliente::whereEstado('Inactivo');
+    	} else {
+        	$clientes = Cliente::all();
+    		}
+		} catch (Exception $e) {
+    error_log("ListController error: " . $e->getMessage());
+    $clientes = [];
+    $errorMsg = "No se pudieron cargar los clientes.";
+	}
+	
 
 	// ─── 4.1) Capturar mensaje de operación (opcional) ─────────────────────────
 	$msg = isset($_GET['msg']) ? $_GET['msg'] : '';

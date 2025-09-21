@@ -1,5 +1,6 @@
 <?php
 // Iniciar salida en buffer para controlar cabeceras y limpiar la salida previa
+// archivo registrar_vehiculo.php
 ob_start();
 require_once '../../includes/conexion.php';
 session_start();
@@ -84,6 +85,29 @@ $usuarioId = isset($_SESSION['usuario']['id']) ? (int)$_SESSION['usuario']['id']
 		);
 
 if ($stmt->execute()) {
+
+
+    // Subir fotos si existen
+    if (!empty($_FILES['fotos']['tmp_name'][0])) {
+        foreach ($_FILES['fotos']['tmp_name'] as $i => $tmp) {
+            if ($_FILES['fotos']['error'][$i] === UPLOAD_ERR_OK) {
+                $nombre = basename($_FILES['fotos']['name'][$i]);
+                $destino_relativo = '/uploads/vehiculos/' . time() . '_' . $nombre;
+                $destino_absoluto = $_SERVER['DOCUMENT_ROOT'] . $destino_relativo;
+
+                if (move_uploaded_file($tmp, $destino_absoluto)) {
+                    $sqlFoto = "INSERT INTO vehiculo_fotos (id_vehiculo, ruta_archivo, creado_por) VALUES (?, ?, ?)";
+                    $stmtFoto = $conn->prepare($sqlFoto);
+                    $stmtFoto->bind_param("isi", $id_vehiculo, $destino_relativo, $usuarioId);
+                    $stmtFoto->execute();
+                }
+            }
+        }
+    }
+
+
+
+
     $respuesta = [
         'success' => true,
         'message' => "✅ Registro exitoso en la base de datos."

@@ -1,6 +1,5 @@
 <?php
 
-
 // 2) Modo depuración (solo DEV)
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -12,7 +11,6 @@ require_once __DIR__ . '/../../includes/config.php';
 
 // 4) Obtener la conexión
 $conn = getConnection();
-
 
 require_once '../../includes/header_erp.php';
 
@@ -35,6 +33,17 @@ if ($result->num_rows === 0) {
 }
 
 $vehiculo = $result->fetch_assoc();
+
+$fotos = [];
+$sqlFotos = "SELECT id_foto, ruta_archivo, descripcion FROM vehiculo_fotos WHERE id_vehiculo = ?";
+$stmtFotos = $conn->prepare($sqlFotos);
+$stmtFotos->bind_param("i", $vehiculo_id);
+$stmtFotos->execute();
+$resFotos = $stmtFotos->get_result();
+if ($resFotos && $resFotos->num_rows > 0) {
+    $fotos = $resFotos->fetch_all(MYSQLI_ASSOC);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -53,7 +62,11 @@ $vehiculo = $result->fetch_assoc();
     <div class="container mt-4">
         <h2 class="text-center mb-4">Editar Vehículo: <?= htmlspecialchars($vehiculo['placa']) ?></h2>
 
-        <form action="procesar_edicion.php" method="POST">
+        <form 
+            action="procesar_edicion.php" 
+            method="POST"
+            enctype="multipart/form-data"
+        >
             <input type="hidden" name="id" value="<?= $vehiculo['id'] ?>">
 
             <div class="mb-3">
@@ -76,7 +89,7 @@ $vehiculo = $result->fetch_assoc();
                 </select>
             </div>
 
-            <div class="mb-3">
+            <div class\="mb-3">
                 <label class="form-label">Marca:</label>
                 <select name="marca_id" class="form-select">
                     <option value="" disabled>Seleccione una marca...</option>
@@ -134,6 +147,28 @@ $vehiculo = $result->fetch_assoc();
                 <label class="form-label">Observaciones:</label>
                 <textarea name="observaciones" class="form-control"><?= htmlspecialchars($vehiculo['observaciones']) ?></textarea>
             </div>
+
+			<?php if (!empty($fotos)): ?>
+    <div class="mb-3">
+        <label class="form-label">Fotos actuales</label>
+        <div class="row">
+            <?php foreach ($fotos as $foto): ?>
+                <div class="col-md-3 mb-3 text-center">
+                    <img src="<?= htmlspecialchars($foto['ruta_archivo']) ?>" class="img-thumbnail mb-2" width="150">
+                    <div>
+                        <input type="checkbox" name="eliminar_fotos[]" value="<?= $foto['id_foto'] ?>">
+                        <label class="small text-muted">Eliminar</label>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+<?php endif; ?>
+
+            <div class="mb-3">
+        		<label for="fotos" class="form-label">Fotos del vehículo</label>
+    			<input type="file" name="fotos[]" id="fotos" class="form-control" multiple accept="image/*">
+			</div>
 
             <button type="submit" class="btn btn-primary">Guardar Cambios</button>
         </form>

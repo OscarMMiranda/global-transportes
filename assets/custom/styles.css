@@ -1,0 +1,155 @@
+/* === Paneles y encabezados === */
+.panel-heading {
+  background-color: #337ab7;
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 10px 15px;
+}
+
+.panel-info {
+  border-color: #bce8f1;
+}
+
+/* === Botones contextuales === */
+.btn-xs {
+  padding: 3px 8px;
+  font-size: 12px;
+}
+
+.btn-info {
+  background-color: #5bc0de;
+  border-color: #46b8da;
+  color: #fff;
+}
+
+.btn-default {
+  background-color: #f5f5f5;
+  border-color: #ccc;
+  color: #333;
+}
+
+.btn-warning {
+  background-color: #f0ad4e;
+  border-color: #eea236;
+  color: #fff;
+}
+
+.btn-danger {
+  background-color: #d9534f;
+  border-color: #d43f3a;
+  color: #fff;
+}
+
+.btn-success {
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+  color: #fff;
+}
+
+/* === Tablas limpias === */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-bordered th {
+  background-color: #337ab7;
+  color: #fff;
+  font-weight: bold;
+}
+
+
+.table-bordered td {
+  border: 1px solid #ddd;
+}
+
+.table-striped > tbody > tr:nth-child(odd) {
+  background-color: #f7f7f7;
+}
+
+.table thead th {
+  background-color: #f0f0f0;
+  color: #333;
+  font-weight: bold;
+  border-bottom: 1px solid #ccc;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+/* === Formularios modales === */
+.modal-header {
+  background-color: #337ab7;
+  color: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+.modal-footer {
+  background-color: #f5f5f5;
+  border-top: 1px solid #ddd;
+}
+
+/* === Estados visuales === */
+.estado-activo {
+  color: #3c763d;
+  font-weight: bold;
+}
+
+.estado-inactivo {
+  color: #a94442;
+  font-weight: bold;
+}
+
+/* === Íconos FontAwesome === */
+.fa {
+  margin-right: 5px;
+}
+
+/* === Pestañas === */
+.nav-tabs > li.active > a {
+  background-color: #eee;
+  font-weight: bold;
+  border: 1px solid #ddd;
+  border-bottom-color: transparent;
+}
+
+.nav-tabs > li > a {
+  border: 1px solid transparent;
+  border-radius: 4px 4px 0 0;
+  padding: 8px 12px;
+}
+
+/* === Espaciado general === */
+.mt-20 {
+  margin-top: 20px;
+}
+
+.mb-10 {
+  margin-bottom: 10px;
+}
+
+/* === Alertas === */
+.alert {
+  padding: 10px 15px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+.alert-danger {
+  background-color: #f2dede;
+  border-color: #ebccd1;
+  color: #a94442;
+}
+
+.alert-info {
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+  color: #31708f;
+}
+
+.alert-warning {
+  background-color: #fcf8e3;
+  border-color: #faebcc;
+  color: #8a6d3b;
+}

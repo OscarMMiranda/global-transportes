@@ -1,17 +1,17 @@
 /* === VARIABLES DE COLOR === */
 :root {
-    --color-primario: #002a5c;
-    --color-secundario: #004a99;
-    --color-acento: #0066cc;
-    --color-hover: #004080;
-    --color-texto: #333;
-    --color-fondo: #f4f6f8;
-    --color-card: #f4f4f4;
-    --color-blanco: #fff;
-    --color-rojo: #dc3545;
-    --color-rojo-hover: #a71d2a;
-    --color-focus: #f4b400;
-  }
+	--color-primario	:	#002a5c;
+    --color-secundario  :	#004a99;
+    --color-acento		: 	#0066cc;
+    --color-hover		: 	#004080;
+    --color-texto		: 	#333;
+    --color-fondo		: 	#f4f6f8;
+    --color-card		: 	#f4f4f4;
+    --color-blanco		: 	#fff;
+    --color-rojo		: 	#dc3545;
+    --color-rojo-hover	: 	#a71d2a;
+    --color-focus		: 	#f4b400;
+  	}
   
   /* === CONFIGURACIÓN GLOBAL === */
   body {
@@ -151,4 +151,20 @@
 .btn-nav:hover {
     background-color: var(--color-acento);
     transform: translateY(-2px);
+}
+
+
+.table thead th {
+    position: sticky;
+    top: 0;
+    background-color: #343a40;
+    color: white;
+    z-index: 2;
+}
+
+header {
+  background: #f8f9fa; /* gris claro */
+  padding: 0.8rem 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
 }

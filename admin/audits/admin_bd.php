@@ -23,12 +23,16 @@ error_log("⚙️ SESSION en admin_db.php: " . print_r($_SESSION, true));
 
 
 // 02. Verificar acceso solo para administradores
-		if (!isset($_SESSION['usuario']) || $_SESSION['rol_nombre'] !== 'admin') 
-			{
-    		error_log("❌ Acceso no autorizado: " . $_SERVER['REMOTE_ADDR']);
-    		header("Location: login.php");
-    		exit();
-			}
+	if (!isset($_SESSION['usuario']) || $_SESSION['rol_nombre'] !== 'admin') 
+		{
+    	error_log("❌ Acceso no autorizado: " . $_SERVER['REMOTE_ADDR']);
+    	header("Location: login.php");
+    	exit();
+		}
+	require_once __DIR__ . '/../../includes/funciones.php';
+
+	$usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'visitante';
+	registrarEnHistorial($conn, $usuario, 'Accedió a administración de BD', 'admin_bd', obtenerIP());
 
 // Obtener todas las tablas de la base de datos con validación de errores
 $sql = "SHOW TABLES";
@@ -42,6 +46,8 @@ if (!$resultado) {
 
 // Exportación a CSV
 if (isset($_GET['exportar']) && $_GET['exportar'] === 'csv') {
+    registrarEnHistorial($conn, $usuario, 'Exportó listado de tablas a CSV', 'admin_bd', obtenerIP());
+
     header('Content-Type: text/csv');
     header('Content-Disposition: attachment; filename="base_de_datos.csv"');
 

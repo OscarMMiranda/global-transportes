@@ -37,9 +37,7 @@
 	require_once '../../includes/funciones.php'; 
 ?>
 
-	<!-- Opcional: Generación del token CSRF -->
-
-
+<!-- Opcional: Generación del token CSRF -->
 
 <script>
 	document.addEventListener("DOMContentLoaded", function() {
@@ -55,7 +53,6 @@
 		});
 </script>
 
-
 <div class="container py-4">
   	<div class="card shadow-sm">
     	<div class="card-header <?= $editando ? 'bg-warning' : 'bg-success' ?> text-white">
@@ -67,7 +64,8 @@
     	<div class="card-body">
     		<form	
 				action="<?= $editando ? 'actualizar_vehiculos.php' : 'registrar_vehiculos.php' ?>" 
-				method="POST" 
+				method="POST"
+				enctype="multipart/form-data"
 				id="form_vehiculos">
          	
 				<!-- Si editamos, envío el ID -->
@@ -242,6 +240,11 @@
                 		?>
             		</select>
          		</div>
+
+				<div class="mb-3">
+    				<label for="fotos" class="form-label">Fotos del vehículo</label>
+    				<input type="file" name="fotos[]" id="fotos" class="form-control" multiple accept="image/*">
+				</div>
 		
 				<!-- Observaciones -->
         		<div class="mb-3">

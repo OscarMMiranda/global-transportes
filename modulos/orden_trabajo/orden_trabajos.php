@@ -1,4 +1,5 @@
 <?php
+    //  archivo :   /modulos/orden_trabajo/orden_trabajos.php
 session_start();
 require_once '../../includes/conexion.php';
 
@@ -14,13 +15,24 @@ if (!isset($_SESSION['usuario']) || !isset($_SESSION['rol_nombre']) || $_SESSION
 }
 
 // Consultar órdenes de trabajo con nombre del cliente
-$sql = "SELECT ot.id, ot.numero_ot, ot.fecha, c.nombre AS cliente, ot.estado, ot.factura_numero 
-        FROM ordenes_trabajo ot
-        JOIN clientes c ON ot.cliente_id = c.id
-        ORDER BY ot.fecha DESC";
+$sql = "SELECT ot.id, ot.numero_ot, ot.fecha, ot.oc_cliente, ot.tipo_ot_id, 
+                                c.nombre AS cliente_nombre, 
+                                tot.nombre AS tipo_ot_nombre, 
+                                e.razon_social AS empresa_nombre, 
+                                eo.nombre AS estado_nombre
+                         FROM ordenes_trabajo ot
+                         LEFT JOIN clientes c ON ot.cliente_id = c.id
+                         LEFT JOIN tipo_ot tot ON ot.tipo_ot_id = tot.id
+                         LEFT JOIN empresa e ON ot.empresa_id = e.id
+                         LEFT JOIN estado_orden_trabajo eo ON ot.estado_ot = eo.id
+                         WHERE eo.id NOT IN (7,8)
+                         ORDER BY CAST(SUBSTRING_INDEX(numero_ot, '-', -1) AS UNSIGNED) DESC, 
+                                  CAST(SUBSTRING_INDEX(numero_ot, '-', 1) AS UNSIGNED) DESC";
 
+$resultOrdenes = $conn->query($sql);
 $result = $conn->query($sql);
-if (!$result) {
+
+if (!$resultOrdenes) {
     die("❌ Error en la consulta de órdenes: " . $conn->error);
 }
 ?>

@@ -73,7 +73,7 @@
 						</li>
    						<li class="nav-item">
 							<a 
-								href="/../../modulos/orden_trabajo/orden_trabajo.php" 
+								href="/../../modulos/orden_trabajo/index.php" 
 								class="nav-link">
 								📋 Órdenes de Trabajo
 							</a>

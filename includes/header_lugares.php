@@ -28,7 +28,7 @@
                     <span class="text-white me-3">Bienvenido, <?= htmlspecialchars($_SESSION['usuario']); ?></span>
                     <a href="../../sistema/logout.php" class="btn btn-danger btn-sm">Cerrar Sesión</a>
                 <?php } else { ?>
-                <a href="../../sistema/login.php" class="btn btn-success btn-sm">Iniciar Sesión</a>
+                <a href="../../../login.php" class="btn btn-success btn-sm">Iniciar Sesión</a>
             <?php } ?>
         </div>
     </div>
