@@ -1,0 +1,55 @@
+/* 🦶 Estilos para el pie de página */
+
+footer {
+  	background-color	: var(--bg-footer);
+  	color		: 	var(--color-texto-claro);
+  	padding		: 	2rem 0;
+  	font-size	: 	var(--font-size-sm);
+  	font-family	: 	var(--font-principal);
+	}
+
+footer .container {
+  	display		: 		flex;
+  	flex-direction: 	row;
+  	justify-content: 	space-between;
+  	align-items	: 	center;
+  	flex-wrap	: 	wrap;
+	}
+
+footer a {
+  color: var(--color-texto-claro);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+footer a:hover {
+  color: var(--color-warning);
+}
+
+footer .logo-footer {
+  max-width: 150px;
+}
+
+footer .social-icons a {
+  margin-right: 1rem;
+  font-size: 1.2rem;
+}
+
+footer .copyright {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: var(--font-size-sm);
+  opacity: 0.6;
+}
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+  footer .container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  footer .social-icons {
+    margin-top: 1rem;
+  }
+}

@@ -1,0 +1,28 @@
+/* archivo: /css/componentes/tarjetas.css */
+
+/* =========================
+   TARJETAS DEL DASHBOARD
+   ========================= */
+.card-dashboard {
+  background-color: var(--color-tarjeta);
+  border-radius: 10px;
+  box-shadow: 0 5px 15px var(--color-sombra);
+  padding: 20px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s, box-shadow 0.4s ease-in-out;
+}
+
+.card-dashboard:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.dashboard-cards {
+  justify-content: center;
+}
+.dashboard-cards .col {
+  max-width: 280px;
+}

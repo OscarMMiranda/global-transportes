@@ -1,0 +1,59 @@
+/* Botones de acción con ancho fijo y alineación */
+.btn-accion {
+    min-width: 100px;
+    text-align: center;
+    white-space: nowrap;
+    }
+
+/* Espaciado entre botones */
+.btn-accion + .btn-accion {
+    margin-left: 4px;
+    }
+
+.btn-accion-sm {
+    font-size   :   0.25rem;     /* Fuente más pequeña */
+    padding     :   0.25rem 0.4rem; /* Menos espacio interno */
+    line-height :   1.2;
+    }
+
+/* Tabla compacta y legible */
+.table-sm th,
+.table-sm td {
+    vertical-align: middle;
+    font-size: 14px;
+    padding: 6px 8px;
+    }
+
+/* Encabezado claro */
+.table-light th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+    }
+
+/* Alertas centradas y con íconos grandes */
+.alert {
+    font-size: 15px;
+    padding: 10px;
+    }
+
+.alert i {
+    margin-right: 6px;
+    }
+
+/* Íconos dentro de botones */
+.btn i {
+    margin-right: 4px;
+    }
+
+/* Responsive para pantallas pequeñas */
+@media (max-width: 576px) {
+  .btn-accion {
+    display: block;
+    width: 100%;
+    margin-bottom: 6px;
+  }
+
+  .btn-accion + .btn-accion {
+    margin-left: 0;
+  }
+}

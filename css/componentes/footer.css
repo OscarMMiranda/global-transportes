@@ -1,0 +1,8 @@
+/* archivo: /css/componentes/footer.css */
+
+.footer {
+  background-color: var(--color-navbar);
+  color: white;
+  text-align: center;
+  padding: 1rem;
+}

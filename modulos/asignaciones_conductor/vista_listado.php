@@ -60,7 +60,7 @@
         	<a href="asignar_conductor.php" class="btn btn-primary me-2">
             	<i class="fas fa-plus"></i> Asignacion
         	</a>
-        	<a href="/../../views/dashboard/erp_dashboard.php" class="btn btn-secondary">
+        	<a href="/modulos/dashboard/erp_dashboard.php" class="btn btn-secondary">
             	<i class="fas fa-arrow-left"></i> Volver al Dashboard
         	</a>
     	</div>

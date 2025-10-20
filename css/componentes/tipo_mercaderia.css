@@ -1,0 +1,55 @@
+/* =========================
+   ESTILOS: TIPO MERCADERÍA
+   ========================= */
+
+/* Título principal */
+h2.h4.text-primary i {
+  font-size: 1.2rem;
+  color: var(--color-icono-secundario, #6c757d); /* gris Bootstrap */
+}
+
+/* Botón de agregar */
+.btn-success {
+  font-weight: 500;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-success:hover {
+  transform: scale(1.05);
+}
+
+/* Tablas */
+.tabla-mercaderia th,
+.tabla-mercaderia td {
+  vertical-align: middle;
+}
+
+.tabla-mercaderia td.text-muted {
+  font-style: italic;
+  color: #6c757d;
+}
+
+/* Acciones centradas */
+.tabla-mercaderia td.text-center .btn {
+  margin: 0 2px;
+}
+
+/* Contenedores dinámicos */
+#contenedorActivos,
+#contenedorInactivos {
+  min-height: 100px;
+}
+
+/* Mensajes flash */
+.alert i {
+  margin-right: 6px;
+}
+
+/* Modal */
+.modal .form-label {
+  font-weight: 500;
+}
+
+.modal .btn {
+  min-width: 100px;
+}

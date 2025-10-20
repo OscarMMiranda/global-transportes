@@ -64,38 +64,38 @@ class TipoVehiculoModel
      * @throws Exception
      */
     public function obtenerPorEstado($estado = 0)
-    {
-        $where = ($estado == 0)
-            ? "tv.fecha_borrado IS NULL"
-            : "tv.fecha_borrado IS NOT NULL";
+{
+    $where = ($estado == 0)
+        ? "tv.fecha_borrado IS NULL"
+        : "tv.fecha_borrado IS NOT NULL";
 
-        $sql = "
-            SELECT 
-                tv.id,
-                tv.nombre,
-                tv.descripcion,
-                cv.nombre AS categoria,
-                tv.fecha_creado,
-                tv.fecha_modificacion,
-                tv.fecha_borrado
-            FROM tipo_vehiculo tv
-            LEFT JOIN categoria_vehiculo cv ON tv.categoria_id = cv.id
-            WHERE {$where}
-            ORDER BY tv.id DESC
-        ";
+    $sql = "
+        SELECT 
+            tv.id,
+            tv.nombre,
+            tv.descripcion,
+            cv.nombre AS categoria_nombre,
+            tv.fecha_creado,
+            tv.fecha_modificacion,
+            tv.fecha_borrado
+        FROM tipo_vehiculo tv
+        LEFT JOIN categoria_vehiculo cv ON tv.categoria_id = cv.id
+        WHERE {$where}
+        ORDER BY tv.id DESC
+    ";
 
-        $stmt = $this->db->prepare($sql);
-        if (!$stmt) {
-            throw new Exception("Error al preparar obtenerPorEstado: " . $this->db->error);
-        }
-
-        $stmt->execute();
-        $res   = $stmt->get_result();
-        $tipos = $res->fetch_all(MYSQLI_ASSOC);
-        $stmt->close();
-
-        return $tipos;
+    $stmt = $this->db->prepare($sql);
+    if (!$stmt) {
+        throw new Exception("Error al preparar obtenerPorEstado: " . $this->db->error);
     }
+
+    $stmt->execute();
+    $res   = $stmt->get_result();
+    $tipos = $res->fetch_all(MYSQLI_ASSOC);
+    $stmt->close();
+
+    return $tipos;
+}
 
     /**
      * Obtiene un tipo por ID si no está borrado
@@ -104,32 +104,34 @@ class TipoVehiculoModel
      * @return array|null
      * @throws Exception
      */
-    public function obtenerPorId($id)
-    {
-        $sql = "
-            SELECT 
-                id, 
-                nombre, 
-                descripcion,
-                categoria_id,
-                fecha_modificacion
-            FROM tipo_vehiculo
-            WHERE id = ? AND fecha_borrado IS NULL
-        ";
+	public function obtenerPorId($id)
+    	{
+    	$sql = "
+        	SELECT 
+            	tv.id, 
+            	tv.nombre, 
+            	tv.descripcion,
+            	tv.categoria_id,
+            	cv.nombre AS categoria_nombre,
+            	tv.fecha_modificacion
+        	FROM tipo_vehiculo tv
+        	LEFT JOIN categoria_vehiculo cv ON tv.categoria_id = cv.id
+        	WHERE tv.id = ? AND tv.fecha_borrado IS NULL
+    		";
 
-        $stmt = $this->db->prepare($sql);
-        if (!$stmt) {
-            throw new Exception("Error al preparar obtenerPorId: " . $this->db->error);
-        }
+    	$stmt = $this->db->prepare($sql);
+    	if (!$stmt) {
+        	throw new Exception("Error al preparar obtenerPorId: " . $this->db->error);
+    	}
 
-        $stmt->bind_param("i", $id);
-        $stmt->execute();
-        $res  = $stmt->get_result();
-        $tipo = $res->num_rows ? $res->fetch_assoc() : null;
-        $stmt->close();
+    	$stmt->bind_param("i", $id);
+    	$stmt->execute();
+    	$res  = $stmt->get_result();
+    	$tipo = $res->num_rows ? $res->fetch_assoc() : null;
+    	$stmt->close();
 
-        return $tipo;
-    }
+    	return $tipo;
+	}
 
     /**
      * Verifica si existe un tipo eliminado con ese nombre

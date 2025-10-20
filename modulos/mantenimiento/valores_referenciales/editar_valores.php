@@ -19,7 +19,7 @@ $conn = getConnection();
 
 // Solo admins pueden
 if (!isset($_SESSION['usuario']) || $_SESSION['rol_nombre'] !== 'admin') {
-    header('Location: ../../sistema/login.php');
+    header('Location: login.php');
     exit;
 }
 

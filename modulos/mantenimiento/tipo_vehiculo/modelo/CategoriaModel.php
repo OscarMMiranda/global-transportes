@@ -1,47 +1,60 @@
 <?php
-// models/CategoriaModel.php
+// archivo: CategoriaModel.php
 
-/**
- * Modelo para el módulo de Categorías.
- */
-class CategoriaModel
-{
-    /** @var mysqli */
-    protected $db;
+class CategoriaModel {
+    private $conn;
 
-    /**
-     * @param mysqli $db
-     */
-    public function __construct(mysqli $db)
-    {
-        $this->db = $db;
+    public function __construct($conn) {
+        $this->conn = $conn;
     }
 
     /**
-     * Obtiene todas las categorías activas (no borradas).
+     * Listar todas las categorías no eliminadas
      *
      * @return array
-     * @throws Exception
      */
-    public function listar()
-    {
-        $sql  = "SELECT 
-                    id, 
-                    nombre
-                 FROM categoria_vehiculo
-                 WHERE fecha_borrado IS NULL
-                 ORDER BY nombre";
-        $stmt = $this->db->prepare($sql);
-        if (!$stmt) {
-            throw new Exception("Error al preparar listado de categorías: " . $this->db->error);
-        }
-        $stmt->execute();
-        $res         = $stmt->get_result();
-        $categorias  = $res->fetch_all(MYSQLI_ASSOC);
-        $stmt->close();
+    public function listar() {
+        $sql = "
+            SELECT id, nombre 
+            FROM categoria_vehiculo 
+            WHERE fecha_borrado IS NULL 
+            ORDER BY nombre ASC
+        ";
 
-        return $categorias;
+        $result = $this->conn->query($sql);
+        if (!$result) {
+            error_log("Error al listar categorías: " . $this->conn->error);
+            return array(); // fallback defensivo
+        }
+
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    // Aquí puedes extender con métodos como crear(), actualizar(), eliminar()…
+    /**
+     * Obtener una categoría por ID
+     *
+     * @param int $id
+     * @return array|null
+     */
+    public function obtenerPorId($id) {
+        $sql = "
+            SELECT id, nombre, descripcion 
+            FROM categoria_vehiculo 
+            WHERE id = ? AND fecha_borrado IS NULL
+        ";
+
+        $stmt = $this->conn->prepare($sql);
+        if (!$stmt) {
+            error_log("Error al preparar obtenerPorId: " . $this->conn->error);
+            return null;
+        }
+
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $res = $stmt->get_result();
+        $categoria = $res->num_rows ? $res->fetch_assoc() : null;
+        $stmt->close();
+
+        return $categoria;
+    }
 }

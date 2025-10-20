@@ -48,37 +48,54 @@ function renderListadoEntidades($conn, $estado) {
             <th style="width:120px; color:#fff;">RUC</th>
             <th style="color:#fff;">Dirección</th>
             <th style="color:#fff;">Ubicación</th>
-            <th style="width:160px; color:#fff;">Acciones</th>
+            <th style="width:200px; color:#fff;">Acciones</th>
           </tr>';
     echo '</thead><tbody>';
 
     while ($row = $res->fetch_assoc()) {
-        $ubicacion = trim($row['departamento']) . ' - ' . trim($row['provincia']) . ' - ' . trim($row['distrito']);
-        echo '<tr>';
-        echo '<td>' . $row['id'] . '</td>';
-        echo '<td>' . htmlspecialchars($row['nombre']) . '</td>';
-        echo '<td>' . htmlspecialchars($row['ruc']) . '</td>';
-        echo '<td>' . htmlspecialchars($row['direccion']) . '</td>';
-        echo '<td>' . htmlspecialchars($ubicacion) . '</td>';
+        $id = intval($row['id']);
+        $nombre = htmlspecialchars($row['nombre']);
+        $ruc = htmlspecialchars($row['ruc']);
+        $direccion = htmlspecialchars($row['direccion']);
+        $ubicacion = htmlspecialchars(trim($row['departamento']) . ' - ' . trim($row['provincia']) . ' - ' . trim($row['distrito']));
 
-        // Acciones según estado
+        echo '<tr>';
+        echo "<td>$id</td>";
+        echo "<td>$nombre</td>";
+        echo "<td>$ruc</td>";
+        echo "<td>$direccion</td>";
+        echo "<td>$ubicacion</td>";
+
         echo '<td style="text-align:center;">';
-        echo '<button class="btn btn-info btn-xs" title="Ver entidad" onclick="verEntidad(' . $row['id'] . ')">
+
+        // 🔹 Botón Ver ficha completa (vista_entidad.php)
+        echo '<a href="/modulos/mantenimiento/entidades/index.php?action=view&entidad_id=' . $id . '" class="btn btn-info btn-xs" title="Ver ficha completa">
+                <i class="fa fa-folder-open"></i>
+              </a> ';
+
+        // 🔹 Botón Ver (modal AJAX)
+        echo '<button class="btn btn-default btn-ver-entidad btn-xs" data-id="' . $id . '" title="Ver resumen">
                 <i class="fa fa-eye"></i>
               </button> ';
 
         if ($estado === 'activo') {
-            echo '<a href="editar.php?id=' . $row['id'] . '" class="btn btn-warning btn-xs" title="Editar entidad">
+            // 🔹 Botón Editar (modal AJAX)
+            echo '<button class="btn btn-warning btn-editar-entidad btn-xs" data-id="' . $id . '" title="Editar entidad">
                     <i class="fa fa-pencil"></i>
-                  </a> ';
-            echo '<a href="../actions/borrar.php?id=' . $row['id'] . '" class="btn btn-danger btn-xs" title="Marcar como inactivo" onclick="return confirm(\'¿Marcar como inactivo?\')">
+                  </button> ';
+
+            // 🔹 Botón Marcar como inactivo
+            echo '<a href="/modulos/mantenimiento/entidades/actions/borrar.php?id=' . $id . '" class="btn btn-danger btn-xs" title="Marcar como inactivo" onclick="return confirm(\'¿Marcar como inactivo?\')">
                     <i class="fa fa-trash"></i>
                   </a>';
         } else {
-            echo '<a href="../actions/restaurar.php?id=' . $row['id'] . '" class="btn btn-success btn-xs" title="Restaurar entidad" onclick="return confirm(\'¿Restaurar esta entidad?\')">
+            // 🔹 Botón Restaurar
+            echo '<a href="/modulos/mantenimiento/entidades/actions/restaurar.php?id=' . $id . '" class="btn btn-success btn-xs" title="Restaurar entidad" onclick="return confirm(\'¿Restaurar esta entidad?\')">
                     <i class="fa fa-recycle"></i>
                   </a> ';
-            echo '<a href="../actions/eliminar.php?id=' . $row['id'] . '" class="btn btn-danger btn-xs" title="Eliminar permanentemente" onclick="return confirm(\'¿Eliminar permanentemente esta entidad?\')">
+
+            // 🔹 Botón Eliminar permanentemente
+            echo '<a href="/modulos/mantenimiento/entidades/actions/eliminar.php?id=' . $id . '" class="btn btn-danger btn-xs" title="Eliminar permanentemente" onclick="return confirm(\'¿Eliminar permanentemente esta entidad?\')">
                     <i class="fa fa-times-circle"></i>
                   </a>';
         }

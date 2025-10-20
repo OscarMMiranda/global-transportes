@@ -1,0 +1,66 @@
+/* === Estilos del módulo tipo_documento === */
+
+/* Etiquetas de nombre */
+.badge-tipo {
+  font-weight: 600;
+  padding: 0.4em 0.6em;
+  border-radius: 0.3em;
+  display: inline-block;
+}
+
+/* Iconos en tabla */
+.table i {
+  font-size: 1.2em;
+  opacity: 0.8;
+}
+
+/* Estados */
+.badge-activo {
+  background-color: #198754;
+  color: #fff;
+}
+.badge-inactivo {
+  background-color: #6c757d;
+  color: #fff;
+}
+
+/* Botones de acción */
+.btn-accion {
+  margin-right: 0.3em;
+}
+
+/* Modal en modo ver */
+.modo-ver input,
+.modo-ver select,
+.modo-ver textarea {
+  background-color: #f8f9fa !important;
+  border-color: #dee2e6 !important;
+  color: #495057 !important;
+  pointer-events: none;
+}
+.modo-ver .form-check-input {
+  pointer-events: none;
+}
+
+/* === Estilos de impresión === */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #modalTipoDocumento,
+  #modalTipoDocumento * {
+    visibility: visible;
+  }
+  #modalTipoDocumento .modal-footer {
+    display: none;
+  }
+  #modalTipoDocumento {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 2rem;
+    background-color: #fff;
+    box-shadow: none;
+  }
+}

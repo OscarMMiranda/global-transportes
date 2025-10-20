@@ -1,0 +1,51 @@
+/* archivo: /css/componentes/header.css */
+
+/* =========================
+   HEADER FIJO SUPERIOR
+   ========================= */
+
+.dashboard-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1020;
+  background-color: var(--color-tarjeta); /* Blanco puro */
+  box-shadow: 0 2px 4px var(--color-sombra);
+  padding: 12px 20px;
+}
+
+/* Título del módulo */
+.dashboard-header h1 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-texto);
+  margin: 0;
+}
+
+/* Botón de retorno */
+.dashboard-header .btn-outline-primary {
+  font-size: 0.85rem;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Icono dentro del botón */
+.dashboard-header .btn-outline-primary i {
+  font-size: 0.9rem;
+}
+
+/* Hover del botón */
+.dashboard-header .btn-outline-primary:hover {
+  background-color: var(--color-boton-hover);
+  color: white;
+  transform: scale(1.05);
+}
+
+/* Espaciado para evitar que el contenido quede oculto debajo del header */
+main.container,
+.dashboard-container {
+  padding-top: 80px; /* antes: 70px */
+}

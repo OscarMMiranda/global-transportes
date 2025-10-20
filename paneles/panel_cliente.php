@@ -56,8 +56,7 @@ if (!isset($_SESSION['usuario']) || !isset($_SESSION['rol_nombre']) || $_SESSION
     </section>
   </main>
 
-  <footer>
-    <p>&copy; 2025 Global Transportes. Todos los derechos reservados.</p>
-  </footer>
+<?php require_once __DIR__ . '/../includes/footer_panel.php'; ?>
+
 </body>
 </html>

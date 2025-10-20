@@ -1,0 +1,17 @@
+/* archivo: /css/componentes/navbar.css */
+
+.navbar {
+  background-color: var(--color-navbar);
+  padding: 12px 20px;
+  box-shadow: 0 4px 8px var(--color-sombra);
+}
+
+.dashboard-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1020;
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}

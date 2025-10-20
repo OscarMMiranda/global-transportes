@@ -6,7 +6,7 @@
 	/* position: fixed;			Fijo en la ventana, no en el flujo del documento */
 	position	: 	sticky;
 	width		: 	250px;				/* Ancho del menú */
-	height		: 	400vh;				/* Altura completa de la ventana */
+  	min-height: 70vh; /* o 600px, según tu diseño */
 	background-color: var(--bg-navbar);
   	flex-shrink	: 	0;				/* Aunque no aplica aquí por ser fijo */
   	color		: 	var(--color-texto-claro);

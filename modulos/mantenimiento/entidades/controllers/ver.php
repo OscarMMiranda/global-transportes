@@ -22,32 +22,48 @@ if (!is_object($conn) || get_class($conn) !== 'mysqli') {
 }
 
 // 3) Consultar entidad
-$sql = "SELECT * FROM entidades WHERE id = $id LIMIT 1";
-$res = $conn->query($sql);
+$sql = "SELECT 
+            e.id, 
+            e.nombre, 
+            e.ruc, 
+            e.direccion, 
+            e.estado,
+            t.nombre AS tipo_nombre,
+            dpto.nombre AS departamento_nombre,
+            prov.nombre AS provincia_nombre,
+            dist.nombre AS distrito_nombre
+        FROM entidades e
+        LEFT JOIN tipo_lugares t ON e.tipo_id = t.id
+        LEFT JOIN distritos dist ON e.distrito_id = dist.id
+        LEFT JOIN provincias prov ON dist.provincia_id = prov.id
+        LEFT JOIN departamentos dpto ON prov.departamento_id = dpto.id
+        WHERE e.id = $id
+        LIMIT 1";
 
+$res = $conn->query($sql);
 if (!$res || $res->num_rows === 0) {
     echo "<div class='modal-body'><div class='alert alert-warning'>Entidad no encontrada.</div></div>";
     return;
 }
 
-$entidad = $res->fetch_assoc();
-
-// 4) Mostrar datos
+$row = $res->fetch_assoc();
 ?>
-<div class="modal-header bg-info" style="color:#fff;">
+
+<div class="modal-header bg-info text-white">
   <h4 class="modal-title"><i class="fa fa-eye"></i> Detalle de entidad</h4>
 </div>
 <div class="modal-body">
   <table class="table table-bordered table-striped">
-    <tr><th>ID</th><td><?= $entidad['id'] ?></td></tr>
-    <tr><th>Nombre</th><td><?= htmlspecialchars($entidad['nombre']) ?></td></tr>
-    <tr><th>Tipo</th><td><?= htmlspecialchars($entidad['tipo_id']) ?></td></tr>
-    <tr><th>Departamento</th><td><?= htmlspecialchars($entidad['departamento_id']) ?></td></tr>
-    <tr><th>Provincia</th><td><?= htmlspecialchars($entidad['provincia_id']) ?></td></tr>
-    <tr><th>Distrito</th><td><?= htmlspecialchars($entidad['distrito_id']) ?></td></tr>
-    <tr><th>Estado</th><td><?= $entidad['estado'] === 'activo' ? 'Activo' : 'Inactivo' ?></td></tr>
+    <tr><th>Nombre</th><td><?= htmlspecialchars($row['nombre']) ?></td></tr>
+    <tr><th>RUC</th><td><?= htmlspecialchars($row['ruc']) ?></td></tr>
+    <tr><th>Dirección</th><td><?= htmlspecialchars($row['direccion']) ?></td></tr>
+    <tr><th>Tipo</th><td><?= htmlspecialchars($row['tipo_nombre']) ?></td></tr>
+    <tr><th>Departamento</th><td><?= htmlspecialchars($row['departamento_nombre']) ?></td></tr>
+    <tr><th>Provincia</th><td><?= htmlspecialchars($row['provincia_nombre']) ?></td></tr>
+    <tr><th>Distrito</th><td><?= htmlspecialchars($row['distrito_nombre']) ?></td></tr>
+    <tr><th>Estado</th><td><span class="label label-<?= $row['estado'] === 'activo' ? 'success' : 'danger' ?>"><?= ucfirst($row['estado']) ?></span></td></tr>
   </table>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cerrar</button>
+  <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cerrar</button>
 </div>

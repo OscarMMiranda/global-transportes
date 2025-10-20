@@ -1,0 +1,46 @@
+//	archivo	:	/modulos/mantenimiento/tipo_vehiculo/mapa_modulo_tipo_vehiculo.txt
+
+/ajax/
+	-	eliminar.php			
+  	- 	form_create.php			✅ cargado por modalAgregar
+	-	form_edit_loader.php	
+	-	form_view_loader.php
+	-	listar_activos.php
+	-	listar_inactivos.php
+	-	restaurar.php
+	-	validar_nombre.php
+
+/assets/
+	-	estilos.css
+
+/componentes/
+	-	mensajes_flash.php
+
+/js/
+	-	tipo_vehiculos.js
+
+/modales/
+	-	modal_agregar.php
+	-	modal_editar.php
+	-	modal_ver.php
+
+/modelo/
+	-	CategoriaModel.php
+	-	TipoVehiculoModel.php
+
+/vistas/
+	-	form_edit.php
+	-	lista_activos.php
+	-	lista_inactivos.php
+	-	tabla.php
+	-	view.php
+
+-	controller.php
+-	eliminar.php
+-	error_log.txt
+-	helpers.php
+-	index.php
+-	mapa_modulo_tipo_vehiculo.txt
+-	model.php
+-	reactivar_prompt.php
+

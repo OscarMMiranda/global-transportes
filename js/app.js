@@ -3,8 +3,8 @@
  * Core JavaScript for Global Transportes
  * - Navbar toggle
  * - Modal open/close
- * - Safe JSON parsing (avoids “[object Object]” errors)
- * - Chrome storage change listener (optional)
+ * - Safe JSON parsing (evita “[object Object]”)
+ * - Chrome storage change listener blindado
  */
 
 ;(function() {
@@ -19,7 +19,7 @@
   }
 
   // ────────────────────────────────────────────────────────────────
-  // Navbar toggle for mobile
+  // Navbar toggle para móviles
   // ────────────────────────────────────────────────────────────────
   function setupNavbarToggle() {
     var toggleBtn = document.querySelector('.nav-toggle');
@@ -32,10 +32,9 @@
   }
 
   // ────────────────────────────────────────────────────────────────
-  // Modal handlers: open, close, overlay click
+  // Modal: abrir, cerrar, clic en overlay
   // ────────────────────────────────────────────────────────────────
   function setupModalHandlers() {
-    // Open buttons: <button data-modal-target="modalId">
     document.querySelectorAll('[data-modal-target]').forEach(function(btn) {
       btn.addEventListener('click', function() {
         var targetId = btn.getAttribute('data-modal-target');
@@ -44,7 +43,6 @@
       });
     });
 
-    // Close buttons: <button class="modal-close">
     document.querySelectorAll('.modal-close').forEach(function(btn) {
       btn.addEventListener('click', function() {
         var modal = btn.closest('.modal');
@@ -52,7 +50,6 @@
       });
     });
 
-    // Click outside content to close
     document.querySelectorAll('.modal').forEach(function(modal) {
       modal.addEventListener('click', function(e) {
         if (e.target === modal) {
@@ -63,43 +60,59 @@
   }
 
   // ────────────────────────────────────────────────────────────────
-  // Chrome.storage listener with safe JSON.parse
+  // Listener de chrome.storage con trazabilidad y blindaje
   // ────────────────────────────────────────────────────────────────
   function setupStorageListener() {
+    // Evitar ejecución en login
+    if (window.location.pathname.includes('login')) {
+      console.log('🔒 Storage listener desactivado en login');
+      return;
+    }
+
     if (window.chrome && chrome.storage && chrome.storage.onChanged) {
       chrome.storage.onChanged.addListener(function(changes, areaName) {
         for (var key in changes) {
           var newVal = changes[key].newValue;
-          var data   = safeParse(newVal);
+
+          // 🧪 Trazabilidad visual
+          console.log(`📦 Cambio en ${areaName}.${key}`);
+          console.log('🧠 Valor recibido:', newVal);
+
+          var data = safeParse(newVal);
           handleStorageUpdate(key, data, areaName);
         }
       });
     }
   }
 
-  // Default handler—override or extend as needed
+  // Handler por defecto — puedes extenderlo
   function handleStorageUpdate(key, data, area) {
-    console.log('Storage changed:', area, key, data);
-    // Aquí tu lógica para reaccionar a cambios en el storage
+    console.log('🔄 Storage actualizado:', area, key, data);
+    // Aquí tu lógica para reaccionar a cambios
   }
 
   // ────────────────────────────────────────────────────────────────
-  // Safe JSON parse: solo parsea si es string válida
+  // safeParse: evita errores de JSON.parse sobre objetos
   // ────────────────────────────────────────────────────────────────
   function safeParse(input) {
     if (typeof input === 'string') {
       try {
         return JSON.parse(input);
       } catch (e) {
-        console.warn('safeParse: no es JSON válido, devolviendo entrada cruda:', input);
+        console.warn('❌ safeParse: cadena no válida, devolviendo crudo:', input);
         return input;
       }
     }
+
+    if (typeof input === 'object') {
+      console.warn('⚠️ safeParse: ya es objeto, no se parsea:', input);
+    }
+
     return input;
   }
 
   // ────────────────────────────────────────────────────────────────
-  // Global helpers para modales
+  // Helpers globales para modales
   // ────────────────────────────────────────────────────────────────
   window.openModal = function(modal) {
     if (modal) modal.classList.add('show');
@@ -108,5 +121,5 @@
   window.closeModal = function(modal) {
     if (modal) modal.classList.remove('show');
   };
-  
+
 })();

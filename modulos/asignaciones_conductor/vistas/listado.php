@@ -38,7 +38,7 @@ $flash = getFlash();
         <a href="asignar_conductor.php" class="btn btn-primary me-2">
             <i class="fas fa-plus"></i> Asignación
         </a>
-        <a href="/../../views/dashboard/erp_dashboard.php" class="btn btn-secondary">
+        <a href="/modulos/erp_dashboard.php" class="btn btn-secondary">
             <i class="fas fa-arrow-left"></i> Volver al Dashboard
         </a>
     </div>

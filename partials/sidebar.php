@@ -1,82 +1,51 @@
+<?php
+// archivo : sidebar.php – Menú lateral dinámico y trazable
+
+// Detectar página actual
+$paginaActual = basename($_SERVER['PHP_SELF']);
+
+// Menú completo
+$menu = array(
+    array('Inicio',        'index.php',        'fa-home'),
+    array('Quiénes Somos', 'nosotros.php',     'fa-book-open'),
+    array('Servicios',     'servicios.php',    'fa-truck'),
+    array('Contacto',      'contacto.php',     'fa-address-card'),
+    array('Correo',        'correo.php',       'fa-envelope', true),
+    array('Sistema',       'login.php',        'fa-lock')
+);
+?>
+
 <aside
-  	id="sidebarMenu"
-  	role="complementary"
-	aria-labelledby="titulo-menu"
-  	class="sidebar bg-light shadow-sm h-100 px-3 py-4 rounded"
-  	aria-label="Menú lateral"
+    id="sidebarMenu"
+    role="complementary"
+    aria-labelledby="titulo-menu"
+    class="sidebar bg-light shadow-sm h-100 px-3 py-4 rounded"
+    aria-label="Menú lateral"
 >
-  	<section 
-		class=" py-5 px-3 rounded shadow-sm h-100"
-	>
-    	<h5 id="titulo-menu"
-			class="text-dark fw-bold fs-5 mb-4"	>
-			<i 	class="fas fa-globe me-2"></i> 
-			OPCIONES
-			<!-- 🌐 OPCIONES -->
-		</h5>
-    	<ul class="nav flex-column gap-2">
-      		<li class="nav-item">
-        		<a	class="nav-link active fw-semibold fs-6 d-flex align-items-center text-dark"
-          			href="index.php"
-        		>
-					<i class="fas fa-home me-2"></i>
-					Inicio
-          			<!-- 🏠 <span class="ms-1">Inicio</span> -->
-        		</a>
-      		</li>
-      		<li class="nav-item">
-        		<a
-          			class="nav-link fw-semibold fs-6 d-flex align-items-center text-dark"
-          			href="nosotros.php"
-        		>
-					<i class="fas fa-book-open me-2"></i>
-					<!-- <i class="bi bi-book-half"></i> -->
-					Quiénes Somos
-          			<!-- 📖 Quiénes Somos -->
-        		</a>
-      		</li>
-      		<li class="nav-item">
-        		<a
-          			class="nav-link fw-semibold fs-6 d-flex align-items-center text-dark"
-          			href="servicios.php"
-        		>
-					<i class="fas fa-truck me-2"></i> 
-					<!-- <i class="bi bi-truck me-2"></i> -->
-					Servicios
-          			<!-- 🚚 Servicios -->
-        		</a>
-      		</li>
-      		<li class="nav-item">
-        		<a
-          		class="nav-link fw-semibold fs-6 d-flex align-items-center text-dark"
-          		href="contacto.php"
-        		>
-					<i class="fas fa-address-card me-2"></i>
-					Contacto
-          			<!-- 📞 Contacto -->
-        		</a>
-      		</li>
-      		<li class="nav-item">
-        		<a
-          			class="nav-link fw-semibold fs-6 d-flex align-items-center text-dark"
-          			href="correo.php"
-          			target="_blank"
-        		>
-					<i class="fas fa-envelope me-2"></i> 
-					Correo
-          			<!-- ✉️ Correo -->
-        		</a>
-      		</li>
-      		<li class="nav-item">
-        		<a
-          			class="nav-link fw-semibold fs-6 d-flex align-items-center text-dark"
-          			href="login.php"
-        		>
-					<i class="fas fa-lock me-2"></i> 
-					Sistema
-          			<!-- 🔐 Sistema -->
-        		</a>
-      		</li>
-    	</ul>
-  	</section>
+    <section class="py-4 px-2 rounded shadow-sm h-100">
+        <h5 id="titulo-menu" class="text-dark fw-bold fs-5 mb-4">
+            <i class="fas fa-globe me-2"></i> OPCIONES
+        </h5>
+        <ul class="nav flex-column gap-2">
+            <?php
+            foreach ($menu as $item) {
+                $label   = $item[0];
+                $link    = $item[1];
+                $icon    = $item[2];
+                $target  = isset($item[3]) && $item[3] ? ' target="_blank"' : '';
+
+                // Excluir la página actual
+                if ($paginaActual === $link) {
+                    continue;
+                }
+
+                echo '<li class="nav-item">';
+                echo '<a href="' . $link . '" class="nav-link btn btn-global w-100 text-start d-flex align-items-center px-3 py-2"' . $target . '>';
+                echo '<i class="fas ' . $icon . ' me-2"></i>' . $label;
+                echo '</a>';
+                echo '</li>';
+            }
+            ?>
+        </ul>
+    </section>
 </aside>

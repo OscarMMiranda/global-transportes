@@ -1,4 +1,7 @@
 <?php
+    //  archivo :   /modulos/ubicaciones/ajax_departamento.php
+    
+
 require_once('../../includes/conexion.php');
 
 $sql = "SELECT id, nombre FROM departamentos ORDER BY nombre ASC";

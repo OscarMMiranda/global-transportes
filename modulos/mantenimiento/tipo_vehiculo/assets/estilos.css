@@ -1,0 +1,65 @@
+/* archivo: /modulos/mantenimiento/tipo_vehiculo/assets/estilos.css */
+
+/* 🔷 Título principal */
+h2 {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+/* 🔹 Contenedores de pestañas */
+#contenidoVehiculo .tab-pane {
+  border: 1px solid #dee2e6;
+  border-top: none;
+  background-color: #fff;
+  padding: 1rem;
+  min-height: 200px;
+}
+
+/* 🔸 Spinner de carga */
+.text-muted .fa-spinner {
+  font-size: 1.2rem;
+}
+
+/* ✅ Botón de acción principal */
+.btn-success {
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+}
+
+/* 🧩 Tarjetas de vehículo (si usás .card) */
+.card-vehiculo {
+  border-left: 4px solid #0d6efd;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background-color: #f8f9fa;
+}
+
+/* 🧠 Mensajes flash */
+.alert {
+  font-size: 0.95rem;
+  padding: 0.75rem 1rem;
+}
+
+/* 🔁 Modales */
+.modal-header {
+  background-color: #f1f3f5;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.modal-footer {
+  background-color: #f8f9fa;
+  border-top: 1px solid #dee2e6;
+}
+
+/* 📌 Íconos */
+.fas {
+  vertical-align: middle;
+}
+
+/* 🧭 Navegación activa */
+.nav-tabs .nav-link.active {
+  font-weight: bold;
+  color: #0d6efd;
+  border-color: #dee2e6 #dee2e6 #fff;
+}
