@@ -7,7 +7,7 @@
       <i class="fas fa-id-card fa-2x text-warning mb-2"></i>
       <h5 class="card-title">📄 Conductores</h5>
       <p class="card-text">Registrar y administrar conductores y licencias.</p>
-      <a href="../modulos/conductores/conductores.php" class="btn btn-warning">
+      <a href="../modulos/conductores/index.php" class="btn btn-warning">
         <i class="fas fa-arrow-right me-1"></i> Ir
       </a>
     </div>

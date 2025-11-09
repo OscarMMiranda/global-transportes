@@ -3,7 +3,7 @@
 
 	/**
 	 * Devuelve una única instancia de mysqli
-	 * @return mysqli
+	 * @return mysqli|false
 	 */
 	function getConnection() 
 		{

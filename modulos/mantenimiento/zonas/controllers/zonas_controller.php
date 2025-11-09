@@ -19,24 +19,13 @@ function prep($sql) {
 function listarZonasPadre() {
     global $conn;
     $sql = "SELECT id, nombre FROM zona WHERE estado = 1 ORDER BY nombre";
-    $stmt = $conn->prepare($sql);
-    if (!$stmt) {
-        die("Error en prepare() de listarZonasPadre: (" . $conn->errno . ") " . $conn->error);
-    }
+    $stmt = prep($sql);
     if (!$stmt->execute()) {
-        die("Error en execute() de listarZonasPadre: (" . $stmt->errno . ") " . $stmt->error);
+        die("Error en listarZonasPadre: ({$stmt->errno}) {$stmt->error}");
     }
-    $result = $stmt->get_result();
-    if (!$result) {
-        die("Error en get_result() de listarZonasPadre: (" . $stmt->errno . ") " . $stmt->error);
-    }
-    $rows = $result->fetch_all(MYSQLI_ASSOC);
-    $stmt->close();
-    return $rows;
+    $res = $stmt->get_result();
+    return $res->fetch_all(MYSQLI_ASSOC);
 }
-
-
-
 
 /**
  * Trae todos los departamentos
@@ -66,7 +55,35 @@ function listarProvincias() {
     return $res->fetch_all(MYSQLI_ASSOC);
 }
 
-function listarRutas() {
+/**
+ * Trae todos los distritos con su jerarquía
+ */
+function listarDistritosDisponibles() {
+    global $conn;
+    $sql = "
+        SELECT 
+            d.id,
+            d.nombre,
+            d.provincia_id,
+            p.nombre AS provincia,
+            dp.nombre AS departamento
+        FROM distritos d
+        JOIN provincias p ON d.provincia_id = p.id
+        JOIN departamentos dp ON p.departamento_id = dp.id
+        ORDER BY dp.nombre, p.nombre, d.nombre
+    ";
+    $stmt = prep($sql);
+    if (!$stmt->execute()) {
+        die("Error en listarDistritosDisponibles: ({$stmt->errno}) {$stmt->error}");
+    }
+    $res = $stmt->get_result();
+    return $res->fetch_all(MYSQLI_ASSOC);
+}
+
+/**
+ * Trae rutas entre distritos, con opción de incluir inactivas
+ */
+function listarRutas($incluirInactivas = false) {
     $sql = "
         SELECT 
             z.id,
@@ -87,6 +104,7 @@ function listarRutas() {
         JOIN distritos dd ON z.destino_id = dd.id
         JOIN provincias pd ON dd.provincia_id = pd.id
         JOIN departamentos ded ON pd.departamento_id = ded.id
+        " . ($incluirInactivas ? "WHERE z.estado = 0" : "WHERE z.estado = 1") . "
         ORDER BY zp.nombre, do.nombre
     ";
     $stmt = prep($sql);
@@ -105,6 +123,9 @@ function listarRutas() {
     return $data;
 }
 
+/**
+ * Trae una ruta específica para edición
+ */
 function obtenerRutaExtendida($id) {
     global $conn;
     $sql = "
@@ -123,6 +144,9 @@ function obtenerRutaExtendida($id) {
     return $stmt->get_result()->fetch_assoc();
 }
 
+/**
+ * Procesa guardado o edición de ruta
+ */
 function procesarRuta($post) {
     global $conn;
     $id         = (int) $post['id'];
@@ -134,8 +158,11 @@ function procesarRuta($post) {
     if (!$zona_id)    return '❌ Debes seleccionar una zona.';
     if (!$origen_id)  return '❌ Debes seleccionar el distrito de origen.';
     if (!$destino_id) return '❌ Debes seleccionar el distrito de destino.';
-    if ($origen_id === $destino_id) return '❌ El origen y destino no pueden ser iguales.';
 
+   // Permitir rutas internas (origen = destino), pero evitar duplicados exactos
+if ($origen_id === $destino_id && $zona_id === $zona_id) {
+    // No bloqueamos por ser iguales, pero sí validamos duplicados más abajo
+}
     // Validar duplicados
     $sqlChk = $id > 0
         ? "SELECT id FROM zonas WHERE zona_id = ? AND origen_id = ? AND destino_id = ? AND id <> ?"
@@ -169,54 +196,4 @@ function procesarRuta($post) {
 
     $stmt->close();
     return '';
-}
-
-function listarDistritosDisponibles() {
-    global $conn;
-    $sql = "
-        SELECT 
-            d.id,
-            d.nombre,
-            d.provincia_id,
-            p.nombre AS provincia,
-            dp.nombre AS departamento
-        FROM distritos d
-        JOIN provincias p ON d.provincia_id = p.id
-        JOIN departamentos dp ON p.departamento_id = dp.id
-        ORDER BY dp.nombre, p.nombre, d.nombre
-    ";
-    $stmt = prep($sql);
-    if (!$stmt->execute()) {
-        die("Error en listarDistritosDisponibles: ({$stmt->errno}) {$stmt->error}");
-    }
-    $res = $stmt->get_result();
-    return $res->fetch_all(MYSQLI_ASSOC);
-}
-
-
-function listarRutas($incluirInactivas = false) {
-    $sql = "
-        SELECT 
-            z.id,
-            zp.nombre AS zona_padre,
-            do.nombre AS distrito_origen,
-            po.nombre AS provincia_origen,
-            deo.nombre AS departamento_origen,
-            dd.nombre AS distrito_destino,
-            pd.nombre AS provincia_destino,
-            ded.nombre AS departamento_destino,
-            z.kilometros,
-            z.estado
-        FROM zonas z
-        JOIN zona zp ON z.zona_id = zp.id
-        JOIN distritos do ON z.origen_id = do.id
-        JOIN provincias po ON do.provincia_id = po.id
-        JOIN departamentos deo ON po.departamento_id = deo.id
-        JOIN distritos dd ON z.destino_id = dd.id
-        JOIN provincias pd ON dd.provincia_id = pd.id
-        JOIN departamentos ded ON pd.departamento_id = ded.id
-        " . ($incluirInactivas ? "" : "WHERE z.estado = 1") . "
-        ORDER BY zp.nombre, do.nombre
-    ";
-    ...
 }

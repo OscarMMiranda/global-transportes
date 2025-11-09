@@ -5,10 +5,11 @@
 session_start();
 
 if (!isset($_GET['eliminar'])) {
-  $_SESSION['error'] = '❌ ID no especificado para eliminar.';
-  header('Location: ../index.php');
-  exit;
-}
+  	$_SESSION['error'] = '❌ ID no especificado para eliminar.';
+
+  	header('Location: ../zonas/index.php');
+  	exit;
+	}
 
 $id = (int) $_GET['eliminar'];
 

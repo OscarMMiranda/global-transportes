@@ -37,8 +37,12 @@ if (!isset($subzonas) || !is_array($subzonas) || count($subzonas) === 0) {
       <td><?= $z['kilometros'] !== null ? number_format($z['kilometros'], 2) . ' km' : '—' ?></td>
       <td class="text-center"><?= $z['estado'] ? '✅' : '❌' ?></td>
       <td class="text-center">
-        <a href="index.php?id=<?= $z['id'] ?>" class="btn btn-sm btn-primary">Editar</a>
-        <a href="index.php?eliminar=<?= $z['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar esta ruta?')">Eliminar</a>
+        <?php if (isset($verEliminadas) && $verEliminadas): ?>
+          <a href="index.php?activar=<?= $z['id'] ?>" class="btn btn-sm btn-success" onclick="return confirm('¿Reactivar esta ruta?')">Reactivar</a>
+        <?php else: ?>
+          <a href="index.php?id=<?= $z['id'] ?>" class="btn btn-sm btn-primary">Editar</a>
+          <a href="index.php?eliminar=<?= $z['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar esta ruta?')">Eliminar</a>
+        <?php endif; ?>
       </td>
     </tr>
     <?php endforeach; ?>

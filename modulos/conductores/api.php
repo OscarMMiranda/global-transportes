@@ -1,142 +1,94 @@
 <?php
-// modulos/conductores/api.php
+// archivo: /modulos/conductores/api.php
 
-	error_reporting(E_ALL);
-	ini_set('display_errors', '1');
-	header('Content-Type: application/json; charset=utf-8');
+require_once '../../includes/config.php';
+require_once 'controllers/conductores_controller.php';
 
-	session_start();
-	if (! isset($_SESSION['rol_nombre']) || $_SESSION['rol_nombre'] !== 'admin') {
-    	http_response_code(403);
-    	echo json_encode(array('success' => false, 'error' => 'No autorizado'));
-    	exit;
-		}
+header('Content-Type: application/json');
 
-	// conexión
-	require_once __DIR__ . '/../../includes/conexion.php';
+// 🔒 Conexión segura
+$conn = getConnection();
+if (!$conn || !($conn instanceof mysqli)) {
+  error_log('❌ Error de conexión en api.php');
+  echo json_encode(['success' => false, 'error' => 'No se pudo conectar a la base de datos']);
+  exit;
+}
 
-	// controlador
-	require_once __DIR__ . '/controllers/conductorescontrollers.php';
+// 🔀 Operación solicitada
+$op = isset($_REQUEST['op']) ? $_REQUEST['op'] : '';
 
-	$ctrl = new ConductoresController($conn);
+switch ($op) {
+  case 'list':
+    try {
+      $incluirInactivos = isset($_GET['filter']) && $_GET['filter'] === 'all';
+      $conductores = listarConductores($conn, $incluirInactivos);
+      echo json_encode(['success' => true, 'data' => $conductores]);
+    } catch (Exception $e) {
+      error_log('❌ Error en op=list: ' . $e->getMessage());
+      echo json_encode(['success' => false, 'error' => 'Error al listar conductores']);
+    }
+    break;
 
-	// helper
-		function respond($payload, $code = 200)
-			{
-    		http_response_code($code);
-    		echo json_encode($payload);
-    		exit;
-			}
+  case 'get':
+    try {
+      $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+      if ($id <= 0) throw new Exception('ID inválido');
 
-	// sin usar PHP7 “null coalescing”
-		$op = isset($_REQUEST['op']) ? $_REQUEST['op'] : '';
+      $conductor = obtenerConductorPorId($conn, $id);
+      if (!$conductor) throw new Exception('Conductor no encontrado');
 
-	switch ($op) {
- 	   case 'list':
-    		// 1) Decide si mostramos sólo activos o todos (activos + inactivos)
-    		$filter = isset($_GET['filter']) && $_GET['filter'] === 'all' ? 'all' : 'active';
+      echo json_encode(['success' => true, 'data' => $conductor]);
+    } catch (Exception $e) {
+      error_log('❌ Error en op=get: ' . $e->getMessage());
+      echo json_encode(['success' => false, 'error' => $e->getMessage()]);
+    }
+    break;
 
-    		// 2) Arma el WHERE según el filtro
-    		$where = $filter === 'all'
-    		    ? ''               // sin filtro → trae todos
-    		    : 'WHERE activo=1'; // sólo activos
+  case 'save':
+    try {
+      $error = guardarConductor($conn, $_POST, $_FILES);
+      echo json_encode([
+        'success' => $error === '',
+        'error' => $error ?: 'Error al guardar conductor'
+      ]);
+    } catch (Exception $e) {
+      error_log('❌ Error en op=save: ' . $e->getMessage());
+      echo json_encode(['success' => false, 'error' => 'Error al guardar conductor']);
+    }
+    break;
 
-    		// 3) Ejecuta la consulta
-    		$sql = "SELECT id, 
-					nombres, 
-					apellidos, 
-					dni, 
-					licencia_conducir, 
-					telefono, 
-					correo,
-					direccion,
-					foto,
-					activo
-    	        FROM conductores
-    	        $where
-    	        ORDER BY apellidos, nombres";
-    		$result = $conn->query($sql);
-    		$rows = $result->fetch_all(MYSQLI_ASSOC);
+  case 'delete':
+    try {
+      $id = isset($_POST['id']) ? intval($_POST['id']) : 0;
+      if ($id <= 0) throw new Exception('ID inválido');
 
-    		// 4) Devuelve el JSON
-    		respond(['success' => true, 'data' => $rows]);
-    		break;
+      $error = eliminarConductor($conn, $id);
+      echo json_encode([
+        'success' => $error === '',
+        'error' => $error ?: 'Error al eliminar conductor'
+      ]);
+    } catch (Exception $e) {
+      error_log('❌ Error en op=delete: ' . $e->getMessage());
+      echo json_encode(['success' => false, 'error' => $e->getMessage()]);
+    }
+    break;
 
-		case 'get':
-    		$id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
-    		if (! $id) {
-    			respond(array('success' => false, 'error' => 'ID inválido'), 400);
-    			}
-    		$res = $ctrl->get($id);
-    		respond($res, $res['success'] ? 200 : 404);
-    		break;
+  case 'restore':
+    try {
+      $id = isset($_POST['id']) ? intval($_POST['id']) : 0;
+      if ($id <= 0) throw new Exception('ID inválido');
 
-	    case 'save':
-    	    $data = array(
-        	    'id'                => filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT) ? : 0,
-            	'nombres'           => isset($_POST['nombres'])   ? trim($_POST['nombres'])   : '',
-        	    'apellidos'         => isset($_POST['apellidos']) ? trim($_POST['apellidos']) : '',
-        	    'dni'               => isset($_POST['dni'])       ? trim($_POST['dni'])       : '',
-        	    'licencia_conducir' => isset($_POST['licencia_conducir']) ? trim($_POST['licencia_conducir']) : '',
-        	    'telefono'          => isset($_POST['telefono'])  ? trim($_POST['telefono'])  : '',
-        	    'correo'            => isset($_POST['correo'])    ? trim($_POST['correo'])    : '',
-				'direccion'			=> isset($_POST['direccion']) ? trim($_POST['direccion']) : "",
-				
-				'activo'            => isset($_POST['activo'])    ? 1 : 0
-        	);
-        	if ($data['nombres']=='' || $data['apellidos']=='' || ! preg_match('/^\d{8}$/', $data['dni'])) {
-            	respond(array('success'=>false,'error'=>'Datos inválidos'),422);
-        	}
+      $error = restaurarConductor($conn, $id);
+      echo json_encode([
+        'success' => $error === '',
+        'error' => $error ?: 'Error al restaurar conductor'
+      ]);
+    } catch (Exception $e) {
+      error_log('❌ Error en op=restore: ' . $e->getMessage());
+      echo json_encode(['success' => false, 'error' => $e->getMessage()]);
+    }
+    break;
 
-			// Procesar imagen
-			$fotoName = '';
-
-			// Verifica si se subió una imagen
-			if (!empty($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
-    			$tmp  = $_FILES['foto']['tmp_name'];
-    			$ext  = pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION);
-    			$fotoName = uniqid('cond_') . '.' . $ext;
-
-    			$destino = __DIR__ . '/../../uploads/conductores/' . $fotoName;
-
-    			if (!move_uploaded_file($tmp, $destino)) {
-        			respond(['success' => false, 'error' => 'No se pudo guardar la imagen']);
-    				}
-				}
-			
-			$data['foto'] = $fotoName;
-
-        	$res = $ctrl->save($data);
-        	respond($res, $res['success'] ? 200 : 500);
-        	break;
-
-    	case 'delete':
-        	$id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
-        	if (! $id) {
-        	    respond(array('success' => false, 'error' => 'ID inválido'), 400);
-        		}
-        	$res = $ctrl->delete($id);
-        	respond($res, $res['success'] ? 200 : 500);
-        	break;
-
-		case 'restore':
-    		$id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
-    		if (!$id) {
-        		respond(['success' => false, 'error' => 'ID inválido']);
-    			}
-
-    		$stmt = $conn->prepare("UPDATE conductores SET activo = 1 WHERE id = ?");
-    		$stmt->bind_param('i', $id);
-    		$stmt->execute();
-
-    		if ($stmt->affected_rows > 0) {
-        		respond(['success' => true]);
-    			} 
-			else {
-        		respond(['success' => false, 'error' => 'No se pudo restaurar']);
-    			}
-    		break;
-
-    		default:
-        	respond(array('success' => false, 'error' => 'Operación no válida'), 400);
-	}
+  default:
+    echo json_encode(['success' => false, 'error' => 'Operación no válida']);
+}

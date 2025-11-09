@@ -17,15 +17,15 @@
 	 * Lista todos los valores referenciales vigentes (activo = 1)
 	 */
 	function listarValoresReferenciales() {
-    	$sql = "
-      		SELECT 
+    	$sql = 
+            "SELECT 
         		vr.id,
-        		z.nombre                 AS zona,
-        		tm.nombre                AS tipo_mercaderia,
+        		z.nombre	AS zona,
+        		tm.nombre	AS tipo_mercaderia,
         		vr.anio,
         		vr.monto
       		FROM valor_referencial vr
-      		JOIN zona z   ON vr.zona_id              = z.id
+      		JOIN zona z  	ON vr.zona_id	= z.id
       		JOIN tipos_mercaderia tm ON vr.tipo_mercaderia_id = tm.id
       		WHERE vr.activo = 1
       		ORDER BY z.km_inicio, tm.nombre
@@ -129,7 +129,10 @@ function procesarValorReferencial($post) {
 }
 
 function listarValoresPivot() {
-    $sql = "SELECT * FROM vw_valores_local ORDER BY zona_id";
+    $sql = 
+        "SELECT * 
+        FROM vw_valores_local 
+        ORDER BY zona_id";
     $stmt = prep($sql);
     if (!$stmt->execute()) {
         die("Error en execute() de listarValoresPivot: ({$stmt->errno}) {$stmt->error}");

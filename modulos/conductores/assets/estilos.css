@@ -1,0 +1,87 @@
+/* archivo  :   /modulos/conductores/assets/estilos.css */
+
+/* === General === */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f8f9fa;
+}
+
+/* === Encabezado del módulo === */
+h2 i {
+  font-size: 1.4rem;
+}
+
+/* === Tabla de conductores === */
+#tablaConductores th,
+#tablaConductores td {
+  vertical-align: middle;
+}
+
+#tablaConductores .estado-activo {
+  color: #198754;
+  font-weight: bold;
+}
+
+#tablaConductores .estado-inactivo {
+  color: #6c757d;
+  font-weight: bold;
+}
+
+#tablaConductores .foto-miniatura {
+  max-height: 60px;
+  border-radius: 6px;
+  box-shadow: 0 0 4px rgba(0,0,0,0.2);
+}
+
+/* === Botones de acción === */
+.btn-group .btn {
+  min-width: 38px;
+  padding: 6px 10px;
+}
+
+.btn-group .btn i {
+  font-size: 1rem;
+}
+
+/* === Modales === */
+.modal-title i {
+  margin-right: 6px;
+}
+
+.modal-body p {
+  margin-bottom: 0.5rem;
+}
+
+#ver_foto {
+  max-height: 200px;
+  border-radius: 8px;
+  box-shadow: 0 0 6px rgba(0,0,0,0.3);
+}
+
+/* === Tooltips === */
+[data-bs-toggle="tooltip"] {
+  cursor: pointer;
+}
+
+/* === Badges de estado === */
+.badge.bg-success {
+  font-size: 0.9rem;
+  padding: 0.4em 0.6em;
+}
+
+.badge.bg-secondary {
+  font-size: 0.9rem;
+  padding: 0.4em 0.6em;
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+  .btn-group .btn {
+    font-size: 0.85rem;
+    padding: 5px 8px;
+  }
+
+  #tablaConductores .foto-miniatura {
+    max-height: 40px;
+  }
+}

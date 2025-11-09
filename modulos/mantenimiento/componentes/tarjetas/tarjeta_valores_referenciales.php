@@ -10,7 +10,7 @@
         Gestionar valores anuales por zona y tipo de carga.
       </p>
       <a 
-        href="../../modulos/mantenimiento/valores_referenciales/editar_valores.php" 
+        href="../../modulos/mantenimiento/valores_referenciales/index.php" 
         class="btn dashboard-btn btn-primary mt-3"
       >
         Administrar Valores

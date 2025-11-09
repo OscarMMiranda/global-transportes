@@ -167,6 +167,7 @@ $conn->close();
           class="form-control" 
           placeholder="Usuario"
           value="<?= htmlspecialchars($usuario, ENT_QUOTES, 'UTF-8') ?>" 
+          autocomplete="username"
           required
         >
         <label for="usuario"><i class="fas fa-user me-2"></i> Usuario</label>
@@ -179,6 +180,7 @@ $conn->close();
           name="clave" 
           class="form-control" 
           placeholder="Contraseña"
+          autocomplete="current-password"
           required
         >
         <label for="clave"><i class="fas fa-key me-2"></i> Contraseña</label>

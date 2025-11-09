@@ -1,0 +1,15 @@
+<?php
+// archivo: /modulos/mantenimiento/zonas/componentes/tabs_estado.php
+?>
+<ul class="nav nav-tabs mb-3">
+  <li class="nav-item">
+    <a class="nav-link <?= empty($verEliminadas) ? 'active' : '' ?>" href="index.php">
+      Zonas activas
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link <?= !empty($verEliminadas) ? 'active' : '' ?>" href="index.php?inactivas=1">
+      Zonas eliminadas
+    </a>
+  </li>
+</ul>

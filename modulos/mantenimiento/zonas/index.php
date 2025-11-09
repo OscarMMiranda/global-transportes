@@ -34,33 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   exit;
 }
 
-
-$verEliminadas = isset($_GET['inactivas']) && $_GET['inactivas'] === '1';
-$subzonas = listarRutas($verEliminadas);
-
-// 📦 Datos para vistas
-$zonasPadre   = listarZonasPadre();
-$distritos    = listarDistritosDisponibles();
-$subzonas     = listarRutas();
-$departamentos = listarDepartamentos(); // ← nueva función en controlador
-$provincias    = listarProvincias();    // ← nueva función en controlador
-
-// Precarga extendida si se está editando
-$registro = isset($_GET['id']) ? obtenerRutaExtendida($_GET['id']) : array(
-  'id' => 0,
-  'zona_id' => 0,
-  'origen_id' => 0,
-  'destino_id' => 0,
-  'kilometros' => ''
-);
-
-foreach (['id','zona_id','origen_id','destino_id','kilometros'] as $k) {
-  if (!isset($registro[$k])) $registro[$k] = ($k === 'kilometros') ? '' : 0;
-}
-
-// 🧯 Mensajes
-$error = isset($_SESSION['error']) ? $_SESSION['error'] : '';
-unset($_SESSION['error']);
+// 📦 Datos para vista
+require_once __DIR__ . '/helpers/datos_vista.php';
 ?>
 
 <!DOCTYPE html>
@@ -78,11 +53,17 @@ unset($_SESSION['error']);
   <!-- 🧩 Mensajes -->
   <?php include __DIR__ . '/componentes/mensajes_flash.php'; ?>
 
-	
-
-
+  <!-- 🧩 Pestañas de vista -->
+  <?php include __DIR__ . '/componentes/tabs_estado.php'; ?>
+  
   <!-- 🧩 Tabla de subzonas -->
-  <?php include __DIR__ . '/componentes/tabla_subzonas.php'; ?>
+  <?php
+    extract([
+      'subzonas' => $subzonas,
+      'verEliminadas' => $verEliminadas
+    ]);
+    include __DIR__ . '/componentes/tabla_subzonas.php';
+  ?>
 
   <!-- 🧩 Modales -->
   <?php include __DIR__ . '/modales/modal_agregar.php'; ?>

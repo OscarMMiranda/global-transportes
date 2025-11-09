@@ -15,9 +15,10 @@ require_once __DIR__ . '/../controllers/zonas_controller.php';
 $stmt = $conn->prepare("UPDATE zonas SET estado = 1 WHERE id = ?");
 if (!$stmt) {
   $_SESSION['error'] = "❌ Error al preparar activación: " . $conn->error;
-  header('Location: index.php');
-  exit;
-}
+
+    header('Location: ../zonas/index.php');
+    exit;
+    }
 
 $stmt->bind_param("i", $id);
 if (!$stmt->execute()) {
