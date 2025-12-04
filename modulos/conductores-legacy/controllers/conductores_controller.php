@@ -1,4 +1,7 @@
 <?php
+// archivo	:	/modulos/conductores/controllers/conductores_controller.php
+
+
 /**
  * Helper para preparar statements con chequeo de errores (MySQLi)
  * @throws Exception
@@ -20,18 +23,30 @@ function prep($conn, $sql) {
  * Lista todos los conductores (activos por defecto)
  */
 function listarConductores($conn, $incluirInactivos = false) {
-    $sql = "SELECT id, nombres, apellidos, dni, licencia_conducir, telefono, activo, foto FROM conductores";
+    $sql = "SELECT id, nombres, apellidos, dni, licencia_conducir, telefono, activo, foto 
+            FROM conductores";
     if (!$incluirInactivos) {
         $sql .= " WHERE activo = 1";
     }
     $sql .= " ORDER BY apellidos, nombres";
 
     $stmt = prep($conn, $sql);
-    $stmt->execute();
-    $res = $stmt->get_result();
-    return $res ? $res->fetch_all(MYSQLI_ASSOC) : array();
-}
+    if (!$stmt->execute()) {
+        throw new Exception("❌ Error en execute(): {$stmt->error}");
+    }
 
+    $res = $stmt->get_result();
+    $conductores = [];
+
+    if ($res) {
+        while ($row = $res->fetch_assoc()) {
+            $conductores[] = $row;
+        }
+    }
+
+    $stmt->close();
+    return $conductores;
+}
 /**
  * Obtiene un conductor por ID (compatible con PHP 5.6 sin mysqlnd)
  */
@@ -137,3 +152,15 @@ function restaurarConductor($conn, $id) {
     $stmt->bind_param("i", $id);
     return $stmt->execute() ? '' : "❌ Error al restaurar conductor: {$stmt->error}";
 }
+
+
+/**
+ * Elimina definitivamente un conductor
+ */
+function eliminarConductorPermanentemente($conn, $id) {
+    $stmt = prep($conn, "DELETE FROM conductores WHERE id = ?");
+    $stmt->bind_param("i", $id);
+    return $stmt->execute() ? '' : "❌ Error al eliminar conductor: {$stmt->error}";
+}
+
+
