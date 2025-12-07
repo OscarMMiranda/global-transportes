@@ -1,0 +1,24 @@
+{
+  "ftp://globaltransportes.com:21@wi010232@globaltransportes.com": {
+    "home": {
+      "wi010232": {
+        "public_html": {
+          ".DS_Store": {
+            "type": "-",
+            "size": 14340,
+            "lmtime": 0,
+            "modified": false
+          },
+          "ftp-sync.json": {
+            "type": "-",
+            "size": 365,
+            "lmtime": 0,
+            "modified": false
+          },
+          "modulos": {}
+        }
+      }
+    }
+  },
+  "$version": 1
+}

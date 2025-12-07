@@ -16,10 +16,12 @@
       <?php endif; ?>
       <?= htmlspecialchars($titulo) ?>
     </h2>
+    
     <?php if (!empty($acciones)): ?>
-      <div class="ms-3">
-        <?= $acciones ?>
-      </div>
+      
+      <div class="ms-3 d-flex gap-2">
+    <?= $$acciones = '<a href="/nuevo.php" class="btn btn-primary">Nuevo</a>'; ?>
+    </div>
     <?php endif; ?>
   </div>
 </div>

@@ -1,0 +1,21 @@
+{
+  "deployments": [
+    {
+      "name": "DonWeb",
+      "type": "ftp",
+      "host": "globaltransportes.com",
+      "port": 21,
+      "secure": false,
+      "user": "wi010232@globaltransportes.com",
+      "password": "rapgupkr0Iusepn",
+      "remotePath": "/home/wi010232/public_html/",
+      "passive": true,
+      "uploadOnSave": true,
+      "ignore": [
+        ".git",
+        ".vscode",
+        "node_modules"
+      ]
+    }
+  ]
+}

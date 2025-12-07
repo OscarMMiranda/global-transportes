@@ -1,7 +1,5 @@
 <?php
-	//
-	//	
-
+	
 	// archivo: /modulos/conductores/index.php
 
 	if (session_status() === PHP_SESSION_NONE) {
@@ -11,7 +9,7 @@
     	header("Location: /login.php");
     	exit;
 		}
-	$titulo = 'Módulo Conductores ____-';
+	$titulo = 'Módulo Conductores';
 ?>
 
 <?php include __DIR__ . '/componentes/head.php'; ?>
@@ -44,6 +42,9 @@
 
   		<!-- Script del módulo -->
   		<script src="/modulos/conductores/assets/conductores.js"></script>
+
+
+
 	</body>
 </html>
 

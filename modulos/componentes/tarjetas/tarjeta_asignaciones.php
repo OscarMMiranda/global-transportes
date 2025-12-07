@@ -1,5 +1,5 @@
 <!--    archivo :   /modulos/componentes/tarjetas/tarjeta_asignaciones.php  -->
-
+    
 
 <div class="col">
   <div class="card card-dashboard shadow-sm h-100 text-center">

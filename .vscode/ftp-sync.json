@@ -1,18 +1,17 @@
 {
-  "name": "globaltransportes",
-  "protocol": "ftp",
+  "remotePath": "/home/wi010232/public_html/",
   "host": "globaltransportes.com",
-  "port": 21,
   "username": "wi010232@globaltransportes.com",
   "password": "rapgupkr0Iusepn",
-  "remotePath": "/home/wi010232/public_html/",
-  "syncMode": "update",
+  "port": 21,
+  "protocol": "ftp",
   "uploadOnSave": true,
+  "passive": true,
   "secure": false,
+  "debug": true,
   "ignore": [
     ".git",
     ".vscode",
     "node_modules"
-  ],
-  "skipUploadModificationTime": true
+  ]
 }
