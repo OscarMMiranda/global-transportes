@@ -5,7 +5,7 @@
   "password": "rapgupkr0Iusepn",
   "protocol": "ftp",
   "passive": true,
-  "remotePath": "public_html",
+  "remotePath": "/",
   "uploadOnSave": true,
   "ignore": [
     ".git",

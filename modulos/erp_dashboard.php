@@ -1,5 +1,5 @@
 <?php
-    //  archivo :   /modulos/erp_dashboard.php
+	//  archivo :   /modulos/erp_dashboard.php
 	session_start();
 
 	// Verificar acceso solo para administradores
@@ -16,14 +16,16 @@
     	<meta charset="UTF-8">
     	<title>ERP - Global Transportes</title>
     	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    	<!-- Bootstrap CSS -->
+    	
+		<!-- Bootstrap CSS -->
     	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    	<!-- Estilos personalizados -->
+    	
+		<!-- Estilos personalizados -->
     	<link rel="stylesheet" href="../css/dashboard.css">
 	</head>
 	
 	<body>
-	<!-- Navbar superior -->
+		<!-- Navbar superior -->
     	<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
         	<div class="container-fluid">
             	<a class="navbar-brand" href="../index.php">

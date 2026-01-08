@@ -80,7 +80,7 @@ registrarActividad($conn, $_SESSION['usuario'], 'Acceso al Panel de Administraci
               <i class="fa fa-users fa-2x text-primary mb-2"></i>
               <h5 class="card-title">Gestión de Usuarios</h5>
               <p class="card-text">Crear, editar o eliminar cuentas.</p>
-              <a href="/admin/users/users.php" class="btn btn-primary">Ir</a>
+              <a href="/modulos/usuarios/index.php" class="btn btn-primary">Ir</a>
             </div>
           </div>
         </div>

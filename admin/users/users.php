@@ -1,5 +1,13 @@
 <?php
-// /admin/users/users.php
+	// archivo: /modulos/usuarios/usuarios.php
+	// ----------------------------------------------
+	// Lista de usuarios con opción de exportar a CSV
+	// ----------------------------------------------
+	// Requiere sesión iniciada y rol de administrador
+	// Incluye conexión a base de datos
+	// Registra acceso en historial_bd
+	// ----------------------------------------------
+	
 
 session_start();
 require_once '../../includes/config.php';

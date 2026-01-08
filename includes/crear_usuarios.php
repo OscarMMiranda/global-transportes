@@ -58,6 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <input type="text" name="usuario" placeholder="Usuario" required>
             <input type="email" name="correo" placeholder="Correo Electrónico" required>
             <input type="password" name="contrasena" placeholder="Contraseña" required>
+            
 
             <select name="rol" required>
                 <option value="" disabled selected>Selecciona un rol</option>

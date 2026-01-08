@@ -37,6 +37,11 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="../modulos/documentos/index.php" class="nav-link">
+                    📄 Documentos
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="../admin/audits/admin_bd.php" class="nav-link">
                     📊 Auditoría y BD
                 </a>

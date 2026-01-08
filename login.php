@@ -1,93 +1,106 @@
 <?php
-// archivo	:	/public_html/login.php
+// archivo: /public_html/login.php
 
+// --------------------------------------------------------------
+// 1. Mostrar errores (solo para depuración)
+// --------------------------------------------------------------
 
-// public_html/login.php
-var_dump(__DIR__);
-exit;
-
-
-// 	1. 	Mostrar errores para depuración
-ini_set('display_errors',    1);
+ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-
-// 	2. 	Cargar la configuración global
+// --------------------------------------------------------------
+// 2. Cargar configuración global
+// --------------------------------------------------------------
 require_once __DIR__ . '/includes/config.php';
 
+// Iniciar sesión si no está iniciada
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
-// session_start();
-
-// 	3. 	Cargar la conexion
+// --------------------------------------------------------------
+// 3. Conexión a la base de datos
+// --------------------------------------------------------------
 $conn = getConnection();
+if (!$conn) {
+    die("Error de conexión a la base de datos.");
+}
 
-
-
-
-
-// 2. Incluir conexión (tu archivo original devuelve $conn)
-// $conn = require_once __DIR__ . '/includes/conexion.php';
-
-// 3. Generar o recuperar token CSRF
+// --------------------------------------------------------------
+// 4. Generar token CSRF
+// --------------------------------------------------------------
 if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(openssl_random_pseudo_bytes(32));
 }
 $csrf = $_SESSION['csrf_token'];
 
-// 4. Inicializar variables
+// --------------------------------------------------------------
+// 5. Variables iniciales
+// --------------------------------------------------------------
 $error   = '';
 $usuario = isset($_POST['usuario']) ? trim($_POST['usuario']) : '';
-$clave    = isset($_POST['clave'])   ? $_POST['clave']          : '';
+$clave   = isset($_POST['clave'])   ? $_POST['clave']          : '';
 
-// 5. Procesar envío
+// --------------------------------------------------------------
+// 6. Procesar formulario
+// --------------------------------------------------------------
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // 5.1 Validar CSRF
-    if (! isset($_POST['csrf_token']) || 
-         ! hash_equals($csrf, $_POST['csrf_token'])
-    ) {
+
+    // 6.1 Validar CSRF
+    if (!isset($_POST['csrf_token']) || !hash_equals($csrf, $_POST['csrf_token'])) {
         $error = 'Token de seguridad inválido.';
     }
-    // 5.2 Validar campos
+
+    // 6.2 Validar campos
     elseif ($usuario === '' || $clave === '') {
         $error = 'Usuario y contraseña son requeridos.';
     }
+
     else {
-        // 5.3 Preparar y ejecutar consulta
+        // 6.3 Consulta del usuario
         $sql = "
             SELECT 
                 u.id,
                 u.usuario,
-                u.contrasena    AS clave_hash,
-                u.rol           AS rol_id,
-                r.nombre        AS rol_nombre
+                u.contrasena AS clave_hash,
+                u.rol        AS rol_id,
+                r.nombre     AS rol_nombre
             FROM usuarios u
             JOIN roles r ON u.rol = r.id
             WHERE u.usuario = ?
             LIMIT 1
         ";
+
         $stmt = $conn->prepare($sql);
-        if (! $stmt) {
+        if (!$stmt) {
             die('Error interno: ' . $conn->error);
         }
+
         $stmt->bind_param('s', $usuario);
         $stmt->execute();
         $res = $stmt->get_result();
 
-        // 5.4 Verificar existencia de usuario
+        // 6.4 Verificar existencia
         if ($res && $res->num_rows === 1) {
             $fila = $res->fetch_assoc();
 
-            // 5.5 Verificar contraseña
+            // 6.5 Verificar contraseña
             if (password_verify($clave, $fila['clave_hash'])) {
-                // 5.6 Guardar datos en sesión
-                session_regenerate_id(true);
-                $_SESSION['id']          = $fila['id'];
-                $_SESSION['usuario']     = $fila['usuario'];
-                $_SESSION['rol']         = $fila['rol_id'];
-                $_SESSION['rol_nombre']  = $fila['rol_nombre'];
 
-                // 5.7 Redireccionar según rol
+                // 6.6 Regenerar sesión
+                session_regenerate_id(true);
+
+                // --------------------------------------------------------------
+                // VARIABLES DE SESIÓN CORRECTAS (CLAVE PARA PERMISOS)
+                // --------------------------------------------------------------
+                $_SESSION['usuario_id'] = $fila['id'];        // ← NECESARIO PARA permisos.php
+                $_SESSION['id']         = $fila['id'];
+                $_SESSION['usuario']    = $fila['usuario'];
+                $_SESSION['rol']        = $fila['rol_id'];
+                $_SESSION['rol_nombre'] = $fila['rol_nombre'];
+
+                // 6.7 Redirección por rol
                 switch ($fila['rol_nombre']) {
                     case 'admin':
                         $dest = '/paneles/panel_admin.php'; break;
@@ -101,11 +114,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $dest = '/paneles/panel.php';
                 }
 
-                // Verificar existencia y redirigir
+                // Verificar archivo destino
                 if (file_exists(__DIR__ . $dest)) {
                     header("Location: $dest");
                     exit;
                 }
+
                 $error = "Panel de destino no encontrado: $dest";
             }
             else {
@@ -115,16 +129,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         else {
             $error = 'Usuario no encontrado.';
         }
+
         $stmt->close();
     }
 }
 
-
-
-
-
-
-// 6. Cerrar conexión
+// --------------------------------------------------------------
+// 7. Cerrar conexión
+// --------------------------------------------------------------
 $conn->close();
 ?>
 <!DOCTYPE html>
@@ -138,6 +150,7 @@ $conn->close();
     rel="stylesheet"
   />
 </head>
+
 <body class="d-flex align-items-center justify-content-center" style="min-height:100vh; background:linear-gradient(135deg,#0052D4,#4364F7);">
 
   <div class="card p-4" style="width:100%; max-width:400px;">
@@ -178,10 +191,6 @@ $conn->close();
       <button type="submit" class="btn btn-primary w-100">Ingresar</button>
     </form>
   </div>
-
-
-
-  
 
 </body>
 </html>

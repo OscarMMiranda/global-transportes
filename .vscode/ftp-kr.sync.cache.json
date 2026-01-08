@@ -1,5 +1,87 @@
 {
   "ftp://globaltransportes.com:21@wi010232@globaltransportes.com": {
+    ".hintrc": {
+      "type": "-",
+      "size": 0,
+      "lmtime": 0,
+      "modified": false
+    },
+    ".htaccess": {
+      "type": "-",
+      "size": 102,
+      "lmtime": 0,
+      "modified": false
+    },
+    ".vscode": {},
+    "2006 kenworth cold start.mp3": {
+      "type": "-",
+      "size": 1840588,
+      "lmtime": 0,
+      "modified": false
+    },
+    "admin": {},
+    "assets": {},
+    "bootstrap_sitio.php": {
+      "type": "-",
+      "size": 1331,
+      "lmtime": 0,
+      "modified": false
+    },
+    "contacto.php": {
+      "type": "-",
+      "size": 2159,
+      "lmtime": 0,
+      "modified": false
+    },
+    "correo.php": {
+      "type": "-",
+      "size": 2313,
+      "lmtime": 0,
+      "modified": false
+    },
+    "css": {},
+    "debug.log": {
+      "type": "-",
+      "size": 0,
+      "lmtime": 0,
+      "modified": false
+    },
+    "debug.php": {
+      "type": "-",
+      "size": 943,
+      "lmtime": 0,
+      "modified": false
+    },
+    "debug_log.txt": {
+      "type": "-",
+      "size": 245,
+      "lmtime": 0,
+      "modified": false
+    },
+    "error.log": {
+      "type": "-",
+      "size": 0,
+      "lmtime": 0,
+      "modified": false
+    },
+    "error_log.txt": {
+      "type": "-",
+      "size": 351361,
+      "lmtime": 0,
+      "modified": true
+    },
+    "estructura.txt": {
+      "type": "-",
+      "size": 1853,
+      "lmtime": 0,
+      "modified": false
+    },
+    "favicon.ico": {
+      "type": "-",
+      "size": 4833,
+      "lmtime": 0,
+      "modified": false
+    },
     "home": {
       "wi010232": {
         "public_html": {
@@ -18,7 +100,117 @@
           "modulos": {}
         }
       }
-    }
+    },
+    "images": {},
+    "img": {},
+    "includes": {},
+    "index.php": {
+      "type": "-",
+      "size": 3131,
+      "lmtime": 0,
+      "modified": false
+    },
+    "info.php": {
+      "type": "-",
+      "size": 20,
+      "lmtime": 0,
+      "modified": false
+    },
+    "js": {},
+    "legacy": {},
+    "login.php": {
+      "type": "-",
+      "size": 6361,
+      "lmtime": 0,
+      "modified": true
+    },
+    "login_test.php": {
+      "type": "-",
+      "size": 32,
+      "lmtime": 0,
+      "modified": false
+    },
+    "logout.php": {
+      "type": "-",
+      "size": 522,
+      "lmtime": 0,
+      "modified": false
+    },
+    "logs": {},
+    "manifest.json": {
+      "type": "-",
+      "size": 1112,
+      "lmtime": 0,
+      "modified": false
+    },
+    "modulos": {},
+    "nosotros.html": {
+      "type": "-",
+      "size": 2374,
+      "lmtime": 0,
+      "modified": false
+    },
+    "nosotros.php": {
+      "type": "-",
+      "size": 3208,
+      "lmtime": 0,
+      "modified": false
+    },
+    "ommz": {},
+    "paneles": {},
+    "partials": {},
+    "popup.html": {
+      "type": "-",
+      "size": 1085,
+      "lmtime": 0,
+      "modified": false
+    },
+    "prueba.php": {
+      "type": "-",
+      "size": 22,
+      "lmtime": 0,
+      "modified": false
+    },
+    "README.md": {
+      "type": "-",
+      "size": 1098,
+      "lmtime": 0,
+      "modified": false
+    },
+    "servicios.php": {
+      "type": "-",
+      "size": 2194,
+      "lmtime": 0,
+      "modified": false
+    },
+    "sistema": {},
+    "test.php": {
+      "type": "-",
+      "size": 18,
+      "lmtime": 0,
+      "modified": false
+    },
+    "test_conexion.php": {
+      "type": "-",
+      "size": 278,
+      "lmtime": 0,
+      "modified": false
+    },
+    "test_finalizar.php": {
+      "type": "-",
+      "size": 1002,
+      "lmtime": 0,
+      "modified": false
+    },
+    "Thumbs.db": {
+      "type": "-",
+      "size": 16896,
+      "lmtime": 0,
+      "modified": false
+    },
+    "uploads": {},
+    "users": {},
+    "views": {}
   },
   "$version": 1
 }

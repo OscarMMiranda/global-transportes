@@ -42,17 +42,17 @@ try {
                 }
             }
 
-            // Normalizar salida
+            // Normalizar salida (sin ??)
             $data = [
-                'id' => (int)$conductor['id'],
-                'nombres' => $conductor['nombres'] ?? '',
-                'apellidos' => $conductor['apellidos'] ?? '',
-                'dni' => $conductor['dni'] ?? '',
-                'licencia_conducir' => $conductor['licencia_conducir'] ?? '',
-                'telefono' => $conductor['telefono'] ?? '',
-                'correo' => $conductor['correo'] ?? '',
-                'direccion' => $conductor['direccion'] ?? '',
-                'activo' => (int)($conductor['activo'] ?? 0),
+                'id' => isset($conductor['id']) ? (int)$conductor['id'] : 0,
+                'nombres' => isset($conductor['nombres']) ? $conductor['nombres'] : '',
+                'apellidos' => isset($conductor['apellidos']) ? $conductor['apellidos'] : '',
+                'dni' => isset($conductor['dni']) ? $conductor['dni'] : '',
+                'licencia_conducir' => isset($conductor['licencia_conducir']) ? $conductor['licencia_conducir'] : '',
+                'telefono' => isset($conductor['telefono']) ? $conductor['telefono'] : '',
+                'correo' => isset($conductor['correo']) ? $conductor['correo'] : '',
+                'direccion' => isset($conductor['direccion']) ? $conductor['direccion'] : '',
+                'activo' => isset($conductor['activo']) ? (int)$conductor['activo'] : 0,
                 'foto' => $fotoRuta
             ];
 

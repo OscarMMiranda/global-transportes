@@ -1,58 +1,61 @@
 <?php
 // archivo: /modulos/conductores/acciones/listar.php
 
-require_once __DIR__ . '/../../../includes/config.php';
+header('Content-Type: application/json; charset=utf-8');
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
+// Captura errores fatales al final del script
+register_shutdown_function(function () {
+    $error = error_get_last();
+    if ($error !== null) {
+        echo json_encode(array(
+            'success' => false,
+            'error'   => 'Error fatal: ' . $error['message']
+        ));
+    }
+});
+
+// Cargar config y controlador
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/config.php';
 require_once __DIR__ . '/../controllers/conductores_controller.php';
 
-header('Content-Type: application/json; charset=utf-8');
-
+// Obtener conexión
 $conn = getConnection();
 if (!$conn) {
-    echo json_encode(['success' => false, 'data' => [], 'error' => 'Conexión fallida']);
+    echo json_encode(array(
+        'success' => false,
+        'error'   => '❌ No se pudo conectar a la base de datos'
+    ));
     exit;
 }
 
-$estado = isset($_GET['estado']) ? $_GET['estado'] : 'all';
+// Leer parámetro estado
+$estado = isset($_GET['estado']) ? $_GET['estado'] : 'activo';
+
+// Validar valor permitido
+if ($estado !== 'activo' && $estado !== 'inactivo') {
+    $estado = 'activo';
+}
 
 try {
-    $todos = listarConductores($conn, true);
+    // Llamar al controlador con el estado
+    $rows = listarConductores($conn, $estado);
 
-    switch ($estado) {
-        case 'activo':
-            $conductores = array_filter($todos, fn($c) => (int)$c['activo'] === 1);
-            break;
-        case 'inactivo':
-            $conductores = array_filter($todos, fn($c) => (int)$c['activo'] === 0);
-            break;
-        default:
-            $conductores = $todos;
-            break;
+    // Validar que sea un array
+    if (!is_array($rows)) {
+        throw new Exception('El controlador no devolvió un array válido');
     }
 
-    // Normalizar salida: asegurar que cada registro tenga las claves correctas
-    $salida = array_map(function ($c) {
-        return [
-            'id' => $c['id'], // ⚠️ clave fundamental para los botones
-            'nombres' => $c['nombres'] ?? '',
-            'apellidos' => $c['apellidos'] ?? '',
-            'dni' => $c['dni'] ?? '',
-            'licencia_conducir' => $c['licencia_conducir'] ?? '',
-            'telefono' => $c['telefono'] ?? '',
-            'correo' => $c['correo'] ?? '',
-            'direccion' => $c['direccion'] ?? '',
-            'activo' => (int)($c['activo'] ?? 0),
-            'foto' => !empty($c['foto']) ? '/uploads/conductores/' . basename($c['foto']) : null
-        ];
-    }, $conductores);
-
-    echo json_encode([
+    // Respuesta para DataTables
+    echo json_encode(array(
         'success' => true,
-        'data' => array_values($salida)
-    ]);
+        'data'    => $rows
+    ));
 } catch (Exception $e) {
-    echo json_encode([
+    error_log("❌ listar.php: " . $e->getMessage());
+    echo json_encode(array(
         'success' => false,
-        'data' => [],
-        'error' => $e->getMessage()
-    ]);
+        'error'   => 'Error interno: ' . $e->getMessage()
+    ));
 }
