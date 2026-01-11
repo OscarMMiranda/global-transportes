@@ -28,15 +28,15 @@
   </button>
 
   <?php if (!empty($c['activo']) && (int)$c['activo'] === 1): ?>
-    <!-- Eliminar -->
+    <!-- Desactivar (soft delete) -->
     <button 
       type="button" 
-      class="btn btn-danger btn-delete" 
+      class="btn btn-warning btn-soft-delete" 
       data-id="<?= $c['id'] ?>" 
-      title="Eliminar conductor"
-      aria-label="Eliminar conductor <?= htmlspecialchars($c['nombres'] . ' ' . $c['apellidos']) ?>"
+      title="Desactivar conductor"
+      aria-label="Desactivar conductor <?= htmlspecialchars($c['nombres'] . ' ' . $c['apellidos']) ?>"
     >
-      <i class="fa-solid fa-trash-can"></i>
+      <i class="fa-solid fa-ban"></i>
     </button>
   <?php else: ?>
     <!-- Restaurar -->
@@ -48,6 +48,17 @@
       aria-label="Restaurar conductor <?= htmlspecialchars($c['nombres'] . ' ' . $c['apellidos']) ?>"
     >
       <i class="fa-solid fa-rotate-left"></i>
+    </button>
+
+    <!-- Eliminar definitivo -->
+    <button 
+      type="button" 
+      class="btn btn-danger btn-delete" 
+      data-id="<?= $c['id'] ?>" 
+      title="Eliminar definitivamente"
+      aria-label="Eliminar definitivamente a <?= htmlspecialchars($c['nombres'] . ' ' . $c['apellidos']) ?>"
+    >
+      <i class="fa-solid fa-trash"></i>
     </button>
   <?php endif; ?>
 

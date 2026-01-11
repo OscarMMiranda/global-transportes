@@ -17,7 +17,8 @@ if ($id <= 0) {
 }
 
 try {
-    $stmt = $conn->prepare("
+
+    $sql = "
         SELECT 
             id,
             nombres,
@@ -31,37 +32,69 @@ try {
             foto
         FROM conductores
         WHERE id = ?
-    ");
+    ";
+
+    $stmt = $conn->prepare($sql);
     if (!$stmt) {
         echo json_encode(['success' => false, 'error' => $conn->error]);
         exit;
     }
 
     $stmt->bind_param("i", $id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $data = $result->fetch_assoc();
 
-    if ($data) {
-        // Ajustar ruta de la foto si existe
-        if (!empty($data['foto'])) {
-            // Si en BD ya está guardada la ruta completa (/uploads/conductores/archivo.jpg), no concatenar nada
-            if (strpos($data['foto'], '/uploads/conductores/') === 0) {
-                $data['foto'] = $data['foto'];
+    if (!$stmt->execute()) {
+        echo json_encode(['success' => false, 'error' => $stmt->error]);
+        exit;
+    }
+
+    $stmt->bind_result(
+        $id_c,
+        $nombres,
+        $apellidos,
+        $dni,
+        $licencia,
+        $telefono,
+        $correo,
+        $direccion,
+        $activo,
+        $foto
+    );
+
+    if ($stmt->fetch()) {
+
+        // Construir ruta correcta de foto
+        if (!empty($foto)) {
+            // Si ya viene con ruta completa, no tocar
+            if (strpos($foto, '/uploads/conductores/') === 0) {
+                $fotoFinal = $foto;
             } else {
-                // Si en BD solo está el nombre del archivo, armar la ruta completa
-                $data['foto'] = '/uploads/conductores/' . $data['foto'];
+                $fotoFinal = '/uploads/conductores/' . $foto;
             }
         } else {
-            $data['foto'] = null; // explícito para que el frontend muestre "Sin foto disponible"
+            $fotoFinal = null;
         }
 
+        $data = [
+            'id'                => $id_c,
+            'nombres'           => $nombres,
+            'apellidos'         => $apellidos,
+            'dni'               => $dni,
+            'licencia_conducir' => $licencia,
+            'telefono'          => $telefono,
+            'correo'            => $correo,
+            'direccion'         => $direccion,
+            'activo'            => (int)$activo,
+            'foto'              => $fotoFinal
+        ];
+
         echo json_encode(['success' => true, 'data' => $data]);
+
     } else {
         echo json_encode(['success' => false, 'error' => 'Conductor no encontrado']);
     }
 
     $stmt->close();
+
 } catch (Exception $e) {
     error_log("❌ ver.php: " . $e->getMessage());
     echo json_encode(['success' => false, 'error' => $e->getMessage()]);
