@@ -1,6 +1,4 @@
 <?php
-// archivo: /modulos/vehiculos/acciones/crear.php
-
 header('Content-Type: application/json');
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
@@ -20,6 +18,7 @@ $placa            = trim($_POST['placa'] ?? "");
 $marca_id         = intval($_POST['marca_id'] ?? 0);
 $estado_id        = intval($_POST['estado_id'] ?? 0);
 $configuracion_id = intval($_POST['configuracion_id'] ?? 0);
+$tipo_id          = ($_POST['tipo_id'] !== "") ? intval($_POST['tipo_id']) : null;
 $modelo           = trim($_POST['modelo'] ?? "");
 $anio             = ($_POST['anio'] !== "") ? intval($_POST['anio']) : null;
 $observaciones    = trim($_POST['observaciones'] ?? "");
@@ -47,12 +46,12 @@ if ($stmt->num_rows > 0) {
 $stmt->close();
 
 // ---------------------------------------------------------
-// INSERTAR VEHÍCULO (con NULL seguros)
+// INSERTAR VEHÍCULO
 // ---------------------------------------------------------
 $sql = "
 INSERT INTO vehiculos 
-(placa, marca_id, estado_id, configuracion_id, modelo, anio, empresa_id, observaciones, creado_por, activo)
-VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1)
+(placa, marca_id, estado_id, configuracion_id, tipo_id, modelo, anio, empresa_id, observaciones, creado_por, activo)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)
 ";
 
 $stmt = $conn->prepare($sql);
@@ -62,18 +61,11 @@ if (!$stmt) {
     exit;
 }
 
-// Convertir NULL a tipo correcto
-$anio_sql     = $anio !== null ? $anio : null;
-$empresa_sql  = $empresa_id !== null ? $empresa_id : null;
-$usuario_sql  = $usuario_id !== null ? $usuario_id : null;
-
 // Tipos dinámicos
-$types = "siiisisss";
-
-// Ajustar tipos cuando el valor es NULL
-$types[5] = ($anio_sql === null)    ? "s" : "i";
-$types[6] = ($empresa_sql === null) ? "s" : "i";
-$types[8] = ($usuario_sql === null) ? "s" : "i";
+$types = "siiisssss";
+$types[5] = ($anio === null) ? "s" : "i";
+$types[6] = ($empresa_id === null) ? "s" : "i";
+$types[8] = ($usuario_id === null) ? "s" : "i";
 
 $stmt->bind_param(
     $types,
@@ -81,25 +73,25 @@ $stmt->bind_param(
     $marca_id,
     $estado_id,
     $configuracion_id,
+    $tipo_id,
     $modelo,
-    $anio_sql,
-    $empresa_sql,
+    $anio,
+    $empresa_id,
     $observaciones,
-    $usuario_sql
+    $usuario_id
 );
 
-if ($stmt->execute()) {
-    echo json_encode([
-        "ok" => true,
-        "msg" => "Vehículo registrado correctamente.",
-        "id"  => $stmt->insert_id
-    ]);
-} else {
+if (!$stmt->execute()) {
     echo json_encode([
         "ok" => false,
-        "msg" => "Error al registrar: " . $stmt->error
+        "msg" => "Error al registrar",
+        "error_sql" => $stmt->error
     ]);
+    exit;
 }
 
-$stmt->close();
-$conn->close();
+echo json_encode([
+    "ok" => true,
+    "msg" => "Vehículo registrado correctamente",
+    "id"  => $stmt->insert_id
+]);

@@ -1,55 +1,38 @@
 // archivo: /modulos/vehiculos/js/form.js
 
-console.log("📝 form.js inicializado");
-
-// ---------------------------------------------------------
-// GUARDAR FORMULARIO (Nuevo o Editar)
-// ---------------------------------------------------------
 $(document).on("submit", "#formVehiculo", function (e) {
     e.preventDefault();
 
-    const datos = $(this).serialize();
+    const form = $(this);
+    const datos = form.serialize();
 
-    // Detectar si es edición
-    const esEdicion = $(this).find("input[name='id']").length > 0;
+    $.ajax({
+        url: "/modulos/vehiculos/acciones/crear.php",
+        type: "POST",
+        data: datos,
+        dataType: "json",
 
-    // Endpoint según modo
-    const url = esEdicion
-        ? "/modulos/vehiculos/acciones/editar.php"
-        : "/modulos/vehiculos/acciones/crear.php";
+        success: function (r) {
+            console.log("Respuesta del servidor:", r);
 
-    // Spinner mientras guarda
-    $("#modalVehiculoBody").append(`
-        <div id="savingOverlay" class="text-center py-3">
-            <div class="spinner-border text-primary"></div>
-            <p class="mt-2">Guardando...</p>
-        </div>
-    `);
-
-    $.post(url, datos, function (resp) {
-
-        $("#savingOverlay").remove();
-
-        alert(resp.msg);
-
-        if (resp.ok) {
-
-            // Cerrar modal
-            $("#modalVehiculo").modal("hide");
-
-            // Recargar tablas
-            if (esEdicion) {
-                VehiculosDT.reloadActivos();
-                VehiculosDT.reloadInactivos();
+            if (r.ok) {
+                alert("Vehículo registrado correctamente");
+                $("#modalVehiculo").modal("hide");
+                $("#tblActivosVehiculos").DataTable().ajax.reload(null, false);
             } else {
-                VehiculosDT.reloadActivos();
+                alert("Error al guardar: " + (r.error_sql ?? r.msg));
+            }
+        },
+
+        error: function (xhr) {
+            console.error("❌ Error AJAX:", xhr.responseText);
+
+            try {
+                const r = JSON.parse(xhr.responseText);
+                alert("Error al guardar: " + (r.error_sql ?? "Error desconocido"));
+            } catch (e) {
+                alert("Error al guardar (respuesta no válida)");
             }
         }
-
-    }, "json")
-    .fail(function (xhr) {
-        $("#savingOverlay").remove();
-        console.log("❌ Error AJAX:", xhr.responseText);
-        alert("Error al guardar los datos del vehículo.");
     });
 });
