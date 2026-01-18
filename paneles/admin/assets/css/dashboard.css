@@ -1,0 +1,169 @@
+/*  archivo :	/paneles/admin/assets/css/dashboard.css */
+
+/* =========================
+   PALETA DE COLORES PROFESIONAL
+   ========================= */
+:root {
+    --color-navbar: #1e3a5f;          /* Azul oscuro elegante para navbar */
+    --color-sidebar: #162b4c;         /* Azul profundo para sidebar */
+    --color-sidebar-hover: #28558a;   /* Azul vibrante al pasar el mouse */
+    --color-texto: #2c3e50;           /* Gris oscuro para texto principal */
+    --color-fondo: #ecf0f1;           /* Fondo claro suave */
+    --color-tarjeta: #ffffff;         /* Blanco puro para tarjetas */
+    --color-boton: #3498db;           /* Azul moderno para botones */
+    --color-boton-hover: #2980b9;     /* Azul más profundo al pasar el mouse */
+    --color-sombra: rgba(0, 0, 0, 0.1); /* Sombra ligera */
+}
+
+/* =========================
+   ESTILOS GENERALES
+   ========================= */
+body {
+    font-family: 'Poppins', sans-serif; /* Fuente más moderna */
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+}
+
+/* =========================
+   NAVBAR SUPERIOR FIJO
+   ========================= */
+.navbar {
+    background-color: var(--color-navbar);
+    padding: 10px 15px;
+    box-shadow: 0 4px 8px var(--color-sombra); /* Sombra más pronunciada */
+}
+
+/* =========================
+   SIDEBAR (MENÚ LATERAL)
+   ========================= */
+.sidebar {
+    width: 250px;
+    height: calc(100vh - 56px);
+    background-color: var(--color-sidebar);
+    color: white;
+    position: fixed;
+    left: 0;
+    top: 60px;
+    padding: 20px;
+    overflow-y: auto;
+    z-index: 1030;
+}
+
+/* Texto SIEMPRE visible */
+.sidebar .nav-link {
+    color: rgb(39, 37, 37) !important;
+    padding: 12px;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Íconos también blancos */
+.sidebar .nav-link i {
+    color: white !important;
+}
+
+/* Hover */
+.sidebar .nav-link:hover {
+    background-color: var(--color-sidebar-hover);
+    transform: scale(1.05);
+}
+
+
+
+/* =========================
+   CONTENEDOR PRINCIPAL
+   ========================= */
+.app-container {
+    margin-left: 250px;
+	margin-top: 5px; /* espacio del navbar */
+    padding: 10px;
+    width: calc(100% - 250px);
+	}
+
+/* =========================
+   TARJETAS DEL DASHBOARD
+   ========================= */
+
+
+.card-dashboard {
+    background-color: var(--color-tarjeta); /* Fondo */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 5px 15px var(--color-sombra); /* Sombra */
+    padding: 20px; /* Espaciado interno */
+    height: 100%; /* Hace que todas tengan la misma altura */
+    display: flex; /* Flexbox para manejar contenido */
+    flex-direction: column; /* Asegura que los elementos dentro se alineen verticalmente */
+    justify-content: space-between; /* Distribuye el contenido equitativamente */
+    transition: transform 0.3s, box-shadow 0.4s ease-in-out;
+}
+
+
+/* Efecto al pasar el mouse */
+.card-dashboard:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* =========================
+   BOTONES MODERNOS
+   ========================= */
+.btn-primary {
+    background-color: var(--color-boton);
+    border: none;
+    padding: 12px 20px;
+    font-weight: bold;
+    border-radius: 6px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Hover en botones */
+.btn-primary:hover {
+    background-color: var(--color-boton-hover);
+    transform: scale(1.05);
+}
+
+/* =========================
+   PIE DE PÁGINA
+   ========================= */
+.footer {
+    background-color: var(--color-navbar);
+    color: white;
+    text-align: center;
+    padding: 1rem;
+}
+
+/* =========================
+   RESPONSIVIDAD
+   ========================= */
+@media (max-width: 768px) { 
+    .sidebar {
+        display: none;
+      }
+    .app-container {
+        margin-left: 0;
+        width: 100%;
+      }
+    .card-dashboard {
+        margin-bottom: 20px;
+      }
+  }
+
+
+ .dashboard-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1020;
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* suponiendo que tu header mide aprox. 60px de alto: */
+main.container {
+  padding-top: 60px;  /* para que el contenido no quede oculto */
+}
+
+
+
+

@@ -101,19 +101,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['rol_nombre'] = $fila['rol_nombre'];
 
                 // 6.7 Redirección por rol
-                switch ($fila['rol_nombre']) {
-                    case 'admin':
-                        $dest = '/paneles/panel_admin.php'; break;
-                    case 'chofer':
-                        $dest = '/paneles/panel_chofer.php'; break;
-                    case 'cliente':
-                        $dest = '/paneles/panel_cliente.php'; break;
-                    case 'empleado':
-                        $dest = '/paneles/panel_empleado.php'; break;
-                    default:
-                        $dest = '/paneles/panel.php';
-                }
-
+                // switch ($fila['rol_nombre']) {
+                //     case 'admin':
+                //         $dest = '/paneles/panel_admin.php'; break;
+                //     case 'chofer':
+                //         $dest = '/paneles/panel_chofer.php'; break;
+                //     case 'cliente':
+                //         $dest = '/paneles/panel_cliente.php'; break;
+                //     case 'empleado':
+                //         $dest = '/paneles/panel_empleado.php'; break;
+                //     default:
+                //         $dest = '/paneles/panel.php';
+                // }
+                    $dest = '/paneles/router_panel.php';
+                    
                 // Verificar archivo destino
                 if (file_exists(__DIR__ . $dest)) {
                     header("Location: $dest");

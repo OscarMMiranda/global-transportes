@@ -1,0 +1,43 @@
+/* archivo: /modulos/seguridad/usuarios/css/usuarios.css */
+
+.notificaciones-container {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 99999;
+    width: 300px;
+}
+
+.notificacion {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border-left: 5px solid #007bff;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    opacity: 0;
+    transform: translateX(50px);
+    transition: all .2s ease-in-out;
+    box-shadow: 0 2px 6px rgba(0,0,0,.15);
+}
+
+.notificacion.mostrar {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.notificacion.success { border-left-color: #28a745; }
+.notificacion.error   { border-left-color: #dc3545; }
+.notificacion.warning { border-left-color: #ffc107; }
+
+.notificacion .icono {
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+.notificacion .cerrar {
+    margin-left: auto;
+    cursor: pointer;
+    font-weight: bold;
+}

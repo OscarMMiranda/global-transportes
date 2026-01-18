@@ -1,27 +1,25 @@
 <?php
-	// archivo: /includes/permisos.php
-	// --------------------------------------------------------------
-	// Gestión de permisos de usuarios  
-	// --------------------------------------------------------------
-	// Iniciar sesión si no está iniciada
-	// --------------------------------------------------------------
+// archivo: /includes/permisos.php
+// --------------------------------------------------------------
+// Sistema moderno de permisos compatible con PHP 5.6
+// --------------------------------------------------------------
 
-	if (session_status() === PHP_SESSION_NONE) {
-		session_start();
-		}
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
-	require_once __DIR__ . '/conexion.php';
-	require_once __DIR__ . '/funciones.php'; // para registrarEnHistorial si no estaba incluido
+// Cargar conexión y funciones globales
+require_once __DIR__ . '/conexion.php';
+require_once __DIR__ . '/funciones.php';
 
-	// Cache interno para no consultar la BD en cada validación.
-	 
-	$__cache_permisos_rol = [];
-	$__cache_permisos_usuario = [];
+// Cache interno para evitar consultas repetidas
+$__cache_permisos_rol = array();
 
-	/**
-	 * Obtener permisos asignados a un rol.
-	 */
-function getPermisosRol($rol_id) {
+/**
+ * Obtener permisos asignados a un rol (cacheado)
+ */
+function getPermisosRol($rol_id)
+{
     global $__cache_permisos_rol;
 
     if (isset($__cache_permisos_rol[$rol_id])) {
@@ -29,94 +27,47 @@ function getPermisosRol($rol_id) {
     }
 
     $conn = getConnection();
-    if (!$conn) {
-        return [];
-    }
+    if (!$conn) return array();
 
     $sql = "
-        SELECT p.modulo, p.accion
-        FROM roles_permisos rp
-        JOIN permisos p ON p.id = rp.permiso_id
-        WHERE rp.rol_id = ?
+        SELECT m.nombre AS modulo, a.nombre AS accion
+        FROM permisos_roles pr
+        JOIN modulos m ON m.id = pr.modulo_id
+        JOIN acciones a ON a.id = pr.accion_id
+        WHERE pr.rol_id = ?
     ";
 
     $stmt = $conn->prepare($sql);
-    if (!$stmt) {
-        return [];
-    }
+    if (!$stmt) return array();
 
     $stmt->bind_param("i", $rol_id);
     $stmt->execute();
     $result = $stmt->get_result();
 
-    $permisos = [];
+    $permisos = array();
     while ($row = $result->fetch_assoc()) {
+        if (!isset($permisos[$row['modulo']])) {
+            $permisos[$row['modulo']] = array();
+        }
         $permisos[$row['modulo']][$row['accion']] = true;
     }
-
-    $stmt->close();
 
     $__cache_permisos_rol[$rol_id] = $permisos;
     return $permisos;
 }
 
 /**
- * Obtener permisos especiales asignados a un usuario.
+ * Verificar si un usuario tiene un permiso específico
  */
-function getPermisosUsuario($usuario_id) {
-    global $__cache_permisos_usuario;
-
-    if (isset($__cache_permisos_usuario[$usuario_id])) {
-        return $__cache_permisos_usuario[$usuario_id];
-    }
-
+function tienePermiso($usuario_id, $modulo, $accion)
+{
     $conn = getConnection();
-    if (!$conn) {
-        return [];
-    }
+    if (!$conn) return false;
 
-    $sql = "
-        SELECT p.modulo, p.accion
-        FROM usuarios_permisos up
-        JOIN permisos p ON p.id = up.permiso_id
-        WHERE up.usuario_id = ?
-    ";
-
-    $stmt = $conn->prepare($sql);
-    if (!$stmt) {
-        return [];
-    }
-
-    $stmt->bind_param("i", $usuario_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    $permisos = [];
-    while ($row = $result->fetch_assoc()) {
-        $permisos[$row['modulo']][$row['accion']] = true;
-    }
-
-    $stmt->close();
-
-    $__cache_permisos_usuario[$usuario_id] = $permisos;
-    return $permisos;
-}
-
-/**
- * Verificar si un usuario tiene un permiso específico.
- */
-function tienePermiso($usuario_id, $modulo, $accion) {
-    $conn = getConnection();
-    if (!$conn) {
-        return false;
-    }
-
-    // 1) Obtener rol del usuario
+    // Obtener rol del usuario
     $sql = "SELECT rol FROM usuarios WHERE id = ?";
     $stmt = $conn->prepare($sql);
-    if (!$stmt) {
-        return false;
-    }
+    if (!$stmt) return false;
 
     $stmt->bind_param("i", $usuario_id);
     $stmt->execute();
@@ -124,66 +75,73 @@ function tienePermiso($usuario_id, $modulo, $accion) {
     $stmt->fetch();
     $stmt->close();
 
-    if (!$rol_id) {
-        return false;
-    }
+    if (!$rol_id) return false;
 
-    // 2) Permisos por rol
+    // Permisos por rol
     $permisosRol = getPermisosRol($rol_id);
-    if (isset($permisosRol[$modulo][$accion])) {
-        return true;
-    }
 
-    // 3) Permisos especiales por usuario
-    $permisosUsuario = getPermisosUsuario($usuario_id);
-    if (isset($permisosUsuario[$modulo][$accion])) {
-        return true;
-    }
-
-    return false;
+    return isset($permisosRol[$modulo]) && isset($permisosRol[$modulo][$accion]);
 }
 
 /**
- * Bloquear acceso si el usuario no tiene permiso.
- * Versión profesional:
- * - No rompe la página con HTML crudo.
- * - Registra intento fallido.
- * - Redirige al módulo con mensaje en $_SESSION['error'].
+ * Bloquear acceso si el usuario no tiene permiso
  */
-function requirePermiso($modulo, $accion) {
-    // 1. Validar sesión
+function requirePermiso($modulo, $accion)
+{
+    // Validar sesión
     if (!isset($_SESSION['usuario_id'])) {
-        $_SESSION['error'] = "Debes iniciar sesión para continuar.";
+
+        // Si es AJAX → devolver JSON
+        if (
+            isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
+            strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest'
+        ) {
+            echo json_encode(array(
+                "ok" => false,
+                "msg" => "Debes iniciar sesión para continuar."
+            ));
+            exit;
+        }
+
+        // Navegación normal → redirigir al login
         header("Location: /login.php");
         exit;
     }
 
-    // 2. Validar permiso
+    // Validar permiso
     if (!tienePermiso($_SESSION['usuario_id'], $modulo, $accion)) {
 
-        // 2.1 Registrar intento fallido en historial (si hay conexión)
+        // Registrar intento fallido
         $conn = getConnection();
-        if ($conn) {
+        if ($conn && function_exists('registrarEnHistorial')) {
+
             $usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'desconocido';
             $ip      = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : 'IP desconocida';
 
-            // Si tienes esta función en funciones.php
-            if (function_exists('registrarEnHistorial')) {
-                registrarEnHistorial(
-                    $conn,
-                    $usuario,
-                    "Intento NO AUTORIZADO de acceder a $modulo → $accion",
-                    $modulo,
-                    $ip
-                );
-            }
+            registrarEnHistorial(
+                $conn,
+                $usuario,
+                "Intento NO AUTORIZADO de acceder a $modulo → $accion",
+                $modulo,
+                $ip
+            );
         }
 
-        // 2.2 Mensaje elegante para el usuario
-        $_SESSION['error'] = "No tienes permiso para realizar esta acción.";
+        // Si es AJAX → devolver JSON limpio
+        if (
+            isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
+            strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest'
+        ) {
+            echo json_encode(array(
+                "ok" => false,
+                "msg" => "No tienes permiso para realizar esta acción."
+            ));
+            exit;
+        }
 
-        // 2.3 Redirigir al módulo correspondiente
-        header("Location: /modulos/$modulo/index.php");
+        // Navegación normal → regresar a la página anterior
+        $volver = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/';
+        header("Location: " . $volver);
         exit;
     }
 }

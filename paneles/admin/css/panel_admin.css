@@ -1,0 +1,60 @@
+/* --------------------------------------------------------------
+   PANEL ADMIN – ESTILOS PERSONALIZADOS
+   -------------------------------------------------------------- */
+
+/* Fondo general */
+body {
+    background-color: #f5f6fa;
+}
+
+/* Navbar */
+.navbar {
+    border-bottom: 3px solid rgba(255, 255, 255, 0.2);
+}
+
+.navbar-brand {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* Tarjetas del dashboard */
+.card {
+    border-radius: 10px;
+    transition: all 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+/* Iconos */
+.card i {
+    color: #0d6efd;
+}
+
+/* Títulos */
+.card-title {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+/* Botón dentro de tarjeta */
+.card .btn {
+    margin-top: 10px;
+    padding: 6px 18px;
+    font-size: 0.9rem;
+    border-radius: 6px;
+}
+
+/* Contenedor principal */
+.container {
+    max-width: 1200px;
+}
+
+/* Ajustes responsive */
+@media (max-width: 768px) {
+    .card {
+        margin-bottom: 15px;
+    }
+}

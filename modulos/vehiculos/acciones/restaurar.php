@@ -1,61 +1,68 @@
 <?php
-// modulos/vehiculos/acciones/restaurar.php
-// Este script procesa la restauración (soft‐undo) de un vehículo
+// archivo: /modulos/vehiculos/acciones/restaurar.php
 
-// 1) Cargar configuración, utilidades y modelo
-require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/config.php';
-require_once __DIR__   . '/../includes/funciones.php';
-require_once __DIR__   . '/../modelo.php';
+header('Content-Type: application/json');
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
-// 2) Inicializar conexión y sesión
-$conn = getConnection();
-validarSesionAdmin();
-
-// 3) Preparar respuesta
-$response = [
-    'success' => false,
-    'message' => 'Petición inválida.'
-];
-
-// 4) Validar entrada y ejecutar restauración
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id']) && validarId($_POST['id'])) {
-    $id        = (int) $_POST['id'];
-    $usuarioId = $_SESSION['usuario_id'];
-    $ipOrigen  = obtenerIP();
-
-    if (restaurarVehiculo($conn, $id, $usuarioId, $ipOrigen)) {
-        // Registrar en historial propio de vehículos
-        registrarVehiculoHistorial($conn, $id, $usuarioId, 'Restaurado');
-        // Registrar en historial global del ERP
-        registrarEnHistorial(
-            $_SESSION['usuario'],
-            "Restauró vehículo ID {$id}",
-            'vehiculos',
-            $ipOrigen
-        );
-
-        $response['success'] = true;
-        $response['message'] = 'Vehículo restaurado correctamente.';
-    }
-    else {
-        $response['message'] = 'Error al restaurar el vehículo.';
-    }
+// Sesión
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
 }
 
-// 5) Devolver JSON si es AJAX, o redirigir si es petición normal
-$isAjax = ! empty($_SERVER['HTTP_X_REQUESTED_WITH'])
-          && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
+// MISMA RUTA QUE ver.php (4 niveles arriba)
+require_once __DIR__ . '/../../../includes/config.php';
+require_once INCLUDES_PATH . '/permisos.php';
+require_once INCLUDES_PATH . '/funciones.php';
 
-if ($isAjax) {
-    header('Content-Type: application/json');
-    echo json_encode($response);
+$conn = getConnection();
+if (!$conn) {
+    echo json_encode(array("ok" => false, "msg" => "Error de conexión"));
     exit;
 }
 
-// petición clásica: redirigir con parámetros de éxito o error
-$query = $response['success']
-       ? 'action=list&msg=restaurado'
-       : 'action=list&error=' . urlencode($response['message']);
+// ID del vehículo (compatible con PHP 5.6)
+$id = isset($_POST['id']) ? intval($_POST['id']) : 0;
+if ($id <= 0) {
+    echo json_encode(array("ok" => false, "msg" => "ID inválido"));
+    exit;
+}
 
-header("Location: index.php?{$query}");
-exit;
+// Usuario que restaura
+$usuario_id = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : null;
+
+// SQL
+$sql = "
+UPDATE vehiculos 
+SET activo = 1,
+    fecha_borrado = NULL,
+    borrado_por = NULL
+WHERE id = ?
+";
+
+$stmt = $conn->prepare($sql);
+
+if (!$stmt) {
+    echo json_encode(array(
+        "ok" => false,
+        "msg" => "Error interno",
+        "error_sql" => $conn->error
+    ));
+    exit;
+}
+
+$stmt->bind_param("i", $id);
+
+if (!$stmt->execute()) {
+    echo json_encode(array(
+        "ok" => false,
+        "msg" => "Error al restaurar",
+        "error_sql" => $stmt->error
+    ));
+    exit;
+}
+
+echo json_encode(array(
+    "ok" => true,
+    "msg" => "Vehículo restaurado correctamente"
+));

@@ -1,0 +1,62 @@
+/* archivo: /modulos/seguridad/roles/css/notificaciones.css */
+/* Componente de notificaciones flotantes ERP */
+
+.notificaciones-container {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 9999;
+    max-width: 320px;
+}
+
+.notificacion {
+    border-radius: 6px;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    color: #fff;
+    font-size: 13px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: all 0.2s ease-in-out;
+}
+
+.notificacion.mostrar {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.notificacion .icono {
+    margin-right: 8px;
+    font-size: 15px;
+}
+
+.notificacion .mensaje {
+    flex: 1;
+}
+
+.notificacion .cerrar {
+    cursor: pointer;
+    margin-left: 8px;
+    font-weight: bold;
+}
+
+/* Colores por tipo */
+.notificacion.success {
+    background-color: #198754;
+}
+
+.notificacion.error {
+    background-color: #dc3545;
+}
+
+.notificacion.warning {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.notificacion.info {
+    background-color: #0d6efd;
+}

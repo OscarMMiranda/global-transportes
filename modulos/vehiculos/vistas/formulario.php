@@ -1,5 +1,7 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . "/includes/config.php";
+// archivo: /modulos/vehiculos/vistas/formulario.php
+
+require_once __DIR__ . '/../../../includes/config.php';
 $conn = getConnection();
 
 $modo = "nuevo";
@@ -9,7 +11,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $modo = "editar";
     $id = intval($_GET['id']);
 
-    $q = $conn->query("SELECT * FROM vehiculos WHERE id = $id LIMIT 1");
+    $q = $conn->query("SELECT * FROM vehiculos WHERE id = " . $id . " LIMIT 1");
     $vehiculo = $q->fetch_assoc();
 }
 ?>
@@ -65,23 +67,29 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         </div>
 
         <!-- CONFIGURACIÓN -->
-        <div class="col-md-4">
-            <label class="form-label">Configuración</label>
-            <select name="configuracion_id" class="form-select" required>
-                <option value="">Seleccione...</option>
-                <?php
-                $q = $conn->query("SELECT id, nombre FROM configuracion_vehiculo ORDER BY nombre");
-                while ($r = $q->fetch_assoc()):
-                ?>
-                    <option value="<?= $r['id'] ?>"
-                        <?= ($modo === 'editar' && $vehiculo['configuracion_id'] == $r['id']) ? 'selected' : '' ?>>
-                        <?= $r['nombre'] ?>
-                    </option>
-                <?php endwhile; ?>
-            </select>
-        </div>
+		<div class="col-md-4">
+    		<label class="form-label d-flex justify-content-between align-items-center">
+        		<span>Configuración</span>
+        		<button type="button" class="btn btn-sm btn-success btn-add-config">
+            		+
+        		</button>
+    		</label>
 
-        <!-- TIPO (FALTABA) -->
+    		<select name="configuracion_id" id="configuracion_id" class="form-select" required>
+        		<option value="">Seleccione...</option>
+        		<?php
+        			$q = $conn->query("SELECT id, nombre FROM configuracion_vehiculo ORDER BY nombre");
+        			while ($r = $q->fetch_assoc()):
+        		?>
+            		<option value="<?= $r['id'] ?>"
+            			<?= ($modo === 'editar' && $vehiculo['configuracion_id'] == $r['id']) ? 'selected' : '' ?>>
+            			<?= $r['nombre'] ?>
+            		</option>
+        		<?php endwhile; ?>
+    		</select>
+		</div>
+
+        <!-- TIPO -->
         <div class="col-md-4">
             <label class="form-label">Tipo</label>
             <select name="tipo_id" class="form-select">
@@ -93,6 +101,23 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                     <option value="<?= $r['id'] ?>"
                         <?= ($modo === 'editar' && $vehiculo['tipo_id'] == $r['id']) ? 'selected' : '' ?>>
                         <?= $r['nombre'] ?>
+                    </option>
+                <?php endwhile; ?>
+            </select>
+        </div>
+
+        <!-- EMPRESA -->
+        <div class="col-md-4">
+            <label class="form-label">Empresa</label>
+            <select name="empresa_id" class="form-select" required>
+                <option value="">Seleccione...</option>
+                <?php
+                $q = $conn->query("SELECT id, razon_social FROM empresa ORDER BY razon_social");
+                while ($r = $q->fetch_assoc()):
+                ?>
+                    <option value="<?= $r['id'] ?>"
+                        <?= ($modo === 'editar' && $vehiculo['empresa_id'] == $r['id']) ? 'selected' : '' ?>>
+                        <?= $r['razon_social'] ?>
                     </option>
                 <?php endwhile; ?>
             </select>
@@ -116,8 +141,8 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         <!-- OBSERVACIONES -->
         <div class="col-md-12">
             <label class="form-label">Observaciones</label>
-            <textarea name="observaciones" class="form-control" rows="3"><?= 
-                $modo === 'editar' ? htmlspecialchars($vehiculo['observaciones']) : '' 
+            <textarea name="observaciones" class="form-control" rows="3"><?=
+                $modo === 'editar' ? htmlspecialchars($vehiculo['observaciones']) : ''
             ?></textarea>
         </div>
 

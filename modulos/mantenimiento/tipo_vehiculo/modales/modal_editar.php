@@ -1,32 +1,56 @@
 <?php
-	// 	archivo	: 	/modulos/mantenimiento/tipo_vehiculo/modales/modal_editar.php
+// archivo: /modulos/mantenimiento/tipo_vehiculo/modales/modal_editar.php
 ?>
 
-<div id="modalEditarVehiculo" class="modal fade" tabindex="-1" aria-labelledby="modalEditarVehiculoLabel" aria-hidden="true">
-  	<div class="modal-dialog modal-lg modal-dialog-centered">
-    	<div class="modal-content shadow rounded-4 border-0">
-      		<div class="modal-header bg-primary text-white rounded-top-1">
-        		<h5 class="modal-title" id="modalEditarVehiculoLabel">
-          			<i class="fas fa-edit me-2"></i> Editar Tipo de Vehículo
-        		</h5>
-        		<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar">
-				</button>
-      		</div>
+<div class="modal fade" id="modalEditarTipoVehiculo" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
 
-      		<div class="modal-body" id="contenedorFormularioEditar">
-				<!-- Aquí se carga el formulario dinámico vía AJAX -->
-        		<div class="text-center text-muted py-3">
-          			<i class="fas fa-spinner fa-spin me-2"></i> Cargando formulario...
-        		</div>
-				<div class="modal-footer bg-white rounded-bottom-4 px-4 py-3">
-        			<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          				<i class="fas fa-times me-1"></i> Cancelar
-        			</button>
-        			<button type="submit" form="formEditarVehiculo" class="btn btn-success">
-          				<i class="fas fa-save me-1"></i> Guardar cambios
-        			</button>
-      			</div>
-      		</div>
-    	</div>
-  	</div>
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title">Editar Tipo de Vehículo</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+
+                <input type="hidden" id="editar_tv_id">
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Nombre <span class="text-danger">*</span></label>
+                    <input type="text" id="editar_tv_nombre" class="form-control" maxlength="50">
+                    <div class="invalid-feedback">El nombre es obligatorio.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Descripción</label>
+                    <textarea id="editar_tv_descripcion" class="form-control" rows="3" maxlength="255"></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Categoría <span class="text-danger">*</span></label>
+                    <select id="editar_tv_categoria_id" class="form-select">
+                        <option value="">Cargando categorías...</option>
+                    </select>
+                    <div class="invalid-feedback">Debe seleccionar una categoría.</div>
+                </div>
+
+                <hr>
+
+                <div class="small text-muted">
+                    <div><span class="fw-bold">Creado por:</span> <span id="editar_tv_creado_por"></span></div>
+                    <div><span class="fw-bold">Fecha creación:</span> <span id="editar_tv_fecha_creado"></span></div>
+                    <div><span class="fw-bold">Última modificación:</span> <span id="editar_tv_fecha_modificacion"></span></div>
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" id="btnActualizarTipoVehiculo" class="btn btn-primary">
+                    Guardar cambios
+                </button>
+            </div>
+
+        </div>
+    </div>
 </div>

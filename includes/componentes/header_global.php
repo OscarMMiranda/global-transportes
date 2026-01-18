@@ -1,43 +1,49 @@
 <?php
-	// archivo: /includes/componentes/header_global.php
-	// Barra superior global del sistema
-	// Compatible con PHP 5.6 (sin operadores ?? ni sintaxis moderna)
+// archivo: /includes/componentes/header_global.php
+// Barra superior global del sistema (versión moderna)
 ?>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-2">
+<nav class="navbar navbar-expand-lg bg-white shadow-sm border-bottom">
     <div class="container-fluid">
 
-        <!-- Botón Volver -->
-        <a href="javascript:history.back()" class="btn btn-outline-light me-3">
-            <i class="fa fa-arrow-left"></i> Volver
+        <!-- Logo + Nombre -->
+        <a href="/paneles/panel_admin.php" class="navbar-brand d-flex align-items-center">
+            <i class="fa fa-truck text-primary me-2 fs-4"></i>
+            <span class="fw-bold text-dark">Global Transportes</span>
         </a>
 
-        <!-- Título del sistema -->
-        <span class="navbar-brand mb-0 h1">Global Transportes</span>
+        <!-- Botón móvil -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarGlobal">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-        <div class="ms-auto d-flex align-items-center">
+        <div class="collapse navbar-collapse" id="navbarGlobal">
 
-            <!-- Panel principal -->
-            <a href="/paneles/panel_admin.php" class="btn btn-outline-info me-2">
-                <i class="fa fa-home"></i> Panel Principal
+            <!-- Botón Volver -->
+            <a href="javascript:history.back()" class="btn btn-light border me-3 ms-lg-3">
+                <i class="fa fa-arrow-left me-1"></i> Volver
             </a>
 
-            <!-- Usuario conectado -->
-            <span class="text-white me-3">
-                <i class="fa fa-user"></i>
-                <?php
-                    if (isset($_SESSION['usuario'])) {
-                        echo htmlspecialchars($_SESSION['usuario']);
-                    } else {
-                        echo 'Usuario';
-                    }
-                ?>
-            </span>
+            <div class="ms-auto d-flex align-items-center gap-3">
 
-            <!-- Salir -->
-            <a href="/logout.php" class="btn btn-outline-danger">
-                <i class="fa fa-sign-out-alt"></i> Salir
-            </a>
+                <!-- Usuario -->
+                <div class="d-flex align-items-center text-dark fw-semibold">
+                    <i class="fa fa-user-circle text-primary me-2 fs-5"></i>
+                    <?php
+                        if (isset($_SESSION['usuario'])) {
+                            echo htmlspecialchars($_SESSION['usuario']);
+                        } else {
+                            echo 'Usuario';
+                        }
+                    ?>
+                </div>
+
+                <!-- Salir -->
+                <a href="/logout.php" class="btn btn-outline-danger">
+                    <i class="fa fa-sign-out-alt me-1"></i> Salir
+                </a>
+
+            </div>
 
         </div>
     </div>

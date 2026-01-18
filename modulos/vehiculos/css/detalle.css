@@ -5,6 +5,7 @@
   border-radius: 8px;
 }
 
+/* ÍCONO CIRCULAR */
 .ficha-hero .icon-wrapper {
   background: #0d6efd;
   color: white;
@@ -27,6 +28,7 @@
   transition: background 0.2s ease;
 }
 
+/* PESTAÑA ACTIVA */
 .tabs-modern .nav-link.active {
   background-color: #0d6efd;
   color: white !important;
@@ -172,4 +174,55 @@
   .footer-status .badge {
     font-size: 13px;
   }
+}
+
+
+/* Contenedor general de notificaciones */
+#erpNotifications {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+/* Caja base */
+.erp-toast {
+    min-width: 260px;
+    max-width: 360px;
+    padding: .75rem 1rem;
+    border-radius: .35rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,.15);
+    color: #fff;
+    font-size: .9rem;
+    display: flex;
+    align-items: flex-start;
+    gap: .5rem;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: opacity .2s ease, transform .2s ease;
+}
+
+/* Estados */
+.erp-toast-success { background-color: #198754; }
+.erp-toast-error   { background-color: #dc3545; }
+.erp-toast-info    { background-color: #0d6efd; }
+.erp-toast-warning { background-color: #ffc107; color: #212529; }
+
+/* Título y texto */
+.erp-toast-title {
+    font-weight: 600;
+    margin-bottom: .15rem;
+}
+
+.erp-toast-body {
+    margin: 0;
+}
+
+/* Mostrar */
+.erp-toast-show {
+    opacity: 1;
+    transform: translateX(0);
 }

@@ -1,25 +1,25 @@
-	/*	archivo	:	/css/dashboard.css	 */
+/* archivo: /css/dashboard.css */
 
 /* =========================
    PALETA DE COLORES PROFESIONAL
    ========================= */
 :root {
-    --color-navbar: #1e3a5f;          /* Azul oscuro elegante para navbar */
-    --color-sidebar: #162b4c;         /* Azul profundo para sidebar */
-    --color-sidebar-hover: #28558a;   /* Azul vibrante al pasar el mouse */
-    --color-texto: #2c3e50;           /* Gris oscuro para texto principal */
-    --color-fondo: #ecf0f1;           /* Fondo claro suave */
-    --color-tarjeta: #ffffff;         /* Blanco puro para tarjetas */
-    --color-boton: #3498db;           /* Azul moderno para botones */
-    --color-boton-hover: #2980b9;     /* Azul más profundo al pasar el mouse */
-    --color-sombra: rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    --color-navbar: #1e3a5f;
+    --color-sidebar: #162b4c;
+    --color-sidebar-hover: #28558a;
+    --color-texto: #2c3e50;
+    --color-fondo: #ecf0f1;
+    --color-tarjeta: #ffffff;
+    --color-boton: #3498db;
+    --color-boton-hover: #2980b9;
+    --color-sombra: rgba(0, 0, 0, 0.1);
 }
 
 /* =========================
-   ESTILOS GENERALES
+   ESTILOS GENERALES (solo dashboard)
    ========================= */
-body {
-    font-family: 'Poppins', sans-serif; /* Fuente más moderna */
+body.dashboard {
+    font-family: 'Poppins', sans-serif;
     background-color: var(--color-fondo);
     color: var(--color-texto);
 }
@@ -27,16 +27,16 @@ body {
 /* =========================
    NAVBAR SUPERIOR FIJO
    ========================= */
-.navbar {
+body.dashboard .navbar {
     background-color: var(--color-navbar);
     padding: 12px 20px;
-    box-shadow: 0 4px 8px var(--color-sombra); /* Sombra más pronunciada */
+    box-shadow: 0 4px 8px var(--color-sombra);
 }
 
 /* =========================
    SIDEBAR (MENÚ LATERAL)
    ========================= */
-.sidebar {
+body.dashboard .sidebar {
     width: 250px;
     height: 100vh;
     background-color: var(--color-sidebar);
@@ -47,16 +47,14 @@ body {
     padding: 20px;
 }
 
-/* Estilo de los enlaces en el sidebar */
-.sidebar .nav-link {
+body.dashboard .sidebar .nav-link {
     color: white;
     padding: 12px;
     border-radius: 5px;
     transition: all 0.3s ease-in-out;
 }
 
-/* Hover en sidebar */
-.sidebar .nav-link:hover {
+body.dashboard .sidebar .nav-link:hover {
     background-color: var(--color-sidebar-hover);
     transform: scale(1.05);
 }
@@ -64,7 +62,7 @@ body {
 /* =========================
    CONTENEDOR PRINCIPAL
    ========================= */
-.app-container {
+body.dashboard .app-container {
     margin-left: 250px;
     padding: 20px;
     width: calc(100% - 250px);
@@ -73,23 +71,19 @@ body {
 /* =========================
    TARJETAS DEL DASHBOARD
    ========================= */
-
-
-.card-dashboard {
-    background-color: var(--color-tarjeta); /* Fondo */
-    border-radius: 10px; /* Bordes redondeados */
-    box-shadow: 0 5px 15px var(--color-sombra); /* Sombra */
-    padding: 20px; /* Espaciado interno */
-    height: 100%; /* Hace que todas tengan la misma altura */
-    display: flex; /* Flexbox para manejar contenido */
-    flex-direction: column; /* Asegura que los elementos dentro se alineen verticalmente */
-    justify-content: space-between; /* Distribuye el contenido equitativamente */
+body.dashboard .card-dashboard {
+    background-color: var(--color-tarjeta);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px var(--color-sombra);
+    padding: 20px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     transition: transform 0.3s, box-shadow 0.4s ease-in-out;
 }
 
-
-/* Efecto al pasar el mouse */
-.card-dashboard:hover {
+body.dashboard .card-dashboard:hover {
     transform: translateY(-6px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
@@ -97,7 +91,7 @@ body {
 /* =========================
    BOTONES MODERNOS
    ========================= */
-.btn-primary {
+body.dashboard .btn-primary {
     background-color: var(--color-boton);
     border: none;
     padding: 12px 20px;
@@ -106,8 +100,7 @@ body {
     transition: all 0.3s ease-in-out;
 }
 
-/* Hover en botones */
-.btn-primary:hover {
+body.dashboard .btn-primary:hover {
     background-color: var(--color-boton-hover);
     transform: scale(1.05);
 }
@@ -115,7 +108,7 @@ body {
 /* =========================
    PIE DE PÁGINA
    ========================= */
-.footer {
+body.dashboard .footer {
     background-color: var(--color-navbar);
     color: white;
     text-align: center;
@@ -126,34 +119,34 @@ body {
    RESPONSIVIDAD
    ========================= */
 @media (max-width: 768px) { 
-    .sidebar {
+    body.dashboard .sidebar {
         display: none;
-      }
-    .app-container {
+    }
+    body.dashboard .app-container {
         margin-left: 0;
         width: 100%;
-      }
-    .card-dashboard {
+    }
+    body.dashboard .card-dashboard {
         margin-bottom: 20px;
-      }
-  }
-
-
- .dashboard-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1020;
-  background: #fff;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
 }
 
-/* suponiendo que tu header mide aprox. 60px de alto: */
-main.container {
-  padding-top: 60px;  /* para que el contenido no quede oculto */
+/* =========================
+   HEADER FIJO DEL DASHBOARD
+   ========================= */
+body.dashboard .dashboard-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1020;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
+body.dashboard main.container {
+    padding-top: 60px;
+}
 
 
 

@@ -20,7 +20,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
   <!-- Estilos personalizados opcionales -->
-   <link rel="stylesheet" href="/modulos/mantenimiento/tipo_vehiculo/assets/estilos.css">
+   <!-- <link rel="stylesheet" href="/modulos/mantenimiento/tipo_vehiculo/assets/estilos.css"> -->
 </head>
 <body>
 

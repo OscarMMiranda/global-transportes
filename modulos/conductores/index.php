@@ -1,62 +1,63 @@
 <?php
+// archivo: /modulos/conductores/index.php
+// Página principal del módulo Conductores
+// Requiere autenticación
 
-	// archivo: /modulos/conductores/index.php
-	// Requiere sesión iniciada y usuario autenticado
-	// Incluye configuración y utilidades
+// Seguridad
+if (session_status() === PHP_SESSION_NONE) session_start();
+if (!isset($_SESSION['usuario'])) {
+    header("Location: /login.php");
+    exit;
+}
 
-	// Sesión y seguridad
-	if (session_status() === PHP_SESSION_NONE) {
-    	session_start();
-		}
-	if (!isset($_SESSION['usuario'])) {
-    	header("Location: /login.php");
-    	exit;
-		}
+$titulo    = 'Módulo Conductores';
+$subtitulo = 'Gestión de Conductores';
+$icono     = 'fa-solid fa-id-card-clip';
 
-	// Variables globales para el módulo
-	$titulo    = 'Módulo Conductores';
-	$subtitulo = 'Gestión de Conductores';
-	$icono     = 'fa-solid fa-id-card-clip';
-
-	// Incluye cabecera HTML (abre <html><head> y configura <title>)
-	include __DIR__ . '/componentes/head.php';
+include __DIR__ . '/componentes/head.php';
 ?>
 
 <body class="bg-light">
-        <?php include __DIR__ . '/../../includes/componentes/header_global.php'; ?>
 
-  <!-- HEADER -->
-  <div class="container py-1">
+<?php include __DIR__ . '/../../includes/componentes/header_global.php'; ?>
+
+<!-- ============================================================
+     FIX DEFINITIVO: container-fluid evita el ancho reducido
+     ============================================================ -->
+<div class="container-fluid py-1">
     <?php include __DIR__ . '/componentes/header.php'; ?>
-
     <?php include __DIR__ . '/componentes/tabs.php'; ?>
-  </div>
+</div>
 
-  <!-- Modales -->
-  	<?php include __DIR__ . '/modales/modal_ver_conductor.php'; ?>
-  	<?php include __DIR__ . '/modales/modal_conductor.php'; ?>
+<?php include __DIR__ . '/modales/modal_ver_conductor.php'; ?>
+<?php include __DIR__ . '/modales/modal_conductor.php'; ?>
 
-  <!-- Scripts base -->
-  	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Librerías base -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- DataTables -->
-  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-  <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+<!-- DataTables -->
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
 
-  <!-- SweetAlert2 -->
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-  <!-- Scripts del módulo (modulares) -->
-  <script src="/modulos/conductores/assets/datatables.js"></script>
-  <script src="/modulos/conductores/assets/modal.js"></script>
-  <script src="/modulos/conductores/assets/form.js"></script>
-  <script src="/modulos/conductores/assets/acciones.js"></script>
+<!-- Scripts globales del ERP -->
+<script src="/includes/js/global.js"></script>
+<script src="/includes/js/validaciones_globales.js"></script>
+<script src="/includes/js/modales_globales.js"></script>
 
-  <script>
-    // Auditoría visual: confirmar que index.php cargó correctamente
-    console.log('✅ index.php cargado y scripts inicializados');
-  </script>
+<!-- Scripts del módulo -->
+<script src="/modulos/conductores/assets/datatables.js"></script>
+<script src="/modulos/conductores/assets/modal.js"></script>
+<script src="/modulos/conductores/assets/form.js"></script>
+<script src="/modulos/conductores/assets/acciones.js"></script>
+<script src="/modulos/conductores/js/conductores.js"></script>
+
+<script>
+console.log('🚚 index.php del módulo Conductores cargado correctamente');
+</script>
 
 </body>
 </html>

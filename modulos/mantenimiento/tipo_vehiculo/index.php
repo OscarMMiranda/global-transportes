@@ -1,76 +1,78 @@
 <?php
 // archivo: /modulos/mantenimiento/tipo_vehiculo/index.php
 
-// 1) Modo depuración (solo en desarrollo)
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-ini_set('log_errors', 1);
-ini_set('error_log', __DIR__ . '/error_log.txt');
-
-// 2) Sesión y control de acceso
-session_start();
-if (empty($_SESSION['usuario']) || $_SESSION['rol_nombre'] !== 'admin') {
-    header('Location: ../../../login.php');
-    exit;
-}
-
-// 3) Carga de dependencias globales
 require_once __DIR__ . '/../../../includes/config.php';
-require_once __DIR__ . '/../../../includes/conexion.php';
-require_once __DIR__ . '/modelo/TipoVehiculoModel.php';
-require_once __DIR__ . '/controller.php';
+require_once __DIR__ . '/../../../includes/permisos.php';
+require_once __DIR__ . '/../../../includes/funciones.php';
 
-// 4) Conexión única y validación defensiva
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+requirePermiso('tipo_vehiculo', 'ver');
+
 $conn = getConnection();
-if (!($conn instanceof mysqli)) {
-    die("❌ Error de conexión con la base de datos.");
-}
+?>
 
-// 5) Instancia del controlador
-$ctrl = new TipoVehiculoController($conn);
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Tipo de Vehículo</title>
 
-// 6) Mini-ruteo por acción
-$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : 'index';
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 
-switch ($action) {
-    case 'create':
-        $ctrl->create(); // muestra formulario
-        break;
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    case 'store':
-        $ctrl->store($_POST); // guarda nuevo registro
-        break;
+    <!-- DataTables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
 
-    case 'edit':
-        $ctrl->edit((int) $_GET['id']); // muestra formulario de edición
-        break;
+    <!-- Estilos del módulo -->
+    <link rel="stylesheet" href="/modulos/mantenimiento/tipo_vehiculo/css/tipo_vehiculo.css">
+</head>
 
-    case 'update':
-        $ctrl->update($_POST); // actualiza registro
-        break;
+<body>
 
-    case 'delete':
-        $ctrl->delete((int) $_GET['id']); // desactiva registro
-        break;
+<?php include __DIR__ . '/../../../includes/navbar.php'; ?>
 
-    case 'reactivar_prompt':
-        $ctrl->reactivar_prompt(); // muestra confirmación
-        break;
+<div class="container mt-4">
 
-    case 'reactivar':
-        $ctrl->reactivar(); // reactiva registro
-        break;
+    <h3 class="mb-4">
+        <i class="fa-solid fa-tags me-2"></i>
+        Tipo de Vehículo
+    </h3>
 
-    default:
-        // Vista principal con layout completo
-        $layoutPath = realpath(__DIR__ . '/../componentes/layout/layout_base.php');
-        if ($layoutPath && file_exists($layoutPath)) {
-            require_once $layoutPath;
-        } else {
-            die("❌ No se encontró layout_base.php en: " . $layoutPath);
-        }
-        break;
-}
+    <!-- Tabs + tablas -->
+    <?php include __DIR__ . '/componentes/tabs.php'; ?>
 
-// 7) Cerrar conexión
-$conn->close();
+    <!-- Modales -->
+    <?php include __DIR__ . '/modales/modal_ver.php'; ?>
+    <?php include __DIR__ . '/modales/modal_crear.php'; ?>
+    <?php include __DIR__ . '/modales/modal_editar.php'; ?>
+
+</div>
+
+<!-- Modal de confirmación genérico -->
+<?php include __DIR__ . '/modales/modal_confirmacion.php'; ?>
+
+<!-- JS Core -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- DataTables -->
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+
+<!-- JS del módulo -->
+<script src="/modulos/mantenimiento/tipo_vehiculo/js/notificaciones.js"></script>
+<script src="/modulos/mantenimiento/tipo_vehiculo/js/datatables.js"></script>
+<script src="/modulos/mantenimiento/tipo_vehiculo/js/confirmacion.js"></script>
+<script src="/modulos/mantenimiento/tipo_vehiculo/js/acciones.js"></script>
+<script src="/modulos/mantenimiento/tipo_vehiculo/js/form.js"></script>
+<script src="/modulos/mantenimiento/tipo_vehiculo/js/modal.js"></script>
+<script src="/modulos/mantenimiento/tipo_vehiculo/js/editar.js"></script>
+
+</body>
+</html>

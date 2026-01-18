@@ -26,10 +26,7 @@
   >
 
   <!-- 4) Tus estilos -->
-  <link
-    rel="stylesheet"
-    href="/modulos/mantenimiento/tipo_vehiculo/assets/estilos.css"
-  >
+  <!-- <link rel="stylesheet" href="/modulos/mantenimiento/tipo_vehiculo/assets/estilos.css"> -->
 </head>
 <body class="bg-light">
 

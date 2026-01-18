@@ -1,0 +1,134 @@
+/* archivo: modulos/mantenimiento/tipo_vehiculo/css/tipo_vehiculo.css */
+
+/* ---------------------------------------------------------
+   ESTILOS GENERALES DEL MÓDULO TIPO DE VEHÍCULO
+
+--------------------------------------------------------- */
+
+
+
+#contenedorTipoVehiculo {
+    padding: 15px 20px;
+}
+
+/* ---------------------------------------------------------
+   TABLAS
+--------------------------------------------------------- */
+
+table.dataTable tbody tr:hover {
+    background-color: #f5f7fa;
+}
+
+table.dataTable td {
+    vertical-align: middle !important;
+}
+
+/* Número de fila */
+.col-num {
+    width: 50px;
+    text-align: center;
+}
+
+/* Acciones */
+.col-acciones {
+    width: 140px;
+    text-align: center;
+}
+
+/* ---------------------------------------------------------
+   BOTONES DE ACCIÓN
+--------------------------------------------------------- */
+
+.btn-ver {
+    background-color: #17a2b8;
+    color: white;
+}
+.btn-ver:hover {
+    background-color: #138496;
+    color: white;
+}
+
+.btn-editar {
+    background-color: #007bff;
+    color: white;
+}
+.btn-editar:hover {
+    background-color: #0069d9;
+    color: white;
+}
+
+.btn-desactivar {
+    background-color: #ffc107;
+    color: #212529;
+}
+.btn-desactivar:hover {
+    background-color: #e0a800;
+    color: #212529;
+}
+
+.btn-restaurar {
+    background-color: #28a745;
+    color: white;
+}
+.btn-restaurar:hover {
+    background-color: #218838;
+    color: white;
+}
+
+.btn-eliminar {
+    background-color: #dc3545;
+    color: white;
+}
+.btn-eliminar:hover {
+    background-color: #c82333;
+    color: white;
+}
+
+/* ---------------------------------------------------------
+   BADGES DE ESTADO
+--------------------------------------------------------- */
+
+.badge {
+    font-size: 0.85rem;
+    padding: 6px 10px;
+    border-radius: 4px;
+}
+
+/* ---------------------------------------------------------
+   MODALES
+--------------------------------------------------------- */
+
+.modal-header {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.modal-footer {
+    border-top: 1px solid #e5e5e5;
+}
+
+#modalTipoVehiculo .form-label {
+    font-weight: 600;
+}
+
+#modalVerTipoVehiculo .form-control-plaintext {
+    padding: 6px 0;
+    font-size: 15px;
+}
+
+/* ---------------------------------------------------------
+   NOTIFICACIONES (compatibles con notificaciones.js)
+--------------------------------------------------------- */
+
+#contenedorNotificaciones div {
+    font-family: "Segoe UI", sans-serif;
+}
+
+/* ---------------------------------------------------------
+   RESPONSIVE
+--------------------------------------------------------- */
+
+@media (max-width: 768px) {
+    .col-acciones {
+        width: 100px;
+    }
+}

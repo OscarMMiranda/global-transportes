@@ -10,7 +10,7 @@ $(function () {
   const listarTodosApi     = "/modulos/vehiculos/acciones/listar.php?estado=todos";
 
   // ---------------------------------------------------------
-  // Render de botones de acción
+  // Render de botones de acción (CORREGIDO)
   // ---------------------------------------------------------
   function accionesHTML(r) {
     const verBtn = `
@@ -18,23 +18,25 @@ $(function () {
         <i class="fa fa-eye"></i>
       </button>`;
 
+    // Vehículo activo → mostrar Editar + Desactivar
     if (parseInt(r.activo) === 1) {
       return `
         ${verBtn}
         <button class="btn btn-sm btn-primary btn-edit" data-id="${r.id}" title="Editar">
           <i class="fa fa-edit"></i>
         </button>
-        <button class="btn btn-sm btn-warning btn-soft-delete" data-id="${r.id}" title="Desactivar">
+        <button class="btn btn-sm btn-warning btn-desactivar" data-id="${r.id}" title="Desactivar">
           <i class="fa fa-ban"></i>
         </button>`;
     }
 
+    // Vehículo inactivo → mostrar Restaurar + Eliminar
     return `
       ${verBtn}
-      <button class="btn btn-sm btn-success btn-restore" data-id="${r.id}" title="Restaurar">
+      <button class="btn btn-sm btn-success btn-restaurar" data-id="${r.id}" title="Restaurar">
         <i class="fa fa-rotate-left"></i>
       </button>
-      <button class="btn btn-sm btn-danger btn-delete" data-id="${r.id}" title="Eliminar definitivo">
+      <button class="btn btn-sm btn-danger btn-eliminar" data-id="${r.id}" title="Eliminar definitivo">
         <i class="fa fa-trash"></i>
       </button>`;
   }

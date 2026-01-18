@@ -1,28 +1,32 @@
-<!-- 
-  archivo : /modulos/mantenimiento/componentes/tarjetas/tarjeta_entidades.php  
--->
+<?php
+// archivo: /modulos/mantenimiento/componentes/tarjetas/tarjeta_entidades.php
+
+$nombre      = isset($moduloConfig['nombre']) ? $moduloConfig['nombre'] : 'Entidades';
+$descripcion = isset($moduloConfig['descripcion']) ? $moduloConfig['descripcion'] : 'Almacenes, depósitos, terminales y puntos logísticos.';
+$icono       = isset($moduloConfig['icono']) ? $moduloConfig['icono'] : 'fa-building';
+$ruta        = isset($moduloConfig['ruta']) ? $moduloConfig['ruta'] : '/modulos/mantenimiento/entidades/index.php';
+?>
 
 <div class="col">
-    <article class="card card-dashboard h-100 border-1 shadow-sm rounded-4">
+  <article class="card card-dashboard h-100 border-1 shadow-sm rounded-4">
     <div class="card-body d-flex flex-column">
-      <!-- Título con icono -->
+
       <h3 class="card-title h6 fw-bold text-primary mb-2">
-        <i class="fas fa-building me-2 text-secondary"></i>
-        Entidades
+        <i class="fas <?= htmlspecialchars($icono) ?> me-2 text-secondary"></i>
+        <?= htmlspecialchars($nombre) ?>
       </h3>
 
-      <!-- Texto descriptivo -->
       <p class="card-text text-muted flex-fill mb-3">
-        Almacenes, depósitos, terminales y puntos logísticos.
+        <?= htmlspecialchars($descripcion) ?>
       </p>
 
-      <!-- Botón de acción -->
       <a 
-        href="../../modulos/mantenimiento/entidades/index.php" 
+        href="<?= htmlspecialchars($ruta) ?>" 
         class="btn btn-sm btn-primary w-100 mt-auto"
       >
         <i class="fas fa-cogs me-1"></i> Administrar
       </a>
+
     </div>
   </article>
 </div>

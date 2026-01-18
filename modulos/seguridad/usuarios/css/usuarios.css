@@ -1,0 +1,9 @@
+/* archivo: /modulos/seguridad/usuarios/css/usuarios.css */
+
+.tabla-erp tbody tr {
+    cursor: pointer;
+}
+
+.fila-seleccionada {
+    background-color: #d6eaff !important;
+}

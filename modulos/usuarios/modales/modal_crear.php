@@ -12,46 +12,53 @@ $roles = obtenerRoles($conn);
 
 <div class="modal fade" id="modalCrearUsuario" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content shadow-sm border-0">
+        <div class="modal-content shadow-lg border-0 rounded-3">
 
-            <div class="modal-header bg-light border-bottom">
-                <h5 class="modal-title fw-semibold d-flex align-items-center">
-                    <i class="fa fa-user-plus text-primary me-2"></i>
-                    Crear Nuevo Usuario
+            <!-- Encabezado -->
+            <div class="modal-header bg-white border-bottom-0 pb-0">
+                <h5 class="modal-title fw-bold text-primary d-flex align-items-center">
+                    <i class="fa fa-user-plus me-2 fs-4"></i>
+                    Crear nuevo usuario
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
 
-            <div class="modal-body px-4 py-3">
+            <!-- Línea divisoria elegante -->
+            <div class="px-4">
+                <hr class="mt-1 mb-1" style="opacity:.15;">
+            </div>
+
+            <!-- Cuerpo -->
+            <div class="modal-body px-4 pb-4">
 
                 <div id="crear-alertas"></div>
 
                 <form id="form-crear-usuario" autocomplete="off">
 
-                    <div class="row g-3">
+                    <div class="row g-4">
 
                         <div class="col-md-6">
-                            <label class="form-label">Nombre</label>
+                            <label class="form-label text-muted small mb-1">Nombre</label>
                             <input type="text" name="nombre" class="form-control" required>
                         </div>
 
                         <div class="col-md-6">
-                            <label class="form-label">Apellido</label>
+                            <label class="form-label text-muted small mb-1">Apellido</label>
                             <input type="text" name="apellido" class="form-control" required>
                         </div>
 
                         <div class="col-md-6">
-                            <label class="form-label">Usuario</label>
+                            <label class="form-label text-muted small mb-1">Usuario</label>
                             <input type="text" name="usuario" class="form-control" required>
                         </div>
 
                         <div class="col-md-6">
-                            <label class="form-label">Correo electrónico</label>
+                            <label class="form-label text-muted small mb-1">Correo electrónico</label>
                             <input type="email" name="correo" class="form-control" required>
                         </div>
 
                         <div class="col-md-6">
-                            <label class="form-label">Rol</label>
+                            <label class="form-label text-muted small mb-1">Rol</label>
                             <select name="rol" class="form-select" required>
                                 <option value="">Seleccione un rol</option>
                                 <?php foreach ($roles as $r): ?>
@@ -63,14 +70,15 @@ $roles = obtenerRoles($conn);
                         </div>
 
                         <div class="col-md-6">
-                            <label class="form-label">Contraseña</label>
+                            <label class="form-label text-muted small mb-1">Contraseña</label>
                             <div class="position-relative">
                                 <input type="password" name="password" class="form-control" required>
-                                <button type="button" class="btn btn-sm btn-outline-secondary toggle-pass"
-            data-target="[name='password']"
-            style="position:absolute; top:8px; right:10px; z-index:10;">
-        <i class="fa fa-eye"></i>
-    </button>
+                                <button type="button"
+                                        class="btn btn-sm btn-outline-secondary toggle-pass"
+                                        data-target="[name='password']"
+                                        style="position:absolute; top:8px; right:10px; z-index:10;">
+                                    <i class="fa fa-eye"></i>
+                                </button>
                             </div>
                         </div>
 
@@ -80,14 +88,15 @@ $roles = obtenerRoles($conn);
 
             </div>
 
-            <div class="modal-footer bg-light border-top">
+            <!-- Footer -->
+            <div class="modal-footer bg-white border-top-0 pt-0 px-4 pb-4">
 
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                <button type="button" class="btn btn-light border" data-bs-dismiss="modal">
                     <i class="fa fa-times me-1"></i> Cancelar
                 </button>
 
                 <button type="submit" form="form-crear-usuario" class="btn btn-primary">
-                    <i class="fa fa-save me-1"></i> Guardar Usuario
+                    <i class="fa fa-save me-1"></i> Guardar usuario
                 </button>
 
             </div>

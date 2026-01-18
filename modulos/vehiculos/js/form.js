@@ -3,11 +3,18 @@
 $(document).on("submit", "#formVehiculo", function (e) {
     e.preventDefault();
 
-    const form = $(this);
-    const datos = form.serialize();
+    var form = $(this);
+    var datos = form.serialize();
+
+    // Detectar si es edición
+    var esEdicion = form.find('input[name="id"]').length > 0;
+
+    var url = esEdicion
+        ? "/modulos/vehiculos/acciones/editar.php"
+        : "/modulos/vehiculos/acciones/crear.php";
 
     $.ajax({
-        url: "/modulos/vehiculos/acciones/crear.php",
+        url: url,
         type: "POST",
         data: datos,
         dataType: "json",
@@ -15,24 +22,37 @@ $(document).on("submit", "#formVehiculo", function (e) {
         success: function (r) {
             console.log("Respuesta del servidor:", r);
 
-            if (r.ok) {
-                alert("Vehículo registrado correctamente");
+            if (r && r.ok) {
+                notifySuccess(
+                    esEdicion ? "Vehículo actualizado" : "Vehículo registrado",
+                    r.msg || "La operación se completó correctamente."
+                );
+
                 $("#modalVehiculo").modal("hide");
-                $("#tblActivosVehiculos").DataTable().ajax.reload(null, false);
+
+                if ($("#tblActivosVehiculos").length) {
+                    $("#tblActivosVehiculos").DataTable().ajax.reload(null, false);
+                }
             } else {
-                alert("Error al guardar: " + (r.error_sql ?? r.msg));
+                var msg = (r && r.msg) ? r.msg : "Error desconocido";
+                notifyError(
+                    "No se pudo guardar el vehículo",
+                    msg
+                );
+
+                if (r && r.error_sql) {
+                    console.error("SQL:", r.error_sql);
+                }
             }
         },
 
         error: function (xhr) {
             console.error("❌ Error AJAX:", xhr.responseText);
 
-            try {
-                const r = JSON.parse(xhr.responseText);
-                alert("Error al guardar: " + (r.error_sql ?? "Error desconocido"));
-            } catch (e) {
-                alert("Error al guardar (respuesta no válida)");
-            }
+            notifyError(
+                "Error de comunicación",
+                "No se pudo completar la operación. Intente nuevamente."
+            );
         }
     });
 });

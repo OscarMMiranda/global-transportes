@@ -1,0 +1,63 @@
+/* 
+	archivo: /modulos/seguridad/auditoria/css/auditoria.css
+
+	============================
+	MÓDULO AUDITORÍA - ESTILOS
+	============================ */
+
+/* Ajuste general del módulo */
+#tablaAuditoria {
+    font-size: 14px;
+}
+
+/* Encabezados de tabla */
+#tablaAuditoria thead th {
+    background-color: #f1f1f1;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+}
+
+/* Filas */
+#tablaAuditoria tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+/* Hover profesional */
+#tablaAuditoria tbody tr:hover {
+    background-color: #f5faff;
+}
+
+/* Celdas */
+#tablaAuditoria td {
+    vertical-align: middle;
+}
+
+/* Descripción más legible */
+#tablaAuditoria td:nth-child(7) {
+    white-space: normal;
+    max-width: 350px;
+}
+
+/* Filtros */
+.card .form-label {
+    font-weight: 600;
+    font-size: 13px;
+}
+
+/* Botones */
+#btnBuscar {
+    font-weight: 600;
+}
+
+#btnLimpiar {
+    font-weight: 600;
+}
+
+/* Ajuste responsive */
+@media (max-width: 768px) {
+    #tablaAuditoria {
+        font-size: 12px;
+    }
+}

@@ -1,0 +1,106 @@
+/* archivo: modulos/conductores/css/conductores.css */
+
+/* ==============================================================
+   MODULO CONDUCTORES — ESTILOS ESPECÍFICOS
+   ============================================================== */
+
+#conductores-header h4 {
+    letter-spacing: -0.3px;
+}
+
+#conductores-header .btn {
+    border-radius: 6px;
+    padding: 0.45rem 0.9rem;
+}
+
+#conductores-header .btn i {
+    font-size: 0.9rem;
+}
+
+/* Loader */
+.loader-conductores {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 0;
+    color: #64748b;
+}
+
+.loader-conductores .spinner-border {
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+/* Validaciones */
+.input-error {
+    border-color: #dc3545 !important;
+}
+
+.text-error {
+    color: #dc3545;
+    font-size: 0.8rem;
+    margin-top: 3px;
+}
+
+/* Tabla */
+.table-conductores tbody tr:hover {
+    background: #f1f5f9;
+}
+
+.tabla-conductores thead th {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #334155;
+}
+
+.tabla-conductores tbody tr:hover {
+    background: #f8fafc !important;
+}
+
+.tabla-conductores td {
+    font-size: 0.9rem;
+    color: #475569;
+}
+
+/* Badges */
+.badge-activo {
+    background: #16a34a;
+    color: #fff;
+    padding: 0.35rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+}
+
+.badge-inactivo {
+    background: #64748b;
+    color: #fff;
+    padding: 0.35rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+}
+
+/* Acciones */
+.acciones-conductor .btn {
+    border-radius: 6px;
+    padding: 0.35rem 0.55rem;
+}
+
+.acciones-conductor .btn i {
+    font-size: 0.85rem;
+}
+
+/* ==============================================================
+   FIX DEFINITIVO — Forzar ancho completo sin romper Bootstrap
+   ============================================================== */
+
+#panelesConductores,
+#panelesConductores .tab-pane {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+#panelesConductores .table-responsive,
+#panelesConductores .dataTables_wrapper {
+    width: 100% !important;
+    max-width: 100% !important;
+}
