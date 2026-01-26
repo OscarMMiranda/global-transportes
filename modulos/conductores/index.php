@@ -21,9 +21,7 @@ include __DIR__ . '/componentes/head.php';
 
 <?php include __DIR__ . '/../../includes/componentes/header_global.php'; ?>
 
-<!-- ============================================================
-     FIX DEFINITIVO: container-fluid evita el ancho reducido
-     ============================================================ -->
+<!-- FIX: container-fluid evita el ancho reducido -->
 <div class="container-fluid py-1">
     <?php include __DIR__ . '/componentes/header.php'; ?>
     <?php include __DIR__ . '/componentes/tabs.php'; ?>
@@ -35,6 +33,10 @@ include __DIR__ . '/componentes/head.php';
 <!-- Librerías base -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Ubigeo -->
+<script src="/modulos/ubigeo/assets/ubigeo.js"></script>
+
 
 <!-- DataTables -->
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
@@ -48,11 +50,23 @@ include __DIR__ . '/componentes/head.php';
 <script src="/includes/js/validaciones_globales.js"></script>
 <script src="/includes/js/modales_globales.js"></script>
 
-<!-- Scripts del módulo -->
+<!-- ============================================================
+     ORDEN CORRECTO DE SCRIPTS DEL MÓDULO
+     ============================================================ -->
+
+<!-- 1. DataTables del módulo -->
 <script src="/modulos/conductores/assets/datatables.js"></script>
-<script src="/modulos/conductores/assets/modal.js"></script>
-<script src="/modulos/conductores/assets/form.js"></script>
+
+<!-- 2. Acciones (usa DataTables) -->
 <script src="/modulos/conductores/assets/acciones.js"></script>
+
+<!-- 3. Modales -->
+<script src="/modulos/conductores/assets/modal.js"></script>
+
+<!-- 4. Formularios -->
+<script src="/modulos/conductores/assets/form.js"></script>
+
+<!-- 5. Orquestador (inicializa todo) -->
 <script src="/modulos/conductores/js/conductores.js"></script>
 
 <script>

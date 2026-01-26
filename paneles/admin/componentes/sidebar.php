@@ -23,6 +23,12 @@
         </li>
 
         <li class="nav-item mb-2">
+            <a class="nav-link" href="/modulos/documentos/index.php">
+                🔐 Documentos
+            </a>
+        </li>
+
+        <li class="nav-item mb-2">
             <a class="nav-link" href="/modulos/seguridad/permisos/index.php">
                 🔐 Permisos
             </a>

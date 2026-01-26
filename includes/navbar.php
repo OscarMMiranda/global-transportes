@@ -1,7 +1,6 @@
-  <?php
+<?php
 // archivo: /includes/navbar.php
 
-// Detectar ruta actual para resaltar el menú activo
 $uri = $_SERVER['REQUEST_URI'];
 
 function active($path) {
@@ -38,7 +37,8 @@ function active($path) {
         </li>
 
         <li class="nav-item">
-          <a class="nav-link <?= active('/vehiculos') ?>" href="/modulos/vehiculos/index.php">
+          <a class="nav-link <?= active('/vehiculos') || active('/documentos_vehiculos') ?>" 
+             href="/modulos/vehiculos/index.php">
             <i class="fa-solid fa-car-side me-1"></i> Vehículos
           </a>
         </li>
@@ -51,15 +51,12 @@ function active($path) {
 
       </ul>
 
-      <!-- Lado derecho -->
       <ul class="navbar-nav ms-auto">
-
         <li class="nav-item">
           <a class="nav-link text-warning" href="/logout.php">
             <i class="fa-solid fa-right-from-bracket me-1"></i> Salir
           </a>
         </li>
-
       </ul>
 
     </div>

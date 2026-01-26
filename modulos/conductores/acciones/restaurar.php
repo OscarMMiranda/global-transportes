@@ -10,21 +10,18 @@ if (!$conn) {
     exit;
 }
 
-$id = isset($_POST['id']) ? intval($_POST['id']) : 0;
+// ID recibido por GET (porque el JS lo envía así)
+$id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+
 if ($id <= 0) {
     echo json_encode(['success' => false, 'error' => 'ID inválido']);
     exit;
 }
 
 try {
-    // Restaurar: marcar como activo nuevamente
     $stmt = $conn->prepare("UPDATE conductores SET activo = 1 WHERE id = ?");
-    if (!$stmt) {
-        echo json_encode(['success' => false, 'error' => $conn->error]);
-        exit;
-    }
-
     $stmt->bind_param("i", $id);
+
     if ($stmt->execute()) {
         echo json_encode(['success' => true]);
     } else {
@@ -32,6 +29,7 @@ try {
     }
 
     $stmt->close();
+
 } catch (Exception $e) {
     error_log("❌ restaurar.php: " . $e->getMessage());
     echo json_encode(['success' => false, 'error' => $e->getMessage()]);

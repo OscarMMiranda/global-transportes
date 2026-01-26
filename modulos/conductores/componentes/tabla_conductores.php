@@ -16,12 +16,12 @@
             <table id="<?= $tablaId ?>" class="table table-hover align-middle mb-0 tabla-conductores">
                 <thead class="table-light">
                     <tr>
-                        <th style="width: 50px">#</th>
-                        <th>Apellidos y Nombres</th>
-                        <th style="width: 120px">DNI</th>
-                        <th style="width: 120px">Licencia</th>
-                        <th style="width: 130px">Teléfono</th>
-                        <th style="width: 100px">Estado</th>
+                        <th style="width: 30px">#</th>
+                        <th style="width: 260px">Apellidos y Nombres</th>
+                        <th style="width: 100px">DNI</th>
+                        <th style="width: 100px">Licencia</th>
+                        <th style="width: 100px">Teléfono</th>
+                        <th style="width: 80px">Estado</th>
                         <th class="text-center" style="width: 120px">Acciones</th>
                     </tr>
                 </thead>

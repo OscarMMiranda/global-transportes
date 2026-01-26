@@ -26,6 +26,14 @@
     >
         <i class="fa-solid fa-pen-to-square"></i>
     </button>
+	<button 
+		class="btn btn-sm btn-info btn-historial" 
+		data-id="<?= $c['id'] ?>">
+    	<i class="fa fa-clock-rotate-left"></i>
+	</button>
+
+
+
 
     <?php if (!empty($c['activo']) && (int)$c['activo'] === 1): ?>
 

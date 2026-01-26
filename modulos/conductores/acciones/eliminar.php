@@ -10,7 +10,9 @@ if (!$conn) {
     exit;
 }
 
-$id = isset($_POST['id']) ? intval($_POST['id']) : 0;
+// ID recibido por GET (igual que desactivar/restaurar)
+$id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+
 if ($id <= 0) {
     echo json_encode(['success' => false, 'error' => 'ID inválido']);
     exit;
@@ -27,6 +29,7 @@ try {
     }
 
     $stmt->close();
+
 } catch (Exception $e) {
     error_log("❌ eliminar.php: " . $e->getMessage());
     echo json_encode(['success' => false, 'error' => $e->getMessage()]);

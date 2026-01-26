@@ -1,6 +1,9 @@
 <?php
 // archivo: /modulos/conductores/controllers/conductores_controller.php
 
+/**
+ * Prepara un statement seguro
+ */
 function prep($conn, $sql) {
     if (!$conn || !($conn instanceof mysqli)) {
         throw new Exception("❌ Conexión inválida en prep()\nSQL: $sql");
@@ -13,11 +16,13 @@ function prep($conn, $sql) {
 }
 
 /**
- * Lista todos los conductores (activos por defecto)
+ * Lista conductores según estado (activo / inactivo)
  */
 function listarConductores($conn, $estado = 'activo') {
-    $sql = "SELECT id, nombres, apellidos, dni, licencia_conducir, telefono, correo, direccion,
-                   distrito_id, provincia_id, departamento_id, activo, created_at, foto
+
+    $sql = "SELECT 
+                id, nombres, apellidos, dni, licencia_conducir, telefono, correo, direccion,
+                distrito_id, provincia_id, departamento_id, activo, created_at, foto
             FROM conductores";
 
     if ($estado === 'activo') {
@@ -25,36 +30,42 @@ function listarConductores($conn, $estado = 'activo') {
     } elseif ($estado === 'inactivo') {
         $sql .= " WHERE activo = 0";
     }
+
     $sql .= " ORDER BY apellidos, nombres";
 
     $stmt = prep($conn, $sql);
+
     if (!$stmt->execute()) {
         throw new Exception("❌ Error en execute(): {$stmt->error}");
     }
 
-    $stmt->bind_result($id, $nombres, $apellidos, $dni, $licencia, $telefono, $correo,
-                       $direccion, $distrito_id, $provincia_id, $departamento_id,
-                       $activo, $created_at, $foto);
+    $stmt->bind_result(
+        $id, $nombres, $apellidos, $dni, $licencia, $telefono, $correo,
+        $direccion, $distrito_id, $provincia_id, $departamento_id,
+        $activo, $created_at, $foto
+    );
 
     $rows = [];
+
     while ($stmt->fetch()) {
         $rows[] = [
-            'id'             => $id,
-            'nombres'        => $nombres,
-            'apellidos'      => $apellidos,
-            'dni'            => $dni,
+            'id'                => $id,
+            'nombres'           => $nombres,
+            'apellidos'         => $apellidos,
+            'dni'               => $dni,
             'licencia_conducir' => $licencia,
-            'telefono'       => $telefono,
-            'correo'         => $correo,
-            'direccion'      => $direccion,
-            'distrito_id'    => $distrito_id,
-            'provincia_id'   => $provincia_id,
-            'departamento_id'=> $departamento_id,
-            'activo'         => (int)$activo,
-            'created_at'     => $created_at,
-            'foto'           => $foto
+            'telefono'          => $telefono,
+            'correo'            => $correo,
+            'direccion'         => $direccion,
+            'distrito_id'       => $distrito_id,
+            'provincia_id'      => $provincia_id,
+            'departamento_id'   => $departamento_id,
+            'activo'            => (int)$activo,
+            'created_at'        => $created_at,
+            'foto'              => $foto
         ];
     }
+
     $stmt->close();
     return $rows;
 }
@@ -63,9 +74,14 @@ function listarConductores($conn, $estado = 'activo') {
  * Obtiene un conductor por ID
  */
 function obtenerConductorPorId($conn, $id) {
-    $stmt = prep($conn, "SELECT id, nombres, apellidos, dni, licencia_conducir, telefono, correo, direccion,
-                                distrito_id, provincia_id, departamento_id, activo, created_at, foto
-                         FROM conductores WHERE id = ?");
+
+    $stmt = prep($conn, "
+        SELECT id, nombres, apellidos, dni, licencia_conducir, telefono, correo, direccion,
+               distrito_id, provincia_id, departamento_id, activo, created_at, foto
+        FROM conductores
+        WHERE id = ?
+    ");
+
     $stmt->bind_param("i", $id);
 
     if (!$stmt->execute()) {
@@ -73,27 +89,31 @@ function obtenerConductorPorId($conn, $id) {
         return null;
     }
 
-    $stmt->bind_result($id_c, $nombres, $apellidos, $dni, $licencia, $telefono, $correo,
-                       $direccion, $distrito_id, $provincia_id, $departamento_id, $activo,
-                       $created_at, $foto);
+    $stmt->bind_result(
+        $id_c, $nombres, $apellidos, $dni, $licencia, $telefono, $correo,
+        $direccion, $distrito_id, $provincia_id, $departamento_id,
+        $activo, $created_at, $foto
+    );
 
     if ($stmt->fetch()) {
+
         $data = [
-            'id'             => $id_c,
-            'nombres'        => $nombres,
-            'apellidos'      => $apellidos,
-            'dni'            => $dni,
+            'id'                => $id_c,
+            'nombres'           => $nombres,
+            'apellidos'         => $apellidos,
+            'dni'               => $dni,
             'licencia_conducir' => $licencia,
-            'telefono'       => $telefono,
-            'correo'         => $correo,
-            'direccion'      => $direccion,
-            'distrito_id'    => $distrito_id,
-            'provincia_id'   => $provincia_id,
-            'departamento_id'=> $departamento_id,
-            'activo'         => (int)$activo,
-            'created_at'     => $created_at,
-            'foto'           => $foto
+            'telefono'          => $telefono,
+            'correo'            => $correo,
+            'direccion'         => $direccion,
+            'distrito_id'       => $distrito_id,
+            'provincia_id'      => $provincia_id,
+            'departamento_id'   => $departamento_id,
+            'activo'            => (int)$activo,
+            'created_at'        => $created_at,
+            'foto'              => $foto
         ];
+
         $stmt->close();
         return $data;
     }
@@ -103,65 +123,7 @@ function obtenerConductorPorId($conn, $id) {
 }
 
 /**
- * Guarda o actualiza un conductor
- */
-function guardarConductor($conn, $post, $file = null) {
-    $id        = isset($post['id']) ? (int)$post['id'] : 0;
-    $nombres   = isset($post['nombres']) ? trim($post['nombres']) : '';
-    $apellidos = isset($post['apellidos']) ? trim($post['apellidos']) : '';
-    $dni       = isset($post['dni']) ? trim($post['dni']) : '';
-    $licencia  = isset($post['licencia_conducir']) ? trim($post['licencia_conducir']) : '';
-    $telefono  = isset($post['telefono']) ? trim($post['telefono']) : '';
-    $correo    = isset($post['correo']) ? trim($post['correo']) : '';
-    $direccion = isset($post['direccion']) ? trim($post['direccion']) : '';
-    $activo    = isset($post['activo']) ? 1 : 0;
-    $foto      = '';
-
-    if ($file && isset($file['foto']) && $file['foto']['error'] === UPLOAD_ERR_OK) {
-        $nombreTmp   = $file['foto']['tmp_name'];
-        $nombreFinal = uniqid('foto_') . '.jpg';
-        $rutaDestino = __DIR__ . '/../uploads/' . $nombreFinal;
-        if (move_uploaded_file($nombreTmp, $rutaDestino)) {
-            $foto = $nombreFinal;
-        }
-    }
-
-  if ($id > 0) {
-    if ($foto !== '') {
-        $sql = "UPDATE conductores 
-                SET nombres=?, apellidos=?, dni=?, licencia_conducir=?, telefono=?, correo=?, direccion=?, activo=?, foto=? 
-                WHERE id=?";
-        $stmt = prep($conn, $sql);
-        $stmt->bind_param("ssssssssis", $nombres, $apellidos, $dni, $licencia, $telefono,
-                          $correo, $direccion, $activo, $foto, $id);
-    } else {
-        $sql = "UPDATE conductores 
-                SET nombres=?, apellidos=?, dni=?, licencia_conducir=?, telefono=?, correo=?, direccion=?, activo=? 
-                WHERE id=?";
-        $stmt = prep($conn, $sql);
-        $stmt->bind_param("ssssssssi", $nombres, $apellidos, $dni, $licencia, $telefono,
-                          $correo, $direccion, $activo, $id);
-    }
-} else {
-    $sql = "INSERT INTO conductores (nombres, apellidos, dni, licencia_conducir, telefono, correo, direccion, foto, activo) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    $stmt = prep($conn, $sql);
-    $stmt->bind_param("ssssssssi", $nombres, $apellidos, $dni, $licencia, $telefono,
-                      $correo, $direccion, $foto, $activo);
-}
-
-
-    if (!$stmt->execute()) {
-        error_log("❌ Error al guardar conductor: {$stmt->error}");
-        return "❌ Error al guardar conductor: {$stmt->error}";
-    }
-
-    $stmt->close();
-    return '';
-}
-
-/**
- * Elimina (desactiva) un conductor
+ * Desactiva (soft delete)
  */
 function eliminarConductor($conn, $id) {
     $stmt = prep($conn, "UPDATE conductores SET activo = 0 WHERE id = ?");
@@ -172,7 +134,7 @@ function eliminarConductor($conn, $id) {
 }
 
 /**
- * Restaura (reactiva) un conductor
+ * Restaura conductor
  */
 function restaurarConductor($conn, $id) {
     $stmt = prep($conn, "UPDATE conductores SET activo = 1 WHERE id = ?");
@@ -183,7 +145,7 @@ function restaurarConductor($conn, $id) {
 }
 
 /**
- * Elimina definitivamente un conductor
+ * Eliminación definitiva
  */
 function eliminarConductorPermanentemente($conn, $id) {
     $stmt = prep($conn, "DELETE FROM conductores WHERE id = ?");

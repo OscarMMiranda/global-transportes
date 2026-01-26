@@ -1,6 +1,15 @@
 <?php
 // archivo: /includes/componentes/header_global.php
-// Barra superior global del sistema (versión moderna)
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Seguridad: bloquear acceso sin login
+if (!isset($_SESSION['usuario'])) {
+    header("Location: /login.php");
+    exit;
+}
 ?>
 
 <nav class="navbar navbar-expand-lg bg-white shadow-sm border-bottom">
@@ -29,17 +38,11 @@
                 <!-- Usuario -->
                 <div class="d-flex align-items-center text-dark fw-semibold">
                     <i class="fa fa-user-circle text-primary me-2 fs-5"></i>
-                    <?php
-                        if (isset($_SESSION['usuario'])) {
-                            echo htmlspecialchars($_SESSION['usuario']);
-                        } else {
-                            echo 'Usuario';
-                        }
-                    ?>
+                    <?= htmlspecialchars($_SESSION['usuario']); ?>
                 </div>
 
                 <!-- Salir -->
-                <a href="/logout.php" class="btn btn-outline-danger">
+                <a href="/sistema/logout.php" class="btn btn-outline-danger">
                     <i class="fa fa-sign-out-alt me-1"></i> Salir
                 </a>
 

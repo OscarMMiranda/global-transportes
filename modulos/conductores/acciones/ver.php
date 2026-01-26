@@ -1,6 +1,8 @@
 <?php
 // archivo: /modulos/conductores/acciones/ver.php
+
 require_once __DIR__ . '/../../../includes/config.php';
+require_once __DIR__ . '/../../ubigeo/helpers/ubigeo_helper.php'; // ← IMPORTANTE
 
 header('Content-Type: application/json; charset=utf-8');
 
@@ -28,6 +30,9 @@ try {
             telefono,
             correo,
             direccion,
+            departamento_id,
+            provincia_id,
+            distrito_id,
             activo,
             foto
         FROM conductores
@@ -56,15 +61,17 @@ try {
         $telefono,
         $correo,
         $direccion,
+        $departamento_id,
+        $provincia_id,
+        $distrito_id,
         $activo,
         $foto
     );
 
     if ($stmt->fetch()) {
 
-        // Construir ruta correcta de foto
+        // Foto
         if (!empty($foto)) {
-            // Si ya viene con ruta completa, no tocar
             if (strpos($foto, '/uploads/conductores/') === 0) {
                 $fotoFinal = $foto;
             } else {
@@ -73,6 +80,11 @@ try {
         } else {
             $fotoFinal = null;
         }
+
+        // Obtener nombres de Ubigeo
+        $departamento_nombre = obtenerNombreDepartamento($departamento_id);
+        $provincia_nombre    = obtenerNombreProvincia($provincia_id);
+        $distrito_nombre     = obtenerNombreDistrito($distrito_id);
 
         $data = [
             'id'                => $id_c,
@@ -83,6 +95,17 @@ try {
             'telefono'          => $telefono,
             'correo'            => $correo,
             'direccion'         => $direccion,
+
+            // Ubigeo IDs
+            'departamento_id'   => $departamento_id,
+            'provincia_id'      => $provincia_id,
+            'distrito_id'       => $distrito_id,
+
+            // Ubigeo nombres
+            'departamento_nombre' => $departamento_nombre,
+            'provincia_nombre'    => $provincia_nombre,
+            'distrito_nombre'     => $distrito_nombre,
+
             'activo'            => (int)$activo,
             'foto'              => $fotoFinal
         ];

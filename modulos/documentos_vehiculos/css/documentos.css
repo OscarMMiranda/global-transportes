@@ -1,0 +1,58 @@
+/* archivo: /modulos/documentos_vehiculos/css/documentos.css */
+
+.tabla-documentos {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.tabla-documentos th,
+.tabla-documentos td {
+  padding: 8px 12px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+.estado-ok {
+  color: #0a8a0a;
+  font-weight: bold;
+}
+
+.estado-pendiente {
+  color: #c00;
+  font-weight: bold;
+}
+
+.boton-adjuntar {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 6px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+.boton-adjuntar:hover {
+  background-color: #0056b3;
+}
+
+/* Modal muy simple */
+.modal-doc {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-doc-contenido {
+  background: #fff;
+  padding: 20px;
+  border-radius: 6px;
+  min-width: 320px;
+}

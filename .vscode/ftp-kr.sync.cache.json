@@ -27,6 +27,12 @@
       "lmtime": 0,
       "modified": false
     },
+    "buscar_includes.php": {
+      "type": "-",
+      "size": 642,
+      "lmtime": 0,
+      "modified": false
+    },
     "contacto.php": {
       "type": "-",
       "size": 2159,
@@ -66,7 +72,7 @@
     },
     "error_log.txt": {
       "type": "-",
-      "size": 396130,
+      "size": 426282,
       "lmtime": 0,
       "modified": true
     },
@@ -120,15 +126,9 @@
     "legacy": {},
     "login.php": {
       "type": "-",
-      "size": 6361,
+      "size": 6475,
       "lmtime": 0,
       "modified": true
-    },
-    "login_test.php": {
-      "type": "-",
-      "size": 32,
-      "lmtime": 0,
-      "modified": false
     },
     "logout.php": {
       "type": "-",
@@ -185,24 +185,6 @@
       "modified": false
     },
     "sistema": {},
-    "test.php": {
-      "type": "-",
-      "size": 18,
-      "lmtime": 0,
-      "modified": false
-    },
-    "test_conexion.php": {
-      "type": "-",
-      "size": 278,
-      "lmtime": 0,
-      "modified": false
-    },
-    "test_finalizar.php": {
-      "type": "-",
-      "size": 1002,
-      "lmtime": 0,
-      "modified": false
-    },
     "Thumbs.db": {
       "type": "-",
       "size": 16896,

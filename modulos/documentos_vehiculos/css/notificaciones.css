@@ -1,0 +1,33 @@
+/* CSS para notificaciones emergentes */
+
+#notificacionesERP {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 999999;
+}
+
+.notificacion {
+    padding: 12px 18px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 14px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+    opacity: 0;
+    transform: translateX(50px);
+    transition: all .3s ease;
+}
+
+.notificacion.mostrar {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.notificacion.exito {
+    background: #28a745;
+}
+
+.notificacion.error {
+    background: #dc3545;
+}
