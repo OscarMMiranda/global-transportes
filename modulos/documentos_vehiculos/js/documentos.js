@@ -73,14 +73,17 @@ function cargarDocumentosVehiculo(idVehiculo) {
                 var botones = '';
 
                 if (doc.ruta) {
-                    botones +=
-                        '<button class="btn btn-sm btn-success me-1 btn-ver-doc" data-ruta="' + doc.ruta + '">Ver</button>' +
-                        '<a href="' + doc.ruta + '" download class="btn btn-sm btn-secondary me-1">Descargar</a>' +
-                        '<button type="button" class="boton-adjuntar btn btn-sm btn-warning" ' +
-                        'data-tipo="' + doc.tipo_documento_id + '" ' +
-                        'data-desc="' + escapeHtml(doc.descripcion) + '">' +
-                        'Reemplazar</button>';
-                } else {
+    			botones +=
+        		'<button class="btn btn-sm btn-success me-1 btn-ver-doc" data-ruta="' + doc.ruta + '">Ver</button>' +
+        		'<a href="' + doc.ruta + '" download class="btn btn-sm btn-secondary me-1">Descargar</a>' +
+        		'<button class="btn btn-sm btn-info me-1 btn-historial" data-tipo="' + doc.tipo_documento_id + '" data-desc="' + escapeHtml(doc.descripcion) + '">Historial</button>' +
+        		'<button type="button" class="boton-adjuntar btn btn-sm btn-warning" ' +
+        		'data-tipo="' + doc.tipo_documento_id + '" ' +
+        		'data-desc="' + escapeHtml(doc.descripcion) + '">' +
+        		'Reemplazar</button>';
+				}
+ 				else 
+					{
                     botones +=
                         '<button type="button" class="boton-adjuntar btn btn-sm btn-primary" ' +
                         'data-tipo="' + doc.tipo_documento_id + '" ' +

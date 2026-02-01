@@ -23,9 +23,9 @@
     "assets": {},
     "bootstrap_sitio.php": {
       "type": "-",
-      "size": 1331,
+      "size": 1643,
       "lmtime": 0,
-      "modified": false
+      "modified": true
     },
     "buscar_includes.php": {
       "type": "-",
@@ -72,7 +72,7 @@
     },
     "error_log.txt": {
       "type": "-",
-      "size": 426282,
+      "size": 177383,
       "lmtime": 0,
       "modified": true
     },
@@ -185,6 +185,18 @@
       "modified": false
     },
     "sistema": {},
+    "test_permisos.php": {
+      "type": "-",
+      "size": 104,
+      "lmtime": 0,
+      "modified": false
+    },
+    "test_ruta.php": {
+      "type": "-",
+      "size": 56,
+      "lmtime": 0,
+      "modified": false
+    },
     "Thumbs.db": {
       "type": "-",
       "size": 16896,

@@ -1,5 +1,5 @@
 <?php
-	// archivo: /modulos/documentos_vehiculos/acciones/guardar_documento.php
+// archivo: /modulos/documentos_vehiculos/acciones/guardar_documento.php
 
 header('Content-Type: application/json; charset=utf-8');
 
@@ -96,12 +96,12 @@ $stmt = $conn->prepare("
         archivo_tamano, version, is_current
     ) VALUES (
         ?, '', 'vehiculo', ?, ?, NULL, ?, 30, 1, NULL,
-        NOW(), 0, ?, ?, ?, 1
+        NOW(), 0, ?, ?, ?, ?, 1
     )
 ");
 
 $stmt->bind_param(
-    "iisssisi",
+    "iissssii",
     $tipoId,
     $vehiculoId,
     $nombreFinal,

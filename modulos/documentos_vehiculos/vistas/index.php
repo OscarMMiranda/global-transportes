@@ -14,6 +14,14 @@ require_once __DIR__ . '/../../../includes/componentes/navbar_global.php';
 
     <?php require_once __DIR__ . '/../componentes/tabla_documentos_vehiculos.php'; ?>
 
+    <?php require_once __DIR__ . '/../componentes/modal_historial.php'; ?>
+
+    <?php require_once __DIR__ . '/../componentes/modal_preview.php'; ?>
+
+
+
+    
+
 </div>
 
 <?php
@@ -21,3 +29,7 @@ require_once __DIR__ . '/../../../includes/footer_panel.php';
 ?>
 
 <script src="/modulos/documentos_vehiculos/js/documentos_vehiculos.js?v=<?= time() ?>"></script>
+<script src="/modulos/documentos_vehiculos/js/documentos.js?v=<?= time() ?>"></script>
+
+<script src="/modulos/documentos_vehiculos/js/documentos_historial.js?v=<?= time() ?>"></script>
+

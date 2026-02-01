@@ -1,0 +1,36 @@
+/* archivo: /modulos/documentos_conductores/css/documentos.css */
+
+.estado-ok {
+    color: green;
+    font-weight: bold;
+}
+
+.estado-vencido {
+    color: red;
+    font-weight: bold;
+}
+
+.estado-pendiente {
+    color: #999;
+    font-weight: bold;
+}
+
+.modalERP {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 9999;
+    display: none;
+}
+
+.modalERP-contenido {
+    background: #fff;
+    max-width: 600px;
+    margin: 5% auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px #000;
+}

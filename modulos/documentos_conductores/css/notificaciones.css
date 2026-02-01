@@ -1,0 +1,32 @@
+/* archivo: /modulos/documentos_conductores/css/notificaciones.css */
+
+#notificacionesERP {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 99999;
+}
+
+.notificacion {
+    background: #333;
+    color: #fff;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: all 0.3s ease;
+}
+
+.notificacion.mostrar {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.notificacion.exito {
+    background: #28a745;
+}
+
+.notificacion.error {
+    background: #dc3545;
+}

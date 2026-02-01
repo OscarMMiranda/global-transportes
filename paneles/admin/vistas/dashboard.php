@@ -54,7 +54,11 @@ if (!isset($_SESSION['usuario']) || !isset($_SESSION['rol_nombre']) || $_SESSION
                 <section class="mb-4">
                     <h3>Gestión Administrativa</h3>
                     <div class="row row-cols-1 row-cols-md-3 g-4">
-                        <?php include __DIR__ . '/../componentes/tarjetas/tarjeta_orden_trabajo.php'; ?>
+                        
+                       
+                        <?php include __DIR__ . '/../componentes/tarjetas/tarjeta_documentos_conductores.php'; ?>
+                        <?php include __DIR__ . '/../componentes/tarjetas/tarjeta_documentos_vehiculos.php'; ?>
+                        <?php include __DIR__ . '/../componentes/tarjetas/tarjeta_documentos_empresas.php'; ?>
                         <?php include __DIR__ . '/../componentes/tarjetas/tarjeta_conductores.php'; ?>
                         <?php include __DIR__ . '/../componentes/tarjetas/tarjeta_vehiculos.php'; ?>
                     </div>
@@ -66,7 +70,7 @@ if (!isset($_SESSION['usuario']) || !isset($_SESSION['rol_nombre']) || $_SESSION
                     <div class="row row-cols-1 row-cols-md-3 g-4">
                         <?php include __DIR__ . '/../componentes/tarjetas/tarjeta_mantenimiento.php'; ?>
                         <?php include __DIR__ . '/../componentes/tarjetas/tarjeta_asignaciones.php'; ?>
-                        <?php include __DIR__ . '/../componentes/tarjetas/tarjeta_documentos_vehiculos.php'; ?>
+                        <?php include __DIR__ . '/../componentes/tarjetas/tarjeta_orden_trabajo.php'; ?>
                     </div>
                 </section>
 
