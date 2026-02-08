@@ -1,50 +1,50 @@
-// archivo: /modulos/documentos_empresas/js/documentos_historial.js
+// archivo: modulos/documentos_empresas/js/documentos_historial.js
 
 // ============================================================
-// CARGAR HISTORIAL DE UN DOCUMENTO
+// CARGAR HISTORIAL DE DOCUMENTOS DE EMPRESA
 // ============================================================
-function cargarHistorial(documento_id) {
+function cargarHistorial(empresa_id, tipo_documento_id) {
 
-    if (!documento_id) {
-        console.error("cargarHistorial(): documento_id no recibido");
+    if (!empresa_id || !tipo_documento_id) {
+        console.error("cargarHistorial(): parámetros incompletos", empresa_id, tipo_documento_id);
         return;
     }
 
-    // Limpia tabla antes de cargar
     $("#tablaHistorial tbody").html(`
         <tr>
-            <td colspan="7" class="text-center">Cargando historial...</td>
+            <td colspan="5" class="text-center">Cargando historial...</td>
         </tr>
     `);
 
     $.ajax({
-        url: "/modulos/documentos_empresas/acciones/listar_historial_documento.php",
-        type: "GET",
-        data: { documento_id: documento_id },
+        url: "/modulos/documentos_empresas/acciones/listar_historial_empresa.php",
+        type: "POST",
+        data: {
+            empresa_id: empresa_id,
+            tipo_documento_id: tipo_documento_id
+        },
         dataType: "json",
 
         success: function (resp) {
 
-            if (!resp || !resp.data) {
-                console.error("Respuesta inválida en historial:", resp);
+            if (!resp.ok) {
+                console.error("Respuesta inválida:", resp);
                 return;
             }
 
             let html = "";
 
-            resp.data.forEach(function (item) {
+            resp.historial.forEach(function (item) {
 
                 html += `
                     <tr>
                         <td>${item.version}</td>
                         <td>${item.archivo}</td>
-                        <td>${item.fecha_inicio}</td>
-                        <td>${item.fecha_vencimiento}</td>
-                        <td>${item.subido_por}</td>
                         <td>${item.fecha_subida}</td>
+                        <td>${item.fecha_vencimiento}</td>
                         <td>
-                            <button class="btn btn-sm btn-primary btn-preview" 
-                                    data-url="${item.url}">
+                            <button class="btn btn-sm btn-primary btn-preview"
+                                    data-url="${item.ruta}">
                                 Ver
                             </button>
                         </td>
@@ -53,15 +53,14 @@ function cargarHistorial(documento_id) {
             });
 
             $("#tablaHistorial tbody").html(html);
-
             $("#modalHistorial").modal("show");
         },
 
-        error: function (xhr, status, error) {
-            console.error("Error AJAX historial:", error);
+        error: function (xhr) {
+            console.error("Error AJAX historial:", xhr.responseText);
             $("#tablaHistorial tbody").html(`
                 <tr>
-                    <td colspan="7" class="text-center text-danger">
+                    <td colspan="5" class="text-center text-danger">
                         Error al cargar historial
                     </td>
                 </tr>

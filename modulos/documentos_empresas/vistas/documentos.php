@@ -42,7 +42,7 @@ $empresa = $res->fetch_assoc();
 <div class="container-fluid mt-4">
 
     <!-- TÍTULO -->
-    <div class="card mb-4">
+    <div class="card mb-1">
         <div class="card-body">
             <h4 class="mb-1">
                 Documentos de la empresa: 

@@ -1,0 +1,22 @@
+/* archivo: /modulos/asistencias/assets/css/panel.css */
+
+.panel-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    text-align: center;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.card:hover {
+    background: #f0f8ff;
+    transform: translateY(-3px);
+}

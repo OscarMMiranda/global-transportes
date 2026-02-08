@@ -5,7 +5,7 @@
 <div class="d-flex justify-content-between align-items-center mb-2">
 
   <!-- 🔙 Botón de retorno -->
-  <a href="/modulos/erp_dashboard.php" class="btn btn-secondary">
+  <a href="../../../paneles/admin/vistas/dashboard.php" class="btn btn-secondary">
     <i class="fa-solid fa-arrow-left me-2"></i>
     Volver al módulo anterior
   </a>

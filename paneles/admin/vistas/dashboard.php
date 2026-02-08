@@ -61,6 +61,8 @@ if (!isset($_SESSION['usuario']) || !isset($_SESSION['rol_nombre']) || $_SESSION
                         <?php include __DIR__ . '/../componentes/tarjetas/tarjeta_documentos_empresas.php'; ?>
                         <?php include __DIR__ . '/../componentes/tarjetas/tarjeta_conductores.php'; ?>
                         <?php include __DIR__ . '/../componentes/tarjetas/tarjeta_vehiculos.php'; ?>
+                        <?php include __DIR__ . '/../componentes/tarjetas/tarjeta_asistencias.php'; ?>
+
                     </div>
                 </section>
 

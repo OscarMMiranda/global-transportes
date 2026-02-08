@@ -1,52 +1,100 @@
-// /modulos/documentos_empresas/js/documentos_empresas.js
-
 $(document).ready(function () {
 
     console.log("documentos_empresas.js cargado correctamente");
 
-    // Evento submit del formulario de subir documento
-    $("#formSubirDocumento").on("submit", function (e) {
+    const urlParams = new URLSearchParams(window.location.search);
+    const empresa_id = urlParams.get("id");
+
+    // ============================================================
+    // ABRIR MODAL PARA ADJUNTAR O REEMPLAZAR
+    // ============================================================
+    $(document).on("click", ".btn-subir", function () {
+
+        const tipo_id = $(this).data("tipo");
+        const nombre  = $(this).data("nombre");
+
+        $("#tipo_documento_id").val(tipo_id);
+        $("#empresa_id").val(empresa_id);
+
+        $("#tituloModalSubir").text("Subir documento: " + nombre);
+        $("#modalSubirDocumento").modal("show");
+    });
+
+    // ============================================================
+    // PREVIEW PDF
+    // ============================================================
+    $(document).on("click", ".btn-preview", function () {
+
+        const url = $(this).data("url");
+
+        $("#previewContenidoEmpresa").html(
+            '<embed src="' + url + '" type="application/pdf" style="width:100%; height:100%;">'
+        );
+
+        $("#modalPreview").modal("show");
+    });
+
+    // ============================================================
+    // GUARDAR DOCUMENTO
+    // ============================================================
+    $(document).on("submit", "#formSubirDocumento", function (e) {
         e.preventDefault();
 
-        let formData = new FormData(this);
+        const formData = new FormData(this);
+        formData.append("empresa_id", empresa_id);
 
         $.ajax({
-            url: "/modulos/documentos_empresas/acciones/subir_documento_empresa.php",
+            url: "../acciones/subir_documento_empresa.php",
             type: "POST",
             data: formData,
-            processData: false,
             contentType: false,
-            timeout: 20000,
+            processData: false,
+            dataType: "json",
 
-            success: function (resp) {
-                console.log("RESPUESTA DEL SERVIDOR:", resp);
+            beforeSend: function () {
+                $("#btnGuardarDocumento").prop("disabled", true).text("Guardando...");
+            },
 
-                // Si el servidor devolvió JSON válido
-                if (resp && resp.success) {
+            success: function (json) {
+
+                if (json.success) {
 
                     alert("Documento guardado correctamente.");
 
-                    // Cerrar modal
                     $("#modalSubirDocumento").modal("hide");
+                    $("#formSubirDocumento")[0].reset();
 
-                    // Recargar tabla activa
-                    let tablaActiva = $(".tab-pane.active table").attr("id");
-                    $("#" + tablaActiva).DataTable().ajax.reload(null, false);
+                    $.fn.dataTable
+                        .tables({ visible: true, api: true })
+                        .ajax.reload(null, false);
 
                 } else {
-                    alert("Error: " + (resp.message || "Respuesta inválida del servidor"));
+                    alert(json.message || "Error desconocido.");
                 }
             },
 
-            error: function (xhr, status, error) {
-                console.log("ERROR AJAX:", xhr.responseText, status, error);
+            error: function (xhr) {
+                console.error("ERROR AJAX:", xhr.responseText);
                 alert("Error en el servidor. No se pudo guardar el documento.");
             },
 
             complete: function () {
-                console.log("AJAX COMPLETADO");
+                $("#btnGuardarDocumento").prop("disabled", false).text("Guardar");
             }
         });
     });
 
+});
+
+// ============================================================
+// ABRIR HISTORIAL
+// ============================================================
+$(document).on("click", ".btn-historial", function () {
+
+    const empresa_id = $(this).data("empresa");
+    const tipo_documento_id = $(this).data("tipo");
+
+    console.log("HISTORIAL → empresa:", empresa_id, "tipo:", tipo_documento_id);
+
+    cargarHistorial(empresa_id, tipo_documento_id);
 });

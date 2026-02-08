@@ -2,12 +2,12 @@
 // archivo: /modulos/documentos_empresas/componentes/tabla_documentos_empresa.php
 ?>
 
-<div class="container-fluid mt-4">
+<div class="container-fluid mt-1">
 
     <!-- TÍTULO -->
-    <div class="card mb-4">
+    <div class="card mb-1">
         <div class="card-body">
-            <h4 class="mb-1">
+            <h4 class="mb-0">
                 Documentos de la empresa: 
                 <strong><?= htmlspecialchars($empresa['razon_social']) ?></strong>
             </h4>

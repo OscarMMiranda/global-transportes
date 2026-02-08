@@ -13,6 +13,7 @@
 
                 <div class="modal-body">
 
+                    <input type="hidden" id="empresa_id" name="empresa_id">
                     <input type="hidden" id="tipo_documento_id" name="tipo_documento_id">
 
                     <div class="mb-3">

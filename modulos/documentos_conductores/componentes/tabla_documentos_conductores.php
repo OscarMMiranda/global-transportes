@@ -7,7 +7,7 @@
     <div class="card-body">
 
         <!-- Nombre del conductor (correctamente ubicado) -->
-        <p class="fw-bold mb-3">
+        <p class="fw-bold mb-1">
             Conductor: 
             <span id="conductor_nombre">
                 <?= htmlspecialchars($conductor['nombres'] . ' ' . $conductor['apellidos']) ?>

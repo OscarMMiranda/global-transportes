@@ -1,4 +1,7 @@
 <?php
+// archivo: /modulos/documentos_empresas/acciones/listar_documentos_empresa_completo.php
+
+
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
@@ -111,9 +114,11 @@ while ($sql->fetch()) {
                 Descargar
             </a>
 
-            <button class="btn btn-sm btn-dark btn-historial" data-id="'.$tipo_documento_id.'">
-                Historial
-            </button>
+            <button class="btn btn-sm btn-info btn-historial"
+        data-empresa="{{empresa_id}}"
+        data-tipo="{{tipo_documento_id}}">
+    Historial
+</button>
 
             <button class="btn btn-sm btn-warning btn-subir"
                 data-tipo="'.$tipo_documento_id.'"

@@ -17,7 +17,7 @@ $(document).ready(function () {
     $.ajax({
         url: "../acciones/listar_categorias_documentos.php",
         type: "GET",
-        dataType: "json", // ← IMPORTANTE
+        dataType: "json",
         data: { entidad_tipo: "empresa" },
 
         success: function (categorias) {
@@ -29,7 +29,14 @@ $(document).ready(function () {
                 return;
             }
 
-            let htmlTabs = `<ul class="nav nav-tabs" id="tabsDocumentos" role="tablist">`;
+            // ============================================================
+            // CONTENEDOR FLEX: TABS IZQUIERDA + SHOW DERECHA
+            // ============================================================
+            let htmlTabs = `
+                <div class="d-flex justify-content-between align-items-center mb-0">
+                    <ul class="nav nav-tabs" id="tabsDocumentos" role="tablist">
+            `;
+
             let htmlContent = `<div class="tab-content" id="tabsContent">`;
 
             categorias.forEach((cat, index) => {
@@ -50,25 +57,33 @@ $(document).ready(function () {
 
                 htmlContent += `
                     <div class="tab-pane fade ${show}" id="contenido-${cat.id}" role="tabpanel">
-                        <table class="table table-bordered tabla-documentos"
-                            id="tabla-${cat.id}">
-                            <thead>
-                                <tr>
-                                    <th>Documento</th>
-                                    <th>Número</th>
-                                    <th>Inicio</th>
-                                    <th>Vencimiento</th>
-                                    <th>Días</th>
-                                    <th>Estado</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                        </table>
+                        <div class="container-fluid p-0">
+                            <table class="table table-bordered tabla-documentos"
+                                id="tabla-${cat.id}" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>Documento</th>
+                                        <th>Número</th>
+                                        <th>Inicio</th>
+                                        <th>Vencimiento</th>
+                                        <th>Días</th>
+                                        <th>Estado</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
                     </div>
                 `;
             });
 
-            htmlTabs += `</ul>`;
+            // Cerrar UL y agregar contenedor del SHOW
+            htmlTabs += `
+                    </ul>
+                    <div id="contenedorShow" class="ms-auto"></div>
+                </div>
+            `;
+
             htmlContent += `</div>`;
 
             $("#contenedorTabs").html(htmlTabs + htmlContent);
@@ -90,9 +105,9 @@ function inicializarTablas(empresa_id, categorias) {
 
     categorias.forEach(cat => {
 
-        $(`#tabla-${cat.id}`).DataTable({
+        const tabla = $(`#tabla-${cat.id}`).DataTable({
             ajax: {
-                url: "../acciones/listar_documentos_empresa_completo.php",
+                url: "../acciones/listar_documentos_empresa.php",
                 type: "GET",
                 data: {
                     empresa_id: empresa_id,
@@ -113,6 +128,16 @@ function inicializarTablas(empresa_id, categorias) {
             searching: false
         });
 
+        // ============================================================
+        // MOVER EL SELECTOR "SHOW X" A LA DERECHA JUNTO A LAS TABS
+        // ============================================================
+        $(`#tabla-${cat.id}`).on('init.dt', function () {
+            const wrapper = $(`#tabla-${cat.id}_wrapper`);
+            const length = wrapper.find('.dataTables_length');
+
+            $("#contenedorShow").html(length);
+        });
+
     });
 
     // Ajustar columnas al cambiar de pestaña
@@ -120,4 +145,3 @@ function inicializarTablas(empresa_id, categorias) {
         $.fn.dataTable.tables({ visible: true, api: true }).columns.adjust();
     });
 }
-
