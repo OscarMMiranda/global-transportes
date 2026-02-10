@@ -74,8 +74,9 @@
 <script src="/modulos/asistencias/js/reporte_diario.js"></script>
 
 
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/modulos/asistencias/modales/modal_editar_asistencia.php'; ?>
 
-<?php include __DIR__ . '/../modales/modal_editar_asistencia.php'; ?>
+
 
 <?php include __DIR__ . '/../modales/modal_historial.php'; ?>
 

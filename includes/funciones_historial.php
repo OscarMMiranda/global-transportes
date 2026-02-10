@@ -1,6 +1,4 @@
 <?php
-// archivo: /includes/funciones_historial.php
-
 require_once __DIR__ . '/config.php';
 
 function registrarHistorial($asistencia_id, $accion, $usuario, $detalle = null)

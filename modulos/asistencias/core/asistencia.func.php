@@ -116,6 +116,7 @@ function registrar_permiso($conn, $data)
     return array('ok' => true);
 }
 
+// Función para registrar vacaciones (rango de fechas)
 function registrar_vacacion($conn, $data)
 {
     $conductor_id = intval($data['conductor_id']);
@@ -135,21 +136,35 @@ function registrar_vacacion($conn, $data)
     return array('ok' => true);
 }
 
-function tipo_id_por_codigo($conn, $codigo)
+// Función auxiliar para obtener el ID del tipo de asistencia a partir de su código
+function tipo_id_por_codigo(mysqli $conn, $codigo)
 {
     $sql = "SELECT id FROM asistencia_tipos WHERE codigo = ? LIMIT 1";
 
     $stmt = $conn->prepare($sql);
-    if (!$stmt) return 0;
+    if (!$stmt) {
+        return 0;
+    }
 
     $stmt->bind_param("s", $codigo);
-    $stmt->execute();
-    $result = $stmt->get_result();
 
-    if ($result === false) return 0;
+    if (!$stmt->execute()) {
+        $stmt->close();
+        return 0;
+    }
 
-    $row = $result->fetch_assoc();
-    if ($row) return intval($row['id']);
+    // Declarar la variable ANTES para que Visual Studio no marque error
+    $id = null;
+
+    $stmt->bind_result($id);
+
+    $found = $stmt->fetch();
+    $stmt->close();
+
+    if ($found) {
+        return (int)$id;
+    }
 
     return 0;
 }
+

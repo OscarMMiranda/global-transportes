@@ -69,11 +69,15 @@ function obtener_conductores_por_empresa($conexion, $empresa_id)
     $stmt = mysqli_prepare($conexion, $sql);
     mysqli_stmt_bind_param($stmt, 'i', $empresa_id);
     mysqli_stmt_execute($stmt);
-    $res = mysqli_stmt_get_result($stmt);
+
+    mysqli_stmt_bind_result($stmt, $id, $nombres);
 
     $lista = array();
-    while ($row = mysqli_fetch_assoc($res)) {
-        $lista[] = $row;
+    while (mysqli_stmt_fetch($stmt)) {
+        $lista[] = array(
+            'id' => $id,
+            'nombres' => $nombres
+        );
     }
 
     mysqli_stmt_close($stmt);
@@ -104,16 +108,23 @@ function obtener_matriz($conexion, $empresa_id, $mes, $anio)
     $stmt = mysqli_prepare($conexion, $sql);
     mysqli_stmt_bind_param($stmt, 'iii', $empresa_id, $mes, $anio);
     mysqli_stmt_execute($stmt);
-    $res = mysqli_stmt_get_result($stmt);
+
+    mysqli_stmt_bind_result($stmt, $conductor_id, $nombres, $fecha, $tipo);
 
     $matriz = array();
-    while ($row = mysqli_fetch_assoc($res)) {
-        $matriz[] = $row;
+    while (mysqli_stmt_fetch($stmt)) {
+        $matriz[] = array(
+            'conductor_id' => $conductor_id,
+            'nombres' => $nombres,
+            'fecha' => $fecha,
+            'tipo' => $tipo
+        );
     }
 
     mysqli_stmt_close($stmt);
     return $matriz;
 }
+
 
 
 // Obtener lista de empresas

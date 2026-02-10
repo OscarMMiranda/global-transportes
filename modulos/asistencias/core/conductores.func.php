@@ -16,16 +16,21 @@ function obtener_conductores_por_empresa($conn, $empresa_id)
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, 'i', $empresa_id);
     mysqli_stmt_execute($stmt);
-    $res = mysqli_stmt_get_result($stmt);
+
+    mysqli_stmt_bind_result($stmt, $id, $nombres);
 
     $lista = array();
-    while ($row = mysqli_fetch_assoc($res)) {
-        $lista[] = $row;
+    while (mysqli_stmt_fetch($stmt)) {
+        $lista[] = array(
+            'id' => $id,
+            'nombres' => $nombres
+        );
     }
 
     mysqli_stmt_close($stmt);
     return $lista;
 }
+
 
 // Obtener conductor por ID
 function obtener_conductor_por_id($conn, $id)
@@ -37,10 +42,48 @@ function obtener_conductor_por_id($conn, $id)
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, 'i', $id);
     mysqli_stmt_execute($stmt);
-    $res = mysqli_stmt_get_result($stmt);
 
-    $data = mysqli_fetch_assoc($res);
+    mysqli_stmt_bind_result($stmt, $rid, $nombres, $empresa_id);
+
+    if (mysqli_stmt_fetch($stmt)) {
+        mysqli_stmt_close($stmt);
+        return array(
+            'id' => $rid,
+            'nombres' => $nombres,
+            'empresa_id' => $empresa_id
+        );
+    }
+
     mysqli_stmt_close($stmt);
-
-    return $data ?: null;
+    return null;
 }
+
+
+
+// Obtener todos los conductores (uso general del módulo)
+function obtener_conductores($conn)
+{
+    $sql = "SELECT id, nombres, apellidos, empresa_id
+            FROM conductores
+            WHERE activo = 1
+            ORDER BY nombres, apellidos";
+
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_execute($stmt);
+
+    mysqli_stmt_bind_result($stmt, $id, $nombres, $apellidos, $empresa_id);
+
+    $lista = array();
+    while (mysqli_stmt_fetch($stmt)) {
+        $lista[] = array(
+            'id' => $id,
+            'nombres' => $nombres,
+            'apellidos' => $apellidos,
+            'empresa_id' => $empresa_id
+        );
+    }
+
+    mysqli_stmt_close($stmt);
+    return $lista;
+}
+

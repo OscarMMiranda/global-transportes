@@ -6,39 +6,65 @@
 
     <!-- Registrar asistencia -->
     <button class="card card-btn" id="btnAbrirRegistrarAsistencia">
-        <h3>Registrar asistencia</h3>
-        <small>Nuevo registro diario</small>
+        <div class="card-body text-center">
+            <h3 class="card-title mb-1">
+                <i class="fa-solid fa-plus-circle"></i> Registrar asistencia
+            </h3>
+            <small class="text-muted">Nuevo registro diario</small>
+        </div>
     </button>
 
-    <!-- Modificar asistencia -->
-    <button class="card card-btn" id="btnAbrirModificarAsistencia">
-        <h3>Modificar asistencia</h3>
-        <small>Editar registros existentes</small>
+    <!-- Modificar asistencia (flujo moderno: ir a la tabla) -->
+    <button class="card card-btn"
+            onclick="location.href='/modulos/asistencias/vistas/modificar_asistencia.php'">
+        <div class="card-body text-center">
+            <h3 class="card-title mb-1">
+                <i class="fa-solid fa-pen-to-square"></i> Modificar asistencia
+            </h3>
+            <small class="text-muted">Editar registros existentes</small>
+        </div>
     </button>
 
-    <!-- Reporte diario (vista completa, NO modal) -->
+    <!-- Reporte diario -->
     <button class="card card-btn"
             onclick="location.href='/modulos/asistencias/vistas/reporte_diario.php'">
-        <h3>Reporte diario</h3>
-        <small>Resumen por fecha</small>
+        <div class="card-body text-center">
+            <h3 class="card-title mb-1">
+                <i class="fa-solid fa-calendar-day"></i> Reporte diario
+            </h3>
+            <small class="text-muted">Resumen por fecha</small>
+        </div>
     </button>
 
     <!-- Reporte mensual -->
-    <button class="card card-btn" onclick="location.href='matriz.php'">
-        <h3>Reporte mensual</h3>
-        <small>Matriz por conductor</small>
+    <button class="card card-btn"
+            onclick="location.href='/modulos/asistencias/vistas/matriz.php'">
+        <div class="card-body text-center">
+            <h3 class="card-title mb-1">
+                <i class="fa-solid fa-table"></i> Reporte mensual
+            </h3>
+            <small class="text-muted">Matriz por conductor</small>
+        </div>
     </button>
 
     <!-- Vacaciones -->
     <button class="card card-btn" id="btnAbrirVacaciones">
-        <h3>Vacaciones</h3>
-        <small>Registrar rango</small>
+        <div class="card-body text-center">
+            <h3 class="card-title mb-1">
+                <i class="fa-solid fa-plane-departure"></i> Vacaciones
+            </h3>
+            <small class="text-muted">Registrar rango</small>
+        </div>
     </button>
 
     <!-- Permisos -->
     <button class="card card-btn" id="btnAbrirPermisos">
-        <h3>Permisos</h3>
-        <small>Con goce / sin goce</small>
+        <div class="card-body text-center">
+            <h3 class="card-title mb-1">
+                <i class="fa-solid fa-id-card"></i> Permisos
+            </h3>
+            <small class="text-muted">Con goce / sin goce</small>
+        </div>
     </button>
 
 </div>

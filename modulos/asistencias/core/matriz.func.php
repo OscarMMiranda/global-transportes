@@ -25,11 +25,23 @@ function obtener_matriz($conn, $empresa_id, $mes, $anio)
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, 'iii', $empresa_id, $mes, $anio);
     mysqli_stmt_execute($stmt);
-    $res = mysqli_stmt_get_result($stmt);
+
+    // Declarar variables antes para evitar advertencias del editor
+    $conductor_id = null;
+    $nombres = null;
+    $fecha = null;
+    $tipo = null;
+
+    mysqli_stmt_bind_result($stmt, $conductor_id, $nombres, $fecha, $tipo);
 
     $matriz = array();
-    while ($row = mysqli_fetch_assoc($res)) {
-        $matriz[] = $row;
+    while (mysqli_stmt_fetch($stmt)) {
+        $matriz[] = array(
+            'conductor_id' => $conductor_id,
+            'nombres'      => $nombres,
+            'fecha'        => $fecha,
+            'tipo'         => $tipo
+        );
     }
 
     mysqli_stmt_close($stmt);

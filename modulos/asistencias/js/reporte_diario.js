@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
     </span>
 </td>
 
-                        </tr>
+   </tr>
                     `;
                 });
 
@@ -181,7 +181,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
-// EDITAR
+
+
+// ============================================================
+// 3) CARGAR ASISTENCIA EN MODAL DE EDICIÓN (reporte diario)
+// ============================================================
+// Nota: este código también se puede colocar en guardar_asistencia.js o modificar_asistencia.js, pero lo dejo aquí para mantener el enfoque en el reporte diario
+
 $(document).on("click", ".btnEditarAsistencia", function () {
 
     let id = $(this).data("id");
@@ -224,135 +230,5 @@ $(document).on("click", ".btnEditarAsistencia", function () {
         }, 'json');
 
     }, 'json');
-});
-
-
-$(document).on("click", ".btnEliminarAsistencia", function () {
-
-    let id = $(this).data("id");
-
-    if (!confirm("¿Eliminar esta asistencia? Esta acción no se puede deshacer.")) {
-        return;
-    }
-
-    $.post('/modulos/asistencias/acciones/eliminar_asistencia.php', {
-        id: id
-    }, function (r) {
-
-        if (r.ok) {
-            alert("Asistencia eliminada correctamente");
-
-            if (typeof cargarReporte === "function") {
-                cargarReporte();
-            } else {
-                location.reload();
-            }
-
-        } else {
-            alert("Error al eliminar: " + (r.error || "Error desconocido"));
-        }
-
-    }, 'json')
-    .fail(function (xhr) {
-        console.log("ERROR AJAX ELIMINAR:", xhr.responseText);
-        alert("Error de comunicación con el servidor.");
-    });
-
-});
-
-
-// HISTORIAL
-$(document).on("click", ".btnHistorial", function () {
-
-    let id = $(this).data("id");
-
-    $.post('/modulos/asistencias/acciones/historial_asistencia.php', {
-        id: id
-    }, function (r) {
-
-        if (!r.ok) {
-            alert("Error al cargar historial: " + (r.error || "Error desconocido"));
-            return;
-        }
-
-        let html = "";
-
-        if (r.data.length === 0) {
-            html = `
-                <div class="alert alert-secondary">
-                    No hay historial registrado para esta asistencia.
-                </div>
-            `;
-        } else {
-
-            html = `
-                <ul class="list-group">
-            `;
-
-            r.data.forEach(h => {
-                html += `
-                    <li class="list-group-item">
-                        <strong>${h.fecha_hora}</strong><br>
-                        Acción: ${h.accion}<br>
-                        Usuario: ${h.usuario}<br>
-                        Detalle: ${h.detalle}
-                    </li>
-                `;
-            });
-
-            html += `</ul>`;
-        }
-
-        $("#historialContenido").html(html);
-        $("#modalHistorial").modal("show");
-
-    }, 'json')
-    .fail(function (xhr) {
-        console.log("ERROR AJAX HISTORIAL:", xhr.responseText);
-        alert("Error de comunicación con el servidor.");
-    });
-
-});
-
-
-// GUARDAR EDICIÓN
-$(document).on("click", "#btnGuardarEdicion", function () {
-
-    let id      = $("#edit_id").val();
-    let tipo    = $("#edit_tipo").val();
-    let entrada = $("#edit_entrada").val();
-    let salida  = $("#edit_salida").val();
-    let obs     = $("#edit_obs").val();
-
-    console.log("GUARDAR EDICIÓN:", { id, tipo, entrada, salida, obs });
-
-    $.post('/modulos/asistencias/acciones/editar_asistencia.php', {
-        id: id,
-        tipo: tipo,
-        entrada: entrada,
-        salida: salida,
-        obs: obs
-    }, function (r) {
-
-        console.log("RESPUESTA EDITAR:", r);
-
-        if (r.ok) {
-            alert("Asistencia actualizada correctamente");
-            // recargar tabla
-            if (typeof cargarReporte === "function") {
-                cargarReporte();
-            } else {
-                // fallback: recargar página
-                location.reload();
-            }
-            $('#modalEditarAsistencia').modal('hide');
-        } else {
-            alert("Error al guardar: " + (r.error || 'Error desconocido'));
-        }
-
-    }, 'json').fail(function (xhr) {
-        console.log("ERROR AJAX EDITAR:", xhr.responseText);
-        alert("Error de comunicación con el servidor al guardar.");
-    });
 });
 

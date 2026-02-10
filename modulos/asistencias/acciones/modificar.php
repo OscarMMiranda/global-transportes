@@ -1,138 +1,117 @@
 <?php
 // archivo: /modulos/asistencias/acciones/modificar.php
 
-require __DIR__ . '/../../../includes/config.php';
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-// Cargar funciones reales del módulo
+require __DIR__ . '/../../../includes/config.php';
+require __DIR__ . '/../core/helpers.func.php';
 require __DIR__ . '/../core/asistencia.func.php';
 require __DIR__ . '/../core/empresas.func.php';
 require __DIR__ . '/../core/conductores.func.php';
 require __DIR__ . '/../core/fechas.func.php';
 require __DIR__ . '/../core/matriz.func.php';
-require __DIR__ . '/../core/helpers.func.php';
 
-header('Content-Type: application/json');
+file_put_contents(__DIR__ . "/debug_modificar.log", date('Y-m-d H:i:s') . " INICIO\n", FILE_APPEND);
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-$conn = getConnection();
-
-/* ============================================================
-   1) VALIDAR PARAMETROS
-   ============================================================ */
-
-$asistencia_id = intval($_POST['asistencia_id'] ?? 0);
-$empresa_id    = intval($_POST['empresa_id'] ?? 0);
-$conductor_id  = intval($_POST['conductor_id'] ?? 0);
-$codigo_tipo   = $_POST['codigo_tipo'] ?? '';
-$fecha         = $_POST['fecha'] ?? '';
-$hora_entrada  = $_POST['hora_entrada'] ?? null;
-$hora_salida   = $_POST['hora_salida'] ?? null;
-$observacion   = $_POST['observacion'] ?? '';
-
-if ($asistencia_id <= 0) {
-    echo json_encode(['ok' => false, 'error' => 'ID de asistencia inválido']);
-    exit;
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    json_error('Método no permitido');
 }
 
-if ($empresa_id <= 0 || $conductor_id <= 0 || $codigo_tipo === '' || $fecha === '') {
-    echo json_encode(['ok' => false, 'error' => 'Faltan datos obligatorios']);
-    exit;
+// conexión REAL del sistema
+$conn = $GLOBALS['db'];
+
+// seguridad: si algo falló en config.php
+if (!$conn instanceof mysqli) {
+    json_error('No hay conexión a la base de datos');
 }
 
-/* ============================================================
-   2) VALIDAR TIPO
-   ============================================================ */
+// POST
+$asistencia_id = isset($_POST['asistencia_id']) ? (int)$_POST['asistencia_id'] : 0;
+$empresa_id    = isset($_POST['empresa_id'])    ? (int)$_POST['empresa_id']    : 0;
+$conductor_id  = isset($_POST['conductor_id'])  ? (int)$_POST['conductor_id']  : 0;
+$codigo_tipo   = isset($_POST['codigo_tipo'])   ? trim($_POST['codigo_tipo'])  : '';
+$fecha         = isset($_POST['fecha'])         ? trim($_POST['fecha'])        : '';
+$hora_entrada  = isset($_POST['hora_entrada'])  ? trim($_POST['hora_entrada']) : '';
+$hora_salida   = isset($_POST['hora_salida'])   ? trim($_POST['hora_salida'])  : '';
+$observacion   = isset($_POST['observacion'])   ? trim($_POST['observacion'])  : '';
 
+$debugData = [
+    'asistencia_id' => $asistencia_id,
+    'empresa_id'    => $empresa_id,
+    'conductor_id'  => $conductor_id,
+    'codigo_tipo'   => $codigo_tipo,
+    'fecha'         => $fecha,
+    'hora_entrada'  => $hora_entrada,
+    'hora_salida'   => $hora_salida,
+    'observacion'   => $observacion,
+];
+file_put_contents(__DIR__ . "/debug_modificar.log", print_r($debugData, true) . "\n", FILE_APPEND);
+
+// validación
+if ($asistencia_id <= 0) json_error('ID de asistencia inválido');
+if ($empresa_id <= 0 || $conductor_id <= 0) json_error('Empresa o conductor inválidos');
+if ($codigo_tipo === '' || $fecha === '') json_error('Tipo y fecha son obligatorios');
+
+// resolver tipo_id
 $id_tipo = tipo_id_por_codigo($conn, $codigo_tipo);
 
-if ($id_tipo === null) {
-    echo json_encode(['ok' => false, 'error' => 'Tipo de asistencia inválido']);
-    exit;
+file_put_contents(
+    __DIR__ . "/debug_modificar.log",
+    "tipo_id_por_codigo => codigo_tipo={$codigo_tipo}, id_tipo={$id_tipo}\n",
+    FILE_APPEND
+);
+
+if ($id_tipo <= 0) {
+    json_error('Tipo de asistencia inválido');
 }
 
-/* ============================================================
-   3) VALIDAR QUE LA ASISTENCIA EXISTA
-   ============================================================ */
+// 10) Construir SQL del UPDATE
+$sql_update = "
+    UPDATE asistencia_conductores
+    SET 
+        conductor_id = ?,
+        fecha = ?,
+        tipo_id = ?,
+        hora_entrada = ?,
+        hora_salida = ?,
+        observacion = ?
+    WHERE id = ?
+";
 
-$sqlCheck = "SELECT id FROM asistencia_conductores WHERE id = ? LIMIT 1";
-$stmtCheck = $conn->prepare($sqlCheck);
-$stmtCheck->bind_param("i", $asistencia_id);
-$stmtCheck->execute();
-$stmtCheck->store_result();
-
-if ($stmtCheck->num_rows === 0) {
-    echo json_encode(['ok' => false, 'error' => 'La asistencia no existe']);
-    exit;
-}
-
-$stmtCheck->close();
-
-/* ============================================================
-   4) VALIDAR DUPLICADO (MISMA FECHA + CONDUCTOR)
-   ============================================================ */
-
-$sqlDup = "SELECT id FROM asistencia_conductores 
-           WHERE conductor_id = ? AND fecha = ? AND id != ? LIMIT 1";
-
-$stmtDup = $conn->prepare($sqlDup);
-$stmtDup->bind_param("isi", $conductor_id, $fecha, $asistencia_id);
-$stmtDup->execute();
-$stmtDup->store_result();
-
-if ($stmtDup->num_rows > 0) {
-    echo json_encode([
-        'ok' => false,
-        'error' => 'Ya existe una asistencia para este conductor en esta fecha'
-    ]);
-    exit;
-}
-
-$stmtDup->close();
-
-/* ============================================================
-   5) CALCULAR FERIADO
-   ============================================================ */
-
-$esFeriado = es_feriado($conn, $fecha) ? 1 : 0;
-
-/* ============================================================
-   6) ACTUALIZAR REGISTRO
-   ============================================================ */
-
-$sql = "UPDATE asistencia_conductores
-        SET conductor_id = ?, fecha = ?, tipo_id = ?, 
-            hora_entrada = ?, hora_salida = ?, 
-            es_feriado = ?, observacion = ?
-        WHERE id = ?";
-
-$stmt = $conn->prepare($sql);
-
+// preparar
+$stmt = $conn->prepare($sql_update);
 if (!$stmt) {
-    echo json_encode(['ok' => false, 'error' => $conn->error]);
-    exit;
+    json_error("Error al preparar UPDATE: " . $conn->error);
 }
 
+// bind_param (7 parámetros)
 $stmt->bind_param(
-    "isissisi",
+    "isisssi",
     $conductor_id,
     $fecha,
     $id_tipo,
     $hora_entrada,
     $hora_salida,
-    $esFeriado,
     $observacion,
     $asistencia_id
 );
 
+// ejecutar
 if (!$stmt->execute()) {
-    echo json_encode(['ok' => false, 'error' => $stmt->error]);
-    exit;
+    json_error("Error al ejecutar UPDATE: " . $stmt->error);
 }
 
-/* ============================================================
-   7) RESPUESTA FINAL
-   ============================================================ */
+// verificar filas afectadas
+if ($stmt->affected_rows < 0) {
+    json_error("No se pudo actualizar la asistencia");
+}
 
-echo json_encode(['ok' => true]);
+$stmt->close();
+
+// respuesta final
+json_ok([
+    'mensaje' => 'Asistencia actualizada correctamente',
+    'id'      => $asistencia_id
+]);
+

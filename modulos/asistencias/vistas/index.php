@@ -73,6 +73,7 @@ $asistencias = obtener_asistencias($conn);
     <script src="/modulos/asistencias/js/modificar_asistencia.js"></script>
     <script src="/modulos/asistencias/js/reporte_diario.js"></script>
     <script src="/modulos/asistencias/js/vacaciones.js"></script>
+    
 
 </body>
 </html>

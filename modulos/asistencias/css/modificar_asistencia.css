@@ -1,0 +1,16 @@
+/* Archivo: /modulos/asistencias/css/modificar_asistencia.css */
+
+.filtros-box {
+    background: #fff;
+    border-radius: 8px;
+    padding: 18px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    margin-bottom: 20px;
+}
+
+.tabla-box {
+    background: #fff;
+    border-radius: 8px;
+    padding: 18px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
