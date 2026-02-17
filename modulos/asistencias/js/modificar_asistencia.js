@@ -3,17 +3,28 @@
     módulo: asistencias
 */
 
-console.log("modificar_asistencia.js CARGADO REALMENTE");
+$(document).ready(function () {
 
-document.addEventListener("DOMContentLoaded", function () {
+    console.log("modificar_asistencia.js CARGADO REALMENTE");
 
-    if (!document.getElementById('modalModificarAsistencia')) {
+    const modalEl = document.getElementById('modalModificarAsistencia');
+
+    // Si el modal no existe en esta vista, no aplica
+    if (!modalEl) {
         console.log("modificar_asistencia.js: no aplica en esta pantalla");
         return;
     }
 
     console.log("modificar_asistencia.js ACTIVO");
 
+    // ============================================================
+    // Instancia ÚNICA del modal (Bootstrap 5 ya está cargado aquí)
+    // ============================================================
+    const modalModificar = new bootstrap.Modal(modalEl);
+
+    // ============================================================
+    // Función para mostrar alertas dentro del modal
+    // ============================================================
     function mostrarAlertaEditar(tipo, mensaje) {
         let html = `
             <div class="alert alert-${tipo} alert-dismissible fade show" role="alert">
@@ -21,16 +32,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
         `;
-        document.getElementById('alertaModificarAsistencia').innerHTML = html;
+        $("#alertaModificarAsistencia").html(html);
 
         setTimeout(() => {
-            let alerta = document.querySelector('#alertaModificarAsistencia .alert');
-            if (alerta) alerta.remove();
+            $("#alertaModificarAsistencia .alert").remove();
         }, 4000);
     }
 
     // ============================================================
-    // CARGAR DATOS EN EL MODAL
+    // CLICK EN BOTÓN EDITAR ASISTENCIA
     // ============================================================
     $(document).on("click", ".btnEditarAsistencia", function () {
 
@@ -40,6 +50,9 @@ document.addEventListener("DOMContentLoaded", function () {
         $("#asistencia_id").val(asistencia_id);
         $("#alertaModificarAsistencia").html("");
 
+        // ============================================================
+        // 1. Obtener datos de la asistencia
+        // ============================================================
         $.post('../acciones/obtener_asistencia.php', { id: asistencia_id }, function (r) {
 
             if (!r.ok) {
@@ -52,6 +65,9 @@ document.addEventListener("DOMContentLoaded", function () {
             $("#empresa_id_hidden").val(datos.empresa_id);
             $("#conductor_id_hidden").val(datos.conductor_id);
 
+            // ============================================================
+            // 2. Cargar tipos de asistencia
+            // ============================================================
             $.post('../acciones/obtener_tipos.php', {}, function (t) {
 
                 if (!t.ok) {
@@ -67,6 +83,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 $("#codigo_tipo_edit").html(html);
                 $("#codigo_tipo_edit").val(datos.codigo_tipo);
 
+                // ============================================================
+                // 3. Cargar datos en el formulario
+                // ============================================================
                 $("#empresa_id_edit").val(datos.empresa_nombre);
                 $("#conductor_id_edit").val(datos.conductor);
                 $("#fecha_edit").val(datos.fecha);
@@ -75,10 +94,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 $("#observacion_edit").val(datos.observacion);
                 $("#es_feriado_edit").val(datos.es_feriado == 1 ? "Sí" : "No");
 
-                const modal = new bootstrap.Modal(
-                    document.getElementById('modalModificarAsistencia')
-                );
-                modal.show();
+                // ============================================================
+                // 4. Mostrar modal usando la instancia única
+                // ============================================================
+                modalModificar.show();
 
             }, 'json');
 

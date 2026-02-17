@@ -38,7 +38,7 @@
 
     <!-- Reporte mensual -->
     <button class="card card-btn"
-            onclick="location.href='/modulos/asistencias/vistas/matriz.php'">
+            onclick="location.href='/modulos/asistencias/reporte_mensual/index.php'">
         <div class="card-body text-center">
             <h3 class="card-title mb-1">
                 <i class="fa-solid fa-table"></i> Reporte mensual

@@ -1,0 +1,66 @@
+/*
+    archivo: /modulos/asistencias/css/toasts.css
+    módulo: asistencias
+    propósito: estilos corporativos para toasts Bootstrap
+*/
+
+/* Contenedor general */
+.toast {
+    border-radius: 8px;
+    overflow: hidden;
+    /* backdrop-filter: blur(4px); */
+}
+
+/* Sombra elegante */
+.toast.shadow-lg {
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+}
+
+/* Cuerpo del toast */
+.toast-body {
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+/* Cabeceras por tipo */
+.toast-header.bg-success {
+    background: linear-gradient(90deg, #198754, #28a745);
+}
+
+.toast-header.bg-danger {
+    background: linear-gradient(90deg, #dc3545, #c82333);
+}
+
+.toast-header.bg-warning {
+    background: linear-gradient(90deg, #ffc107, #e0a800);
+}
+
+.toast-header.bg-primary {
+    background: linear-gradient(90deg, #0d6efd, #0b5ed7);
+}
+
+/* Iconos */
+.toast-header i {
+    font-size: 1.2rem;
+}
+
+/* Botón cerrar */
+.toast .btn-close-white {
+    filter: brightness(0) invert(1);
+}
+
+/* Animación de entrada */
+@keyframes toastFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.toast {
+    animation: toastFadeIn 0.35s ease-out;
+}

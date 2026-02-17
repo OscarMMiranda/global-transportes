@@ -33,6 +33,7 @@
     	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 		 <!-- 	CSS específico del módulo 	-->
+		<link rel="stylesheet" href="/modulos/asistencias/css/toasts.css">
 		<link rel="stylesheet" href="/modulos/asistencias/css/modificar_asistencia.css">
 
 	</head>
@@ -50,6 +51,16 @@
 
 		<!--	SCRIPTS 	-->
 		<?php include __DIR__ . '/partes/scripts_modificar.php'; ?>
+
+		<div id="toastSuccess" class="toast align-items-center text-bg-success border-0 position-fixed bottom-0 end-0 m-4" role="alert" aria-live="assertive" aria-atomic="true" style="z-index: 9999;">
+  <div class="d-flex">
+    <div class="toast-body">
+      ✔ Asistencia actualizada correctamente.
+    </div>
+    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+  </div>
+</div>
+
 	</body>
 
 </html>

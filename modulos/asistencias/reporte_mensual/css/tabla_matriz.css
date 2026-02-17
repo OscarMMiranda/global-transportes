@@ -1,0 +1,38 @@
+/*
+    Archivo: /modulos/asistencias/reporte_mensual/css/tabla_matriz.css
+    Estilos para la tabla en formato matriz del reporte mensual de asistencias
+*/
+
+.estado-asistio {
+    background: #4da3ff;
+    color: white;
+}
+
+.estado-falto {
+    background: #ffe066;
+}
+
+.estado-feriado {
+    background: #ff6b6b;
+    color: white;
+}
+
+.estado-vacaciones {
+    background: #51cf66;
+    color: white;
+}
+
+.estado-domingo {
+    background: #adb5bd;
+    color: white;
+}
+
+.estado-desc-med {
+    background: #845ef7;
+    color: white;
+}
+
+.estado-vacio {
+    background: #f1f3f5;
+}
+

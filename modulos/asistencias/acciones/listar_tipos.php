@@ -4,7 +4,7 @@
 require_once __DIR__ . '/../../../includes/config.php';
 $conn = getConnection();
 
-$sql = "SELECT id, descripcion FROM asistencia_tipos ORDER BY descripcion ASC";
+$sql = "SELECT id, codigo, descripcion FROM asistencia_tipos ORDER BY descripcion ASC";
 $res = mysqli_query($conn, $sql);
 
 $data = [];
