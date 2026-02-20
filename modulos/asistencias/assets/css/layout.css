@@ -6,8 +6,6 @@
 
 body {
     margin: 0;
-    display: flex;
-    height: 100vh;
     background: #f4f4f4;
     overflow-x: hidden;
 }
@@ -21,15 +19,14 @@ body {
     height: 60px;
     background: #0078d7;
     color: #fff;
+	font-size: 20px;				/* Tamaño de fuente */
+	font-weight: 600;				/* Negrita */
     display: flex;
     align-items: center;
     padding: 0 20px;
-
     position: fixed;
     top: 0;
     left: 0;
-
-    /* z-index bajo para no tapar modales */
     z-index: 100;
 }
 
@@ -38,34 +35,42 @@ body {
    ============================================================ */
 
 .erp-sidebar {
-    width: 230px;
-    background: #1f1f1f;
-    color: #fff;
+	width: 230px;
+	background: hsl(212, 79%, 30%);
+	color: #fff;
 
-    padding-top: 80px;
+    font-size: 20px;
 
-    position: fixed;
-    top: 0;
-    bottom: 0;
+	position: fixed;
+	top: 65px;			/* Sidebar empieza EXACTO debajo del header */
+	bottom: 40px;;			/* Sidebar llega hasta el final de la pantalla */
 
-    /* z-index bajo para no tapar modales */
-    z-index: 100;
+	padding-top: 20px;	/* Separación con el header */
+	z-index: 50;		/* Para que este por encima del header */
+
+	overflow-y: auto;
 }
 
+
+
 .erp-sidebar h3 {
-    padding-left: 20px;
-    margin-bottom: 10px;
-    color: #bbb;
-    font-size: 14px;
-    text-transform: uppercase;
+	padding-left: 20px;				/* Indentación */
+	margin-bottom: 10px;			/* Separación con el siguiente elemento */  
+	color: hsl(0, 0%, 100%);					/* Color de texto */
+	font-family: "Segoe UI Semibold", Arial, sans-serif;
+	font-size: 20px;				/* Tamaño de fuente */
+
+	font-weight: 600;				/* Negrita */
+	text-transform: uppercase;		/* Mayúsculas */
 }
 
 .erp-sidebar a {
     display: block;
     padding: 12px 20px;
     color: #ddd;
-    text-decoration: none;
+    text-decoration: none;			/* Sin subrayado */
     font-size: 15px;
+	font-family: "Segoe UI", sans-serif;
 }
 
 .erp-sidebar a:hover {
@@ -92,22 +97,20 @@ body {
 .erp-footer {
     position: fixed;
     bottom: 0;
-    left: 230px;
-    width: calc(100% - 230px);
+    left: 10px;
+    width: calc(100% - 15px);
     height: 35px;
-    background: #e0e0e0;
+    background: hsl(0, 7%, 74%);
     color: #555;
     display: flex;
     align-items: center;
     padding-left: 20px;
     font-size: 13px;
-
-    /* z-index bajo */
     z-index: 100;
 }
 
 /* ============================================================
-   FIX PARA MODALES (Bootstrap 5)
+   FIX PARA MODALES
    ============================================================ */
 
 .modal {

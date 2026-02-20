@@ -3,7 +3,7 @@
     // Filtro para seleccionar el año en el reporte mensual de asistencias
 ?>
 
-<div class="col-md-3">
+<div class="col-md-2">
     <label for="filtro_anio">Año</label>
     <select id="filtro_anio" class="form-control">
         <option value="">Seleccione</option>

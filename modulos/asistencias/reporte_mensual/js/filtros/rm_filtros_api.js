@@ -1,55 +1,56 @@
-//  archivo  : /modulos/asistencias/reporte_mensual/js/filtros/rm_filtros_api.js
-//  Funciones para manejar los filtros del reporte mensual de asistencias
+// archivo: /modulos/asistencias/reporte_mensual/js/filtros/rm_filtros_api.js
+// Este archivo contiene la función para realizar la búsqueda de datos según los filtros seleccionados en el reporte mensual de asistencias
 
+function rm_filtros_buscar() {
 
-// ======================================================
-//  CARGAR CONDUCTORES SEGÚN EMPRESA
-// ======================================================
+    rm_filtros_leer();
 
+    if (!rm_filtros_validar()) {
+        return;
+    }
 
-var rm_filtros_state = {
-    empresa: '',
-    conductor: '',
-    mes: '',
-    anio: '',
-    vista: 'tabla'   // <-- NECESARIO
+    $.ajax({
+        url: RM_CONFIG.url_reporte_mensual,
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            empresa:   RM_FILTROS_STATE.empresa,
+            conductor: RM_FILTROS_STATE.conductor,
+            mes:       RM_FILTROS_STATE.mes,
+            anio:      RM_FILTROS_STATE.anio,
+            vista:     RM_FILTROS_STATE.vista
+        },
+        success: function (response) {
 
-};
+            if (!response || !response.ok) {
+                alert(response && response.msg ? response.msg : 'No se encontraron datos');
+                rm_tabla_render([]);
+                return;
+            }
 
-
-
-
-// ===============================
-// LEER FILTROS
-// ===============================
-function rm_filtros_leer() {
-
-    rm_filtros_state.empresa   = $('#filtro_empresa').val();
-    rm_filtros_state.conductor = $('#filtro_conductor').val();
-    rm_filtros_state.mes       = $('#filtro_mes').val();
-    rm_filtros_state.anio      = $('#filtro_anio').val();
-    rm_filtros_state.vista      =    $('#filtro_vista').val();
-
+            rm_tabla_render(response.data);
+        },
+        error: function (xhr) {
+            console.log('ERROR AJAX', xhr.status, xhr.responseText);
+            alert('Error al obtener datos');
+        }
+    });
 }
 
 
-// ===============================
-// CARGAR CONDUCTORES POR EMPRESA
-// ===============================
 function rm_cargar_conductores() {
 
     const empresa = $('#filtro_empresa').val();
 
     $.ajax({
-        url: 'ajax/get_conductores.php',
+        url: 'acciones/get_conductores.php',
         type: 'POST',
-        data: { empresa: empresa },
         dataType: 'json',
+        data: { empresa: empresa },
         success: function (resp) {
 
             const select = $('#filtro_conductor');
             select.empty();
-
             select.append(`<option value="">Todos</option>`);
 
             if (resp.ok && resp.data.length > 0) {
@@ -65,47 +66,3 @@ function rm_cargar_conductores() {
     });
 }
 
-
-// ===============================
-// BUSCAR REPORTE
-// ===============================
-function rm_filtros_buscar() {
-
-    rm_filtros_leer();
-
-    // VALIDACIÓN CORRECTA
-    if (!rm_filtros_validar()) {
-        return;
-    }
-
-    $.ajax({
-        url: 'acciones/obtener_reporte_mensual.php',
-        type: 'POST',
-        dataType: 'json',
-        data: rm_filtros_state,
-        success: function (response) {
-
-            if (!response || !response.ok) {
-                alert('No se encontraron datos');
-                rm_render_tabla([]);
-                return;
-            }
-
-            if (rm_filtros_state.vista === 'tabla') {
-                rm_render_tabla(response.data);
-                return;
-            }
-
-            if (rm_filtros_state.vista === 'matriz') {
-                rm_render_tabla_matriz(response.conductores, response.dias);
-                return;
-            }
-
-            alert('Vista no reconocida');
-        },
-        error: function (xhr) {
-            console.log(xhr.responseText);
-            alert('Error al obtener datos');
-        }
-    });
-}

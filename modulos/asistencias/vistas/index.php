@@ -41,8 +41,6 @@ $asistencias = obtener_asistencias($conn);
 
 <body>
 
-    <?php include __DIR__ . '/../layout/header.php'; ?>
-    <?php include __DIR__ . '/../componentes/sidebar.php'; ?>
 
     <div class="contenido">
         <h2>Módulo de Asistencias</h2>
@@ -62,18 +60,25 @@ $asistencias = obtener_asistencias($conn);
 
     <?php include __DIR__ . '/../layout/footer.php'; ?>
 
-    <!-- Bootstrap JS (solo una vez) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- jQuery (requerido por los módulos legacy) -->
+    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <!-- JS MODULARES -->
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- SOLO scripts globales -->
+    <script src="/modulos/asistencias/js/global.js"></script>
+
+    <!-- Solo scripsts del sidebar -->
+    <script src="/modulos/asistencias/js/sidebar.js"></script>
+
+    <!-- Scripts del registrar asistencia -->
     <script src="/modulos/asistencias/js/registrar_asistencia.js"></script>
-    <script src="/modulos/asistencias/js/modificar_asistencia.js"></script>
-    <script src="/modulos/asistencias/js/reporte_diario.js"></script>
-    <script src="/modulos/asistencias/js/vacaciones.js"></script>
-    
+
+
+
+    <?php include __DIR__ . '/../layout/header.php'; ?>
+    <?php include __DIR__ . '/../componentes/sidebar.php'; ?>
 
 </body>
 </html>

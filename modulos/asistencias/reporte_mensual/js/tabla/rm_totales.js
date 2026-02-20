@@ -1,15 +1,17 @@
-// archivo  : /modulos/asistencias/reporte_mensual/js/tabla/rm_totales.js
-// Funciones para calcular y mostrar los totales en el reporte mensual de asistencias
+// ARCHIVO: /modulos/asistencias/reporte_mensual/js/tabla/rm_totales.js
+// ============================================================
+//  MÓDULO: rm_totales.js
+//  RESPONSABILIDAD: Cálculo del total mensual en formato HH:MM
+// ============================================================
 
+function rm_total_horas_hhmm(totalMinutos) {
 
-function rm_totales_update(asistencias, faltas, horas) {
+    if (!totalMinutos || totalMinutos <= 0) return "00:00";
 
-    $("#total_asistencias").val(asistencias);
-    $("#total_faltas").val(faltas);
-    $("#total_horas").val(horas.toFixed(2));
-    $("#total_horas_extra").val("0.00"); // si luego quieres horas extra, lo agregamos
+    const h = Math.floor(totalMinutos / 60);
+    const m = totalMinutos % 60;
+
+    return h.toString().padStart(2, "0") + ":" + m.toString().padStart(2, "0");
 }
 
-function rm_totales_reset() {
-    rm_totales_update(0, 0, 0);
-}
+window.rm_total_horas_hhmm = rm_total_horas_hhmm;

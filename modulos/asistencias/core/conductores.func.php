@@ -1,35 +1,46 @@
 <?php
-// ============================================================
-//  archivo: /modulos/asistencias/core/conductores.func.php
-// ============================================================
-// FUNCIONES DEL SUBMÓDULO: CONDUCTORES
-// ============================================================
+	// archivo: /modulos/asistencias/core/conductores.func.php
+	// FUNCIONES DEL SUBMÓDULO: CONDUCTORES
 
-// Obtener lista de conductores por empresa
+	// Obtener lista de conductores por empresa
 function obtener_conductores_por_empresa($conn, $empresa_id)
 {
-    $sql = "SELECT id, nombres 
-            FROM conductores 
+    if ($empresa_id == 0) {
+        // Todas las empresas
+        $sql = "SELECT id, CONCAT(nombres, ' ', apellidos) AS nombre
+                FROM conductores
+                WHERE activo = 1
+                ORDER BY apellidos ASC, nombres ASC";
+        $res = $conn->query($sql);
+
+        $lista = [];
+        while ($row = $res->fetch_assoc()) {
+            $lista[] = $row;
+        }
+        return $lista;
+    }
+
+    // Empresa específica
+    $sql = "SELECT id, CONCAT(nombres, ' ', apellidos) AS nombre
+            FROM conductores
             WHERE empresa_id = ?
-            ORDER BY nombres";
+              AND activo = 1
+            ORDER BY apellidos ASC, nombres ASC";
 
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, 'i', $empresa_id);
     mysqli_stmt_execute($stmt);
+    mysqli_stmt_bind_result($stmt, $id, $nombre);
 
-    mysqli_stmt_bind_result($stmt, $id, $nombres);
-
-    $lista = array();
+    $lista = [];
     while (mysqli_stmt_fetch($stmt)) {
-        $lista[] = array(
-            'id' => $id,
-            'nombres' => $nombres
-        );
+        $lista[] = ['id' => $id, 'nombre' => $nombre];
     }
 
     mysqli_stmt_close($stmt);
     return $lista;
 }
+
 
 
 // Obtener conductor por ID

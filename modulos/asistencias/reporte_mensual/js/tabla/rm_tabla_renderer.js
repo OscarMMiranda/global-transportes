@@ -1,54 +1,46 @@
-// archivo: /modulos/asistencias/reporte_mensual/js/tabla/rm_tabla_renderer.js
+// ============================================================
+//  MÓDULO: rm_render_tabla.js
+//  RESPONSABILIDAD: Renderizar la tabla del reporte mensual
+// ============================================================
 
 function rm_render_tabla(data) {
 
-    const tbody = $("#tabla_asistencias_body");
-    tbody.empty();
+    let html = "";
+    let totalMinutos = 0;
 
     if (!data || data.length === 0) {
-        tbody.append(`
+        $("#tabla_reporte tbody").html(`
             <tr>
-                <td colspan="6" class="text-center text-muted">
-                    No se encontraron datos
-                </td>
+                <td colspan="10" class="text-center">No hay registros</td>
             </tr>
         `);
-        rm_totales_reset();
+        $("#total_horas").text("00:00");
         return;
     }
 
-    let totalHoras = 0;
-    let totalAsistencias = 0;
-    let totalFaltas = 0;
+    data.forEach(r => {
 
-    data.forEach(item => {
+        let horasTrab = rm_calcular_horas_hhmm(r.hora_entrada, r.hora_salida);
 
-        // Calcular horas trabajadas
-        const horasTrab = rm_calcular_horas(item.hora_entrada, item.hora_salida);
+        // Sumar al total
+        let partes = horasTrab.split(":");
+        totalMinutos += parseInt(partes[0]) * 60 + parseInt(partes[1]);
 
-        // Determinar estado
-        const estado = rm_determinar_estado(item, horasTrab);
-
-        // Construir fila
-        const rowHtml = rm_build_row({
-            fecha: rm_format_fecha(item.fecha),
-            conductor: item.conductor,
-            hora_entrada: rm_format_hora(item.hora_entrada),
-            hora_salida: rm_format_hora(item.hora_salida),
-            horas_trabajadas: horasTrab,
-            estado: estado
-        });
-
-        tbody.append(rowHtml);
-
-        // Totales
-        totalHoras += parseFloat(horasTrab);
-
-        if (estado === "ASISTENCIA") totalAsistencias++;
-        if (estado === "SIN MARCAR" || estado === "INCOMPLETO") totalFaltas++;
+        html += `
+            <tr>
+                <td>${r.fecha}</td>
+                <td>${r.conductor}</td>
+                <td>${r.hora_entrada || "-"}</td>
+                <td>${r.hora_salida || "-"}</td>
+                <td>${horasTrab}</td>
+                <td>${r.observacion || "-"}</td>
+            </tr>
+        `;
     });
 
-    rm_totales_update(totalAsistencias, totalFaltas, totalHoras);
+    $("#tabla_reporte tbody").html(html);
 
+    // Total mensual
+    let totalFinal = rm_total_horas_hhmm(totalMinutos);
+    $("#total_horas").text(totalFinal);
 }
-

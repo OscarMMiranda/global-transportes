@@ -1,7 +1,8 @@
-// archivo  : /modulos/asistencias/reporte_mensual/js/filtros/rm_filtros_api.js
-// Funciones para manejar los filtros del reporte mensual de asistencias
+// archivo: /modulos/asistencias/reporte_mensual/js/filtros/rm_filtros_state.js
+// Este archivo define el estado de los filtros para el reporte mensual de asistencias
 
-var rm_filtros_state = {
+// Estado de filtros del reporte mensual
+var RM_FILTROS_STATE = {
     empresa: '',
     conductor: '',
     mes: '',
@@ -9,13 +10,10 @@ var rm_filtros_state = {
     vista: 'tabla'
 };
 
-
 function rm_filtros_leer() {
-
-    rm_filtros_state.empresa   = $('#filtro_empresa').val();
-    rm_filtros_state.conductor = $('#filtro_conductor').val();
-    rm_filtros_state.mes       = $('#filtro_mes').val();
-    rm_filtros_state.anio      = $('#filtro_anio').val();
-    rm_filtros_state.vista     = $('#filtro_vista').val();
+    RM_FILTROS_STATE.empresa   = $('#filtro_empresa').val();
+    RM_FILTROS_STATE.conductor = $('#filtro_conductor').val();
+    RM_FILTROS_STATE.mes       = $('#filtro_mes').val();
+    RM_FILTROS_STATE.anio      = $('#filtro_anio').val();
+    RM_FILTROS_STATE.vista     = $('#filtro_vista').val();
 }
-

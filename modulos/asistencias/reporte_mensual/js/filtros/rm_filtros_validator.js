@@ -1,14 +1,14 @@
-// archivo  : /modulos/asistencias/reporte_mensual/js/filtros/rm_filtros_validator.js
-// Funciones para validar los filtros del reporte mensual de asistencias
+// archivo: /modulos/asistencias/reporte_mensual/js/filtros/rm_filtros_validator.js
+// Este archivo contiene la función de validación para los filtros del reporte mensual de asistencias
 
 function rm_filtros_validar() {
 
-    if (rm_filtros_state.mes === '') {
+    if (!RM_FILTROS_STATE.mes) {
         alert('Seleccione un mes');
         return false;
     }
 
-    if (rm_filtros_state.anio === '') {
+    if (!RM_FILTROS_STATE.anio) {
         alert('Seleccione un año');
         return false;
     }

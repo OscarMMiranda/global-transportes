@@ -1,26 +1,40 @@
-// ============================================================
-//  archivo: /modulos/asistencias/js/registrar_asistencia.js	
-
-// ============================================================
-// JS PARA REGISTRAR ASISTENCIA (MODULAR)
-// ============================================================
+/*
+    archivo: /modulos/asistencias/js/registrar_asistencia.js
+    módulo: asistencias
+*/
 
 console.log("JS REGISTRAR ASISTENCIA CARGADO REALMENTE");
 
-document.addEventListener("DOMContentLoaded", function () {
+// ------------------------------------------------------------
+// FECHA Y HORAS POR DEFECTO AL ABRIR EL MODAL
+// (ESTE BLOQUE DEBE ESTAR FUERA DEL DOMContentLoaded)
+// ------------------------------------------------------------
+$("#modalRegistrarAsistencia").on("show.bs.modal", function () {
 
-    // Guard clause → este JS solo se ejecuta si existe la tarjeta o el sidebar
-    if (
-        !document.getElementById('btnAbrirRegistrarAsistencia') &&
-        !document.getElementById('btnSidebarRegistrarAsistencia')
-    ) {
-        console.log("registrar_asistencia.js: no aplica en esta pantalla");
-        return;
-    }
+    console.log("APLICANDO FECHA Y HORAS POR DEFECTO");
+
+    // Fecha actual en formato YYYY-MM-DD
+    let hoy = new Date().toISOString().split('T')[0];
+    $("#fecha").val(hoy);
+
+    // Horas por defecto (estándar operativo)
+    $("#hora_entrada").val("08:00");
+    $("#hora_salida").val("18:00");
+
+    // Reset de selects
+    $("#empresa_id").val("");
+    $("#conductor_id").html('<option value="">Seleccione...</option>');
+    $("#codigo_tipo").val("");
+
+    // Otros campos
+    $("#observacion").val("");
+    $("#alertaAsistencia").html("");
+});
+
+document.addEventListener("DOMContentLoaded", function () {
 
     console.log("registrar_asistencia.js CARGADO");
 
-    // ------------------------------------------------------------
     // ALERTA VISUAL (Bootstrap)
     // ------------------------------------------------------------
     function mostrarAlerta(tipo, mensaje) {
@@ -69,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let empresa_id = $('#empresa_id').val();
         $('#conductor_id').html('<option value="">Cargando...</option>');
 
-        $.post('../acciones/cargar_conductores.php', {
+        $.get('/modulos/asistencias/ajax/get_conductores.php', {
             empresa_id: empresa_id
         }, function (r) {
 
@@ -79,7 +93,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             r.forEach(function (item) {
                 $('#conductor_id').append(
-                    '<option value="' + item.id + '">' + item.nombre_completo + '</option>'
+                    '<option value="' + item.id + '">' + item.nombre + '</option>'
                 );
             });
 
@@ -122,9 +136,10 @@ document.addEventListener("DOMContentLoaded", function () {
         let btn = $('#btnRegistrarAsistencia');
         btn.prop('disabled', true).html('<span class="spinner-border spinner-border-sm"></span> Guardando...');
 
-        // AJAX → AHORA CON tipo_registro
-        $.post('../acciones/registrar.php', {
-            tipo_registro: 'asistencia',   // <── CLAVE PARA EL NUEVO ENDPOINT
+        // AJAX → ENVÍO REAL
+        $.post('/modulos/asistencias/acciones/registrar.php', {
+            tipo_registro: 'asistencia',
+            empresa_id: $('#empresa_id').val(),
             conductor_id: $('#conductor_id').val(),
             fecha: $('#fecha').val(),
             codigo_tipo: $('#codigo_tipo').val(),
@@ -172,13 +187,11 @@ document.addEventListener("click", function(e) {
 
         console.log("ABRIENDO MODAL REGISTRO (universal)");
 
-        const modal = new bootstrap.Modal(
-            document.getElementById('modalRegistrarAsistencia')
-        );
-        modal.show();
+        $("#modalRegistrarAsistencia").modal("show");
     }
 
 });
+
 
 // ============================================================
 // FIN JS PARA REGISTRAR ASISTENCIA

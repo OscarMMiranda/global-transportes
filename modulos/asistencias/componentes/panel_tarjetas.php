@@ -1,18 +1,18 @@
 <?php
-// archivo: /modulos/asistencias/componentes/panel_tarjetas.php
+	// archivo: /modulos/asistencias/componentes/panel_tarjetas.php
 ?>
 
 <div class="panel-grid">
 
-    <!-- Registrar asistencia -->
-    <button class="card card-btn" id="btnAbrirRegistrarAsistencia">
-        <div class="card-body text-center">
-            <h3 class="card-title mb-1">
-                <i class="fa-solid fa-plus-circle"></i> Registrar asistencia
-            </h3>
-            <small class="text-muted">Nuevo registro diario</small>
-        </div>
-    </button>
+	<!-- Registrar asistencia -->
+    <button class="card card-btn btnRegistrarAsistencia">
+		<div class="card-body text-center">
+			<h3 class="card-title mb-1">
+				<i class="fa-solid fa-plus-circle"></i> Registrar asistencia
+			</h3>
+			<small class="text-muted">Nuevo registro diario</small>
+		</div>
+	</button>
 
     <!-- Modificar asistencia (flujo moderno: ir a la tabla) -->
     <button class="card card-btn"

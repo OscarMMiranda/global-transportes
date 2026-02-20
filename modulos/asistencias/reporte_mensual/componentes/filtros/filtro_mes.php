@@ -3,7 +3,7 @@
     // Filtro para seleccionar el mes en el reporte mensual de asistencias
 ?>
 
-<div class="col-md-3">
+<div class="col-md-2">
     <label for="filtro_mes">Mes</label>
     <select id="filtro_mes" class="form-control">
         <option value="">Seleccione</option>

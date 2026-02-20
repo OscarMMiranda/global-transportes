@@ -2,7 +2,6 @@
 // archivo: /modulos/asistencias/componentes/sidebar.php
 ?>
 
-
 <aside class="erp-sidebar">
 
     <h3>Asistencias</h3>
