@@ -46,11 +46,28 @@
     		<?php include __DIR__ . '/partes/tabla_resultados.php'; ?>
 		</div>
 
-		<!--	MODAL DE EDICIÓN 	-->	
-		<?php include $_SERVER['DOCUMENT_ROOT'] . '/modulos/asistencias/modales/modal_modificar_asistencia.php'; ?>
+		<!-- MODAL DE EDICIÓN -->
+		<?php include __DIR__ . '/../modales/modal_modificar_asistencia.php'; ?>
 
+		<!-- MODAL DE ELIMINAR -->
+		<?php include __DIR__ . '/../modales/modal_eliminar_asistencia.php'; ?>
+
+		<!-- MODAL DE HISTORIAL -->
+		<?php include __DIR__ . '/../modales/modal_historial_asistencia.php'; ?>
+
+
+
+		<!--	BOOTSTRAP 	-->
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+		
 		<!--	SCRIPTS 	-->
 		<?php include __DIR__ . '/partes/scripts_modificar.php'; ?>
+
+		<!--	SCRIPTS ESPECIFICOS DEL MÓDULO 	-->
+		<script src="/modulos/asistencias/js/eliminar_asistencia.js"></script>
+		<script src="/modulos/asistencias/js/historial_asistencia.js"></script>
+
+
 
 		<div id="toastSuccess" class="toast align-items-center text-bg-success border-0 position-fixed bottom-0 end-0 m-4" role="alert" aria-live="assertive" aria-atomic="true" style="z-index: 9999;">
   <div class="d-flex">

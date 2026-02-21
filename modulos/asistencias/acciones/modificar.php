@@ -66,6 +66,11 @@ $campos[] = "tipo_id = ?";
 $valores[] = $id_tipo;
 $tipos .= "i";
 
+// tipo_codigo
+$campos[] = "tipo_codigo = ?";
+$valores[] = $codigo_tipo;
+$tipos .= "s";
+
 // hora entrada
 if ($hora_entrada !== "") {
     $campos[] = "hora_entrada = ?";

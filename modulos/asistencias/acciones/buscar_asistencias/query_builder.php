@@ -13,7 +13,7 @@ function construir_query($tipo) {
             ac.observacion,
             t.descripcion
         FROM asistencia_conductores ac
-        INNER JOIN asistencia_tipos t ON t.id = ac.tipo_id
+		INNER JOIN asistencia_tipos t ON t.codigo = ac.tipo_codigo
         WHERE ac.conductor_id = ?
           AND ac.fecha BETWEEN ? AND ?
     ";
@@ -22,8 +22,9 @@ function construir_query($tipo) {
     $types  = "iss";
 
     if ($tipo !== '') {
-        $sql .= " AND ac.tipo_id = ? ";
-        $types .= "i";
+        $sql .= " AND ac.tipo_codigo = ?
+ 		";
+        $types .= "s";
     }
 
     $sql .= " ORDER BY ac.fecha ASC ";

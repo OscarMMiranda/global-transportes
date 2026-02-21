@@ -193,6 +193,26 @@ document.addEventListener("click", function(e) {
 });
 
 
+// Cargar tipos en el modal de registrar
+function cargarTiposRegistrar() {
+    $.get("/modulos/asistencias/ajax/get_tipos.php", function(r) {
+
+        $("#codigo_tipo").html('<option value="">Seleccione...</option>');
+
+        r.forEach(t => {
+            $("#codigo_tipo").append(
+                `<option value="${t.codigo}">${t.descripcion}</option>`
+            );
+        });
+
+    }, "json");
+}
+
+$("#modalRegistrarAsistencia").on("show.bs.modal", function() {
+    cargarTiposRegistrar();
+});
+
+
 // ============================================================
 // FIN JS PARA REGISTRAR ASISTENCIA
 // ============================================================

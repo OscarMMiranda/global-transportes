@@ -39,13 +39,7 @@
 		<div class="col-md-4">
 			<label class="form-label">Tipo:</label>
 			<select id="codigo_tipo" class="form-select">
-				<option value="">Seleccione...</option>
-				<?php
-					$q = mysqli_query($conn, "SELECT codigo, descripcion FROM asistencia_tipos ORDER BY descripcion");
-						while ($r = mysqli_fetch_assoc($q)) {
-							echo '<option value="'.$r['codigo'].'">'.$r['descripcion'].'</option>';
-					}
-				?>
+    			<option value="">Seleccione...</option>
 			</select>
 		</div>
 

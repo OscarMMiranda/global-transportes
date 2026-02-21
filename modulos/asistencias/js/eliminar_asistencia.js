@@ -1,11 +1,14 @@
 /*
     archivo: /modulos/asistencias/js/eliminar_asistencia.js
     módulo: asistencias
-    propósito: eliminar una asistencia desde el submódulo REPORTE DIARIO
+    propósito: eliminar asistencia usando modal corporativo
 */
 
 console.log("eliminar_asistencia.js CARGADO");
 
+// ============================================================
+// ABRIR MODAL
+// ============================================================
 $(document).on("click", ".btnEliminarAsistencia", function () {
 
     let id = $(this).data("id");
@@ -16,34 +19,43 @@ $(document).on("click", ".btnEliminarAsistencia", function () {
         return;
     }
 
-    if (!confirm("¿Está seguro de eliminar esta asistencia?")) {
-        return;
-    }
+    $("#asistencia_id_eliminar").val(id);
+    $("#modalEliminarAsistencia").modal("show");
+});
 
-    $.post('/modulos/asistencias/acciones/eliminar_asistencia.php', { id }, function (r) {
+// ============================================================
+// CONFIRMAR ELIMINACIÓN
+// ============================================================
+$(document).on("click", "#btnConfirmarEliminarAsistencia", function () {
 
-        console.log("RESPUESTA DEL SERVIDOR:", r);
+    let id = $("#asistencia_id_eliminar").val();
 
-        if (!r || !r.ok) {
-            toastError(r && r.error ? r.error : "No se pudo eliminar la asistencia.");
-            return;
-        }
+    $.post('/modulos/asistencias/acciones/eliminar_asistencia.php', 
+        { id: id }, 
+        function (r) {
 
-        toastSuccess("Asistencia eliminada correctamente.");
+            console.log("RESPUESTA DEL SERVIDOR:", r);
 
-        // REPORTE DIARIO (tabla.js)
-        if (typeof RD !== "undefined" && typeof RD.cargarReporte === "function") {
-            console.log("Recargando reporte diario…");
-            RD.cargarReporte();
-            return;
-        }
+            if (!r || !r.ok) {
+                toastError(r && r.error ? r.error : "No se pudo eliminar la asistencia.");
+                return;
+            }
 
-        // Fallback
-        console.log("Recargando página (fallback)...");
-        location.reload();
+            toastSuccess("Asistencia eliminada correctamente.");
 
-    }, 'json')
-    .fail(function (xhr) {
+            $("#modalEliminarAsistencia").modal("hide");
+
+            // Si estás en REPORTE DIARIO
+            if (typeof RD !== "undefined" && typeof RD.cargarReporte === "function") {
+                RD.cargarReporte();
+                return;
+            }
+
+            // Fallback
+            location.reload();
+
+        }, 'json'
+    ).fail(function (xhr) {
         console.log("ERROR AJAX:", xhr.responseText);
         toastError("Error de comunicación con el servidor.");
     });
