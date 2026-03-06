@@ -34,6 +34,9 @@ $titulo = isset($titulo) ? $titulo : 'Módulo Conductores';
     <!-- Estilos específicos del módulo Conductores -->
     <link rel="stylesheet" href="/modulos/conductores/css/conductores.css?v=1">
 
+    <link rel="stylesheet" href="/modulos/conductores/css/modal.css">
+
+
     <!-- Variables globales del módulo (útiles para JS) -->
     <script>
         const MODULO = "conductores";

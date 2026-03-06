@@ -8,3 +8,4 @@ var RM_CONFIG = {
     url_reporte_mensual: 'acciones/obtener_reporte_mensual.php',
     url_conductores: 'acciones/get_conductores.php'
 };
+

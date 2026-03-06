@@ -59,70 +59,78 @@ window.Conductores = window.Conductores || {};
         }, 'json');
     });
 
-    // ============================================================
-    // EDITAR CONDUCTOR
-    // ============================================================
-    $(document).on('click', '.btn-edit', function () {
+ // ============================================================
+// EDITAR CONDUCTOR
+// ============================================================
+$(document).on('click', '.btn-edit', function () {
 
-        const id = $(this).data('id');
-        console.log("CLICK EN EDITAR", id);
+    const id = $(this).data('id');
+    console.log("CLICK EN EDITAR", id);
 
-        $.get(`/modulos/conductores/acciones/obtener.php?id=${id}`, function (resp) {
+    $.get(`/modulos/conductores/acciones/obtener.php?id=${id}`, function (resp) {
 
-            console.log("DATA RECIBIDA:", resp);
+        console.log("DATA RECIBIDA:", resp);
 
-            if (!resp || resp.success !== true || !resp.data) {
-                console.error("❌ Respuesta inválida:", resp);
-                return;
-            }
+        if (!resp || resp.success !== true || !resp.data) {
+            console.error("❌ Respuesta inválida:", resp);
+            return;
+        }
 
-            const c = resp.data;
+        const c = resp.data;
 
-            $('#modalConductor').attr('data-modo', 'editar');
+        $('#modalConductor').attr('data-modo', 'editar');
 
-            $('#tituloModalConductor').html(
-                `<i class="fa fa-id-card me-2"></i> Editar Conductor`
-            );
+        $('#tituloModalConductor').html(
+            `<i class="fa fa-id-card me-2"></i> Editar Conductor`
+        );
 
-            $('#btnGuardarConductor').html(
-                `<i class="fa fa-save"></i> Guardar Cambios`
-            );
+        $('#btnGuardarConductor').html(
+            `<i class="fa fa-save"></i> Guardar Cambios`
+        );
 
-            $('#modalConductor').modal('show');
+        $('#modalConductor').modal('show');
 
-            $('#c_id').val(c.id);
-            $('#c_nombres').val(c.nombres);
-            $('#c_apellidos').val(c.apellidos);
-            $('#c_dni').val(c.dni);
-            $('#c_licencia').val(c.licencia_conducir);
-            $('#c_correo').val(c.correo);
-            $('#c_telefono').val(c.telefono);
-            $('#c_direccion').val(c.direccion);
+        $('#c_id').val(c.id);
+        $('#c_nombres').val(c.nombres);
+        $('#c_apellidos').val(c.apellidos);
+        $('#c_dni').val(c.dni);
+        $('#c_licencia').val(c.licencia_conducir);
+        $('#c_correo').val(c.correo);
+        $('#c_telefono').val(c.telefono);
+        $('#c_direccion').val(c.direccion);
 
-            $('#c_activo').prop('checked', c.activo == 1);
+        $('#c_activo').prop('checked', c.activo == 1);
 
-            if (c.foto) {
-                $('#preview_foto').attr('src', c.foto).show();
-            } else {
-                $('#preview_foto').hide();
-            }
+        if (c.foto) {
+            $('#preview_foto').attr('src', c.foto).show();
+        } else {
+            $('#preview_foto').hide();
+        }
 
-            // FOTO ACTUAL → para que guardar.php la conserve si no se sube una nueva
-            $('#c_foto_actual').val(c.foto || '');
+        $('#c_foto_actual').val(c.foto || '');
 
-            // UBIGEO
-            Ubigeo.cargar(
-                '#departamento_id',
-                '#provincia_id',
-                '#distrito_id',
-                {
-                    departamento_id: c.departamento_id,
-                    provincia_id: c.provincia_id,
-                    distrito_id: c.distrito_id
-                }
-            );
-        }, 'json');
-    });
+        // UBIGEO
+       	if (c.departamento_id && c.provincia_id && c.distrito_id) {
+    	Ubigeo.cargar('#departamento_id', '#provincia_id', '#distrito_id', {
+        	departamento_id: c.departamento_id,
+        	provincia_id: c.provincia_id,
+			distrito_id: c.distrito_id
+    		});
+			} 
+		else {
+			// Si no tiene ubigeo, cargar solo departamentos
+			Ubigeo.cargar('#departamento_id', '#provincia_id', '#distrito_id');
+			}
+
+
+        // ⭐⭐⭐ SOLUCIÓN: seleccionar empresa después de cargar empresas
+        setTimeout(function () {
+            $('#empresa_id').val(c.empresa_id);
+        }, 300);
+
+    }, 'json');
+});
+
 
     // DESACTIVAR
     $(document).on('click', '.btn-soft-delete', function () {

@@ -1,0 +1,135 @@
+/* ============================================================
+    archivo: /modulos/asistencias/reporte_mensual/css/rm_matriz.css
+   ============================================================ */
+
+/* ============================================================
+   MATRIZ DE ASISTENCIAS — ESTILOS PROFESIONALES
+   ============================================================ */
+
+/* CONTENEDOR CON SCROLL HORIZONTAL */
+.matriz-wrapper {
+    overflow-x: auto;
+    overflow-y: visible;
+    white-space: nowrap;
+    padding-bottom: 6px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #ffffff;
+}
+
+/* TABLA BASE */
+#tabla_matriz {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: max-content;
+    min-width: 100%;
+    font-size: 14px;
+}
+
+/* ENCABEZADOS */
+#tabla_matriz thead th {
+    background: #f8f9fa;
+    text-align: center;
+    font-weight: 600;
+    border: 1px solid #ddd;
+    padding: 4px 6px;
+    position: relative;
+    z-index: 5;
+    white-space: nowrap;
+}
+
+/* CELDAS */
+#tabla_matriz td {
+    border: 1px solid #ddd;
+    padding: 4px 6px;
+    text-align: center;
+    background: white;
+    white-space: nowrap;
+}
+
+/* ============================================================
+   RESALTAR DOMINGOS
+   ============================================================ */
+.domingo {
+    background-color: #ffe5e5 !important;
+    color: #b30000 !important;
+    font-weight: bold;
+}
+
+/* ============================================================
+   RESALTAR SÁBADOS
+   ============================================================ */
+.sabado {
+    background-color: #fff7d6 !important;
+    color: #8a6d00 !important;
+    font-weight: bold;
+}
+
+/* ============================================================
+   CONGELAR COLUMNA "CONDUCTOR"
+   ============================================================ */
+#tabla_matriz th:first-child,
+#tabla_matriz td:first-child {
+    position: sticky;
+    left: 0;
+    background: #ffffff;
+    z-index: 20;
+    font-weight: 600;
+    text-align: left;
+    padding-left: 8px;
+    border-right: 2px solid #ccc;
+}
+
+/* Encabezado de la columna congelada */
+#tabla_matriz thead th:first-child {
+    z-index: 30;
+}
+
+/* ============================================================
+   SOMBREADO ALTERNADO POR FILAS
+   ============================================================ */
+#tabla_matriz tbody tr:nth-child(even) td {
+    background: #fafafa;
+}
+
+/* ============================================================
+   HOVER PROFESIONAL
+   ============================================================ */
+#tabla_matriz tbody tr:hover td {
+    background: #e8f0fe !important;
+}
+
+/* ============================================================
+   CELDAS DE CÓDIGOS
+   ============================================================ */
+.matriz-celda {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* Línea vertical que separa semanas ISO */
+.corte-semana {
+    border-left: 3px solid #625c5c !important;
+}
+
+
+.pdf-matriz {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 10px;
+}
+
+.pdf-matriz th,
+.pdf-matriz td {
+    border: 1px solid #000;
+    padding: 2px;
+    text-align: center;
+}
+
+.pdf-matriz th {
+    background: #f8f9fa;
+}
+
+
+
+

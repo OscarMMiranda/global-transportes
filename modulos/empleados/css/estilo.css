@@ -1,0 +1,21 @@
+#tablaEmpleados thead th {
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+#tablaEmpleados tbody td {
+    font-size: 0.9rem;
+}
+
+#tablaEmpleados tbody tr:hover {
+    background-color: #f2f6fc;
+    transition: 0.2s ease-in-out;
+}
+
+.badge-estado-activo {
+    background-color: #198754;
+}
+
+.badge-estado-inactivo {
+    background-color: #6c757d;
+}

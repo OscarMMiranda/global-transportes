@@ -1,0 +1,45 @@
+<?php
+// archivo: /modulos/conductores/componentes/head.php
+
+// Título del módulo
+$titulo = isset($titulo) ? $titulo : 'Módulo Conductores';
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- SEO / Seguridad -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="robots" content="noindex, nofollow">
+
+    <title><?= htmlspecialchars($titulo) ?></title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/includes/img/favicon.png">
+
+    <!-- Bootstrap 5.3 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <!-- Font Awesome 6.5 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- DataTables Bootstrap 5 -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+
+    <!-- Estilos globales del ERP -->
+    <link rel="stylesheet" href="/includes/css/global.css?v=1">
+
+    <!-- Estilos específicos del módulo Empleados -->
+    <link rel="stylesheet" href="/modulos/empleados/css/estilo.css?v=1">
+
+    <link rel="stylesheet" href="/modulos/empleados/css/modal.css">
+
+
+    <!-- Variables globales del módulo (útiles para JS) -->
+    <script>
+        const MODULO = "empleados";
+        const API_EMPLEADOS = "/modulos/empleados/controladores/";
+    </script>
+</head>

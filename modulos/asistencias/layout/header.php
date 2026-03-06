@@ -14,8 +14,14 @@
         </div>
     </div>
 
-    <div class="d-none d-md-block">
-        <span class="badge bg-light text-dark border">
+    <div class="d-flex align-items-center gap-3">
+
+        <!-- BOTÓN PARA VOLVER AL MÓDULO PRINCIPAL -->
+        <a href="/paneles/admin/vistas/dashboard.php" class="btn btn-outline-light btn-sm">
+            <i class="fa fa-home me-1"></i> Inicio
+        </a>
+
+        <span class="badge bg-light text-dark border d-none d-md-inline">
             <i class="fa fa-truck me-1"></i> ERP Global Transportes
         </span>
     </div>

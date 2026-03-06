@@ -28,28 +28,73 @@ $telefono  = isset($_POST['telefono']) ? trim($_POST['telefono']) : '';
 $correo    = isset($_POST['correo']) ? trim($_POST['correo']) : '';
 $direccion = isset($_POST['direccion']) ? trim($_POST['direccion']) : '';
 
+$empresa_id      = isset($_POST['empresa_id']) ? intval($_POST['empresa_id']) : 0;
 $departamento_id = isset($_POST['departamento_id']) ? intval($_POST['departamento_id']) : 0;
 $provincia_id    = isset($_POST['provincia_id']) ? intval($_POST['provincia_id']) : 0;
 $distrito_id     = isset($_POST['distrito_id']) ? intval($_POST['distrito_id']) : 0;
 
 $activo = isset($_POST['activo']) ? 1 : 0;
 
-// FOTO ACTUAL
 $fotoActualPost = isset($_POST['foto_actual']) ? trim($_POST['foto_actual']) : '';
-
 $usuario = "admin"; // Ajustar según login real
 
+
 // -------------------------------------------------------------
-// OBTENER DATOS ANTERIORES
+// VALIDACIÓN BACKEND (COMPATIBLE PHP 5.6)
 // -------------------------------------------------------------
+if ($nombres === '' || $apellidos === '') {
+    echo json_encode(array('success' => false, 'error' => 'Debe ingresar nombres y apellidos'));
+    exit;
+}
+
+if (strlen($dni) !== 8) {
+    echo json_encode(array('success' => false, 'error' => 'El DNI debe tener 8 dígitos'));
+    exit;
+}
+
+if ($licencia === '') {
+    echo json_encode(array('success' => false, 'error' => 'Debe ingresar la licencia de conducir'));
+    exit;
+}
+
+if ($empresa_id <= 0) {
+    echo json_encode(array('success' => false, 'error' => 'Debe seleccionar una empresa'));
+    exit;
+}
+
+if ($departamento_id <= 0 || $provincia_id <= 0 || $distrito_id <= 0) {
+    echo json_encode(array('success' => false, 'error' => 'Debe seleccionar un distrito válido'));
+    exit;
+}
+
+// Validación FK manual (compatible PHP 5.6)
+function validarFK($conn, $tabla, $id) {
+    $sql = "SELECT id FROM $tabla WHERE id = $id LIMIT 1";
+    $res = $conn->query($sql);
+    return ($res && $res->num_rows > 0);
+}
+
+if (!validarFK($conn, "empresa", $empresa_id)) {
+    echo json_encode(array('success' => false, 'error' => 'La empresa seleccionada no existe'));
+    exit;
+}
+
+if (!validarFK($conn, "distritos", $distrito_id)) {
+    echo json_encode(array('success' => false, 'error' => 'El distrito seleccionado no existe'));
+    exit;
+}
+
+
+
+
+// 	OBTENER DATOS ANTERIORES
 $anterior = null;
 if ($id > 0) {
     $anterior = obtenerConductorPorId($conn, $id);
 }
-
-// -------------------------------------------------------------
+//
 // MANEJO DE FOTO
-// -------------------------------------------------------------
+// 
 $fotoNueva        = null;
 $rutaFotoAnterior = null;
 
@@ -124,21 +169,57 @@ if (
 // -------------------------------------------------------------
 if ($id > 0) {
 
+    $stmt = $conn->prepare(
+	"UPDATE conductores SET 
+				nombres = ?, 
+				apellidos = ?, 
+				dni = ?, 
+				licencia_conducir = ?, 
+            	telefono = ?, 
+            	correo = ?, 
+            	direccion = ?, 
+            	departamento_id = ?, 
+            	provincia_id = ?, 
+            	distrito_id = ?, 
+            	activo = ?, 
+            	foto = ?, 
+				empresa_id=?
+        	WHERE id = ?
+    	");
+
+    if (!$stmt) {
+        echo json_encode(array('success' => false, 'error' => $conn->error));
+        exit;
+    }
+
+    $stmt->bind_param(
+		"sssssssiiiisii",
+		$nombres,		// s
+		$apellidos,	// s
+		$dni,				// s
+		$licencia,         // s
+		$telefono,         // s
+		$correo,           // s
+		$direccion,        // s
+		$departamento_id,  // i
+		$provincia_id,     // i
+		$distrito_id,      // i
+		$activo,           // i
+		$fotoNueva,        // s
+		$empresa_id,       // i
+		$id                // i
+);
+
+
+    $accion = "editar";
+
+} else {
+
     $stmt = $conn->prepare("
-        UPDATE conductores SET 
-            nombres = ?, 
-            apellidos = ?, 
-            dni = ?, 
-            licencia_conducir = ?, 
-            telefono = ?, 
-            correo = ?, 
-            direccion = ?, 
-            departamento_id = ?, 
-            provincia_id = ?, 
-            distrito_id = ?, 
-            activo = ?, 
-            foto = ?
-        WHERE id = ?
+        INSERT INTO conductores 
+            (nombres, apellidos, dni, licencia_conducir, telefono, correo, direccion, 
+             departamento_id, provincia_id, distrito_id, activo, foto, empresa_id)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,? )
     ");
 
     if (!$stmt) {
@@ -148,39 +229,6 @@ if ($id > 0) {
 
     $stmt->bind_param(
         "sssssssiiiisi",
-        $nombres,			// 1  - s
-        $apellidos,		// 2  - s	
-        $dni,					// 3  - s	
-        $licencia,				// 4  - s
-        $telefono,				// 5  - s
-        $correo,				// 6  - s
-        $direccion,				// 7  - s		
-        $departamento_id,		// 8  - i
-        $provincia_id,			// 9  - i
-        $distrito_id,			// 10 - i
-        $activo,				// 11 - i
-        $fotoNueva,				// 12 - s
-        $id						// 13 - i
-    );
-
-    $accion = "editar";
-
-} else {
-
-    $stmt = $conn->prepare("
-        INSERT INTO conductores 
-            (nombres, apellidos, dni, licencia_conducir, telefono, correo, direccion, 
-             departamento_id, provincia_id, distrito_id, activo, foto)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    ");
-
-    if (!$stmt) {
-        echo json_encode(array('success' => false, 'error' => $conn->error));
-        exit;
-    }
-
-    $stmt->bind_param(
-        "sssssssiiiis",
         $nombres,			// 1  - s
         $apellidos,		// 2  - s
         $dni,					// 3  - s
@@ -192,7 +240,8 @@ if ($id > 0) {
         $provincia_id,			// 9  - i
         $distrito_id,			// 10 - i
         $activo,				// 11 - i
-        $fotoNueva				// 12 - s
+        $fotoNueva,				// 12 - s
+		$empresa_id				// 13 - i
     );
 
     	$accion = "crear";				
@@ -229,7 +278,8 @@ if ($anterior) {
         'provincia_id',
         'distrito_id',
         'activo',
-        'foto'
+        'foto',
+		'empresa_id'
     );
 
     foreach ($campos as $campo) {

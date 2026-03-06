@@ -1,0 +1,37 @@
+/*    archivo: modulos/asistencias/reporte_mensual/componentes/header/header.css
+    estilos para el header del reporte mensual
+*/
+
+.rm-header-info {
+    padding: 10px 15px;
+    background: #fafafa;
+    border-bottom: 1px solid #ddd;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px 20px;
+    font-size: 14px;
+}
+
+.rm-header-totales {
+    padding: 10px 15px;
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    gap: 25px;
+}
+
+.rm-kpi {
+    display: flex;
+    flex-direction: column;
+}
+
+.rm-kpi label {
+    font-weight: 600;
+    color: #666;
+}
+
+.rm-kpi span {
+    font-size: 18px;
+    font-weight: 700;
+    color: #222;
+}

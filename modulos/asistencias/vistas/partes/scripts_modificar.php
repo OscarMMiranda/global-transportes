@@ -33,33 +33,33 @@ $(document).ready(function() {
     // ============================================================
     // 2. BLOQUEAR CONDUCTOR HASTA QUE SE ELIJA EMPRESA
     // ============================================================
-    $("#f_conductor").prop("disabled", true);
+    $("#filtro_conductor").prop("disabled", true);
 
 
     // ============================================================
     // 3. CUANDO CAMBIA EMPRESA → CARGAR CONDUCTORES
     // ============================================================
-    $("#f_empresa").on("change", function() {
+    $("#filtro_empresa").on("change", function() {
 
         let empresa_id = $(this).val();
 
         if (empresa_id === "") {
-            $("#f_conductor").html('<option value="">Seleccione empresa primero...</option>');
-            $("#f_conductor").prop("disabled", true);
+            $("#filtro_conductor").html('<option value="">Seleccione empresa primero...</option>');
+            $("#filtro_conductor").prop("disabled", true);
             return;
         }
 
-        $("#f_conductor").prop("disabled", false);
-        $("#f_conductor").html('<option value="">Cargando...</option>');
+        $("#filtro_conductor").prop("disabled", false);
+        $("#filtro_conductor").html('<option value="">Cargando...</option>');
 
         $.get("/modulos/asistencias/ajax/get_conductores.php",
             { empresa_id: empresa_id },
             function(r) {
 
-                $("#f_conductor").html('<option value="">Seleccione...</option>');
+                $("#filtro_conductor").html('<option value="">Seleccione...</option>');
 
                 r.forEach(item => {
-                    $("#f_conductor").append(
+                    $("#filtro_conductor").append(
                         `<option value="${item.id}">${item.nombre}</option>`
                     );
                 });
@@ -84,8 +84,8 @@ $(document).ready(function() {
     // ============================================================
     $("#btnBuscar").on("click", function() {
 
-        let empresa = $("#f_empresa").val();
-        let conductor = $("#f_conductor").val();
+        let empresa = $("#filtro_empresa").val();
+        let conductor = $("#filtro_conductor").val();
 
         // Validaciones profesionales
         if (empresa === "") {

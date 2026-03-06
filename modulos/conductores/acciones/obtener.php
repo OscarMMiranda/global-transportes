@@ -49,6 +49,7 @@ $sql = "SELECT
             departamento_id,
             provincia_id,
             distrito_id,
+            empresa_id,   -- 🔥 AGREGADO
             activo,
             foto
         FROM conductores

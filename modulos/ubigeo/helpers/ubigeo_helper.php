@@ -1,5 +1,5 @@
 <?php
-// /modulos/ubigeo/helpers/ubigeo_helper.php
+// archivo : /modulos/ubigeo/helpers/ubigeo_helper.php
 
 require_once __DIR__ . '/../../../includes/config.php';
 

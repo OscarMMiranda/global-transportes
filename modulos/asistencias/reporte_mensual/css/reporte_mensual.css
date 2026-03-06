@@ -1,3 +1,5 @@
+/* archivo: /modulos/asistencias/reporte_mensual/css/reporte_mensual.css */
+
 /* ============================================================
    REPORTE MENSUAL DE ASISTENCIAS
    Estilos corporativos, limpios y compatibles con Bootstrap 3
@@ -36,9 +38,16 @@
 
 /* Botón buscar */
 #btn_buscar {
-    margin-top: 22px;
+    margin-top: 5px;
     width: 100%;
 }
+
+/* Botón buscar */
+#btn_descargar_pdf {
+    margin-top: 5px;
+    width: 100%;
+}
+
 
 /* ------------------------------
    TABLA
@@ -98,3 +107,44 @@
         margin-top: 10px;
     }
 }
+
+
+/* ============================================================
+   HEADER PRINCIPAL DEL REPORTE MENSUAL
+   ============================================================ */
+
+.rm-header-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 15px;
+}
+
+.rm-header-main h4 {
+    margin: 0;
+    font-weight: 700;
+    color: #0d6efd; /* azul corporativo Bootstrap */
+    display: flex;
+    align-items: center;
+}
+
+.rm-header-main h4 i {
+    margin-right: 8px;
+}
+
+.rm-header-main small {
+    color: #6c757d; /* gris Bootstrap */
+}
+
+.rm-header-left {
+    display: flex;
+    flex-direction: column;
+}
+
+.rm-btn-volver i {
+    margin-right: 6px;
+}
+

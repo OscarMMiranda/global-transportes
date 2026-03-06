@@ -7,7 +7,7 @@
 
 <div class="col-md-3">
     <label class="form-label">Empresa</label>
-    <select id="f_empresa" class="form-select">
+    <select id="filtro_empresa" class="form-select">
         <option value="">Seleccione...</option>
         <?php foreach ($empresas as $e): ?>
             <option value="<?= $e['id'] ?>">
@@ -19,7 +19,7 @@
 
 <div class="col-md-3">
     <label class="form-label">Conductor</label>
-    <select id="f_conductor" class="form-select" disabled>
+    <select id="filtro_conductor" class="form-select" disabled>
         <option value="">Seleccione empresa primero...</option>
     </select>
 </div>

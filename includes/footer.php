@@ -1,5 +1,5 @@
 <?php
-    // public_html/includes/footer.php
+//  archivo: includes/footer.php
 ?>
 <footer class="footer mt-auto py-3 bg-light">
     <div class="container text-center">
@@ -19,7 +19,6 @@
 <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script> -->
 
 <!-- Tus scripts específicos -->
-<script src="<?= BASE_URL ?>assets/js/clientes.js" defer></script>
 
 <?php if (defined('MODULE_JS')): ?>
 <script src="<?= BASE_URL ?>assets/js/<?= MODULE_JS ?>" defer></script>

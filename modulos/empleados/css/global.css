@@ -1,0 +1,24 @@
+/* archivo: modulos/empleados/css/global.css */
+
+
+/* HISTORIAL CORPORATIVO */
+#modalHistorial .list-group-item {
+    border-left: 4px solid #0d6efd;
+    margin-bottom: 8px;
+    background: #fafafa;
+}
+
+#modalHistorial ul ul {
+    margin-top: 6px;
+    padding-left: 18px;
+}
+
+#modalHistorial li strong {
+    color: #0d6efd;
+}
+
+#modalHistorial pre {
+    background: #f1f1f1;
+    padding: 8px;
+    border-radius: 4px;
+}

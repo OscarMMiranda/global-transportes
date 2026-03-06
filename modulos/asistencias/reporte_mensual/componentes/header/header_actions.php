@@ -3,18 +3,19 @@
     // Botones de acción para el reporte mensual de asistencias (exportar, imprimir, refrescar)
 ?>
 
-<div class="panel-heading text-right" style="border-top: 1px solid #ddd; padding-top: 10px;">
+<div class="d-flex justify-content-end gap-2 border-top pt-2">
 
     <button id="btn_exportar_excel" class="btn btn-success btn-sm">
-        <i class="fa fa-file-excel-o"></i> Exportar Excel
+        <i class="fa-solid fa-file-excel"></i> Exportar Excel
     </button>
 
-    <button id="btn_imprimir" class="btn btn-default btn-sm">
-        <i class="fa fa-print"></i> Imprimir
+    <button id="btn_imprimir" class="btn btn-secondary btn-sm">
+        <i class="fa-solid fa-print"></i> Imprimir
     </button>
 
-    <button id="btn_refrescar" class="btn btn-info btn-sm">
-        <i class="fa fa-refresh"></i> Refrescar
+    <button id="btn_refrescar" class="btn btn-info btn-sm text-white">
+        <i class="fa-solid fa-rotate-right"></i> Refrescar
     </button>
 
 </div>
+

@@ -6,7 +6,8 @@
 <tfoot>
     <tr>
         <th colspan="4" class="text-right">Total Horas:</th>
-        <th id="total_horas">0</th>
+        <th id="total_horas_footer">0</th>
         <th></th>
     </tr>
 </tfoot>
+

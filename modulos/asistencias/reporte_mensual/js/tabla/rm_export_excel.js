@@ -8,10 +8,10 @@ $(document).ready(function () {
 
     $("#btnExportarExcel").on("click", function () {
 
-        let empresa   = $("#f_empresa").val();
-        let conductor = $("#f_conductor").val();
-        let mes       = $("#f_mes").val();
-        let anio      = $("#f_anio").val();
+        let empresa   = $("#filtro_empresa").val();
+        let conductor = $("#filtro_conductor").val();
+        let mes       = $("#filtro_mes").val();
+        let anio      = $("#filtro_anio").val();
 
         let url = "acciones/exportar_excel.php"
                 + "?empresa="   + encodeURIComponent(empresa)

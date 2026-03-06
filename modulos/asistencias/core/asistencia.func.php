@@ -41,6 +41,12 @@ function registrar_asistencia($conn, $data)
     $hora_salida  = $data['hora_salida'];
     $observacion  = $data['observacion'];
 
+    // Bloquear asistencias futuras
+    $hoy = date('Y-m-d');
+    if ($fecha > $hoy) {
+        return array('ok' => false, 'error' => 'No se pueden registrar asistencias futuras');
+    }
+
     $id_tipo = tipo_id_por_codigo($conn, $codigo_tipo);
     if ($id_tipo == 0) {
         return array('ok' => false, 'error' => 'Tipo de asistencia inválido');
@@ -59,19 +65,22 @@ function registrar_asistencia($conn, $data)
 
     $stmt->close();
 
-    // Insertar
+    // Insertar con tipo_codigo
     $sql = "INSERT INTO asistencia_conductores
-            (conductor_id, fecha, tipo_id, hora_entrada, hora_salida, observacion)
-            VALUES (?, ?, ?, ?, ?, ?)";
+            (conductor_id, fecha, tipo_id, tipo_codigo, hora_entrada, hora_salida, observacion)
+            SELECT ?, ?, ?, codigo, ?, ?, ?
+            FROM asistencia_tipos
+            WHERE id = ?";
 
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("isisss",
+    $stmt->bind_param("isisssi",
         $conductor_id,
         $fecha,
         $id_tipo,
         $hora_entrada,
         $hora_salida,
-        $observacion
+        $observacion,
+        $id_tipo
     );
 
     if (!$stmt->execute()) {
@@ -80,6 +89,8 @@ function registrar_asistencia($conn, $data)
 
     return array('ok' => true);
 }
+
+
 
 function registrar_dia_no_laborable($conn, $data)
 {

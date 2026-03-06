@@ -1,6 +1,7 @@
+// archivo: /modulos/asistencias/reporte_mensual/js/tabla/rm_tabla_renderer.js
 // ============================================================
-//  MÓDULO: rm_render_tabla.js
-//  RESPONSABILIDAD: Renderizar la tabla del reporte mensual
+//  MÓDULO: rm_tabla_renderer.js
+//  RESPONSABILIDAD: Renderizar la tabla de asistencias con los datos obtenidos del backend
 // ============================================================
 
 function rm_render_tabla(data) {
@@ -9,7 +10,7 @@ function rm_render_tabla(data) {
     let totalMinutos = 0;
 
     if (!data || data.length === 0) {
-        $("#tabla_reporte tbody").html(`
+        $("#tabla_asistencias tbody").html(`
             <tr>
                 <td colspan="10" class="text-center">No hay registros</td>
             </tr>
@@ -33,12 +34,15 @@ function rm_render_tabla(data) {
                 <td>${r.hora_entrada || "-"}</td>
                 <td>${r.hora_salida || "-"}</td>
                 <td>${horasTrab}</td>
-                <td>${r.observacion || "-"}</td>
+				<td>${r.tipo || "-"}</td>
+
+
+
             </tr>
         `;
     });
 
-    $("#tabla_reporte tbody").html(html);
+    $("#tabla_asistencias tbody").html(html);
 
     // Total mensual
     let totalFinal = rm_total_horas_hhmm(totalMinutos);

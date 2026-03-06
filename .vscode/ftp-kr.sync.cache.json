@@ -60,7 +60,7 @@
     },
     "debug_log.txt": {
       "type": "-",
-      "size": 735,
+      "size": 980,
       "lmtime": 0,
       "modified": true
     },
@@ -72,7 +72,7 @@
     },
     "error_log.txt": {
       "type": "-",
-      "size": 209615,
+      "size": 224151,
       "lmtime": 0,
       "modified": true
     },
@@ -123,7 +123,6 @@
       "modified": false
     },
     "js": {},
-    "legacy": {},
     "login.php": {
       "type": "-",
       "size": 6475,
@@ -159,12 +158,6 @@
     "ommz": {},
     "paneles": {},
     "partials": {},
-    "popup.html": {
-      "type": "-",
-      "size": 1085,
-      "lmtime": 0,
-      "modified": false
-    },
     "prueba.php": {
       "type": "-",
       "size": 22,

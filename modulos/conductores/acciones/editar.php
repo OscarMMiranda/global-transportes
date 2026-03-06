@@ -44,17 +44,24 @@ try {
 
             // Normalizar salida (sin ??)
             $data = [
-                'id' => isset($conductor['id']) ? (int)$conductor['id'] : 0,
-                'nombres' => isset($conductor['nombres']) ? $conductor['nombres'] : '',
+                'id' 		=> isset($conductor['id']) ? (int)$conductor['id'] : 0,
+                'nombres' 	=> isset($conductor['nombres']) ? $conductor['nombres'] : '',
                 'apellidos' => isset($conductor['apellidos']) ? $conductor['apellidos'] : '',
-                'dni' => isset($conductor['dni']) ? $conductor['dni'] : '',
+                'dni' 		=> isset($conductor['dni']) ? $conductor['dni'] : '',
                 'licencia_conducir' => isset($conductor['licencia_conducir']) ? $conductor['licencia_conducir'] : '',
-                'telefono' => isset($conductor['telefono']) ? $conductor['telefono'] : '',
-                'correo' => isset($conductor['correo']) ? $conductor['correo'] : '',
+                'telefono' 	=> isset($conductor['telefono']) ? $conductor['telefono'] : '',
+                'correo' 	=> isset($conductor['correo']) ? $conductor['correo'] : '',
                 'direccion' => isset($conductor['direccion']) ? $conductor['direccion'] : '',
-                'activo' => isset($conductor['activo']) ? (int)$conductor['activo'] : 0,
-                'foto' => $fotoRuta
-            ];
+                'activo' 	=> isset($conductor['activo']) ? (int)$conductor['activo'] : 0,
+                'foto' 		=> $fotoRuta,
+
+			    // 🔥 CAMPOS QUE FALTABAN
+				'empresa_id' => (int)$conductor['empresa_id'],
+    			// 'departamento_id' => (int)$conductor['departamento_id'],
+    			// 'provincia_id' => (int)$conductor['provincia_id'],
+    			// 'distrito_id' => (int)$conductor['distrito_id']
+
+            	];
 
             echo json_encode(['success' => true, 'data' => $data]);
         } else {

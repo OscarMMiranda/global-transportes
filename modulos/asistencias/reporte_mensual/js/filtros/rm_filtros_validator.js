@@ -4,14 +4,26 @@
 function rm_filtros_validar() {
 
     if (!RM_FILTROS_STATE.mes) {
-        alert('Seleccione un mes');
+	    Swal.fire({
+			icon: 'warning',
+			title: 'Seleccione un mes',
+			text: 'Por favor elija un mes para continuar.',
+			confirmButtonText: 'Entendido',
+			confirmButtonColor: '#3085d6'
+			});
         return false;
     }
 
     if (!RM_FILTROS_STATE.anio) {
-        alert('Seleccione un año');
-        return false;
-    }
+		Swal.fire({
+    		icon: 'warning',
+    		title: 'Seleccione un año',
+    		text: 'Por favor elija un año para continuar.',
+    		confirmButtonText: 'Entendido',
+			confirmButtonColor: '#3085d6'
+		});
+		return false;
+	}
 
     return true;
 }

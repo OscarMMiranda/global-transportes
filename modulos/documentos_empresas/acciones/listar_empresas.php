@@ -1,4 +1,5 @@
 <?php
+// archivo: /modulos/documentos_empresas/acciones/listar_empresas.php
 
 require_once __DIR__ . '/../../../includes/config.php';
 require_once __DIR__ . '/../componentes/estado_documental_empresa.php';
@@ -102,12 +103,13 @@ while ($row = $res->fetch_assoc()) {
     // 7) AGREGAR FILA
     // ============================================================
     $data[] = [
-        "razon_social" => $row['razon_social'],
-        "ruc" => $row['ruc'],
-        "total_documentos" => $progreso,
-        "por_vencer" => $porVencer,
-        "estado" => $estado,
-        "acciones" => $acciones
+		"id" => $row['id'],  // ⭐ AGREGAR ESTO
+		"razon_social" => $row['razon_social'],
+		"ruc" => $row['ruc'],
+		"total_documentos" => $progreso,
+		"por_vencer" => $porVencer,
+		"estado" => $estado,
+		"acciones" => $acciones
     ];
 }
 

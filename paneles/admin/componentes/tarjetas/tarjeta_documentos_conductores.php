@@ -1,3 +1,8 @@
+<?php
+    // archivo : /paneles/admin/componentes/tarjetas/tarjeta_documentos_conductores.php
+    // Tarjeta para acceder a la sección de documentos de conductores
+?>
+
 <div class="col">
     <div class="card shadow-sm h-100">
         <div class="card-body text-center">
