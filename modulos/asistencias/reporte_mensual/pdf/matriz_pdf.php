@@ -1,72 +1,211 @@
 <?php
+    // archivo : /modulos/asistencias/reporte_mensual/pdf/matriz_pdf.php
 
+	error_reporting(E_ALL);
+	ini_set('display_errors', 1);
 
-require __DIR__ . '/../../../includes/config.php';
-$conn = getConnection();
+	require $_SERVER['DOCUMENT_ROOT'] . "/includes/config.php";
+	$conn = getConnection();
 
-require_once __DIR__ . '/tcpdf/tcpdf.php';
+	require_once __DIR__ . '/tcpdf/tcpdf.php';
 
-$mes  = intval($_GET['mes'] ?? 0);
-$anio = intval($_GET['anio'] ?? 0);
+	$mes  = isset($_GET['mes']) ? intval($_GET['mes']) : 0;
+	$anio = isset($_GET['anio']) ? intval($_GET['anio']) : 0;
 
-$sql = "SELECT 
-            ac.conductor_id,
-            ac.fecha,
-            ac.tipo_codigo,
-            c.nombre_completo AS conductor
-        FROM asistencia_conductores ac
-        INNER JOIN conductores c ON c.id = ac.conductor_id
-        WHERE MONTH(ac.fecha) = $mes
-          AND YEAR(ac.fecha) = $anio
-        ORDER BY c.nombre_completo ASC, ac.fecha ASC";
+	$meses = [
+    	1=>'ENERO',2=>'FEBRERO',3=>'MARZO',4=>'ABRIL',5=>'MAYO',6=>'JUNIO',
+		7=>'JULIO',8=>'AGOSTO',9=>'SEPTIEMBRE',10=>'OCTUBRE',11=>'NOVIEMBRE',12=>'DICIEMBRE'
+		];
 
-$res = $conn->query($sql);
+	$nombreMes = $meses[$mes];
 
-$grupos = [];
-while ($r = $res->fetch_assoc()) {
-    $cid = $r['conductor_id'];
-    $dia = intval(substr($r['fecha'], 8, 2));
+	// Funciones auxiliares para la matriz
+	function diaSemana($anio,$mes,$dia){
+    	$dias=['D','L','M','M','J','V','S'];
+		return $dias[date('w', mktime(0,0,0,$mes,$dia,$anio))];
+		}
 
-    if (!isset($grupos[$cid])) {
-        $grupos[$cid] = [
-            'nombre' => $r['conductor'],
-            'dias'   => []
-        ];
+	function semanaISO($anio,$mes,$dia){
+    	return date('W', mktime(0,0,0,$mes,$dia,$anio));
+		}
+
+// Colores por código
+$colores = [
+    'A'  => '#C6EFCE',
+    'T'  => '#FFEB9C',
+    'FJ' => '#FFC7CE',
+    'FI' => '#FF9999',
+    'VA' => '#F8CBAD',
+    'DM' => '#BDD7EE',
+    'PN' => '#DDEBF7',
+    'PS' => '#E4DFEC',
+    'FR' => '#E2E2E2',
+    'NL' => '#E4DFEC',
+    'F'  => '#F4B084'
+];
+
+// Estilo de celda
+function estiloCelda($codigo, $esDomingo, $colores) {
+
+    // Celda vacía
+    if ($codigo === '' || $codigo === null) {
+        if ($esDomingo) {
+            return 'background-color:#FFCCCC; border:1px solid #FF0000; text-align:center; font-size:6px; line-height:6px;';
+        }
+        return 'text-align:center; font-size:6px; line-height:6px;';
     }
 
-    $grupos[$cid]['dias'][$dia] = $r['tipo_codigo'];
+    // Color del código
+    $bg = isset($colores[$codigo]) ? $colores[$codigo] : 'transparent';
+
+    // Domingo → fondo rojo + borde rojo + borde interno del color del código
+    if ($esDomingo) {
+        return "
+            background-color:#FFCCCC;
+            border:1px solid #FF0000;
+            outline: 2px solid $bg;
+            text-align:center;
+            font-size:6px;
+            line-height:6px;
+        ";
+    }
+
+    // Día normal
+    return "background-color:$bg; text-align:center; font-size:6px; line-height:6px;";
 }
 
-$diasMes = cal_days_in_month(CAL_GREGORIAN, $mes, $anio);
 
-// Crear PDF
-$pdf = new TCPDF('L', 'mm', 'A4', true, 'UTF-8', false);
-$pdf->SetCreator('Sistema');
-$pdf->SetAuthor('Global Transportes');
-$pdf->SetTitle('Matriz de Asistencias');
-$pdf->SetMargins(10, 10, 10);
+	// Obtener datos de la base de datos
+	$sql = "SELECT 
+			ac.conductor_id,
+        	ac.fecha,
+			ac.tipo_codigo,
+		CONCAT(LEFT(c.nombres,1),'. ',c.apellidos) AS conductor
+			FROM asistencia_conductores ac
+        	INNER JOIN conductores c ON c.id=ac.conductor_id
+        	WHERE MONTH(ac.fecha)=$mes AND YEAR(ac.fecha)=$anio
+        	ORDER BY conductor ASC, ac.fecha ASC";
+
+$res = $conn->query($sql);
+if(!$res) die("ERROR SQL: ".$conn->error);
+
+$grupos=[];
+while($r=$res->fetch_assoc()){
+    if(strlen($r['fecha'])<10) continue;
+
+    $cid=$r['conductor_id'];
+    $dia=intval(substr($r['fecha'],8,2));
+
+    if(!isset($grupos[$cid])){
+        $grupos[$cid]=['nombre'=>$r['conductor'],'dias'=>[]];
+    }
+
+    $grupos[$cid]['dias'][$dia]=$r['tipo_codigo'];
+}
+
+$diasMes = cal_days_in_month(CAL_GREGORIAN,$mes,$anio);
+
+
+// SECCIÓN 4 — Configuración del PDF
+$pdf = new TCPDF('L','mm','A4');
+$pdf->SetMargins(1,10,10); // MARGEN IZQUIERDO AL MÍNIMO
 $pdf->AddPage();
+$pdf->SetFont('helvetica','',6); // tamaño general
 
-$html = '<h2 style="text-align:center;">Matriz de Asistencias - '.$mes.'/'.$anio.'</h2>';
-$html .= '<table border="1" cellpadding="3" cellspacing="0"><thead><tr>';
-$html .= '<th>Conductor</th>';
+$html = '<h2 style="text-align:center; font-size:14px;">Matriz de Asistencias - '.$nombreMes.' - '.$anio.'</h2>';
+$html .= '<table border="1" cellpadding="0.2" cellspacing="0">';
 
-for ($d = 1; $d <= $diasMes; $d++) {
-    $html .= '<th>'.$d.'</th>';
+/* ============================
+   FILA 1: SEMANA ISO
+============================ */
+$html .= '<thead><tr>';
+$html .= '<th style="text-align:center; width:40px; font-size:6px;">Semana</th>';
+
+for($d=1;$d<=$diasMes;$d++){
+    $sem = semanaISO($anio,$mes,$d);
+    $html .= '<th style="text-align:center; font-size:6px; line-height:6px;">'.$sem.'</th>';
+}
+
+$html .= '</tr>';
+
+/* ============================
+   FILA 2: DÍA + NÚMERO
+============================ */
+$html .= '<tr>';
+$html .= '<th style="text-align:center; width:40px;">Conductor</th>';
+
+for($d=1;$d<=$diasMes;$d++){
+
+    $diaLetra = diaSemana($anio,$mes,$d);
+    $bg = ($diaLetra=='D') ? 'background-color:#FFCCCC;' : '';
+
+    $html .= '<th style="text-align:center; font-size:6px; line-height:6px; '.$bg.'">'.$diaLetra.'<br>'.$d.'</th>';
 }
 
 $html .= '</tr></thead><tbody>';
 
-foreach ($grupos as $g) {
-    $html .= '<tr><td>'.$g['nombre'].'</td>';
-    for ($d = 1; $d <= $diasMes; $d++) {
-        $html .= '<td>'.($g['dias'][$d] ?? '').'</td>';
-    }
+/* ============================
+   FILAS DE CONDUCTORES
+============================ */
+foreach($grupos as $g){
+
+    $html .= '<tr>';
+    $html .= '<td style="width:40px;">'.$g['nombre'].'</td>';
+
+    for($d=1;$d<=$diasMes;$d++){
+
+        // $diaLetra = diaSemana($anio,$mes,$d);
+        // $bg = ($diaLetra=='D') ? 'background-color:#FFCCCC;' : '';
+
+        // $valor = isset($g['dias'][$d]) ? $g['dias'][$d] : '';
+
+        // $html .= '<td style="text-align:center; font-size:6px; line-height:6px; '.$bg.'">'.$valor.'</td>';
+		$diaLetra = diaSemana($anio,$mes,$d);
+$esDomingo = ($diaLetra == 'D');
+
+$valor = isset($g['dias'][$d]) ? $g['dias'][$d] : '';
+
+$estilo = estiloCelda($valor, $esDomingo, $colores);
+
+$html .= '<td style="'.$estilo.'">'.$valor.'</td>';
+
+	
+		}
+
     $html .= '</tr>';
 }
 
 $html .= '</tbody></table>';
 
-$pdf->writeHTML($html, true, false, true, false, '');
 
-$pdf->Output("matriz_$mes-$anio.pdf", 'I');
+// Agregar leyenda de códigos al final del PDF
+
+$html .= '
+<br><br>
+<table cellpadding="3" cellspacing="0" style="font-size:9px;">
+
+<tr>
+    <td><span style="background-color:#C6EFCE; padding:2px 6px;">A</span> Asistencia</td>
+    <td><span style="background-color:#FFEB9C; padding:2px 6px;">T</span> Tardanza</td>
+    <td><span style="background-color:#FFC7CE; padding:2px 6px;">FJ</span> Falta Justificada</td>
+    <td><span style="background-color:#FF9999; padding:2px 6px;">FI</span> Falta Injustificada</td>
+</tr>
+
+<tr>
+    <td><span style="background-color:#F8CBAD; padding:2px 6px;">VA</span> Vacaciones</td>
+    <td><span style="background-color:#BDD7EE; padding:2px 6px;">DM</span> Descanso Médico</td>
+    <td><span style="background-color:#DDEBF7; padding:2px 6px;">PN</span> Permiso con Goce</td>
+    <td><span style="background-color:#E4DFEC; padding:2px 6px;">PS</span> Permiso sin Goce</td>
+</tr>
+
+<tr>
+    <td><span style="background-color:#E2E2E2; padding:2px 6px;">FR</span> Franca</td>
+    <td><span style="background-color:#E4DFEC; padding:2px 6px;">NL</span> No Laborable</td>
+    <td><span style="background-color:#F4B084; padding:2px 6px;">F</span> Feriado</td>
+</tr>
+
+</table>
+';
+
+$pdf->writeHTML($html,true,false,true,false,'');
+$pdf->Output("matriz_$mes-$anio.pdf",'I');

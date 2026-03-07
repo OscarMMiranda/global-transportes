@@ -72,7 +72,7 @@
     },
     "error_log.txt": {
       "type": "-",
-      "size": 224151,
+      "size": 231103,
       "lmtime": 0,
       "modified": true
     },
@@ -178,6 +178,18 @@
       "modified": false
     },
     "sistema": {},
+    "test_info.php": {
+      "type": "-",
+      "size": 17,
+      "lmtime": 0,
+      "modified": false
+    },
+    "test_pdf.php": {
+      "type": "-",
+      "size": 260,
+      "lmtime": 0,
+      "modified": false
+    },
     "test_permisos.php": {
       "type": "-",
       "size": 104,
