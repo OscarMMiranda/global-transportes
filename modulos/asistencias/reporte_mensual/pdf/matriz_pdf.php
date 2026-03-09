@@ -47,32 +47,35 @@ $colores = [
 // Estilo de celda
 function estiloCelda($codigo, $esDomingo, $colores) {
 
-    // Celda vacía
-    if ($codigo === '' || $codigo === null) {
-        if ($esDomingo) {
-            return 'background-color:#FFCCCC; border:1px solid #FF0000; text-align:center; font-size:6px; line-height:6px;';
-        }
-        return 'text-align:center; font-size:6px; line-height:6px;';
-    }
+	// Celda vacía
+	if ($codigo === '' || $codigo === null) {
+		if ($esDomingo) {
+			return 'background-color:#FDE2E2; border:0.5px solid #FF6666; text-align:center; font-size:6px; line-height:6px; vertical-align:middle;';
+		}
+		return 'text-align:center; font-size:6px; line-height:6px; vertical-align:middle;';
+	}
 
     // Color del código
     $bg = isset($colores[$codigo]) ? $colores[$codigo] : 'transparent';
 
-    // Domingo → fondo rojo + borde rojo + borde interno del color del código
+    // Domingo con código
     if ($esDomingo) {
         return "
-            background-color:#FFCCCC;
-            border:1px solid #FF0000;
+            background-color:#FDE2E2;
+            border:0.5px solid #FF6666;
             outline: 2px solid $bg;
+            font-weight:bold;
             text-align:center;
             font-size:6px;
             line-height:6px;
+            vertical-align:middle;
         ";
     }
 
     // Día normal
-    return "background-color:$bg; text-align:center; font-size:6px; line-height:6px;";
+    return "background-color:$bg; font-weight:bold; text-align:center; font-size:6px; line-height:6px; vertical-align:middle;";
 }
+
 
 
 	// Obtener datos de la base de datos
@@ -86,22 +89,22 @@ function estiloCelda($codigo, $esDomingo, $colores) {
         	WHERE MONTH(ac.fecha)=$mes AND YEAR(ac.fecha)=$anio
         	ORDER BY conductor ASC, ac.fecha ASC";
 
-$res = $conn->query($sql);
-if(!$res) die("ERROR SQL: ".$conn->error);
+	$res = $conn->query($sql);
+	if(!$res) die("ERROR SQL: ".$conn->error);
 
-$grupos=[];
-while($r=$res->fetch_assoc()){
-    if(strlen($r['fecha'])<10) continue;
+	$grupos=[];
+	while($r=$res->fetch_assoc()){
+    	if(strlen($r['fecha'])<10) continue;
 
-    $cid=$r['conductor_id'];
-    $dia=intval(substr($r['fecha'],8,2));
+    	$cid=$r['conductor_id'];
+    	$dia=intval(substr($r['fecha'],8,2));
 
-    if(!isset($grupos[$cid])){
-        $grupos[$cid]=['nombre'=>$r['conductor'],'dias'=>[]];
-    }
+    	if(!isset($grupos[$cid])){
+			$grupos[$cid]=['nombre'=>$r['conductor'],'dias'=>[]];
+    	}
 
-    $grupos[$cid]['dias'][$dia]=$r['tipo_codigo'];
-}
+		$grupos[$cid]['dias'][$dia]=$r['tipo_codigo'];
+	}
 
 $diasMes = cal_days_in_month(CAL_GREGORIAN,$mes,$anio);
 
@@ -139,6 +142,9 @@ for($d=1;$d<=$diasMes;$d++){
     $diaLetra = diaSemana($anio,$mes,$d);
     $bg = ($diaLetra=='D') ? 'background-color:#FFCCCC;' : '';
 
+	// $html .= '<th style="text-align:center; font-size:6px; line-height:6px; background-color:#F2F2F2; font-weight:bold; border-bottom:1px solid #000; '.$bg.'">'.$diaLetra.'<br>'.$d.'</th>';
+
+
     $html .= '<th style="text-align:center; font-size:6px; line-height:6px; '.$bg.'">'.$diaLetra.'<br>'.$d.'</th>';
 }
 
@@ -154,12 +160,7 @@ foreach($grupos as $g){
 
     for($d=1;$d<=$diasMes;$d++){
 
-        // $diaLetra = diaSemana($anio,$mes,$d);
-        // $bg = ($diaLetra=='D') ? 'background-color:#FFCCCC;' : '';
-
-        // $valor = isset($g['dias'][$d]) ? $g['dias'][$d] : '';
-
-        // $html .= '<td style="text-align:center; font-size:6px; line-height:6px; '.$bg.'">'.$valor.'</td>';
+      
 		$diaLetra = diaSemana($anio,$mes,$d);
 $esDomingo = ($diaLetra == 'D');
 
@@ -182,30 +183,31 @@ $html .= '</tbody></table>';
 
 $html .= '
 <br><br>
-<table cellpadding="3" cellspacing="0" style="font-size:9px;">
+<table cellpadding="2" cellspacing="0" style="font-size:8px;">
 
 <tr>
-    <td><span style="background-color:#C6EFCE; padding:2px 6px;">A</span> Asistencia</td>
-    <td><span style="background-color:#FFEB9C; padding:2px 6px;">T</span> Tardanza</td>
-    <td><span style="background-color:#FFC7CE; padding:2px 6px;">FJ</span> Falta Justificada</td>
-    <td><span style="background-color:#FF9999; padding:2px 6px;">FI</span> Falta Injustificada</td>
+    <td><span style="background-color:#C6EFCE; padding:1px 4px; font-weight:bold;">A</span> Asistencia</td>
+    <td><span style="background-color:#FFEB9C; padding:1px 4px; font-weight:bold;">T</span> Tardanza</td>
+    <td><span style="background-color:#FFC7CE; padding:1px 4px; font-weight:bold;">FJ</span> Falta Justificada</td>
+    <td><span style="background-color:#FF9999; padding:1px 4px; font-weight:bold;">FI</span> Falta Injustificada</td>
 </tr>
 
 <tr>
-    <td><span style="background-color:#F8CBAD; padding:2px 6px;">VA</span> Vacaciones</td>
-    <td><span style="background-color:#BDD7EE; padding:2px 6px;">DM</span> Descanso Médico</td>
-    <td><span style="background-color:#DDEBF7; padding:2px 6px;">PN</span> Permiso con Goce</td>
-    <td><span style="background-color:#E4DFEC; padding:2px 6px;">PS</span> Permiso sin Goce</td>
+    <td><span style="background-color:#F8CBAD; padding:1px 4px; font-weight:bold;">VA</span> Vacaciones</td>
+    <td><span style="background-color:#BDD7EE; padding:1px 4px; font-weight:bold;">DM</span> Descanso Médico</td>
+    <td><span style="background-color:#DDEBF7; padding:1px 4px; font-weight:bold;">PN</span> Permiso con Goce</td>
+    <td><span style="background-color:#E4DFEC; padding:1px 4px; font-weight:bold;">PS</span> Permiso sin Goce</td>
 </tr>
 
 <tr>
-    <td><span style="background-color:#E2E2E2; padding:2px 6px;">FR</span> Franca</td>
-    <td><span style="background-color:#E4DFEC; padding:2px 6px;">NL</span> No Laborable</td>
-    <td><span style="background-color:#F4B084; padding:2px 6px;">F</span> Feriado</td>
+    <td><span style="background-color:#E2E2E2; padding:1px 4px; font-weight:bold;">FR</span> Franca</td>
+    <td><span style="background-color:#E4DFEC; padding:1px 4px; font-weight:bold;">NL</span> No Laborable</td>
+    <td><span style="background-color:#F4B084; padding:1px 4px; font-weight:bold;">F</span> Feriado</td>
 </tr>
 
 </table>
 ';
+
 
 $pdf->writeHTML($html,true,false,true,false,'');
 $pdf->Output("matriz_$mes-$anio.pdf",'I');

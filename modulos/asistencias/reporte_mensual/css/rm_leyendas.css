@@ -55,3 +55,24 @@
 .rm-FR, .cod-FR { background:#f0f0f0 !important; border-color:#9e9e9e !important; }
 .rm-NL, .cod-NL { background:#e8eaf6 !important; border-color:#5c6bc0 !important; }
 .rm-F, .cod-F  { background:#ffe8d6 !important; border-color:#fb8c00 !important; }
+
+
+@media print {
+
+    /* Pie de página fijo */
+    .leyenda-pie {
+        position: fixed;
+        bottom: 10px;
+        left: 20px;
+        right: 20px;
+        font-size: 11px;
+        background: white;
+        padding-top: 5px;
+        border-top: 1px solid #000;
+    }
+
+    /* Evitar que la tabla tape la leyenda */
+    body {
+        margin-bottom: 80px;
+    }
+}

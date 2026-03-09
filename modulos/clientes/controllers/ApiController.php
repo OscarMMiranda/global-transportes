@@ -1,90 +1,109 @@
 <?php
-// public_html/modulos/clientes/controllers/ApiController.php
+// archivo:  /modulos/clientes/controllers/ApiController.php
 
-// 0) Mostrar errores en desarrollo
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-// 1) Configuración global
-$config = rtrim($_SERVER['DOCUMENT_ROOT'], '/\\') . '/includes/config.php';
-if (! file_exists($config)) {
-    http_response_code(500);
-    die(json_encode(['error' => "Config no encontrada: $config"]));
+if (!defined('GT_APP')) {
+    define('GT_APP', true);
 }
-require_once $config;    // define $conn, INCLUDES_PATH, BASE_URL
 
-// 2) Modelos: Cliente y Ubigeo
-$modelCliente = rtrim($_SERVER['DOCUMENT_ROOT'], '/\\')
-              . '/modulos/clientes/models/Cliente.php';
-$modelUbigeo  = rtrim($_SERVER['DOCUMENT_ROOT'], '/\\')
-              . '/modulos/clientes/models/Ubigeo.php';
+// =====================================
+// 1) Tipo de operación
+// =====================================
+$type = isset($_GET['type']) ? $_GET['type'] : '';
 
-if (! file_exists($modelCliente) || ! file_exists($modelUbigeo)) {
-    http_response_code(500);
-    die(json_encode(['error' => 'Falta Cliente.php o Ubigeo.php']));
-}
-require_once $modelCliente;
-require_once $modelUbigeo;
-
-Cliente::init($conn);
-Ubigeo::init($conn);
-
-// 3) Parámetros
-$method = isset($_GET['method']) ? $_GET['method'] : '';
-$id     = isset($_GET['id'])     ? (int)$_GET['id']     : 0;
-
-// 4) Dispatch
 header('Content-Type: application/json; charset=utf-8');
 
-switch ($method) {
+// =====================================
+// 2) Provincias por departamento
+// =====================================
+if ($type === 'provincias') {
 
-  case 'view':
-    // 1) Validar parámetro id
-    if (! isset($_GET['id']) || ! ctype_digit($_GET['id'])) {
-        http_response_code(400);
-        echo '<p class="text-danger">ID de cliente inválido: ' 
-             . htmlspecialchars($_GET['id'], ENT_QUOTES) 
-             . '</p>';
-        exit;
-    }
-    $id = (int) $_GET['id'];
+    $depId = isset($_GET['departamento_id']) ? (int) $_GET['departamento_id'] : 0;
 
-    // 2) Intentar cargar el cliente
-    $cliente = Cliente::findWithUbigeo($id);
-    if (! $cliente) {
-        http_response_code(404);
-        echo '<p class="text-danger">'
-           . "Cliente no encontrado (ID={$id})."
-           . '</p>';
-        exit;
+    $sql = "SELECT id, nombre 
+            FROM provincias 
+            WHERE departamento_id = " . $depId . "
+            ORDER BY nombre ASC";
+
+    $res = mysqli_query($conn, $sql);
+    $data = array();
+
+    if ($res) {
+        while ($row = mysqli_fetch_assoc($res)) {
+            $data[] = $row;
+        }
     }
 
-    // 3) Incluir la vista parcial
-    header('Content-Type: text/html; charset=utf-8');
-    $view = rtrim($_SERVER['DOCUMENT_ROOT'], '/\\') 
-          . '/modulos/clientes/views/modal.php';
-    require $view;
-    exit;
-
-
-  case 'provincias':
-    $depId = isset($_GET['departamento_id']) 
-           ? (int)$_GET['departamento_id'] 
-           : 0;
-    $list = Ubigeo::getProvincias($depId);
-    echo json_encode($list);
-    exit;
-
-  case 'distritos':
-    $provId = isset($_GET['provincia_id']) 
-            ? (int)$_GET['provincia_id'] 
-            : 0;
-    $list = Ubigeo::getDistritos($provId);
-    echo json_encode($list);
-    exit;
-
-  default:
-    http_response_code(400);
-    echo json_encode(['error' => 'Operación no soportada: ' . $method]);
+    echo json_encode($data);
     exit;
 }
+
+// =====================================
+// 3) Distritos por provincia
+// =====================================
+if ($type === 'distritos') {
+
+    $provId = isset($_GET['provincia_id']) ? (int) $_GET['provincia_id'] : 0;
+
+    $sql = "SELECT id, nombre 
+            FROM distritos 
+            WHERE provincia_id = " . $provId . "
+            ORDER BY nombre ASC";
+
+    $res = mysqli_query($conn, $sql);
+    $data = array();
+
+    if ($res) {
+        while ($row = mysqli_fetch_assoc($res)) {
+            $data[] = $row;
+        }
+    }
+
+    echo json_encode($data);
+    exit;
+}
+
+// =====================================
+// 4) Vista del cliente (para modal)
+// =====================================
+if ($type === 'view') {
+
+    if (!isset($_GET['id']) || !ctype_digit($_GET['id'])) {
+        http_response_code(400);
+        echo json_encode(array('error' => 'ID inválido'));
+        exit;
+    }
+
+    $id = (int) $_GET['id'];
+
+    $sql = "SELECT c.id, c.nombre, c.ruc, c.direccion, c.correo, c.telefono,
+                   d.nombre AS departamento,
+                   p.nombre AS provincia,
+                   dis.nombre AS distrito
+            FROM clientes c
+            LEFT JOIN departamentos d ON c.departamento_id = d.id
+            LEFT JOIN provincias p ON c.provincia_id = p.id
+            LEFT JOIN distritos dis ON c.distrito_id = dis.id
+            WHERE c.id = " . $id . " LIMIT 1";
+
+    $res = mysqli_query($conn, $sql);
+
+    if (!$res || mysqli_num_rows($res) === 0) {
+        http_response_code(404);
+        echo json_encode(array('error' => 'Cliente no encontrado'));
+        exit;
+    }
+
+    $cliente = mysqli_fetch_assoc($res);
+
+    // Devolver HTML del modal
+    header('Content-Type: text/html; charset=utf-8');
+    require __DIR__ . '/../views/modal.php';
+    exit;
+}
+
+// =====================================
+// 5) Default
+// =====================================
+http_response_code(400);
+echo json_encode(array('error' => 'Operación no soportada'));
+exit;

@@ -15,8 +15,6 @@ window.Conductores = window.Conductores || {};
 
         $.get(`/modulos/conductores/acciones/obtener.php?id=${id}`, function (resp) {
 
-            console.log("DATA RECIBIDA:", resp);
-
             if (!resp || resp.success !== true || !resp.data) {
                 console.error("❌ Respuesta inválida:", resp);
                 return;
@@ -59,86 +57,78 @@ window.Conductores = window.Conductores || {};
         }, 'json');
     });
 
- // ============================================================
-// EDITAR CONDUCTOR
-// ============================================================
-$(document).on('click', '.btn-edit', function () {
+    // ============================================================
+    // EDITAR CONDUCTOR
+    // ============================================================
+    $(document).on('click', '.btn-edit', function () {
 
-    const id = $(this).data('id');
-    console.log("CLICK EN EDITAR", id);
+        const id = $(this).data('id');
 
-    $.get(`/modulos/conductores/acciones/obtener.php?id=${id}`, function (resp) {
+        $.get(`/modulos/conductores/acciones/obtener.php?id=${id}`, function (resp) {
 
-        console.log("DATA RECIBIDA:", resp);
+            if (!resp || resp.success !== true || !resp.data) {
+                console.error("❌ Respuesta inválida:", resp);
+                return;
+            }
 
-        if (!resp || resp.success !== true || !resp.data) {
-            console.error("❌ Respuesta inválida:", resp);
-            return;
-        }
+            const c = resp.data;
 
-        const c = resp.data;
+            $('#modalConductor').attr('data-modo', 'editar');
 
-        $('#modalConductor').attr('data-modo', 'editar');
+            $('#tituloModalConductor').html(
+                `<i class="fa fa-id-card me-2"></i> Editar Conductor`
+            );
 
-        $('#tituloModalConductor').html(
-            `<i class="fa fa-id-card me-2"></i> Editar Conductor`
-        );
+            $('#btnGuardarConductor').html(
+                `<i class="fa fa-save"></i> Guardar Cambios`
+            );
 
-        $('#btnGuardarConductor').html(
-            `<i class="fa fa-save"></i> Guardar Cambios`
-        );
+            $('#modalConductor').modal('show');
 
-        $('#modalConductor').modal('show');
+            $('#c_id').val(c.id);
+            $('#c_nombres').val(c.nombres);
+            $('#c_apellidos').val(c.apellidos);
+            $('#c_dni').val(c.dni);
+            $('#c_licencia').val(c.licencia_conducir);
+            $('#c_correo').val(c.correo);
+            $('#c_telefono').val(c.telefono);
+            $('#c_direccion').val(c.direccion);
 
-        $('#c_id').val(c.id);
-        $('#c_nombres').val(c.nombres);
-        $('#c_apellidos').val(c.apellidos);
-        $('#c_dni').val(c.dni);
-        $('#c_licencia').val(c.licencia_conducir);
-        $('#c_correo').val(c.correo);
-        $('#c_telefono').val(c.telefono);
-        $('#c_direccion').val(c.direccion);
+            $('#c_activo').prop('checked', c.activo == 1);
 
-        $('#c_activo').prop('checked', c.activo == 1);
+            if (c.foto) {
+                $('#preview_foto').attr('src', c.foto).show();
+            } else {
+                $('#preview_foto').hide();
+            }
 
-        if (c.foto) {
-            $('#preview_foto').attr('src', c.foto).show();
-        } else {
-            $('#preview_foto').hide();
-        }
+            $('#c_foto_actual').val(c.foto || '');
 
-        $('#c_foto_actual').val(c.foto || '');
+            // UBIGEO
+            if (c.departamento_id && c.provincia_id && c.distrito_id) {
+                Ubigeo.cargar('#departamento_id', '#provincia_id', '#distrito_id', {
+                    departamento_id: c.departamento_id,
+                    provincia_id: c.provincia_id,
+                    distrito_id: c.distrito_id
+                });
+            } else {
+                Ubigeo.cargar('#departamento_id', '#provincia_id', '#distrito_id');
+            }
 
-        // UBIGEO
-       	if (c.departamento_id && c.provincia_id && c.distrito_id) {
-    	Ubigeo.cargar('#departamento_id', '#provincia_id', '#distrito_id', {
-        	departamento_id: c.departamento_id,
-        	provincia_id: c.provincia_id,
-			distrito_id: c.distrito_id
-    		});
-			} 
-		else {
-			// Si no tiene ubigeo, cargar solo departamentos
-			Ubigeo.cargar('#departamento_id', '#provincia_id', '#distrito_id');
-			}
+            setTimeout(function () {
+                $('#empresa_id').val(c.empresa_id);
+            }, 300);
 
+        }, 'json');
+    });
 
-        // ⭐⭐⭐ SOLUCIÓN: seleccionar empresa después de cargar empresas
-        setTimeout(function () {
-            $('#empresa_id').val(c.empresa_id);
-        }, 300);
-
-    }, 'json');
-});
-
-
+    // ============================================================
     // DESACTIVAR
+    // ============================================================
     $(document).on('click', '.btn-soft-delete', function () {
         const id = $(this).data('id');
 
         $.post(`/modulos/conductores/acciones/desactivar.php?id=${id}`, function (resp) {
-
-            console.log("RESPUESTA DESACTIVAR:", resp);
 
             if (resp.success) {
                 Swal.fire('Desactivado', 'El conductor fue desactivado correctamente', 'success');
@@ -152,13 +142,13 @@ $(document).on('click', '.btn-edit', function () {
         }, 'json');
     });
 
+    // ============================================================
     // RESTAURAR
+    // ============================================================
     $(document).on('click', '.btn-restore', function () {
         const id = $(this).data('id');
 
         $.post(`/modulos/conductores/acciones/restaurar.php?id=${id}`, function (resp) {
-
-            console.log("RESPUESTA RESTAURAR:", resp);
 
             if (resp.success) {
                 Swal.fire('Restaurado', 'El conductor fue restaurado correctamente', 'success');
@@ -172,7 +162,9 @@ $(document).on('click', '.btn-edit', function () {
         }, 'json');
     });
 
+    // ============================================================
     // ELIMINAR DEFINITIVO
+    // ============================================================
     $(document).on('click', '.btn-delete', function () {
         const id = $(this).data('id');
 
@@ -189,8 +181,6 @@ $(document).on('click', '.btn-edit', function () {
 
             $.post(`/modulos/conductores/acciones/eliminar.php?id=${id}`, function (resp) {
 
-                console.log("RESPUESTA ELIMINAR:", resp);
-
                 if (resp.success) {
                     Swal.fire('Eliminado', 'El conductor fue eliminado permanentemente', 'success');
                 } else {
@@ -206,90 +196,43 @@ $(document).on('click', '.btn-edit', function () {
 
 })();
 
-// VER HISTORIAL
-$(document).on('click', '.btn-historial', function () {
-    const id = $(this).data('id');
-
-    $.get(`/modulos/conductores/acciones/obtener_historial.php?id=${id}`, function (resp) {
-
-        if (!resp.success) {
-            Swal.fire('Error', resp.error, 'error');
-            return;
-        }
-
-        const historial = resp.historial;
-        let html = '';
-
-        historial.forEach(h => {
-
-            html += `
-                <div class="card mb-3 shadow-sm">
-                    <div class="card-header bg-light">
-                        <strong>Acción:</strong> ${h.accion.toUpperCase()}  
-                        <span class="float-end"><strong>${h.fecha_cambio}</strong></span>
-                    </div>
-
-                    <div class="card-body">
-
-                        <p><strong>Usuario:</strong> ${h.usuario || '—'}</p>
-
-                        <p><strong>Cambios:</strong></p>
-                        <pre class="bg-dark text-white p-2 rounded">${JSON.stringify(h.cambios_json, null, 2)}</pre>
-
-                        <div class="row mt-3">
-                            <div class="col-md-6">
-                                <strong>Foto actual:</strong><br>
-                                ${h.foto ? `<img src="/uploads/conductores/${h.foto}" class="img-fluid rounded border">` : '—'}
-                            </div>
-
-                            <div class="col-md-6">
-                                <strong>Foto anterior:</strong><br>
-                                ${h.ruta_foto_anterior ? `<img src="${h.ruta_foto_anterior.replace($_SERVER['DOCUMENT_ROOT'], '')}" class="img-fluid rounded border">` : '—'}
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            `;
-        });
-
-        $('#contenedorHistorial').html(html);
-        $('#modalHistorialConductor').modal('show');
-    }, 'json');
-});
-
-
 // ============================================================
-// GUARDAR (CREAR / EDITAR) — ENVÍO REAL DE ARCHIVOS
+// FUNCIÓN UNIVERSAL PARA ABRIR HISTORIAL
 // ============================================================
-$(document).on('click', '#btnGuardarConductor', function (e) {
-    e.preventDefault();
+function abrirHistorial(tabla, id) {
 
-    let formData = new FormData($('#formConductor')[0]);
+    $("#historialContenido").html(`
+        <div class="text-center text-muted py-4">
+            Cargando historial...
+        </div>
+    `);
+
+    const modal = new bootstrap.Modal(document.getElementById('modalHistorial'));
+    modal.show();
 
     $.ajax({
-        url: '/modulos/conductores/acciones/guardar.php',
-        type: 'POST',
-        data: formData,
-        contentType: false,
-        processData: false,
-        dataType: 'json',
-
-        success: function (resp) {
-            if (resp.success) {
-                Swal.fire('Éxito', 'Datos guardados correctamente', 'success');
-                $('#modalConductor').modal('hide');
-
-                Conductores.tablaActivos.ajax.reload(null, false);
-                Conductores.tablaInactivos.ajax.reload(null, false);
-            } else {
-                Swal.fire('Error', resp.error || 'No se pudo guardar', 'error');
-            }
+        url: `/modulos/${tabla}/acciones/historial.php`,
+        type: "POST",
+        data: { id: id },
+        dataType: "json",
+        success: function(resp) {
+            $("#historialContenido").html(resp.html);
         },
-
-        error: function (xhr) {
-            console.error(xhr.responseText);
-            Swal.fire('Error', 'Error inesperado al guardar', 'error');
+        error: function() {
+            $("#historialContenido").html(`
+                <div class="alert alert-danger">
+                    Error al cargar historial.
+                </div>
+            `);
         }
     });
+}
+
+// ============================================================
+// HISTORIAL  ← ESTE BLOQUE DEBE ESTAR FUERA
+// ============================================================
+$(document).on('click', '.btn-historial', function () {
+    const id = $(this).data('id');
+    const tabla = $(this).data('tabla');
+    abrirHistorial(tabla, id);
 });

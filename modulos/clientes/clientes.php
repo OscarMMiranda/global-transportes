@@ -1,5 +1,5 @@
 <?php
-	// clientes.php
+	// archivo :	/modulos/clientes/clientes.php
 
 	// 2) Modo depuración (solo DEV)
     error_reporting(E_ALL);

@@ -19,9 +19,12 @@ window.Conductores = window.Conductores || {};
             </button>`;
 
         const historialBtn = `
-            <button class="btn btn-sm btn-outline-secondary btn-historial" data-id="${r.id}">
-                <i class="fa-solid fa-clock-rotate-left"></i>
-            </button>`;
+    <button class="btn btn-sm btn-outline-secondary btn-historial"
+            data-id="${r.id}"
+            data-tabla="conductores">
+        <i class="fa-solid fa-clock-rotate-left"></i>
+    </button>`;
+
 
         // Conductor ACTIVO
         if (parseInt(r.activo) === 1) {

@@ -26,11 +26,16 @@
     >
         <i class="fa-solid fa-pen-to-square"></i>
     </button>
+
+	<!-- Historial -->
 	<button 
-		class="btn btn-sm btn-info btn-historial" 
-		data-id="<?= $c['id'] ?>">
-    	<i class="fa fa-clock-rotate-left"></i>
+		type="button"
+		class="btn btn-sm btn-info"
+		onclick="abrirHistorial('conductores', <?= $c['id'] ?>)"
+	>
+		<i class="fa fa-clock-rotate-left"></i>
 	</button>
+
 
 
 

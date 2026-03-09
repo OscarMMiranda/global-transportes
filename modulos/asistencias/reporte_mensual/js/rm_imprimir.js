@@ -66,22 +66,24 @@ function rm_imprimir_reporte() {
     }
 
     // ================= LEYENDAS PARA IMPRESIÓN =================
-    let leyendas_html = `
-        <div style="margin-bottom:15px; font-size:12px;">
-            <strong>Leyenda:</strong>
-            A: Asistencia |
-            T: Tardanza |
-            FJ: Falta Justificada |
-            FI: Falta Injustificada |
-            VA: Vacaciones |
-            DM: Descanso Médico |
-            PN: Permiso con Goce |
-            PS: Permiso sin Goce |
-            FR: Franca |
-            NL: No Laborable |
-            F: Feriado
-        </div>
-    `;
+ let leyendas_html = `
+    <div class="leyenda-pie">
+
+        <strong>Leyenda:</strong><br>
+        A: Asistencia |
+        T: Tardanza |
+        FJ: Falta Justificada |
+        FI: Falta Injustificada |
+        VA: Vacaciones |
+        DM: Descanso Médico |
+        PN: Permiso con Goce |
+        PS: Permiso sin Goce |
+        FR: Franca |
+        NL: No Laborable |
+        F: Feriado
+    </div>
+`;
+
 
     // ================= VENTANA DE IMPRESIÓN =================
     let w = window.open("", "PRINT", "height=800,width=1200");
@@ -102,8 +104,10 @@ function rm_imprimir_reporte() {
         </head>
         <body>
             ${encabezado_html}
-            ${leyendas_html}
-            ${contenido}
+${contenido}
+<div style="page-break-before: always;"></div>
+${leyendas_html}
+
         </body>
         </html>
     `);

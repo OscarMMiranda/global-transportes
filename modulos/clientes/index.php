@@ -1,43 +1,48 @@
 <?php
-	// archivo	:	/modulos/clientes/index.php
-	
+// archivo: /modulos/clientes/index.php
 
-	// 2) Modo depuración (solo DEV)
-    error_reporting(E_ALL);
-    ini_set('display_errors', 1);
-    ini_set('log_errors',     1);
-    ini_set('error_log',      __DIR__ . '/error_log.txt');
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('log_errors', 1);
+ini_set('error_log', __DIR__ . '/error_log.txt');
 
-    // 3) Cargar config.php (define getConnection() y rutas)
-    require_once __DIR__ . '/../../includes/config.php';
+// =========================
+// 1) Configuración general
+// =========================
+require_once __DIR__ . '/../../includes/config.php';
+$conn = getConnection();
 
-    // 4) Obtener la conexión
-    $conn = getConnection();
+// =========================
+// 2) Lista blanca corporativa
+// =========================
+$allowedActions = array('list', 'form', 'delete', 'trash', 'restore', 'api');
 
-	$action = isset($_GET['action']) ? $_GET['action'] : 'list';
+$action = isset($_GET['action']) ? $_GET['action'] : 'list';
 
-	switch ($action) {
-		case 'list':
-    		require __DIR__ . '/controllers/ListController.php';
-    		break;
-  		case 'form':
-    		require __DIR__ . '/controllers/FormController.php';
-    		break;
-  		case 'delete':
-    		require __DIR__ . '/controllers/DeleteController.php';
-    		break;
-		case 'trash':   
-			require 'controllers/TrashController.php';    
-			break;
-  		case 'restore': 
-			require 'controllers/RestoreController.php';  
-			break;
-  		case 'api':
-    		require __DIR__ . '/controllers/ApiController.php';
-    		break;
+if (!in_array($action, $allowedActions, true)) {
+    header("HTTP/1.0 404 Not Found");
+    exit("Acción no válida.");
+}
 
-  		default:
-    		header("HTTP/1.0 404 Not Found");
-    		echo "Acción no válida.";
-    		break;
-		}
+// =========================
+// 3) Cargar headers del módulo
+// =========================
+require_once __DIR__ . '/componentes/header.php';
+require_once __DIR__ . '/componentes/header_actions.php';
+require_once __DIR__ . '/componentes/header_filtros.php';
+require_once __DIR__ . '/componentes/tabs.php';
+require_once __DIR__ . '/componentes/TablaClientes.php';
+
+
+
+// =========================
+// 4) Router corporativo
+// =========================
+$controller = __DIR__ . '/controllers/' . ucfirst($action) . 'Controller.php';
+
+if (!file_exists($controller)) {
+    header("HTTP/1.0 500 Internal Server Error");
+    exit("Controlador no encontrado: " . $controller);
+}
+
+require $controller;

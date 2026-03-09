@@ -48,14 +48,16 @@
     </button>
 
     <!-- Vacaciones -->
-    <button class="card card-btn" id="btnAbrirVacaciones">
-        <div class="card-body text-center">
-            <h3 class="card-title mb-1">
-                <i class="fa-solid fa-plane-departure"></i> Vacaciones
-            </h3>
-            <small class="text-muted">Registrar rango</small>
-        </div>
-    </button>
+    <button class="card card-btn"
+        onclick="location.href='/modulos/asistencias/vacaciones/index.php'">
+    <div class="card-body text-center">
+        <h3 class="card-title mb-1">
+            <i class="fa-solid fa-plane-departure"></i> Vacaciones
+        </h3>
+        <small class="text-muted">Registrar rango</small>
+    </div>
+</button>
+
 
     <!-- Permisos -->
     <button class="card card-btn" id="btnAbrirPermisos">

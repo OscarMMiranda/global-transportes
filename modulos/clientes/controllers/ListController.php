@@ -1,84 +1,39 @@
 <?php
-	// archivo	:	/modulos/clientes/controllers/ListController.php
+// /modulos/clientes/controllers/ListController.php
 
-	// ─── 0) Mostrar todos los errores (solo en desarrollo) ────────────────────
-	error_reporting(E_ALL);
-	ini_set('display_errors', 1);
+if (!defined('GT_APP')) {
+    define('GT_APP', true);
+}
 
-	
-	// ─── 1) Configuración global ───────────────────────────────────────────────
-	// Usa DOCUMENT_ROOT para no depender de ../../..
-	$config = rtrim($_SERVER['DOCUMENT_ROOT'], '/\\') . '/includes/config.php';
-	if (! file_exists($config)) {
-    	die("Config no existe en: $config");
-		}
-	
-		require_once $config;  // deja disponibles $conn, INCLUDES_PATH, BASE_URL
+// Conexión viene desde index.php
 
-	// ─── 2) Cargar modelo Cliente ─────────────────────────────────────────────
-	$model = rtrim($_SERVER['DOCUMENT_ROOT'], '/\\') 
-    	. '/modulos/clientes/models/Cliente.php';
-		if (! file_exists($model)) {
-    		die("Modelo Cliente no existe en: $model");
-			}
-		require_once $model;
+$estado = isset($_GET['estado']) ? $_GET['estado'] : 'todos';
+$q      = isset($_GET['q']) ? trim($_GET['q']) : '';
 
-	// ─── 3) Inicializar conexión en el modelo ────────────────────────────────
-	Cliente::init($conn);
+$sql = "SELECT c.id, c.nombre, c.ruc, c.direccion, c.correo, c.telefono
+        FROM clientes c
+        WHERE 1 = 1";
 
-	// ─── 4) Recuperar datos ───────────────────────────────────────────────────
-	$estado = isset($_GET['estado']) ? $_GET['estado'] : 'todos';
+if ($estado === 'Activo' || $estado === 'Inactivo') {
+    $sql .= " AND c.estado = '" . mysqli_real_escape_string($conn, $estado) . "'";
+}
 
-	try {
-    	if ($estado === 'Activo') {
-        	$clientes = Cliente::whereEstado('Activo');
-    	} elseif ($estado === 'Inactivo') {
-        	$clientes = Cliente::whereEstado('Inactivo');
-    	} else {
-        	$clientes = Cliente::all();
-    		}
-		} catch (Exception $e) {
-    error_log("ListController error: " . $e->getMessage());
-    $clientes = [];
-    $errorMsg = "No se pudieron cargar los clientes.";
-	}
-	
+if ($q !== '') {
+    $qEsc = mysqli_real_escape_string($conn, $q);
+    $sql .= " AND (c.nombre LIKE '%{$qEsc}%' 
+              OR c.ruc LIKE '%{$qEsc}%' 
+              OR c.correo LIKE '%{$qEsc}%')";
+}
 
-	// ─── 4.1) Capturar mensaje de operación (opcional) ─────────────────────────
-	$msg = isset($_GET['msg']) ? $_GET['msg'] : '';
+$sql .= " ORDER BY c.id DESC";
 
-	
+$result = mysqli_query($conn, $sql);
+$clientes = array();
 
-	// ─── 5) Definir assets de este módulo ─────────────────────────────────────
-	define('MODULE_CSS', 'clientes.css');
-	define('MODULE_JS',  'clientes.js');
+if ($result) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        $clientes[] = $row;
+    }
+}
 
-	// ─── 6) Cargar header global ───────────────────────────────────────────────
-	$header = INCLUDES_PATH . '/header_erp.php';
-	if (! file_exists($header)) {
-    	die("Header no existe en: $header");
-		}
-	require_once $header;
-
-	// ─── 7) Mostrar error si lo hay ───────────────────────────────────────────
-	if (! empty($errorMsg)) {
-    	echo '<div class="container mt-3">'
-       			. 	'<div class="alert alert-danger">'
-       				.    htmlspecialchars($errorMsg, ENT_QUOTES)
-       			.  '</div>'
-       		. '</div>';
-		}
-
-	// ─── 8) Incluir la vista de listado ───────────────────────────────────────
-	$view = __DIR__ . '/../views/list.php';
-	if (! file_exists($view)) {
-    	die("Vista list.php no existe en: $view");
-		}
-	require $view;
-
-	// ─── 9) Cargar footer global ───────────────────────────────────────────────
-	$footer = INCLUDES_PATH . '/footer.php';
-	if (! file_exists($footer)) {
-    	die("Footer no existe en: $footer");
-		}
-	require_once $footer;
+require __DIR__ . '/../views/list.php';

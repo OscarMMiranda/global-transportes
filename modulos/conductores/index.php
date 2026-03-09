@@ -29,6 +29,8 @@ include __DIR__ . '/componentes/head.php';
 
 <?php include __DIR__ . '/modales/modal_ver_conductor.php'; ?>
 <?php include __DIR__ . '/modales/modal_conductor.php'; ?>
+<?php include __DIR__ . '/modales/modal_historial.php'; ?>
+
 
 <!-- Librerías base -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
