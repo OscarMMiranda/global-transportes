@@ -1,5 +1,5 @@
 {
-  "ftp://globaltransportes.com:21@wi010232@globaltransportes.com": {
+  "ftp://wi010232@globaltransportes.com@globaltransportes.com:21": {
     ".hintrc": {
       "type": "-",
       "size": 0,
@@ -25,7 +25,7 @@
       "type": "-",
       "size": 1643,
       "lmtime": 0,
-      "modified": true
+      "modified": false
     },
     "buscar_includes.php": {
       "type": "-",
@@ -62,7 +62,7 @@
       "type": "-",
       "size": 980,
       "lmtime": 0,
-      "modified": true
+      "modified": false
     },
     "error.log": {
       "type": "-",
@@ -72,7 +72,7 @@
     },
     "error_log.txt": {
       "type": "-",
-      "size": 235527,
+      "size": 238055,
       "lmtime": 0,
       "modified": true
     },
@@ -88,25 +88,7 @@
       "lmtime": 0,
       "modified": false
     },
-    "home": {
-      "wi010232": {
-        "public_html": {
-          ".DS_Store": {
-            "type": "-",
-            "size": 14340,
-            "lmtime": 0,
-            "modified": false
-          },
-          "ftp-sync.json": {
-            "type": "-",
-            "size": 365,
-            "lmtime": 0,
-            "modified": false
-          },
-          "modulos": {}
-        }
-      }
-    },
+    "home": {},
     "images": {},
     "img": {},
     "includes": {},
@@ -127,7 +109,7 @@
       "type": "-",
       "size": 6475,
       "lmtime": 0,
-      "modified": true
+      "modified": false
     },
     "logout.php": {
       "type": "-",
@@ -142,7 +124,26 @@
       "lmtime": 0,
       "modified": false
     },
-    "modulos": {},
+    "modulos": {
+      "clientes": {
+        "views": {
+          "list.php": {
+            "type": "-",
+            "size": 1173,
+            "lmtime": 1773103921078.7712,
+            "modified": false
+          }
+        },
+        "js": {
+          "clientes.filtros.js": {
+            "type": "-",
+            "size": 1580,
+            "lmtime": 1773177305069.7808,
+            "modified": false
+          }
+        }
+      }
+    },
     "nosotros.html": {
       "type": "-",
       "size": 2374,

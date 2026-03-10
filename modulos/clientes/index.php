@@ -6,9 +6,7 @@ ini_set('display_errors', 1);
 ini_set('log_errors', 1);
 ini_set('error_log', __DIR__ . '/error_log.txt');
 
-// =========================
 // 1) Configuración general
-// =========================
 require_once __DIR__ . '/../../includes/config.php';
 $conn = getConnection();
 
@@ -25,18 +23,20 @@ if (!in_array($action, $allowedActions, true)) {
 }
 
 // =========================
-// 3) Cargar headers del módulo
+// 3) Si es API → NO cargar header, NO cargar footer
+// =========================
+if ($action === 'api') {
+    require __DIR__ . '/controllers/ApiController.php';
+    exit; // ← OBLIGATORIO: evita mezclar HTML + JSON
+}
+
+// =========================
+// 4) Cargar header corporativo del módulo
 // =========================
 require_once __DIR__ . '/componentes/header.php';
-require_once __DIR__ . '/componentes/header_actions.php';
-require_once __DIR__ . '/componentes/header_filtros.php';
-require_once __DIR__ . '/componentes/tabs.php';
-require_once __DIR__ . '/componentes/TablaClientes.php';
-
-
 
 // =========================
-// 4) Router corporativo
+// 5) Router corporativo
 // =========================
 $controller = __DIR__ . '/controllers/' . ucfirst($action) . 'Controller.php';
 

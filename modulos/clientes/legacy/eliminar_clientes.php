@@ -15,6 +15,6 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     }
 
     mysqli_close($conn);
-} else {
+} else { 
     echo "ID no válido.";
 }

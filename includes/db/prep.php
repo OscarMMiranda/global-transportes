@@ -1,6 +1,9 @@
 <?php
 // archivo: /includes/db/prep.php
 
+
+
+
 function prep($conn, $sql) {
     if (!$conn || !($conn instanceof mysqli)) {
         throw new Exception("Conexión inválida en prep(): " . $sql);

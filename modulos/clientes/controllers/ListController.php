@@ -14,10 +14,20 @@ $sql = "SELECT c.id, c.nombre, c.ruc, c.direccion, c.correo, c.telefono
         FROM clientes c
         WHERE 1 = 1";
 
-if ($estado === 'Activo' || $estado === 'Inactivo') {
-    $sql .= " AND c.estado = '" . mysqli_real_escape_string($conn, $estado) . "'";
+// ===============================
+//  ESTADOS UNIFICADOS
+// ===============================
+if ($estado === 'activos') {
+    $sql .= " AND c.estado = 'Activo'";
 }
+elseif ($estado === 'inactivos') {
+    $sql .= " AND c.estado = 'Inactivo'";
+}
+// estado = todos → no filtrar
 
+// ===============================
+//  BÚSQUEDA
+// ===============================
 if ($q !== '') {
     $qEsc = mysqli_real_escape_string($conn, $q);
     $sql .= " AND (c.nombre LIKE '%{$qEsc}%' 

@@ -1,0 +1,79 @@
+/* archivo :    /modulos/clientes/css/modulo_clientes.css
+
+/* =============================== */
+/*  ESTILOS CORPORATIVOS CLIENTES  */
+/* =============================== */
+
+/* Header del módulo */
+.modulo-header {
+    background: #ffffff;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 20px 25px;
+    margin-bottom: 20px;
+}
+
+.titulo-modulo {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.descripcion-modulo {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+/* Tabs */
+.modulo-clientes-list .nav-tabs,
+.modulo-clientes-form .nav-tabs {
+    margin-bottom: 20px;
+}
+
+/* Botonera */
+.acciones-modulo {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* Tabla */
+#tablaClientes {
+    background: #fff;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+#tablaClientes thead th {
+    background: #f8f9fa;
+    font-weight: 600;
+}
+
+/* Formularios */
+.modulo-clientes-form .form-label {
+    font-weight: 500;
+}
+
+.modulo-clientes-form input,
+.modulo-clientes-form select {
+    border-radius: 4px;
+}
+
+/* Modal grande */
+#modalFormCliente .modal-dialog {
+    max-width: 1200px;
+}
+
+#modalFormCliente .modal-body {
+    max-height: 75vh;
+    overflow-y: auto;
+}
+
+/* Botón cerrar modal */
+#modalFormCliente .btn-close-white {
+    filter: invert(1);
+}
+
+/* Espaciado general */
+.modulo-clientes-list,
+.modulo-clientes-form {
+    padding-bottom: 40px;
+}

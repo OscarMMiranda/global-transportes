@@ -5,16 +5,51 @@ if (!defined('GT_APP')) {
     define('GT_APP', true);
 }
 
-// =====================================
-// 1) Tipo de operación
-// =====================================
-$type = isset($_GET['type']) ? $_GET['type'] : '';
-
 header('Content-Type: application/json; charset=utf-8');
 
-// =====================================
-// 2) Provincias por departamento
-// =====================================
+$type = isset($_GET['type']) ? $_GET['type'] : '';
+
+/* ============================================================
+   1) LISTA DE CLIENTES (DataTables)
+   ============================================================ */
+if ($type === 'list') {
+
+    $estado = isset($_GET['estado']) ? $_GET['estado'] : 'activos';
+
+    if ($estado === 'activos') {
+        $sql = "SELECT id, nombre, ruc, direccion, correo, telefono
+                FROM clientes
+                WHERE estado = 'Activo'
+                ORDER BY id DESC";
+    }
+    elseif ($estado === 'inactivos') {
+        $sql = "SELECT id, nombre, ruc, direccion, correo, telefono
+                FROM clientes
+                WHERE estado = 'Inactivo'
+                ORDER BY id DESC";
+    }
+    else {
+        $sql = "SELECT id, nombre, ruc, direccion, correo, telefono
+                FROM clientes
+                ORDER BY id DESC";
+    }
+
+    $res = mysqli_query($conn, $sql);
+    $data = array();
+
+    if ($res) {
+        while ($row = mysqli_fetch_assoc($res)) {
+            $data[] = $row;
+        }
+    }
+
+    echo json_encode($data);
+    exit;
+}
+
+/* ============================================================
+   2) PROVINCIAS POR DEPARTAMENTO
+   ============================================================ */
 if ($type === 'provincias') {
 
     $depId = isset($_GET['departamento_id']) ? (int) $_GET['departamento_id'] : 0;
@@ -37,9 +72,9 @@ if ($type === 'provincias') {
     exit;
 }
 
-// =====================================
-// 3) Distritos por provincia
-// =====================================
+/* ============================================================
+   3) DISTRITOS POR PROVINCIA
+   ============================================================ */
 if ($type === 'distritos') {
 
     $provId = isset($_GET['provincia_id']) ? (int) $_GET['provincia_id'] : 0;
@@ -62,9 +97,9 @@ if ($type === 'distritos') {
     exit;
 }
 
-// =====================================
-// 4) Vista del cliente (para modal)
-// =====================================
+/* ============================================================
+   4) VISTA DEL CLIENTE (MODAL)
+   ============================================================ */
 if ($type === 'view') {
 
     if (!isset($_GET['id']) || !ctype_digit($_GET['id'])) {
@@ -95,15 +130,14 @@ if ($type === 'view') {
 
     $cliente = mysqli_fetch_assoc($res);
 
-    // Devolver HTML del modal
     header('Content-Type: text/html; charset=utf-8');
     require __DIR__ . '/../views/modal.php';
     exit;
 }
 
-// =====================================
-// 5) Default
-// =====================================
+/* ============================================================
+   5) DEFAULT
+   ============================================================ */
 http_response_code(400);
 echo json_encode(array('error' => 'Operación no soportada'));
 exit;

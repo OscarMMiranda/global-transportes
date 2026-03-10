@@ -1,33 +1,39 @@
 <?php
-/**
- * Componente: FooterClientes.php
- * Ubicación: /modulos/clientes/componentes/
- * Propósito: Scripts específicos del módulo CLIENTES (versión segura para PHP 5.6)
- */
+// /modulos/clientes/componentes/FooterClientes.php
 
-// Seguridad: evitar acceso directo
 if (!defined('GT_APP')) {
-    // En PHP 5.6 no se puede definir dentro del if si ya existe, así que solo definimos si no existe
     define('GT_APP', true);
 }
 ?>
 
 <!-- ========================= -->
+<!--  LIBRERÍAS DEL MÓDULO     -->
+<!-- ========================= -->
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- DataTables -->
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+
+<!-- ========================= -->
 <!--  JS ESPECÍFICO DEL MÓDULO -->
 <!-- ========================= -->
 
+<script src="js/clientes.tabla.js"></script>
+<script src="js/clientes.modal.js"></script>
+<script src="js/clientes.filtros.js"></script>
+
 <script type="text/javascript">
-// Inicialización segura compatible con navegadores antiguos
 document.addEventListener('DOMContentLoaded', function () {
 
-    // Inicializar tabla si existe
-    var tabla = document.getElementById('tablaClientes');
-    if (tabla) {
-        if (typeof inicializarTablaClientes === 'function') {
-            inicializarTablaClientes();
-        } else {
-            console.log('inicializarTablaClientes() no está definido.');
-        }
+    // Inicializar tabla
+    if (typeof inicializarTablaClientes === 'function') {
+        inicializarTablaClientes();
     }
 
     // Inicializar modal
@@ -42,10 +48,5 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 
-<!-- ========================= -->
-<!--  ARCHIVOS JS DEL MÓDULO   -->
-<!-- ========================= -->
-
-<script type="text/javascript" src="/modulos/clientes/js/clientes.tabla.js"></script>
-<script type="text/javascript" src="/modulos/clientes/js/clientes.modal.js"></script>
-<script type="text/javascript" src="/modulos/clientes/js/clientes.filtros.js"></script>
+</body>
+</html>

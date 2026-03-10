@@ -1,5 +1,6 @@
 <?php
-// public_html/modulos/clientes/models/Ubigeo.php
+// archivo: /modulos/clientes/models/Ubigeo.php
+
 
 class Ubigeo
 {

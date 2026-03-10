@@ -1,5 +1,7 @@
 <?php
 // /modulos/clientes/ver_cliente.php
+//
+
 require_once '../../includes/conexion.php';
 
 // Toma y valida ID

@@ -1,6 +1,5 @@
 <?php
-  //  archivo: /modulos/clientes/views/list.php
-
+    // archivo: /modulos/clientes/views/list.php
 if (!defined('GT_APP')) {
     define('GT_APP', true);
 }
@@ -8,28 +7,22 @@ if (!defined('GT_APP')) {
 
 <div class="container mt-4 modulo-clientes-list">
 
-    <!-- Tabs de estado -->
-    <?php require __DIR__ . '/../componentes/tabs.php'; ?>
-
-    <!-- Título -->
-    <h2 class="titulo-modulo mb-4">
-        Gestión de Clientes
-    </h2>
+    <!-- Título del módulo -->
+    <?php require __DIR__ . '/../componentes/header_titulo.php'; ?>
 
     <!-- Botonera -->
-    <div class="acciones-modulo mb-3">
-        <a href="index.php?action=form" class="btn btn-success">
-            Registrar Cliente
-        </a>
+    <div class="acciones-modulo mb-3 mt-3">
 
-        <a href="index.php?action=trash" class="btn btn-danger">
-            Papelera
-        </a>
+        <button class="btn btn-success" onclick="abrirModalCliente();">
+    Registrar Cliente
+</button>
 
-        <a href="<?= BASE_URL ?>modulos/erp_dashboard.php" class="btn btn-secondary">
-            Volver al Dashboard
-        </a>
+        <a href="index.php?action=trash" class="btn btn-danger">Papelera</a>
+        <a href="<?= BASE_URL ?>modulos/erp_dashboard.php" class="btn btn-secondary">Volver al Dashboard</a>
     </div>
+
+     <!-- Tabs -->
+    <?php require __DIR__ . '/../componentes/tabs.php'; ?>
 
     <!-- Mensaje -->
     <?php if (!empty($_GET['msg'])): ?>
@@ -38,10 +31,10 @@ if (!defined('GT_APP')) {
         </div>
     <?php endif; ?>
 
-    <!-- Tabla corporativa -->
+    <!-- Tabla -->
     <?php require __DIR__ . '/../componentes/TablaClientes.php'; ?>
 
-    <!-- Footer corporativo (JS del módulo) -->
+    <!-- Footer -->
     <?php require __DIR__ . '/../componentes/FooterClientes.php'; ?>
 
 </div>

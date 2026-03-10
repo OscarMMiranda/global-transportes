@@ -1,14 +1,27 @@
 <?php
-	error_reporting(E_ALL); ini_set('display_errors',1);
-	require_once $_SERVER['DOCUMENT_ROOT'].'/includes/config.php';
-	require_once $_SERVER['DOCUMENT_ROOT'].'/modulos/clientes/models/Cliente.php';
-	Cliente::init($conn);
+// archivo: /modulos/clientes/controllers/TrashController.php
 
-	$clientesEliminados = Cliente::allDeleted();
+if (!defined('GT_APP')) {
+    define('GT_APP', true);
+}
 
-	define('MODULE_CSS','clientes.css');
-	define('MODULE_JS','clientes.js');
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-	require_once INCLUDES_PATH.'/header_erp.php';
-	require __DIR__ . '/../views/trash.php';
-	require_once INCLUDES_PATH.'/footer.php';
+require_once __DIR__ . '/../../../includes/config.php';
+require_once __DIR__ . '/../models/Cliente.php';
+
+$conn = getConnection();
+Cliente::init($conn);
+
+// 1) Obtener clientes eliminados
+$clientesEliminados = Cliente::allDeleted();
+
+// 2) Definir recursos del módulo
+if (!defined('MODULE_CSS')) define('MODULE_CSS', 'clientes.css');
+if (!defined('MODULE_JS'))  define('MODULE_JS', 'clientes.js');
+
+// 3) Renderizar vista
+require_once INCLUDES_PATH . '/header_erp.php';
+require __DIR__ . '/../views/trash.php';
+require_once INCLUDES_PATH . '/footer.php';
