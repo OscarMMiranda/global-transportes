@@ -1,5 +1,5 @@
 {
-  "ftp://wi010232@globaltransportes.com@globaltransportes.com:21": {
+  "ftp://globaltransportes.com:21@wi010232@globaltransportes.com": {
     ".hintrc": {
       "type": "-",
       "size": 0,
@@ -74,7 +74,7 @@
       "type": "-",
       "size": 238055,
       "lmtime": 0,
-      "modified": true
+      "modified": false
     },
     "estructura.txt": {
       "type": "-",
@@ -124,26 +124,7 @@
       "lmtime": 0,
       "modified": false
     },
-    "modulos": {
-      "clientes": {
-        "views": {
-          "list.php": {
-            "type": "-",
-            "size": 1173,
-            "lmtime": 1773103921078.7712,
-            "modified": false
-          }
-        },
-        "js": {
-          "clientes.filtros.js": {
-            "type": "-",
-            "size": 1580,
-            "lmtime": 1773177305069.7808,
-            "modified": false
-          }
-        }
-      }
-    },
+    "modulos": {},
     "nosotros.html": {
       "type": "-",
       "size": 2374,

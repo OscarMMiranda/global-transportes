@@ -6,7 +6,7 @@ if (!defined('GT_APP')) {
 }
 ?>
 
-<div class="row filtros-row mb-3">
+<div class="row filtros-row mb-12">
 
     <!-- Filtro de texto -->
     <div class="col-md-4 filtro-item">
