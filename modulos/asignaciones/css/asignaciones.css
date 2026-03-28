@@ -1,0 +1,14 @@
+/* archivo: /modulos/asignaciones/css/asignaciones.css */
+
+#tablaAsignaciones td,
+#tablaAsignaciones th {
+    vertical-align: middle;
+}
+
+.panel .panel-heading {
+    font-weight: bold;
+}
+
+.btn-finalizar {
+    min-width: 90px;
+}

@@ -1,13 +1,15 @@
 <?php
 // archivo: /paneles/admin/componentes/navbar.php
 
+// Asegurar sesión activa (compatible con PHP 5.6)
 if (!isset($_SESSION)) {
     session_start();
 }
 
+// Nombre del usuario
 $usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Usuario';
 ?>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm fixed-top">
     <div class="container-fluid">
 
         <!-- Logo / Título -->
@@ -23,7 +25,7 @@ $usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Usuario';
         <!-- Menú -->
         <div class="collapse navbar-collapse" id="menuPanel">
 
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav me-auto mb-1 mb-lg-0">
 
                 <!-- Inicio -->
                 <li class="nav-item">
@@ -59,7 +61,7 @@ $usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Usuario';
             <div class="d-flex align-items-center text-white">
                 <span class="me-3">
                     <i class="fa fa-user-circle me-1"></i>
-                    <?= htmlspecialchars($usuario) ?>
+                    <?php echo htmlspecialchars($usuario); ?>
                 </span>
 
                 <a href="/logout.php" class="btn btn-outline-light btn-sm">

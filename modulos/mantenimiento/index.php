@@ -1,25 +1,36 @@
 <?php
-// archivo: /modulos/mantenimiento/index.php
+	// archivo: /modulos/mantenimiento/index.php
 
-session_start();
+	session_start();
 
-// Depuración (solo DEV)
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-ini_set('log_errors', 1);
-ini_set('error_log', __DIR__ . '/error_log.txt');
+	// Depuración (solo DEV)
+	error_reporting(E_ALL);
+	ini_set('display_errors', 1);
+	ini_set('log_errors', 1);
+	ini_set('error_log', __DIR__ . '/error_log.txt');
 
-// Configuración y conexión
-require_once __DIR__ . '/../../includes/config.php';
-require_once __DIR__ . '/../../includes/permisos.php';
+	// Configuración y conexión
+	require_once __DIR__ . '/../../includes/config.php';
+	require_once __DIR__ . '/../../includes/permisos.php';
 
-$conn = getConnection();
+	$conn = getConnection();
+	if (!$conn) {
+		error_log("Error de conexión en mantenimiento");
+		header("Location: /error_db.php");
+	exit;
+	}
 
-// Solo admins
-if (!isset($_SESSION['usuario']) || $_SESSION['rol_nombre'] !== 'admin') {
+
+	if (
+    !isset($_SESSION['usuario']) || 
+    !isset($_SESSION['rol_nombre']) || 
+    $_SESSION['rol_nombre'] !== 'admin'
+) {
     header('Location: /login.php');
     exit;
 }
+
+
 
 // Cargar definición de módulos
 $modulos = require __DIR__ . '/modulos.php';

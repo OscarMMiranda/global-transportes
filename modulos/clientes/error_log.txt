@@ -1,0 +1,647 @@
+[12-Sep-2025 16:45:48 America/Lima] ✅ Conexión establecida correctamente
+[12-Sep-2025 16:45:51 America/Lima] ✅ Conexión establecida correctamente
+[12-Sep-2025 16:47:37 America/Lima] ✅ Conexión establecida correctamente
+[12-Sep-2025 16:47:40 America/Lima] ✅ Conexión establecida correctamente
+[12-Sep-2025 16:47:47 America/Lima] ✅ Conexión establecida correctamente
+[12-Sep-2025 16:47:51 America/Lima] ✅ Conexión establecida correctamente
+[29-Sep-2025 18:22:15 America/Lima] ✅ Conexión establecida correctamente
+[29-Sep-2025 21:27:51 America/Lima] ✅ Conexión establecida correctamente
+[29-Sep-2025 21:34:13 America/Lima] ✅ Conexión establecida correctamente
+[28-Oct-2025 16:30:25 America/Lima] ✅ Conexión establecida correctamente
+[17-Dec-2025 11:41:50 America/Lima] ✅ Conexión establecida correctamente
+[04-Jan-2026 21:46:06 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 21:07:52 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 21:13:35 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 21:14:02 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 21:27:14 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 21:27:14 America/Lima] PHP Warning:  require_once(\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/../../includes/header_actions.php): failed to open stream: No such file or directory in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 48
+[08-Mar-2026 21:27:14 America/Lima] PHP Fatal error:  require_once(): Failed opening required '\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/../../includes/header_actions.php' (include_path='.;E:\PHP5.6\ext') in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 48
+[08-Mar-2026 21:31:47 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 21:31:47 America/Lima] PHP Warning:  require_once(\\hmfs2\web\DTCWIN001\wi010232.ferozo.com\public_html/includes/header_actions.php): failed to open stream: No such file or directory in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 48
+[08-Mar-2026 21:31:47 America/Lima] PHP Fatal error:  require_once(): Failed opening required '\\hmfs2\web\DTCWIN001\wi010232.ferozo.com\public_html/includes/header_actions.php' (include_path='.;E:\PHP5.6\ext') in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 48
+[08-Mar-2026 21:31:50 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 21:31:50 America/Lima] PHP Warning:  require_once(\\hmfs2\web\DTCWIN001\wi010232.ferozo.com\public_html/includes/header_actions.php): failed to open stream: No such file or directory in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 48
+[08-Mar-2026 21:31:50 America/Lima] PHP Fatal error:  require_once(): Failed opening required '\\hmfs2\web\DTCWIN001\wi010232.ferozo.com\public_html/includes/header_actions.php' (include_path='.;E:\PHP5.6\ext') in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 48
+[08-Mar-2026 21:32:01 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 21:32:01 America/Lima] PHP Warning:  require_once(\\hmfs2\web\DTCWIN001\wi010232.ferozo.com\public_html/includes/header_actions.php): failed to open stream: No such file or directory in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 48
+[08-Mar-2026 21:32:01 America/Lima] PHP Fatal error:  require_once(): Failed opening required '\\hmfs2\web\DTCWIN001\wi010232.ferozo.com\public_html/includes/header_actions.php' (include_path='.;E:\PHP5.6\ext') in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 48
+[08-Mar-2026 21:34:05 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 21:34:05 America/Lima] PHP Warning:  require_once(\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/../../includes/header_actions.php): failed to open stream: No such file or directory in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 48
+[08-Mar-2026 21:34:05 America/Lima] PHP Fatal error:  require_once(): Failed opening required '\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/../../includes/header_actions.php' (include_path='.;E:\PHP5.6\ext') in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 48
+[08-Mar-2026 21:34:06 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 21:34:06 America/Lima] PHP Warning:  require_once(\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/../../includes/header_actions.php): failed to open stream: No such file or directory in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 48
+[08-Mar-2026 21:34:06 America/Lima] PHP Fatal error:  require_once(): Failed opening required '\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/../../includes/header_actions.php' (include_path='.;E:\PHP5.6\ext') in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 48
+[08-Mar-2026 21:34:22 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 21:34:22 America/Lima] PHP Warning:  require_once(\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/../../includes/header_actions.php): failed to open stream: No such file or directory in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 48
+[08-Mar-2026 21:34:22 America/Lima] PHP Fatal error:  require_once(): Failed opening required '\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/../../includes/header_actions.php' (include_path='.;E:\PHP5.6\ext') in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 48
+[08-Mar-2026 21:34:23 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 21:34:23 America/Lima] PHP Warning:  require_once(\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/../../includes/header_actions.php): failed to open stream: No such file or directory in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 48
+[08-Mar-2026 21:34:23 America/Lima] PHP Fatal error:  require_once(): Failed opening required '\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/../../includes/header_actions.php' (include_path='.;E:\PHP5.6\ext') in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 48
+[08-Mar-2026 21:34:37 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 21:34:37 America/Lima] PHP Warning:  require_once(\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/../../includes/header_actions.php): failed to open stream: No such file or directory in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 48
+[08-Mar-2026 21:34:37 America/Lima] PHP Fatal error:  require_once(): Failed opening required '\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/../../includes/header_actions.php' (include_path='.;E:\PHP5.6\ext') in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 48
+[08-Mar-2026 21:34:39 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 21:34:39 America/Lima] PHP Warning:  require_once(\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/../../includes/header_actions.php): failed to open stream: No such file or directory in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 48
+[08-Mar-2026 21:34:39 America/Lima] PHP Fatal error:  require_once(): Failed opening required '\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/../../includes/header_actions.php' (include_path='.;E:\PHP5.6\ext') in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 48
+[08-Mar-2026 21:34:41 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 21:34:41 America/Lima] PHP Warning:  require_once(\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/../../includes/header_actions.php): failed to open stream: No such file or directory in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 48
+[08-Mar-2026 21:34:41 America/Lima] PHP Fatal error:  require_once(): Failed opening required '\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/../../includes/header_actions.php' (include_path='.;E:\PHP5.6\ext') in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 48
+[08-Mar-2026 21:34:42 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 21:34:42 America/Lima] PHP Warning:  require_once(\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/../../includes/header_actions.php): failed to open stream: No such file or directory in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 48
+[08-Mar-2026 21:34:42 America/Lima] PHP Fatal error:  require_once(): Failed opening required '\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/../../includes/header_actions.php' (include_path='.;E:\PHP5.6\ext') in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 48
+[08-Mar-2026 21:34:48 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 21:34:48 America/Lima] PHP Warning:  require_once(\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/../../includes/header_actions.php): failed to open stream: No such file or directory in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 48
+[08-Mar-2026 21:34:48 America/Lima] PHP Fatal error:  require_once(): Failed opening required '\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/../../includes/header_actions.php' (include_path='.;E:\PHP5.6\ext') in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 48
+[08-Mar-2026 21:52:21 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 21:52:21 America/Lima] PHP Warning:  require_once(\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/../../includes/header_actions.php): failed to open stream: No such file or directory in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 48
+[08-Mar-2026 21:52:21 America/Lima] PHP Fatal error:  require_once(): Failed opening required '\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/../../includes/header_actions.php' (include_path='.;E:\PHP5.6\ext') in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 48
+[08-Mar-2026 21:52:25 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 21:52:25 America/Lima] PHP Warning:  require_once(\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/../../includes/header_actions.php): failed to open stream: No such file or directory in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 48
+[08-Mar-2026 21:52:25 America/Lima] PHP Fatal error:  require_once(): Failed opening required '\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/../../includes/header_actions.php' (include_path='.;E:\PHP5.6\ext') in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 48
+[08-Mar-2026 21:52:31 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 21:52:31 America/Lima] PHP Warning:  require_once(\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/../../includes/header_actions.php): failed to open stream: No such file or directory in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 48
+[08-Mar-2026 21:52:31 America/Lima] PHP Fatal error:  require_once(): Failed opening required '\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/../../includes/header_actions.php' (include_path='.;E:\PHP5.6\ext') in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 48
+[08-Mar-2026 21:52:32 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 21:52:32 America/Lima] PHP Warning:  require_once(\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/../../includes/header_actions.php): failed to open stream: No such file or directory in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 48
+[08-Mar-2026 21:52:32 America/Lima] PHP Fatal error:  require_once(): Failed opening required '\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/../../includes/header_actions.php' (include_path='.;E:\PHP5.6\ext') in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 48
+[08-Mar-2026 21:52:33 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 21:52:33 America/Lima] PHP Warning:  require_once(\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/../../includes/header_actions.php): failed to open stream: No such file or directory in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 48
+[08-Mar-2026 21:52:33 America/Lima] PHP Fatal error:  require_once(): Failed opening required '\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/../../includes/header_actions.php' (include_path='.;E:\PHP5.6\ext') in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 48
+[08-Mar-2026 21:54:33 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 21:54:33 America/Lima] PHP Warning:  require_once(\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/componentes/header_actions.php): failed to open stream: No such file or directory in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 48
+[08-Mar-2026 21:54:33 America/Lima] PHP Fatal error:  require_once(): Failed opening required '\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/componentes/header_actions.php' (include_path='.;E:\PHP5.6\ext') in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 48
+[08-Mar-2026 21:54:36 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 21:54:36 America/Lima] PHP Warning:  require_once(\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/componentes/header_actions.php): failed to open stream: No such file or directory in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 48
+[08-Mar-2026 21:54:36 America/Lima] PHP Fatal error:  require_once(): Failed opening required '\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/componentes/header_actions.php' (include_path='.;E:\PHP5.6\ext') in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 48
+[08-Mar-2026 21:55:27 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 21:55:27 America/Lima] PHP Warning:  require_once(\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/componentes/header_filtros.php): failed to open stream: No such file or directory in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 49
+[08-Mar-2026 21:55:27 America/Lima] PHP Fatal error:  require_once(): Failed opening required '\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/componentes/header_filtros.php' (include_path='.;E:\PHP5.6\ext') in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 49
+[08-Mar-2026 21:55:28 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 21:55:28 America/Lima] PHP Warning:  require_once(\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/componentes/header_filtros.php): failed to open stream: No such file or directory in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 49
+[08-Mar-2026 21:55:28 America/Lima] PHP Fatal error:  require_once(): Failed opening required '\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/componentes/header_filtros.php' (include_path='.;E:\PHP5.6\ext') in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 49
+[08-Mar-2026 21:55:32 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 21:55:32 America/Lima] PHP Warning:  require_once(\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/componentes/header_filtros.php): failed to open stream: No such file or directory in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 49
+[08-Mar-2026 21:55:32 America/Lima] PHP Fatal error:  require_once(): Failed opening required '\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/componentes/header_filtros.php' (include_path='.;E:\PHP5.6\ext') in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 49
+[08-Mar-2026 21:55:34 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 21:55:34 America/Lima] PHP Warning:  require_once(\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/componentes/header_filtros.php): failed to open stream: No such file or directory in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 49
+[08-Mar-2026 21:55:34 America/Lima] PHP Fatal error:  require_once(): Failed opening required '\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/componentes/header_filtros.php' (include_path='.;E:\PHP5.6\ext') in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 49
+[08-Mar-2026 21:55:36 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 21:55:36 America/Lima] PHP Warning:  require_once(\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/componentes/header_filtros.php): failed to open stream: No such file or directory in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 49
+[08-Mar-2026 21:55:36 America/Lima] PHP Fatal error:  require_once(): Failed opening required '\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/componentes/header_filtros.php' (include_path='.;E:\PHP5.6\ext') in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 49
+[08-Mar-2026 21:55:37 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 21:55:37 America/Lima] PHP Warning:  require_once(\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/componentes/header_filtros.php): failed to open stream: No such file or directory in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 49
+[08-Mar-2026 21:55:37 America/Lima] PHP Fatal error:  require_once(): Failed opening required '\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/componentes/header_filtros.php' (include_path='.;E:\PHP5.6\ext') in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 49
+[08-Mar-2026 21:55:39 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 21:55:39 America/Lima] PHP Warning:  require_once(\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/componentes/header_filtros.php): failed to open stream: No such file or directory in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 49
+[08-Mar-2026 21:55:39 America/Lima] PHP Fatal error:  require_once(): Failed opening required '\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/componentes/header_filtros.php' (include_path='.;E:\PHP5.6\ext') in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 49
+[08-Mar-2026 21:55:40 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 21:55:40 America/Lima] PHP Warning:  require_once(\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/componentes/header_filtros.php): failed to open stream: No such file or directory in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 49
+[08-Mar-2026 21:55:40 America/Lima] PHP Fatal error:  require_once(): Failed opening required '\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes/componentes/header_filtros.php' (include_path='.;E:\PHP5.6\ext') in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\index.php on line 49
+[08-Mar-2026 21:56:17 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 21:56:33 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 21:56:36 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 21:58:48 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 22:03:37 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 22:03:43 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 22:05:19 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 22:09:49 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 22:13:17 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 22:13:22 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 22:13:24 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 22:13:26 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 22:15:19 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 22:16:09 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 22:16:14 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 22:16:15 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 22:16:16 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 22:16:18 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 22:16:21 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 22:17:05 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 22:28:25 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 22:30:58 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 22:34:37 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 22:36:35 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 22:36:48 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 22:36:52 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 22:36:57 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 22:40:33 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 22:40:36 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 23:29:58 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 23:29:58 America/Lima] PHP Fatal error:  Cannot redeclare campo_cliente() (previously declared in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\componentes\TablaClientes.php:15) in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\componentes\TablaClientes.php on line 20
+[08-Mar-2026 23:47:40 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 23:47:40 America/Lima] PHP Fatal error:  Cannot redeclare campo_cliente() (previously declared in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\componentes\TablaClientes.php:15) in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\componentes\TablaClientes.php on line 20
+[08-Mar-2026 23:47:41 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 23:47:41 America/Lima] PHP Fatal error:  Cannot redeclare campo_cliente() (previously declared in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\componentes\TablaClientes.php:15) in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\componentes\TablaClientes.php on line 20
+[08-Mar-2026 23:47:44 America/Lima] ✅ Conexión establecida correctamente
+[08-Mar-2026 23:47:44 America/Lima] PHP Fatal error:  Cannot redeclare campo_cliente() (previously declared in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\componentes\TablaClientes.php:15) in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\componentes\TablaClientes.php on line 20
+[09-Mar-2026 04:26:48 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:26:49 America/Lima] PHP Fatal error:  Cannot redeclare campo_cliente() (previously declared in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\componentes\TablaClientes.php:15) in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\componentes\TablaClientes.php on line 20
+[09-Mar-2026 04:27:51 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:27:51 America/Lima] PHP Fatal error:  Cannot redeclare campo_cliente() (previously declared in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\componentes\TablaClientes.php:15) in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\componentes\TablaClientes.php on line 20
+[09-Mar-2026 04:27:52 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:27:52 America/Lima] PHP Fatal error:  Cannot redeclare campo_cliente() (previously declared in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\componentes\TablaClientes.php:15) in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\componentes\TablaClientes.php on line 20
+[09-Mar-2026 04:27:52 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:27:53 America/Lima] PHP Fatal error:  Cannot redeclare campo_cliente() (previously declared in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\componentes\TablaClientes.php:15) in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\componentes\TablaClientes.php on line 20
+[09-Mar-2026 04:27:53 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:27:53 America/Lima] PHP Fatal error:  Cannot redeclare campo_cliente() (previously declared in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\componentes\TablaClientes.php:15) in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\componentes\TablaClientes.php on line 20
+[09-Mar-2026 04:27:53 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:27:53 America/Lima] PHP Fatal error:  Cannot redeclare campo_cliente() (previously declared in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\componentes\TablaClientes.php:15) in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\componentes\TablaClientes.php on line 20
+[09-Mar-2026 04:27:56 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:27:57 America/Lima] PHP Notice:  Undefined variable: departamentos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 75
+[09-Mar-2026 04:27:57 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 75
+[09-Mar-2026 04:27:57 America/Lima] PHP Notice:  Undefined variable: provincias in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 89
+[09-Mar-2026 04:27:57 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 89
+[09-Mar-2026 04:27:57 America/Lima] PHP Notice:  Undefined variable: distritos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 103
+[09-Mar-2026 04:27:57 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 103
+[09-Mar-2026 04:28:00 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:28:00 America/Lima] PHP Notice:  Undefined variable: departamentos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 75
+[09-Mar-2026 04:28:00 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 75
+[09-Mar-2026 04:28:00 America/Lima] PHP Notice:  Undefined variable: provincias in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 89
+[09-Mar-2026 04:28:00 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 89
+[09-Mar-2026 04:28:01 America/Lima] PHP Notice:  Undefined variable: distritos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 103
+[09-Mar-2026 04:28:01 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 103
+[09-Mar-2026 04:28:02 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:28:08 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:28:09 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:28:10 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:28:10 America/Lima] PHP Notice:  Undefined variable: departamentos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 75
+[09-Mar-2026 04:28:10 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 75
+[09-Mar-2026 04:28:10 America/Lima] PHP Notice:  Undefined variable: provincias in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 89
+[09-Mar-2026 04:28:10 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 89
+[09-Mar-2026 04:28:10 America/Lima] PHP Notice:  Undefined variable: distritos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 103
+[09-Mar-2026 04:28:10 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 103
+[09-Mar-2026 04:28:12 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:28:12 America/Lima] PHP Fatal error:  Cannot redeclare campo_cliente() (previously declared in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\componentes\TablaClientes.php:15) in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\componentes\TablaClientes.php on line 20
+[09-Mar-2026 04:28:15 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:28:15 America/Lima] PHP Fatal error:  Cannot redeclare campo_cliente() (previously declared in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\componentes\TablaClientes.php:15) in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\componentes\TablaClientes.php on line 20
+[09-Mar-2026 04:43:06 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:43:06 America/Lima] PHP Fatal error:  Cannot redeclare campo_cliente() (previously declared in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\componentes\TablaClientes.php:15) in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\componentes\TablaClientes.php on line 20
+[09-Mar-2026 04:50:37 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:50:38 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:50:49 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:50:49 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:50:50 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:50:52 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:50:54 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:50:56 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:50:57 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:50:58 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:51:10 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:51:14 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:53:45 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:53:46 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:53:47 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:53:48 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:53:49 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:53:49 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:53:51 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:53:53 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:53:54 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:53:55 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:53:55 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:53:56 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:53:57 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:53:57 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:53:58 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:53:59 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:54:11 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:57:20 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:57:26 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:57:27 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:57:28 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:57:29 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:57:30 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:57:31 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:57:32 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:57:38 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:57:38 America/Lima] PHP Notice:  Undefined variable: departamentos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 75
+[09-Mar-2026 04:57:38 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 75
+[09-Mar-2026 04:57:38 America/Lima] PHP Notice:  Undefined variable: provincias in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 89
+[09-Mar-2026 04:57:38 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 89
+[09-Mar-2026 04:57:38 America/Lima] PHP Notice:  Undefined variable: distritos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 103
+[09-Mar-2026 04:57:38 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 103
+[09-Mar-2026 04:57:40 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:57:43 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 04:57:43 America/Lima] PHP Notice:  Undefined variable: departamentos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 75
+[09-Mar-2026 04:57:43 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 75
+[09-Mar-2026 04:57:43 America/Lima] PHP Notice:  Undefined variable: provincias in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 89
+[09-Mar-2026 04:57:43 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 89
+[09-Mar-2026 04:57:43 America/Lima] PHP Notice:  Undefined variable: distritos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 103
+[09-Mar-2026 04:57:43 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 103
+[09-Mar-2026 04:57:45 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 05:07:28 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 05:07:29 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 05:07:31 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 05:07:35 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 05:07:36 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 05:07:37 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 05:07:37 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 05:07:38 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 18:25:01 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 18:37:59 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 18:42:20 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 18:42:22 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 18:42:23 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 18:42:30 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 18:43:04 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 18:44:29 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 18:44:35 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 18:44:35 America/Lima] PHP Notice:  Undefined variable: departamentos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 75
+[09-Mar-2026 18:44:35 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 75
+[09-Mar-2026 18:44:35 America/Lima] PHP Notice:  Undefined variable: provincias in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 89
+[09-Mar-2026 18:44:35 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 89
+[09-Mar-2026 18:44:35 America/Lima] PHP Notice:  Undefined variable: distritos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 103
+[09-Mar-2026 18:44:35 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 103
+[09-Mar-2026 18:44:38 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 18:44:39 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 18:44:39 America/Lima] PHP Notice:  Undefined variable: departamentos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 75
+[09-Mar-2026 18:44:39 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 75
+[09-Mar-2026 18:44:39 America/Lima] PHP Notice:  Undefined variable: provincias in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 89
+[09-Mar-2026 18:44:39 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 89
+[09-Mar-2026 18:44:39 America/Lima] PHP Notice:  Undefined variable: distritos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 103
+[09-Mar-2026 18:44:39 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 103
+[09-Mar-2026 18:44:41 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 18:44:45 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 18:44:54 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 18:45:04 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 18:45:04 America/Lima] PHP Notice:  Undefined variable: departamentos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 75
+[09-Mar-2026 18:45:04 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 75
+[09-Mar-2026 18:45:04 America/Lima] PHP Notice:  Undefined variable: provincias in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 89
+[09-Mar-2026 18:45:04 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 89
+[09-Mar-2026 18:45:05 America/Lima] PHP Notice:  Undefined variable: distritos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 103
+[09-Mar-2026 18:45:05 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 103
+[09-Mar-2026 18:45:11 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 18:49:49 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 18:49:59 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 18:50:00 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 18:50:03 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 18:50:08 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 18:50:10 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 18:50:11 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 18:50:12 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 18:50:13 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 18:50:41 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 18:50:43 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 18:50:44 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 18:50:46 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 18:51:22 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 18:51:33 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 18:51:34 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 18:51:35 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 18:51:40 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 18:51:40 America/Lima] PHP Notice:  Undefined variable: departamentos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 75
+[09-Mar-2026 18:51:40 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 75
+[09-Mar-2026 18:51:40 America/Lima] PHP Notice:  Undefined variable: provincias in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 89
+[09-Mar-2026 18:51:40 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 89
+[09-Mar-2026 18:51:40 America/Lima] PHP Notice:  Undefined variable: distritos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 103
+[09-Mar-2026 18:51:40 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 103
+[09-Mar-2026 18:51:42 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 18:51:55 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 18:51:55 America/Lima] PHP Notice:  Undefined variable: departamentos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 75
+[09-Mar-2026 18:51:55 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 75
+[09-Mar-2026 18:51:55 America/Lima] PHP Notice:  Undefined variable: provincias in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 89
+[09-Mar-2026 18:51:55 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 89
+[09-Mar-2026 18:51:55 America/Lima] PHP Notice:  Undefined variable: distritos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 103
+[09-Mar-2026 18:51:55 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 103
+[09-Mar-2026 18:51:58 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 18:54:32 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 18:54:35 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 18:54:35 America/Lima] PHP Notice:  Undefined variable: departamentos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 74
+[09-Mar-2026 18:54:35 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 74
+[09-Mar-2026 18:54:35 America/Lima] PHP Notice:  Undefined variable: provincias in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 88
+[09-Mar-2026 18:54:35 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 88
+[09-Mar-2026 18:54:35 America/Lima] PHP Notice:  Undefined variable: distritos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 102
+[09-Mar-2026 18:54:35 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 102
+[09-Mar-2026 18:54:45 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 18:57:45 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 18:57:45 America/Lima] PHP Notice:  Undefined variable: departamentos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 74
+[09-Mar-2026 18:57:45 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 74
+[09-Mar-2026 18:57:45 America/Lima] PHP Notice:  Undefined variable: provincias in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 88
+[09-Mar-2026 18:57:45 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 88
+[09-Mar-2026 18:57:45 America/Lima] PHP Notice:  Undefined variable: distritos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 102
+[09-Mar-2026 18:57:45 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 102
+[09-Mar-2026 18:57:47 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 18:58:49 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 18:58:51 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 18:58:51 America/Lima] PHP Notice:  Undefined variable: departamentos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 54
+[09-Mar-2026 18:58:51 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 54
+[09-Mar-2026 18:58:51 America/Lima] PHP Notice:  Undefined variable: provincias in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 67
+[09-Mar-2026 18:58:51 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 67
+[09-Mar-2026 18:58:51 America/Lima] PHP Notice:  Undefined variable: distritos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 80
+[09-Mar-2026 18:58:52 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 80
+[09-Mar-2026 18:59:01 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 19:04:48 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 19:04:52 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 19:04:57 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 19:05:48 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 19:05:48 America/Lima] PHP Notice:  Undefined variable: departamentos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 54
+[09-Mar-2026 19:05:48 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 54
+[09-Mar-2026 19:05:48 America/Lima] PHP Notice:  Undefined variable: provincias in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 67
+[09-Mar-2026 19:05:48 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 67
+[09-Mar-2026 19:05:48 America/Lima] PHP Notice:  Undefined variable: distritos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 80
+[09-Mar-2026 19:05:48 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 80
+[09-Mar-2026 19:05:50 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 19:08:02 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 19:08:05 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 19:08:05 America/Lima] PHP Notice:  Undefined variable: departamentos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 54
+[09-Mar-2026 19:08:05 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 54
+[09-Mar-2026 19:08:05 America/Lima] PHP Notice:  Undefined variable: provincias in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 67
+[09-Mar-2026 19:08:05 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 67
+[09-Mar-2026 19:08:05 America/Lima] PHP Notice:  Undefined variable: distritos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 80
+[09-Mar-2026 19:08:05 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 80
+[09-Mar-2026 19:08:10 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 19:50:24 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 19:52:09 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 19:52:11 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 19:52:11 America/Lima] PHP Notice:  Undefined variable: departamentos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 54
+[09-Mar-2026 19:52:11 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 54
+[09-Mar-2026 19:52:11 America/Lima] PHP Notice:  Undefined variable: provincias in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 67
+[09-Mar-2026 19:52:11 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 67
+[09-Mar-2026 19:52:11 America/Lima] PHP Notice:  Undefined variable: distritos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 80
+[09-Mar-2026 19:52:11 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 80
+[09-Mar-2026 19:52:12 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 19:52:12 America/Lima] PHP Notice:  Undefined variable: departamentos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 54
+[09-Mar-2026 19:52:12 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 54
+[09-Mar-2026 19:52:12 America/Lima] PHP Notice:  Undefined variable: provincias in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 67
+[09-Mar-2026 19:52:12 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 67
+[09-Mar-2026 19:52:12 America/Lima] PHP Notice:  Undefined variable: distritos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 80
+[09-Mar-2026 19:52:12 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 80
+[09-Mar-2026 20:08:17 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 20:08:20 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 20:08:20 America/Lima] PHP Notice:  Undefined variable: departamentos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 54
+[09-Mar-2026 20:08:20 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 54
+[09-Mar-2026 20:08:20 America/Lima] PHP Notice:  Undefined variable: provincias in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 67
+[09-Mar-2026 20:08:20 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 67
+[09-Mar-2026 20:08:20 America/Lima] PHP Notice:  Undefined variable: distritos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 80
+[09-Mar-2026 20:08:20 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 80
+[09-Mar-2026 20:08:20 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 20:08:20 America/Lima] PHP Notice:  Undefined variable: departamentos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 54
+[09-Mar-2026 20:08:20 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 54
+[09-Mar-2026 20:08:20 America/Lima] PHP Notice:  Undefined variable: provincias in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 67
+[09-Mar-2026 20:08:20 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 67
+[09-Mar-2026 20:08:20 America/Lima] PHP Notice:  Undefined variable: distritos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 80
+[09-Mar-2026 20:08:20 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 80
+[09-Mar-2026 20:08:21 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 20:08:21 America/Lima] PHP Notice:  Undefined variable: departamentos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 54
+[09-Mar-2026 20:08:21 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 54
+[09-Mar-2026 20:08:21 America/Lima] PHP Notice:  Undefined variable: provincias in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 67
+[09-Mar-2026 20:08:21 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 67
+[09-Mar-2026 20:08:21 America/Lima] PHP Notice:  Undefined variable: distritos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 80
+[09-Mar-2026 20:08:21 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 80
+[09-Mar-2026 20:08:21 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 20:08:21 America/Lima] PHP Notice:  Undefined variable: departamentos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 54
+[09-Mar-2026 20:08:21 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 54
+[09-Mar-2026 20:08:21 America/Lima] PHP Notice:  Undefined variable: provincias in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 67
+[09-Mar-2026 20:08:21 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 67
+[09-Mar-2026 20:08:21 America/Lima] PHP Notice:  Undefined variable: distritos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 80
+[09-Mar-2026 20:08:21 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 80
+[09-Mar-2026 20:08:21 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 20:08:21 America/Lima] PHP Notice:  Undefined variable: departamentos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 54
+[09-Mar-2026 20:08:21 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 54
+[09-Mar-2026 20:08:21 America/Lima] PHP Notice:  Undefined variable: provincias in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 67
+[09-Mar-2026 20:08:21 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 67
+[09-Mar-2026 20:08:21 America/Lima] PHP Notice:  Undefined variable: distritos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 80
+[09-Mar-2026 20:08:21 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 80
+[09-Mar-2026 20:12:13 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 20:16:35 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 20:16:36 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 20:20:29 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 20:20:30 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 20:20:50 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 20:20:50 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 20:23:16 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 20:31:25 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 20:31:26 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 20:31:32 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 20:31:32 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 20:31:43 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 20:31:44 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 20:40:46 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 20:40:46 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 20:40:54 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 20:40:55 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 20:41:05 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 20:41:05 America/Lima] PHP Warning:  require_once(\\hmfs2\web\DTCWIN001\wi010232.ferozo.com\public_html/modulos/clientes/models/funciones.php): failed to open stream: No such file or directory in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\controllers\DeleteController.php on line 10
+[09-Mar-2026 20:41:05 America/Lima] PHP Fatal error:  require_once(): Failed opening required '\\hmfs2\web\DTCWIN001\wi010232.ferozo.com\public_html/modulos/clientes/models/funciones.php' (include_path='.;E:\PHP5.6\ext') in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\controllers\DeleteController.php on line 10
+[09-Mar-2026 20:41:12 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 20:41:12 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 20:41:31 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 20:41:31 America/Lima] PHP Notice:  Undefined variable: departamentos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 54
+[09-Mar-2026 20:41:31 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 54
+[09-Mar-2026 20:41:31 America/Lima] PHP Notice:  Undefined variable: provincias in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 67
+[09-Mar-2026 20:41:31 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 67
+[09-Mar-2026 20:41:31 America/Lima] PHP Notice:  Undefined variable: distritos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 80
+[09-Mar-2026 20:41:31 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 80
+[09-Mar-2026 20:41:33 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 20:41:33 America/Lima] PHP Notice:  Undefined variable: departamentos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 54
+[09-Mar-2026 20:41:33 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 54
+[09-Mar-2026 20:41:33 America/Lima] PHP Notice:  Undefined variable: provincias in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 67
+[09-Mar-2026 20:41:33 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 67
+[09-Mar-2026 20:41:33 America/Lima] PHP Notice:  Undefined variable: distritos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 80
+[09-Mar-2026 20:41:33 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 80
+[09-Mar-2026 20:41:33 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 20:41:33 America/Lima] PHP Notice:  Undefined variable: departamentos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 54
+[09-Mar-2026 20:41:33 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 54
+[09-Mar-2026 20:41:33 America/Lima] PHP Notice:  Undefined variable: provincias in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 67
+[09-Mar-2026 20:41:33 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 67
+[09-Mar-2026 20:41:33 America/Lima] PHP Notice:  Undefined variable: distritos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 80
+[09-Mar-2026 20:41:33 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 80
+[09-Mar-2026 20:41:33 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 20:41:34 America/Lima] PHP Notice:  Undefined variable: departamentos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 54
+[09-Mar-2026 20:41:34 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 54
+[09-Mar-2026 20:41:34 America/Lima] PHP Notice:  Undefined variable: provincias in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 67
+[09-Mar-2026 20:41:34 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 67
+[09-Mar-2026 20:41:34 America/Lima] PHP Notice:  Undefined variable: distritos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 80
+[09-Mar-2026 20:41:34 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 80
+[09-Mar-2026 20:41:35 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 20:41:43 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 20:41:43 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 20:41:44 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 20:41:44 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 20:41:46 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 20:41:46 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 20:41:47 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 20:41:47 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:19:43 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:19:44 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:19:46 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:19:46 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:19:46 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:19:47 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:19:47 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:19:47 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:19:48 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:19:48 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:19:48 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:19:48 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:19:48 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:19:49 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:19:49 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:19:49 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:19:49 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:19:49 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:19:49 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:19:49 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:19:49 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:19:49 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:19:50 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:19:50 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:19:50 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:19:50 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:19:50 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:19:50 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:19:50 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:19:50 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:20:09 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:20:10 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:20:13 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:20:13 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:20:17 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:20:17 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:22:33 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:22:33 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:22:34 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:22:35 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:22:37 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:22:57 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:23:01 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:23:03 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:23:07 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:23:07 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:23:08 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:23:08 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:23:09 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:23:09 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:23:11 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:23:11 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:23:12 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:23:13 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:23:13 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:23:14 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:23:29 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:23:29 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:23:32 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:23:32 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:23:33 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:23:34 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:23:35 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:23:35 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:23:36 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:23:36 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:23:37 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:23:37 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:23:38 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:23:38 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:23:41 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:23:41 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:23:42 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:23:42 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:23:43 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:23:43 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:25:48 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:25:48 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:25:51 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:25:52 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:25:53 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:25:53 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:25:55 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:25:55 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:25:56 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:25:56 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:28:16 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:28:16 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:28:18 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:28:18 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:28:19 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:28:19 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:28:21 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:28:21 America/Lima] PHP Notice:  Undefined variable: departamentos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 54
+[09-Mar-2026 23:28:21 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 54
+[09-Mar-2026 23:28:21 America/Lima] PHP Notice:  Undefined variable: provincias in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 67
+[09-Mar-2026 23:28:21 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 67
+[09-Mar-2026 23:28:21 America/Lima] PHP Notice:  Undefined variable: distritos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 80
+[09-Mar-2026 23:28:21 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 80
+[09-Mar-2026 23:28:22 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:28:22 America/Lima] PHP Notice:  Undefined variable: departamentos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 54
+[09-Mar-2026 23:28:22 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 54
+[09-Mar-2026 23:28:22 America/Lima] PHP Notice:  Undefined variable: provincias in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 67
+[09-Mar-2026 23:28:22 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 67
+[09-Mar-2026 23:28:22 America/Lima] PHP Notice:  Undefined variable: distritos in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 80
+[09-Mar-2026 23:28:22 America/Lima] PHP Warning:  Invalid argument supplied for foreach() in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\views\form.php on line 80
+[09-Mar-2026 23:31:13 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:31:13 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:31:15 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:31:15 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:31:16 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:31:16 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:36:06 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:36:07 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:36:11 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:36:11 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:36:12 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:36:12 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:36:14 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:36:14 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:42:32 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:42:32 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:42:34 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:42:34 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:42:35 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:42:35 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:42:36 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:42:36 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:46:45 America/Lima] ✅ Conexión establecida correctamente
+[09-Mar-2026 23:46:45 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 13:53:08 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 13:53:09 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 13:53:12 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 13:53:12 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 13:53:13 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 13:53:13 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 15:33:31 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 15:33:32 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 15:33:47 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 15:33:47 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 16:15:25 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 16:15:26 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 16:15:28 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 16:15:28 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 16:15:29 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 16:15:29 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 16:15:30 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 16:15:31 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 16:15:31 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 16:15:31 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 16:52:57 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 16:52:57 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 17:03:18 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 17:03:18 America/Lima] PHP Parse error:  syntax error, unexpected '?' in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\clientes\componentes\tabs.php on line 8
+[10-Mar-2026 17:04:17 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 17:04:18 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 17:04:20 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 17:04:20 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 17:04:21 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 17:04:21 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 17:04:22 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 17:04:23 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 17:06:11 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 17:06:12 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 17:06:14 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 17:06:14 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 17:06:14 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 17:06:15 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 17:06:15 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 17:06:15 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 17:06:16 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 17:06:21 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 17:06:21 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 17:06:22 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 17:06:22 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 21:45:33 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 21:45:34 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 21:45:36 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 21:45:36 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 21:45:37 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 21:45:38 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 21:45:39 America/Lima] ✅ Conexión establecida correctamente
+[10-Mar-2026 21:45:39 America/Lima] ✅ Conexión establecida correctamente

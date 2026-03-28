@@ -1,0 +1,2 @@
+[10-Jul-2025 23:28:38 America/Argentina/Buenos_Aires] PHP Notice:  A session had already been started - ignoring session_start() in \\HMFS2\WEB\DTCWIN001\globaltransportes.com\public_html\includes\header_erp.php on line 2
+[10-Jul-2025 23:33:15 America/Argentina/Buenos_Aires] PHP Notice:  A session had already been started - ignoring session_start() in \\HMFS2\WEB\DTCWIN001\globaltransportes.com\public_html\includes\header_erp.php on line 2

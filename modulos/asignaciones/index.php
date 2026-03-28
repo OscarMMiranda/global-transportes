@@ -1,108 +1,65 @@
 <?php
-	// modulos/asignaciones/index.php
+// modulos/asignaciones/index.php
 
-	// 2) Modo depuración (solo DEV)
-    error_reporting(E_ALL);
-    ini_set('display_errors', 1);
-    ini_set('log_errors',     1);
-    ini_set('error_log',      __DIR__ . '/error_log.txt');
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('log_errors', 1);
+ini_set('error_log', __DIR__ . '/error_log.txt');
 
-    // 3) Cargar config.php (define getConnection() y rutas)
-    require_once __DIR__ . '/../../includes/config.php';
+// Configuración global
+require_once __DIR__ . '/../../includes/config.php';
+require_once __DIR__ . '/../../includes/helpers.php';
 
-    // 4) Obtener la conexión
-    $conn = getConnection();
+// Conexión
+$conn = getConnection();
 
-	
-	require_once __DIR__ . '/../../includes/helpers.php';
+// Sesión y trazabilidad
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
-	// 2. Sesión y trazabilidad
-	if (session_status() === PHP_SESSION_NONE) {
-    	session_start();
-		}
-	if (isset($_SESSION['usuario'])) {
-    	registrarActividad(
-        	$conn,
-        	$_SESSION['usuario'],
-        	'Accedió al módulo de Asignaciones'
-    		);
-		}
+if (isset($_SESSION['usuario'])) {
+    registrarActividad(
+        $conn,
+        $_SESSION['usuario'],
+        'Accedió al módulo de Asignaciones'
+    );
+}
 
-	// 3. Partials globales: head y header
-	// require_once __DIR__ . '/../../partials/head.php';
-	require_once __DIR__ . '/../../includes/header-1.php';
-
+// Header del módulo (NO el global)
+require_once __DIR__ . '/componentes/header_asignaciones.php';
 ?>
 
-
-<!-- DataTables CSS (añádelo justo después de tu CSS de Bootstrap) -->
-<link
-  rel="stylesheet"
-  href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css"
-/>
-
-
-
-<!-- Contenido principal -->
+<!-- Título -->
 <main class="col py-4">
-	<h3 
-		class="mb-4">
-		Asignaciones – Conductores / Tractos / Carretas
-	</h3>
 
-	<button 
-		class="btn btn-success mb-3 shadow-sm" 
-		data-bs-toggle="modal" 
-		data-bs-target="#modalAsignar"
-	>
-  		<i class="fas fa-plus me-1"></i> 
-		Nueva asignación
-	</button>
+    <h3 class="mb-4">Asignaciones – Conductores / Tractos / Carretas</h3>
 
-	<!-- Tabla de asignaciones -->
-	<table 
-		id="tablaAsignaciones"
-    	class="table table-bordered table-striped table-hover align-middle text-center">
-  		<thead class="table-dark">
-    		<tr>
-      			<th>Conductor</th>
-				<th>Tracto</th>
-				<th>Carreta</th>
-      			<th>Inicio</th>
-				<th>Fin</th>
-				<th>Estado</th>
-				<th>Acción</th>
-    		</tr>
-  		</thead>
-  		<tbody></tbody>
-	</table>
+    <!-- Botón para abrir modal -->
+    <button class="btn btn-success mb-3 shadow-sm"
+            data-toggle="modal"
+            data-target="#modalAsignar">
+        <i class="fas fa-plus me-1"></i> Nueva asignación
+    </button>
+
+    <!-- Filtros -->
+    <?php include __DIR__ . '/componentes/filtros.php'; ?>
+
+    <!-- Tabla -->
+    <?php include __DIR__ . '/componentes/tabla_asignaciones.php'; ?>
+
 </main>
 
-<!-- Modal Partial -->
-  <?php 
-    require_once __DIR__ . '/views/modal_asignacion.php'; 
-  ?>
+<!-- Modales -->
+
+<?php include __DIR__ . '/modales/modal_asignacion.php'; ?>
+<?php include __DIR__ . '/modales/modal_finalizar.php'; ?>
+<?php include __DIR__ . '/modales/modal_detalle.php'; ?>
+<?php include __DIR__ . '/modales/modal_editar.php'; ?>
+<?php include __DIR__ . '/modales/modal_reasignar.php'; ?>
+
 
 <?php
-	// 4. Footer global y scripts del módulo
-	require_once __DIR__ . '/../../includes/footer-asigna.php';
+// Footer del módulo (NO el global)
+require_once __DIR__ . '/componentes/footer_asignaciones.php';
 ?>
-
-<!-- Carga de scripts -->
-<!-- <script>
-  window.ASIGNACIONES_API_URL = '/modulos/asignaciones/api.php';
-</script> -->
-
-<!-- 7. Define la URL base de tu API justo después de cargar jQuery/Bootstrap -->
-<script>
-  // Si tu index.php está en /modulos/asignaciones/, api.php está en la misma carpeta
-  window.ASIGNACIONES_API_URL = 'api.php';
-</script>
-
-
-
-<!-- <script src="modulos/asignaciones/js/asignaciones.js" defer></script> -->
-<!-- <script src="js/asignaciones.js" defer></script> -->
-
-<!-- 8. Incluye tu script principal de asignaciones -->
-<script src="modulos/asignaciones/js/asignaciones.js" defer></script>

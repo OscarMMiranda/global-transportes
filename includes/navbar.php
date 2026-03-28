@@ -9,19 +9,23 @@ function active($path) {
 }
 ?>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-sm">
   <div class="container-fluid">
 
+    <!-- Logo / Marca -->
     <a class="navbar-brand fw-bold" href="/modulos/erp_dashboard.php">
       <i class="fa-solid fa-layer-group me-2"></i> ERP
     </a>
 
+    <!-- Botón responsive -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarERP">
       <span class="navbar-toggler-icon"></span>
     </button>
 
+    <!-- Contenido del navbar -->
     <div class="collapse navbar-collapse" id="navbarERP">
 
+      <!-- Menú izquierdo -->
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
         <li class="nav-item">
@@ -51,6 +55,7 @@ function active($path) {
 
       </ul>
 
+      <!-- Menú derecho -->
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
           <a class="nav-link text-warning" href="/logout.php">

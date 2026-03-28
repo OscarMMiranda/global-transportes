@@ -110,6 +110,21 @@ $flash = getFlash();
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
 <script src="js/asignaciones.js"></script>
+
+
+<!-- <script src="js/asignaciones.api.js"></script>
+<script src="js/asignaciones.helpers.js"></script>
+<script src="js/asignaciones.table.js"></script>
+<script src="js/asignaciones.filtros.js"></script>
+<script src="js/asignaciones.modals.js"></script>
+<script src="js/asignaciones.events.js"></script>
+<script src="js/asignaciones.main.js"></script> -->
+
+
+
+
 </body>
 </html>

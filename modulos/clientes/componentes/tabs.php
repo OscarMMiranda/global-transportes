@@ -1,33 +1,34 @@
 <?php
 // archivo: /modulos/clientes/componentes/tabs.php
-//
 
-
-if (!defined('GT_APP')) {
-    exit('Acceso directo no permitido');
-}
-
-$estado = isset($_GET['estado']) ? $_GET['estado'] : 'todos';
-$action = isset($_GET['action']) ? $_GET['action'] : 'list';
-
-$estados = array(
-    'todos'    => 'Todos',
-    'Activo'   => 'Activos',
-    'Inactivo' => 'Inactivos'
-);
+if (!isset($titulo))    $titulo    = "Módulo";
+if (!isset($subtitulo)) $subtitulo = "";
+if (!isset($icono))     $icono     = "fa-solid fa-circle-info";
 ?>
 
-<ul class="nav nav-tabs modulo-tabs-estado">
+<div class="d-flex justify-content-between align-items-center mb-2">
 
-<?php foreach ($estados as $valor => $label): ?>
+    <!-- Tabs corporativas -->
+    <ul class="nav nav-tabs" id="tabsClientes">
+        <li class="nav-item">
+            <a class="nav-link active" href="#" data-tab="activos">
+                <i class="fa-solid fa-user-check"></i> Activos
+            </a>
+        </li>
 
-<li class="nav-item">
-    <a class="nav-link <?php echo ($estado === $valor) ? 'active' : ''; ?>"
-       href="?action=<?php echo htmlspecialchars($action, ENT_QUOTES, 'UTF-8'); ?>&estado=<?php echo $valor; ?>">
-        <?php echo $label; ?>
-    </a>
-</li>
+        <li class="nav-item">
+            <a class="nav-link" href="#" data-tab="inactivos">
+                <i class="fa-solid fa-user-xmark"></i> Inactivos
+            </a>
+        </li>
+    </ul>
 
-<?php endforeach; ?>
+    <!-- Botón corporativo para crear nuevo cliente -->
+    <button class="btn btn-primary" id="btnNuevoCliente">
+        <i class="fa-solid fa-user-plus"></i> Nuevo Cliente
+    </button>
 
-</ul>
+</div>
+
+<!-- Contenedor donde se cargan las vistas dinámicas -->
+<div id="contenedor_tabs"></div>

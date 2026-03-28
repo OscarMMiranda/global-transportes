@@ -59,12 +59,12 @@ return [
         "archivo_tarjeta" => "tarjeta_conductores.php"
     ],
     [
-        "id"              => "tipo_lugar",
-        "nombre"          => "Tipo de Lugar",
-        "descripcion"     => "Configurar tipos de lugar.",
+        "id"              => "tipo_destinos",
+        "nombre"          => "Tipo de destinos",
+        "descripcion"     => "Configurar tipos de destinos.",
         "icono"           => "fa-location-dot",
-        "ruta"            => "/modulos/mantenimiento/tipo_lugares/index.php",
-        "archivo_tarjeta" => "tarjeta_tipo_lugar.php"
+        "ruta"            => "/modulos/mantenimiento/tipo_destinos/index.php",
+        "archivo_tarjeta" => "tarjeta_tipo_destinos.php"
     ],
     [
         "id"              => "entidades",

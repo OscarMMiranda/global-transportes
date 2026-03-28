@@ -60,7 +60,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol_nombre'] !== 'admin') {
                 <?php include __DIR__ . '/componentes/tarjetas/tarjeta_zonas.php'; ?>
                 <?php include __DIR__ . '/componentes/tarjetas/tarjeta_valores_referenciales.php'; ?>
                 <?php include __DIR__ . '/componentes/tarjetas/tarjeta_conductores.php'; ?>
-                <?php include __DIR__ . '/componentes/tarjetas/tarjeta_tipo_lugar.php'; ?>
+                <?php include __DIR__ . '/componentes/tarjetas/tarjeta_tipo_destinos.php'; ?>
                 <?php include __DIR__ . '/componentes/tarjetas/tarjeta_entidades.php'; ?>
 
             </div>

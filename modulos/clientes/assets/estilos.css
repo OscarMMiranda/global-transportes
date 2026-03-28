@@ -1,0 +1,111 @@
+/* archivo  :   /modulos/clientes/assets/estilos.css */
+
+/* ===============================
+   ESTILOS CORPORATIVOS DEL MÓDULO CLIENTES
+   =============================== */
+
+/* Espaciado general */
+#contenedor_tabs {
+    margin-top: 10px;
+}
+
+/* Tabs corporativas */
+#tabsClientes .nav-link {
+    font-weight: 500;
+    padding: 8px 16px;
+}
+
+#tabsClientes .nav-link.active {
+    background-color: #0d6efd;
+    color: #fff !important;
+    border-color: #0d6efd #0d6efd #fff;
+}
+
+/* Botón Nuevo Cliente */
+#btnNuevoCliente {
+    font-weight: 600;
+}
+
+/* Tabla corporativa */
+#tablaClientes {
+    font-size: 14px;
+}
+
+#tablaClientes thead th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+}
+
+/* Acciones */
+#tablaClientes td .btn {
+    padding: 2px 6px;
+    font-size: 12px;
+}
+
+/* Hover corporativo */
+#tablaClientes tbody tr:hover {
+    background-color: #f1f7ff;
+}
+
+/* ===============================
+   DEBUG VISUAL (opcional)
+   Activa agregando: body.debug { ... }
+   =============================== */
+
+body.debug #contenedor_tabs {
+    outline: 2px dashed red;
+}
+
+body.debug #tabsClientes {
+    outline: 2px dashed blue;
+}
+
+body.debug #tablaClientes {
+    outline: 2px dashed green;
+}
+
+/* ===============================
+   DEBUG VISUAL (opcional)
+   =============================== */
+
+.col-nombre {
+    max-width: 120px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.col-ruc  {
+    max-width: 80px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.col-tipo  {
+    max-width: 80px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.col-direccion {
+    max-width: 180px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.col-telefono {
+    max-width: 80px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.col-correo {
+    max-width: 120px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

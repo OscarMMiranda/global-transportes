@@ -60,9 +60,9 @@
     },
     "debug_log.txt": {
       "type": "-",
-      "size": 980,
+      "size": 1225,
       "lmtime": 0,
-      "modified": false
+      "modified": true
     },
     "error.log": {
       "type": "-",
@@ -72,9 +72,9 @@
     },
     "error_log.txt": {
       "type": "-",
-      "size": 238055,
+      "size": 257647,
       "lmtime": 0,
-      "modified": false
+      "modified": true
     },
     "estructura.txt": {
       "type": "-",
