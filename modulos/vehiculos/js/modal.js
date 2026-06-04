@@ -9,6 +9,9 @@ $(document).on("click", ".btn-view", function () {
 
     const id = $(this).data("id");
 
+    // 🔥 Guardamos el ID dentro del modal para los TABS
+    $("#modalVerVehiculo").data("id", id);
+
     $.ajax({
         url: "/modulos/vehiculos/acciones/ver.php",
         type: "GET",
@@ -22,6 +25,7 @@ $(document).on("click", ".btn-view", function () {
                 return;
             }
 
+            // Datos rápidos (vista previa)
             $("#v_placa").text(v.placa);
             $("#v_marca").text(v.marca_nombre);
             $("#v_modelo").text(v.modelo);
@@ -36,6 +40,7 @@ $(document).on("click", ".btn-view", function () {
 
             $("#btnFichaCompleta").attr("href", "/modulos/vehiculos/vistas/detalle.php?id=" + v.id);
 
+            // Abrimos el modal
             $("#modalVerVehiculo").modal("show");
         },
 
@@ -71,28 +76,16 @@ $(document).on("click", ".btn-nuevo", function () {
 
 
 // ---------------------------------------------------------
-// EDITAR VEHÍCULO
+// EDITAR VEHÍCULO (NUEVO SISTEMA CORPORATIVO)
 // ---------------------------------------------------------
 $(document).on("click", ".btn-edit", function () {
 
     const id = $(this).data("id");
 
-    $("#modalVehiculoTitulo").text("Editar vehículo");
-
-    $("#modalVehiculoBody").html(`
-        <div class="text-center py-5">
-            <div class="spinner-border text-primary"></div>
-            <p class="mt-3">Cargando datos...</p>
-        </div>
-    `);
-
-    $("#modalVehiculoBody").load(
-        "/modulos/vehiculos/vistas/formulario.php?id=" + id,
-        function () {
-            $("#modalVehiculo").modal("show");
-        }
-    );
+    // Abrimos el nuevo modal corporativo
+    abrirModalEditarVehiculo(id);
 });
+
 
 
 // ---------------------------------------------------------
@@ -138,9 +131,12 @@ $(document).on("submit", "#formConfig", function (e) {
             }
         },
 
+
         error: function (xhr) {
             console.error("❌ Error AJAX:", xhr.responseText);
             notifyError("Error de comunicación", "No se pudo guardar la configuración.");
         }
     });
 });
+
+

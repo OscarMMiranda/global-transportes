@@ -20,12 +20,12 @@
 
 
 <!-- Otros scripts -->
-<script src="/js/jszip.min.js"></script>
-<script src="/js/datatables.min.js"></script>
+<!-- <script src="/js/jszip.min.js"></script> -->
+<!-- <script src="/js/datatables.min.js"></script> -->
 
 <!-- Otros scripts necesarios -->
-<script src="https://d3sxsh8fdkh6hq.cloudfront.net/pageData/.../index.js" crossorigin="anonymous"></script>
-<script src="/js/main.min.js"></script>
+<!-- <script src="https://d3sxsh8fdkh6hq.cloudfront.net/pageData/.../index.js" crossorigin="anonymous"></script> -->
+<!-- <script src="/js/main.min.js"></script> -->
 
 </body>
 </html>

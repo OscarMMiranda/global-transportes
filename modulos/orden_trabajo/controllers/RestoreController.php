@@ -1,31 +1,75 @@
 <?php
-    //  archivo :   /modulos/orden_trabajo/controller/RestoreController.php
-    
+// archivo: /modulos/orden_trabajo/controllers/RestoreController.php
+
+header('Content-Type: application/json');
+
 session_start();
-require_once '../../includes/conexion.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/conexion.php';
+$conn = getConnection();
 
-// Verificar si el usuario tiene permisos administrativos
-if ($_SESSION['rol'] !== 'ADMIN') {
-    echo "<script>alert('❌ No tienes permisos para restaurar órdenes eliminadas.'); window.location.href='orden_trabajo.php';</script>";
-    exit();
+// ===============================
+// 🔵 VALIDAR PERMISOS
+// ===============================
+if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'ADMIN') {
+    echo json_encode(array(
+        "estado" => "error",
+        "mensaje" => "No tienes permisos para restaurar órdenes"
+    ));
+    exit;
 }
 
-if (!isset($_GET['id']) || empty($_GET['id'])) {
-    echo "<script>alert('❌ Error: No se ha especificado la orden.'); window.location.href='orden_trabajo.php';</script>";
-    exit();
+// ===============================
+// 🔵 VALIDAR MÉTODO
+// ===============================
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    echo json_encode(array(
+        "estado" => "error",
+        "mensaje" => "Método no permitido"
+    ));
+    exit;
 }
 
-$idOrden = intval($_GET['id']);
+// ===============================
+// 🔵 VALIDAR ID
+// ===============================
+if (!isset($_POST['id']) || !is_numeric($_POST['id'])) {
+    echo json_encode(array(
+        "estado" => "error",
+        "mensaje" => "ID inválido"
+    ));
+    exit;
+}
 
-// Restaurar la orden a estado ACTIVA
-$sqlActivar = "UPDATE ordenes_trabajo SET estado_ot = 'ACTIVA' WHERE id = ?";
-$stmt = $conn->prepare($sqlActivar);
-$stmt->bind_param("i", $idOrden);
+$id = intval($_POST['id']);
+$ESTADO_ACTIVA = 1; // estado corporativo para activa
+
+// ===============================
+// 🔵 RESTAURAR ORDEN
+// ===============================
+$sql = "UPDATE ordenes_trabajo SET estado_ot = ? WHERE id = ?";
+
+$stmt = $conn->prepare($sql);
+
+if (!$stmt) {
+    echo json_encode(array(
+        "estado" => "error",
+        "mensaje" => "Error preparando consulta: " . $conn->error
+    ));
+    exit;
+}
+
+$stmt->bind_param("ii", $ESTADO_ACTIVA, $id);
 
 if ($stmt->execute()) {
-    header("Location: orden_trabajo.php?success=Orden restaurada correctamente");
-    exit();
+    echo json_encode(array(
+        "estado" => "ok",
+        "mensaje" => "Orden restaurada correctamente"
+    ));
+    exit;
 } else {
-    echo "<script>alert('❌ Error al restaurar la orden.');</script>";
+    echo json_encode(array(
+        "estado" => "error",
+        "mensaje" => "Error al restaurar: " . $stmt->error
+    ));
+    exit;
 }
-?>

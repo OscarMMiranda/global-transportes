@@ -57,6 +57,7 @@ require_once __DIR__ . '/componentes/header_asignaciones.php';
 <?php include __DIR__ . '/modales/modal_detalle.php'; ?>
 <?php include __DIR__ . '/modales/modal_editar.php'; ?>
 <?php include __DIR__ . '/modales/modal_reasignar.php'; ?>
+<?php include __DIR__ . '/modales/modal_historial.php'; ?>
 
 
 <?php

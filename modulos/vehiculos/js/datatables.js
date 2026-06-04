@@ -1,6 +1,6 @@
 // archivo: /modulos/vehiculos/js/datatables.js
-// Inicialización de DataTables para Vehículos (Activos / Inactivos)
 
+// Inicialización de DataTables para Vehículos (Activos / Inactivos)
 $(function () {
 
   console.log("✅ datatables.js de Vehículos inicializado");
@@ -9,6 +9,7 @@ $(function () {
   const listarInactivosApi = "/modulos/vehiculos/acciones/listar.php?estado=inactivo";
   const listarTodosApi     = "/modulos/vehiculos/acciones/listar.php?estado=todos";
 
+  
   // ---------------------------------------------------------
   // Render de botones de acción (CORREGIDO)
   // ---------------------------------------------------------

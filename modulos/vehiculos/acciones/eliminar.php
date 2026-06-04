@@ -1,54 +1,67 @@
 <?php
-session_start();
+// archivo: /modulos/vehiculos/acciones/eliminar.php
 
-// 🔧 Configuración de logs para depuración local
-ini_set('error_log', __DIR__ . '/error_log.txt');
-error_reporting(E_ALL);
+header('Content-Type: application/json');
 ini_set('display_errors', 1);
-ini_set('log_errors', 1);
+error_reporting(E_ALL);
 
-// 1) Cargar configuración, utilidades y modelo
-require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/config.php';
-require_once __DIR__ . '/../includes/funciones.php';
-require_once __DIR__ . '/../modelo.php';
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
-// 2) Inicializar conexión y sesión
+require_once __DIR__ . '/../../../includes/config.php';
+require_once INCLUDES_PATH . '/funciones.php';
+
 $conn = getConnection();
-validarSesionAdmin();
-
-// 3) Validar método y entrada
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    error_log("[DELETE] Método inválido: " . $_SERVER['REQUEST_METHOD']);
-    exit("❌ Método no permitido.");
+if (!$conn) {
+    echo json_encode(array("ok" => false, "msg" => "Error de conexión"));
+    exit;
 }
 
-$id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
-if (!validarId($id)) {
-    error_log("[DELETE] ID inválido o no recibido.");
-    exit("❌ ID inválido.");
+// ID del vehículo
+$id = isset($_POST['id']) ? intval($_POST['id']) : 0;
+if ($id <= 0) {
+    echo json_encode(array("ok" => false, "msg" => "ID inválido"));
+    exit;
 }
 
-// 4) Ejecutar soft delete
-$usuarioId = $_SESSION['usuario_id'];
-$ipOrigen  = obtenerIP();
-error_log("[DELETE] ID recibido: {$id}, usuarioId: {$usuarioId}, IP: {$ipOrigen}");
+// Usuario que elimina
+$usuario_id = isset($_SESSION['usuario']) ? intval($_SESSION['usuario']) : 0;
 
-$response = [
-    'success' => false,
-    'message' => 'Error al eliminar el vehículo.'
-];
+// SQL — Soft delete REAL según tu tabla
+$sql = "
+UPDATE vehiculos 
+SET 
+    activo = 0,
+    fecha_borrado = NOW(),
+    borrado_por = ?
+WHERE id = ?
+LIMIT 1
+";
 
-if (eliminarVehiculo($conn, $id, $usuarioId, $ipOrigen)) {
-    registrarVehiculoHistorial($conn, $id, $usuarioId, 'Eliminado');
-    registrarEnHistorial($_SESSION['usuario'], "Eliminó vehículo ID {$id}", 'vehiculos', $ipOrigen);
-    $response['success'] = true;
-    $response['message'] = 'Vehículo eliminado correctamente.';
-    error_log("[DELETE] Vehículo ID={$id} marcado como inactivo.");
-} else {
-    error_log("[DELETE] Falló eliminación de vehículo ID={$id}");
+$stmt = $conn->prepare($sql);
+
+if (!$stmt) {
+    echo json_encode(array(
+        "ok" => false,
+        "msg" => "Error interno",
+        "error_sql" => $conn->error
+    ));
+    exit;
 }
 
-// 5) Redirigir con mensaje
-	$_SESSION['msg'] = $response['message'];
-		header("Location: ../controlador.php?action=list");
-	exit;
+$stmt->bind_param("ii", $usuario_id, $id);
+
+if (!$stmt->execute()) {
+    echo json_encode(array(
+        "ok" => false,
+        "msg" => "Error al eliminar",
+        "error_sql" => $stmt->error
+    ));
+    exit;
+}
+
+echo json_encode(array(
+    "ok" => true,
+    "msg" => "Vehículo eliminado correctamente"
+));

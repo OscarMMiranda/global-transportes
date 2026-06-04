@@ -35,7 +35,7 @@ function cargarSelect(url, selector, label) {
  * - Muestra primero la opción actual
  * - Luego muestra las opciones disponibles
  */
-function cargarSelectConActual(url, selector, label, actualId) {
+function cargarSelectConActual(url, selector, label, actualId, actualTexto) {
 
     const $select = $(selector);
     label = label || 'opción';
@@ -50,10 +50,10 @@ function cargarSelectConActual(url, selector, label, actualId) {
             $select.empty()
                    .append(`<option value="">Seleccione ${label}</option>`);
 
-            // Opción actual
+            // Opción actual con nombre/placa real
             if (actualId) {
                 $select.append(
-                    `<option value="${actualId}" selected>(Actual)</option>`
+                    `<option value="${actualId}" selected>${actualTexto} (Actual)</option>`
                 );
             }
 
@@ -72,6 +72,7 @@ function cargarSelectConActual(url, selector, label, actualId) {
         })
         .always(() => $select.prop('disabled', false));
 }
+
 
 
 

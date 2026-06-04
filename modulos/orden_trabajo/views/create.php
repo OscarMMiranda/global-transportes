@@ -1,159 +1,121 @@
 <?php
-	// archivo: /modulos/orden_trabajo/views/create.php
-	error_reporting(E_ALL);
-	ini_set('display_errors', 1);
-	ini_set('log_errors', 1);
-	ini_set('error_log', __DIR__ . '/create_error.log');
+// archivo: /modulos/orden_trabajo/views/create.php
 
-	// 🔧 Conexión
-	require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/conexion.php';
-	$conn = getConnection();
-	if (!isset($conn) || !$conn instanceof mysqli) {
-		die("❌ Error de conexión.");
-		}
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/conexion.php';
+$conn = getConnection();
 
-	// 🔧 Carga de clientes activos
-	require_once $_SERVER['DOCUMENT_ROOT'] . '/modulos/orden_trabajo/controllers/ClienteController.php';
-	$clientes = obtenerClientesActivos();
+// ===============================
+// 🔧 Generación de correlativo anual
+// ===============================
+$anioActual = date('y');
 
-	// 🔧 Carga de empresas activas
-	require_once $_SERVER['DOCUMENT_ROOT'] . '/modulos/orden_trabajo/controllers/EmpresaController.php';
-	$empresas = obtenerEmpresasActivas(); // Asegurate de que la función se llame así
-	
+$sqlUltima = "
+    SELECT numero_ot 
+    FROM ordenes_trabajo 
+    WHERE RIGHT(numero_ot, 2) = '$anioActual'
+    ORDER BY id DESC 
+    LIMIT 1
+";
 
-	require_once $_SERVER['DOCUMENT_ROOT'] . '/modulos/orden_trabajo/controllers/TipoOTController.php';
-	$tiposOT  = obtenerTiposOT();
+$res = $conn->query($sqlUltima);
 
+if ($res && $res->num_rows > 0) {
+    $ultimoOT = $res->fetch_assoc()['numero_ot'];
+    $partes = explode('-', $ultimoOT);
+    $correlativo = intval($partes[0]) + 1;
+} else {
+    $correlativo = 1;
+}
 
-	// 🔧 Generación de correlativo
+$nuevoOT = str_pad($correlativo, 4, '0', STR_PAD_LEFT) . '-' . $anioActual;
 
-	$anioActual = date('Y');
-	$sqlUltima = "SELECT numero_ot FROM ordenes_trabajo ORDER BY id DESC LIMIT 1";
-	$resultUltima = $conn->query($sqlUltima);
+// ===============================
+// 🔧 Componentes corporativos
+// ===============================
+include __DIR__ . '/partials/head.php';
+include __DIR__ . '/../componentes/header_erp.php';
 
-	$ultimoOT = '';
-	if ($resultUltima && $resultUltima->num_rows > 0) {
-    	$fila = $resultUltima->fetch_assoc();
-    	$ultimoOT = $fila['numero_ot'];
-		}
-
-
-	$partes = explode('-', $ultimoOT);
-	$correlativo = isset($partes[0]) ? intval($partes[0]) + 1 : 1;
-	$anio = date('Y');
-	$nuevoOT = $correlativo . '-' . $anio;
-
-
-	require_once __DIR__ . '/../../../includes/header_erp.php';
-
-	$pageTitle = '➕ Crear Nueva Orden de Trabajo';
-
-	include __DIR__ . '/partials/head.php';
-
+$pageTitle = "➕ Crear Nueva Orden de Trabajo";
 ?>
 
-<body>
-	<div class="container mt-4">
-		<h2 class="text-center text-success mb-4">
-			<?php echo $pageTitle; ?>
-		</h2>
+<div class="container mt-4">
 
-  		<?php if (isset($_GET['error'])): ?>
-    		<div class="alert alert-danger text-center">
-				<?= htmlspecialchars($_GET['error']) ?>
-			</div>
-  		<?php endif; ?>
+    <h2 class="text-center text-success mb-4">
+        <?= $pageTitle ?>
+    </h2>
 
-  		<form action="../controllers/CreateController.php" method="POST" class="border p-4 shadow-sm bg-light">
-    		<div class="row mb-3">
-      			<div class="col-md-4">
-        			<label for="numero_correlativo" class="form-label">Número Correlativo</label>
-        			<input type="text" name="numero_correlativo" id="numero_correlativo" class="form-control" value="<?= htmlspecialchars($nuevoOT) ?>" readonly>
-      			</div>
-      			<div class="col-md-4">
-        			<label for="anio_ot" class="form-label">Año OT</label>
-        			<input type="text" name="anio_ot" id="anio_ot" class="form-control" value="<?= date('Y') ?>" required>
-      			</div>
-      			<div class="col-md-4">
-        			<label for="fecha" class="form-label">Fecha</label>
-        			<input type="date" name="fecha" id="fecha" class="form-control" required>
-      			</div>
-    		</div>
-    		<div class="row mb-3">
-      			<div class="col-md-4">
-        			<label for="cliente_id" class="form-label">Cliente</label>
-        			<select name="cliente_id" id="cliente_id" class="form-select" required>
-          				<option value="">Seleccione...</option>
-          				<?php foreach ($clientes as $cliente): ?>
-            				<option value="<?= htmlspecialchars($cliente['id']) ?>">
-              					<?= htmlspecialchars($cliente['nombre']) ?>
-            				</option>
-          				<?php endforeach; ?>
-        			</select>
-      			</div>
-      			<div class="col-md-4">
-        			<label for="tipo_ot_id" class="form-label">Tipo OT</label>
-        			<select name="tipo_ot_id" id="tipo_ot_id" class="form-select" required>
-          				<option value="">Seleccione...</option>
-            <?php foreach ($tiposOT as $t): ?>
-              <option value="<?= htmlspecialchars($t['id']) ?>">
-                <?= htmlspecialchars("{$t['codigo']} - {$t['nombre']}") ?>
-              </option>
-            <?php endforeach; ?>
-        			</select>
-      			</div>
-      <div class="col-md-4">
-        <label for="empresa_id" class="form-label">Empresa</label>
-        <select name="empresa_id" id="empresa_id" class="form-select" required>
-  <option value="">Seleccione...</option>
-  <?php foreach ($empresas as $empresa): ?>
-    <option value="<?= htmlspecialchars($empresa['id']) ?>">
-      <?= htmlspecialchars($empresa['razon_social']) ?>
-    </option>
-  <?php endforeach; ?>
-</select>
-      </div>
-    </div>
+    <form id="formCrearOT" class="border p-4 shadow-sm bg-light">
 
-    <div class="mb-3">
-      <label for="oc_cliente" class="form-label">Orden de Cliente (OC)</label>
-      <input type="text" name="oc_cliente" id="oc_cliente" class="form-control" required>
-    </div>
+        <div class="row mb-3">
 
-    <!-- Campos dinámicos según tipo OT -->
-    <div id="campo_dam" class="mb-3 d-none">
-      <label for="numero_dam" class="form-label">Número DAM</label>
-      <input type="text" name="numero_dam" id="numero_dam" class="form-control">
-    </div>
+            <div class="col-md-4">
+                <label class="form-label">Número OT</label>
+                <input type="text" name="numero_ot" class="form-control"
+                       value="<?= htmlspecialchars($nuevoOT) ?>" readonly>
+            </div>
 
-    	<div id="campo_booking" class="mb-3 d-none">
-      		<label for="numero_booking" class="form-label">Número Booking</label>
-      		<input type="text" name="numero_booking" id="numero_booking" class="form-control">
-    	</div>
+            <div class="col-md-4">
+                <label class="form-label">Fecha</label>
+                <input type="date" name="fecha" class="form-control" required>
+            </div>
 
-    	<div id="campo_otros" class="mb-3 d-none">
-    		<label for="otros" class="form-label">Otros</label>
-    		<input type="text" name="otros" id="otros" class="form-control">
-    	</div>
+            <div class="col-md-4 position-relative">
+                <label class="form-label fw-bold">Cliente</label>
 
-		<div class="text-center mt-4">
-    		<button type="submit" class="btn btn-success btn-lg">💾 Guardar Orden</button>
-    		<a href="/modulos/orden_trabajo/index.php" class="btn btn-secondary btn-lg">
-			↩️ Volver al Listado
-			</a>
-		</div>
-	</form>
+                <!-- AUTOCOMPLETADO AJAX -->
+                <input type="text" id="cliente_nombre" class="form-control" autocomplete="off"
+                       placeholder="Buscar cliente...">
+
+                <input type="hidden" id="cliente_id" name="cliente_id">
+
+                <div id="listaClientes"
+                     class="list-group position-absolute w-100"
+                     style="z-index: 9999;"></div>
+
+                <button type="button" class="btn btn-outline-primary btn-sm mt-2" id="btnNuevoCliente">
+                    + Registrar Nuevo Cliente
+                </button>
+            </div>
+
+        </div>
+
+        <div class="row mb-3">
+
+            <div class="col-md-6">
+                <label class="form-label fw-bold">Tipo de Orden</label>
+                <select id="tipo_ot_id" name="tipo_ot_id" class="form-select" required>
+                    <option value="">Cargando...</option>
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label fw-bold">Empresa</label>
+                <select id="empresa_id" name="empresa_id" class="form-select" required>
+                    <option value="">Cargando...</option>
+                </select>
+            </div>
+
+        </div>
+
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-success btn-lg">
+                💾 Crear Orden de Trabajo
+            </button>
+
+            <a href="/modulos/orden_trabajo/index.php" class="btn btn-secondary btn-lg">
+                ↩️ Volver al Listado
+            </a>
+        </div>
+
+    </form>
+
 </div>
 
-<?php include __DIR__ . '/partials/scripts.php'; ?>
+<!-- MODAL NUEVO CLIENTE -->
+<?php include __DIR__ . '/../modales/modal_nuevo_cliente.php'; ?>
 
-	<script>
-  		// Mostrar campos dinámicos según tipo OT
-  		document.getElementById('tipo_ot_id').addEventListener('change', function() {
-    		const tipo = parseInt(this.value);
-    		document.getElementById('campo_dam').classList.toggle('d-none', tipo !== 2);
-    		document.getElementById('campo_booking').classList.toggle('d-none', tipo !== 3);
-			document.getElementById('campo_otros').classList.toggle('d-none', tipo !== 1);
-  			});
-	</script>
+<!-- SCRIPTS CORRECTOS PARA CREATE -->
+<?php include __DIR__ . '/../componentes/scripts_create.php'; ?>
+
 </body>
+</html>

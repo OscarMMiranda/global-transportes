@@ -1,16 +1,16 @@
-// archivo: /modulos/vehiculos/js/confirmacion.js
-// Función para mostrar el modal de confirmación
+	// 	archivo: /modulos/vehiculos/js/confirmacion.js
 
+	// Función para mostrar el modal de confirmación
+	// Parametros: titulo, mensaje, callback
+	function confirmarAccion(titulo, mensaje, callback) {
+		$("#confirmTitulo").text(titulo || "Confirmar acción");
+		$("#confirmMensaje").text(mensaje || "¿Está seguro de continuar?");
+		$("#modalConfirmacion").modal("show");
 
-function confirmarAccion(titulo, mensaje, callback) {
-    $("#confirmTitulo").text(titulo || "Confirmar acción");
-    $("#confirmMensaje").text(mensaje || "¿Está seguro de continuar?");
-    $("#modalConfirmacion").modal("show");
-
-    $("#btnConfirmarAccion").off("click").on("click", function () {
-        $("#modalConfirmacion").modal("hide");
-        if (typeof callback === "function") {
-            callback();
-        }
-    });
+		$("#btnConfirmarAccion").off("click").on("click", function () {
+			$("#modalConfirmacion").modal("hide");
+				if (typeof callback === "function") {
+					callback();
+				}
+    		});
 }

@@ -29,7 +29,7 @@ function active($path) {
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
         <li class="nav-item">
-          <a class="nav-link <?= active('/erp_dashboard') ?>" href="/modulos/erp_dashboard.php">
+          <a class="nav-link <?= active('/erp_dashboard') ?>" href="../../paneles/admin/vistas/dashboard.php">
             <i class="fa-solid fa-gauge me-1"></i> Dashboard
           </a>
         </li>

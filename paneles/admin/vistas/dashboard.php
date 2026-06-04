@@ -101,6 +101,7 @@
                             <?php include __DIR__ . '/../componentes/tarjetas/tarjeta_vehiculos.php'; ?>
                             <?php include __DIR__ . '/../componentes/tarjetas/tarjeta_empleados.php'; ?>
                             <?php include __DIR__ . '/../componentes/tarjetas/tarjeta_asistencias.php'; ?>
+                            <?php include __DIR__ . '/../componentes/tarjetas/tarjeta_infracciones.php'; ?>
                         </div>
                     
                 </section>

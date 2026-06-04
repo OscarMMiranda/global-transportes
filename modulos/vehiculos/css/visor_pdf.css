@@ -1,0 +1,59 @@
+/* ================================
+   VISOR PDF LATERAL CON ANIMACIÓN
+   ================================ */
+
+#visorPDF {
+    position: absolute;
+    top: 0;
+    right: -100%;
+    width: 50%;
+    height: 100%;
+    background: #fff;
+    border-left: 3px solid #0d6efd;
+    z-index: 9999;
+    box-shadow: -4px 0 10px rgba(0,0,0,0.2);
+    transition: right 0.35s ease-in-out;
+}
+
+#visorPDF.visible {
+    right: 0;
+}
+
+.visor-header {
+    padding: 10px;
+    background: #0d6efd;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.visor-close {
+    float: right;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+#iframePDF {
+    width: 100%;
+    height: 95%;
+    border: none;
+}
+
+/* ================================
+   RESPONSIVE
+   ================================ */
+
+@media (max-width: 768px) {
+    #visorPDF {
+        width: 100%;
+        border-left: none;
+        border-top: 3px solid #0d6efd;
+    }
+
+    .visor-close {
+        font-size: 28px !important;
+    }
+}

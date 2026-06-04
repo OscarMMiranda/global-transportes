@@ -1,44 +1,87 @@
 <?php
-	// archivo: /modulos/orden_trabajo/controllers/TipoOTController.php
+// archivo: /modulos/orden_trabajo/controllers/TipoOTController.php
 
-	// Inicia sesión si no está iniciada
-	if (session_status() === PHP_SESSION_NONE) {
-    	session_start();
-		}
+// ===============================
+// 🔧 Iniciar sesión si no existe
+// ===============================
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
-	// Conexión centralizada
-	require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/conexion.php';
+// ===============================
+// 🔧 Conexión centralizada
+// ===============================
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/conexion.php';
+$conn = getConnection();
 
-	/**
-	 * Devuelve un array de tipos de orden de trabajo
-	 * Cada elemento: ['id' => ..., 'codigo' => ..., 'nombre' => ...]
-	 */
-	function obtenerTiposOT() {
-    	global $conn;
+/**
+ * ============================================================
+ *  🔵 obtenerTiposOT()
+ *  Devuelve un array:
+ *  [
+ *      ["id" => 1, "codigo" => "IMP", "nombre" => "Importación"],
+ *      ["id" => 2, "codigo" => "EXP", "nombre" => "Exportación"]
+ *  ]
+ *
+ *  - Compatible con PHP 5.6
+ *  - Compatible con AJAX y vistas
+ *  - No depende del método HTTP
+ * ============================================================
+ */
+function obtenerTiposOT()
+{
+    global $conn;
 
-    	if (!$conn) {
-    	    error_log("❌ Conexión no disponible en TipoOTController");
-        	return [];
-    		}
+    if (!$conn) {
+        error_log("❌ Conexión no disponible en TipoOTController");
+        return array();
+    }
 
-    	$tiposOT = [];
-    	$sql = "SELECT id, codigo, nombre FROM tipo_ot ORDER BY nombre ASC";
-    	$stmt = $conn->prepare($sql);
-    	if (!$stmt) {
-        	error_log("❌ Error en prepare(): " . $conn->error);
-        	return [];
-    		}
+    $tipos = array();
 
-    	if ($stmt->execute()) {
-        	$resultado = $stmt->get_result();
-        	while ($fila = $resultado->fetch_assoc()) {
-            	$tiposOT[] = $fila;
-        		}
-        	$stmt->close();
-    		} 
-		else {
-        	error_log("⚠️ Error al ejecutar consulta de tipos de OT: " . $stmt->error);
-    		}
+    $sql = "SELECT id, codigo, nombre 
+            FROM tipo_ot 
+            WHERE estado = 'activo'
+            ORDER BY nombre ASC";
 
-    	return $tiposOT;
+    $stmt = $conn->prepare($sql);
+
+    if (!$stmt) {
+        error_log("❌ Error preparando consulta de tipos OT: " . $conn->error);
+        return array();
+    }
+
+    if (!$stmt->execute()) {
+        error_log("⚠️ Error ejecutando consulta de tipos OT: " . $stmt->error);
+        return array();
+    }
+
+    $res = $stmt->get_result();
+
+    while ($fila = $res->fetch_assoc()) {
+        $tipos[] = $fila;
+    }
+
+    $stmt->close();
+
+    return $tipos;
+}
+
+/**
+ * ============================================================
+ *  🔵 MODO AJAX (opcional)
+ *  Si se llama con:
+ *      /TipoOTController.php?ajax=1
+ *  devuelve JSON con los tipos de OT activos.
+ * ============================================================
+ */
+if (isset($_GET['ajax']) && $_GET['ajax'] == "1") {
+
+    $tipos = obtenerTiposOT();
+
+    echo json_encode(array(
+        "estado" => "ok",
+        "data"   => $tipos
+    ));
+    exit;
 }

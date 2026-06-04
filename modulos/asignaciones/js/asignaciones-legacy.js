@@ -1,4 +1,4 @@
-// archivo: /modulos/asignaciones/js/asignaciones.js
+// archivo: /modulos/asignaciones/js/asignaciones-legacy.js
 
 let apiUrl = null; // disponible globalmente
 

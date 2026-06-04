@@ -1,111 +1,115 @@
+/* ============================================
+   MÓDULO: ORDEN DE TRABAJO
+   archivo: /modulos/orden_trabajo/css/orden_trabajo.css
+   ============================================ */
+
 /* === General === */
 body {
-  background-color: #f8f9fa;
-  font-family: 'Segoe UI', Tahoma, sans-serif;
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
 }
 
 /* === Títulos === */
 h2 {
-  font-weight: 600;
-  letter-spacing: 0.5px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
 }
 
 /* === Botones === */
 .btn-lg {
-  padding: 0.6rem 1.2rem;
-  font-size: 1.1rem;
-  font-weight: 500;
-  border-radius: 0.4rem;
+    padding: 0.6rem 1.2rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    border-radius: 0.4rem;
 }
 
 .btn-sm {
-  min-width: 100px;
-  text-align: center;
+    min-width: 100px;
+    text-align: center;
 }
 
 .btn-success i,
 .btn-danger i,
 .btn-warning i,
 .btn-primary i {
-  margin-right: 0.4rem;
+    margin-right: 0.4rem;
 }
 
-/* === Tablas === */
-.tabla-ordenes {
-  border: 1px solid #dee2e6;
-  border-radius: 0.4rem;
-  overflow: hidden;
+/* ============================================
+   TABLAS
+   ============================================ */
+
+.ot-tabla {
+    border: 1px solid #dee2e6;
+    border-radius: 0.4rem;
+    overflow: hidden;
 }
 
-.tabla-ordenes th {
-  background-color: #0d6efd;
-  color: white;
-  text-align: center;
-  font-weight: 500;
+.ot-tabla th {
+    background-color: #0d6efd;
+    color: white;
+    text-align: center;
+    font-weight: 500;
 }
 
-.tabla-ordenes td {
-  text-align: center;
-  vertical-align: middle;
+.ot-tabla td {
+    text-align: center;
+    vertical-align: middle;
+    font-size: 0.9rem;
 }
 
-/* === Estados visuales === */
-.estado-activa {
-  background-color: #d1e7dd;
-  color: #0f5132;
+/* ============================================
+   ESTADOS VISUALES
+   ============================================ */
+
+.ot-estado-activa {
+    background-color: #d1e7dd;
+    color: #0f5132;
 }
 
-.estado-anulada {
-  background-color: #fff3cd;
-  color: #664d03;
+.ot-estado-anulada {
+    background-color: #fff3cd;
+    color: #664d03;
 }
 
-.estado-eliminada {
-  background-color: #f8d7da;
-  color: #842029;
+.ot-estado-eliminada {
+    background-color: #f8d7da;
+    color: #842029;
 }
 
-/* === Responsive === */
-@media (max-width: 768px) {
-  .btn-lg {
-    font-size: 1rem;
-    padding: 0.5rem 1rem;
-  }
-
-  h2 {
-    font-size: 1.5rem;
-  }
-}
+/* ============================================
+   TABS
+   ============================================ */
 
 .nav-tabs .nav-link {
-  font-weight: 500;
-  font-size: 1.05rem;
-  padding: 0.6rem 1rem;
+    font-weight: 500;
+    font-size: 1.05rem;
+    padding: 0.6rem 1rem;
 }
 
 .tab-content {
-  border: 1px solid #dee2e6;
-  border-top: none;
-  border-radius: 0 0 0.5rem 0.5rem;
-  background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-top: none;
+    border-radius: 0 0 0.5rem 0.5rem;
+    background-color: #fff;
 }
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
 
 @media (max-width: 768px) {
-  .d-flex.justify-content-end {
-    justify-content: center !important;
-  }
-}
 
+    .btn-lg {
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+    }
 
-.tabla-ordenes th {
-  background-color: #0d6efd;
-  color: white;
-  font-weight: 500;
-  text-align: center;
-}
+    h2 {
+        font-size: 1.5rem;
+    }
 
-.tabla-ordenes td {
-  font-size: 0.9rem;
-  vertical-align: middle;
-  text-align: center;
+    .d-flex.justify-content-end {
+        justify-content: center !important;
+    }
 }

@@ -1,0 +1,85 @@
+/* ============================================================
+   ESTILOS BASE DEL MÓDULO INFRACCIONES
+   Archivo: /modulos/infracciones/css/estilos.css
+   ============================================================ */
+
+/* Fondo general */
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+/* Títulos */
+h4, h5 {
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+/* Botones */
+.btn {
+    font-weight: 500;
+}
+
+.btn-sm {
+    min-width: 90px;
+    text-align: center;
+}
+
+.btn i {
+    margin-right: 4px;
+}
+
+/* Tarjetas */
+.card {
+    border-radius: 0.45rem;
+}
+
+/* Tabs */
+.nav-tabs .nav-link {
+    font-weight: 500;
+    font-size: 1.05rem;
+    padding: 0.6rem 1rem;
+}
+
+.nav-tabs .nav-link.active {
+    background-color: #0d6efd;
+    color: #fff;
+}
+
+/* Tabla */
+.table thead th {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table tbody td {
+    vertical-align: middle;
+    font-size: 0.92rem;
+}
+
+/* Estados visuales (si se usan más adelante) */
+.estado-grave {
+    background-color: #f8d7da;
+    color: #842029;
+}
+
+.estado-muy-grave {
+    background-color: #f5c2c7;
+    color: #58151c;
+}
+
+.estado-leve {
+    background-color: #d1e7dd;
+    color: #0f5132;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    h4 {
+        font-size: 1.3rem;
+    }
+
+    .btn {
+        font-size: 0.9rem;
+    }
+}

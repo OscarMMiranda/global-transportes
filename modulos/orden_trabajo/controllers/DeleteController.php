@@ -1,23 +1,63 @@
 <?php
-	//  archivo :   /modulos/orden_trabajo/controllers/DeleteController.php
+// archivo: /modulos/orden_trabajo/controllers/DeleteController.php
 
-	session_start();
-	require_once '../../includes/conexion.php';
+header('Content-Type: application/json');
 
-	if (!isset($_GET['id']) || empty($_GET['id'])) {
-		die("❌ Error: ID de orden no proporcionado.");
-		}
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/conexion.php';
+$conn = getConnection();
 
-	$idOrden = intval($_GET['id']);
+// ===============================
+// 🔵 VALIDAR MÉTODO
+// ===============================
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    echo json_encode(array(
+        "estado" => "error",
+        "mensaje" => "Método no permitido"
+    ));
+    exit;
+}
 
-	// Actualizar el estado de la orden a "Eliminada" (ID = 8)
-	$sqlActualizar = "UPDATE ordenes_trabajo SET estado_ot = 8 WHERE id = ?";
-	$stmt = $conn->prepare($sqlActualizar);
-	$stmt->bind_param("i", $idOrden);
-	if ($stmt->execute()) {
-		header("Location: orden_trabajo.php?success=✅ Orden eliminada correctamente.");
-		} 
-	else {
-		header("Location: orden_trabajo.php?error=❌ Error al eliminar la orden.");
-		}
-?>
+// ===============================
+// 🔵 VALIDAR ID
+// ===============================
+if (!isset($_POST['id']) || !is_numeric($_POST['id'])) {
+    echo json_encode(array(
+        "estado" => "error",
+        "mensaje" => "ID inválido"
+    ));
+    exit;
+}
+
+$id = intval($_POST['id']);
+$ESTADO_ELIMINADA = 8;
+
+// ===============================
+// 🔵 ACTUALIZAR ESTADO
+// ===============================
+$sql = "UPDATE ordenes_trabajo SET estado_ot = ? WHERE id = ?";
+
+$stmt = $conn->prepare($sql);
+
+if (!$stmt) {
+    echo json_encode(array(
+        "estado" => "error",
+        "mensaje" => "Error preparando consulta: " . $conn->error
+    ));
+    exit;
+}
+
+$stmt->bind_param("ii", $ESTADO_ELIMINADA, $id);
+
+if ($stmt->execute()) {
+    echo json_encode(array(
+        "estado" => "ok",
+        "mensaje" => "Orden eliminada correctamente"
+    ));
+    exit;
+} else {
+    echo json_encode(array(
+        "estado" => "error",
+        "mensaje" => "Error al eliminar: " . $stmt->error
+    ));
+    exit;
+}

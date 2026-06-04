@@ -1,55 +1,82 @@
 <?php
-    //  archivo :   /modulos/orden_trabajo/api/BuscarOrden.php
+// archivo: /modulos/orden_trabajo/api/BuscarOrden.php
+
+header('Content-Type: application/json');
 
 session_start();
-require_once '../../includes/conexion.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/conexion.php';
+$conn = getConnection();
 
-// Activar depuración
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-ini_set('log_errors', 1);
-ini_set('error_log', __DIR__ . '/error_log.txt');
-
-// Verificar acceso solo para administradores
-if (!isset($_SESSION['usuario']) || !isset($_SESSION['rol_nombre']) || $_SESSION['rol_nombre'] !== 'admin') {
-    echo json_encode(["success" => false, "message" => "❌ Acceso denegado."]);
+// ===============================
+// 🔵 VALIDAR PERMISOS
+// ===============================
+if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'ADMIN') {
+    echo json_encode(array(
+        "estado" => "error",
+        "mensaje" => "Acceso denegado"
+    ));
     exit;
 }
 
-// Verificar que se recibió el número OT
-if (!isset($_GET['numero_ot']) || empty($_GET['numero_ot'])) {
-    echo json_encode(["success" => false, "message" => "❌ Número OT no proporcionado."]);
+// ===============================
+// 🔵 VALIDAR PARÁMETRO
+// ===============================
+if (!isset($_GET['numero_ot']) || trim($_GET['numero_ot']) === '') {
+    echo json_encode(array(
+        "estado" => "error",
+        "mensaje" => "Número OT no proporcionado"
+    ));
     exit;
 }
 
-$numero_ot = trim($_GET['numero_ot']);
+$numeroOT = mysqli_real_escape_string($conn, trim($_GET['numero_ot']));
 
-// Consultar la orden en la base de datos
-$sqlOrden = "SELECT id, numero_ot, fecha, cliente_id, tipo_ot_id, empresa_id 
-             FROM ordenes_trabajo WHERE numero_ot = ?";
-$stmtOrden = $conn->prepare($sqlOrden);
-$stmtOrden->bind_param("s", $numero_ot);
-$stmtOrden->execute();
-$resultOrden = $stmtOrden->get_result();
+// ===============================
+// 🔵 CONSULTAR ORDEN
+// ===============================
+$sql = "
+    SELECT 
+        id,
+        numero_ot,
+        fecha,
+        cliente_id,
+        tipo_ot_id,
+        empresa_id,
+        estado_ot
+    FROM ordenes_trabajo
+    WHERE numero_ot = ?
+    LIMIT 1
+";
 
-if ($resultOrden->num_rows === 0) {
-    echo json_encode(["success" => false, "message" => "❌ Orden no encontrada."]);
+$stmt = $conn->prepare($sql);
+
+if (!$stmt) {
+    echo json_encode(array(
+        "estado" => "error",
+        "mensaje" => "Error preparando consulta: " . $conn->error
+    ));
     exit;
 }
 
-$orden = $resultOrden->fetch_assoc();
-$stmtOrden->close();
+$stmt->bind_param("s", $numeroOT);
+$stmt->execute();
+$res = $stmt->get_result();
 
-// Enviar respuesta en formato JSON
-echo json_encode([
-    "success" => true,
-    "id" => $orden['id'],
-    "numero_ot" => $orden['numero_ot'],
-    "fecha" => $orden['fecha'],
-    "cliente_id" => $orden['cliente_id'],
-    "tipo_ot_id" => $orden['tipo_ot_id'],
-    "empresa_id" => $orden['empresa_id']
-]);
+if ($res->num_rows === 0) {
+    echo json_encode(array(
+        "estado" => "error",
+        "mensaje" => "Orden no encontrada"
+    ));
+    exit;
+}
 
+$orden = $res->fetch_assoc();
+
+// ===============================
+// 🔵 RESPUESTA JSON CORPORATIVA
+// ===============================
+echo json_encode(array(
+    "estado" => "ok",
+    "data"   => $orden
+));
 exit;
-?>

@@ -23,11 +23,11 @@ function initFiltrosAsignaciones() {
 function cargarFiltroConductores() {
     $.getJSON('api/recursos/conductores.php', function (data) {
 
-        const $select = $('[data-role="filtro-conductor"]');
+        var $select = $('[data-role="filtro-conductor"]');
         $select.empty().append('<option value="">Todos</option>');
 
-        data.forEach(item => {
-            $select.append(`<option value="${item.id}">${item.nombre}</option>`);
+        data.forEach(function(item) {
+            $select.append('<option value="' + item.nombre + '">' + item.nombre + '</option>');
         });
     });
 }
@@ -40,11 +40,11 @@ function cargarFiltroConductores() {
 function cargarFiltroTractos() {
     $.getJSON('api/recursos/tractos.php', function (data) {
 
-        const $select = $('[data-role="filtro-tracto"]');
+        var $select = $('[data-role="filtro-tracto"]');
         $select.empty().append('<option value="">Todos</option>');
 
-        data.forEach(item => {
-            $select.append(`<option value="${item.id}">${item.placa}</option>`);
+        data.forEach(function(item) {
+            $select.append('<option value="' + item.placa + '">' + item.placa + '</option>');
         });
     });
 }
@@ -57,11 +57,11 @@ function cargarFiltroTractos() {
 function cargarFiltroCarretas() {
     $.getJSON('api/recursos/carretas.php', function (data) {
 
-        const $select = $('[data-role="filtro-carreta"]');
+        var $select = $('[data-role="filtro-carreta"]');
         $select.empty().append('<option value="">Todos</option>');
 
-        data.forEach(item => {
-            $select.append(`<option value="${item.id}">${item.placa}</option>`);
+        data.forEach(function(item) {
+            $select.append('<option value="' + item.placa + '">' + item.placa + '</option>');
         });
     });
 }
@@ -87,6 +87,13 @@ function initFiltroEstado() {
 function bindEventosFiltros() {
 
     $('[data-role^="filtro-"]').on('change', function () {
+
+        // Actualizar filtros dependientes
+        if (typeof actualizarFiltrosDependientes === 'function') {
+            actualizarFiltrosDependientes();
+        }
+
+        // Recargar tabla
         if (window.tabla) {
             window.tabla.ajax.reload();
         }
@@ -109,4 +116,40 @@ function obtenerParametrosFiltros() {
         carreta: $('[data-role="filtro-carreta"]').val(),
         estado: $('[data-role="filtro-estado"]').val()
     };
+}
+
+
+
+/* ============================================================
+   FILTROS DEPENDIENTES
+   ============================================================ */
+
+function actualizarFiltrosDependientes() {
+
+    var filtros = obtenerParametrosFiltros();
+
+    $.getJSON('api/filtros.php', filtros, function (data) {
+
+        actualizarSelect('[data-role="filtro-conductor"]', data.conductores);
+        actualizarSelect('[data-role="filtro-tracto"]', data.tractos);
+        actualizarSelect('[data-role="filtro-carreta"]', data.carretas);
+        actualizarSelect('[data-role="filtro-estado"]', data.estados);
+    });
+}
+
+function actualizarSelect(selector, valores) {
+
+    var $sel = $(selector);
+    var valorActual = $sel.val();
+
+    $sel.empty();
+    $sel.append('<option value="">Todos</option>');
+
+    valores.forEach(function(v) {
+        $sel.append('<option value="' + v + '">' + v + '</option>');
+    });
+
+    if (valores.indexOf(valorActual) !== -1) {
+        $sel.val(valorActual);
+    }
 }

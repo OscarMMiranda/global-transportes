@@ -18,5 +18,8 @@ const API = {
     // RECURSOS (DISPONIBLES)
     conductoresDisponibles: () => 'api/recursos/conductores_disponibles.php',
     tractosDisponibles: () => 'api/recursos/tractos_disponibles.php',
-    carretasDisponibles: () => 'api/recursos/carretas_disponibles.php'
+    carretasDisponibles: () => 'api/recursos/carretas_disponibles.php',
+
+    // 🔥 FALTABA ESTA FUNCIÓN
+    historial: id => `api/historial.php?id=${id}`
 };

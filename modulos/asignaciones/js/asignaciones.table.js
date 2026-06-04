@@ -3,14 +3,25 @@
 
 function initTablaAsignaciones() {
 
+    // ============================================================
+    // EVITAR REINICIALIZACIÓN DE DATATABLE
+    // ============================================================
+    if ($.fn.DataTable.isDataTable('#tablaAsignaciones')) {
+        console.warn("Destruyendo instancia previa de DataTable...");
+        $('#tablaAsignaciones').DataTable().clear().destroy();
+    }
+
+    // ============================================================
+    // CREAR TABLA
+    // ============================================================
     return $('#tablaAsignaciones').DataTable({
 
-        processing: true,
+        processing: false,
         serverSide: false,
         responsive: true,
 
         ajax: {
-            url: API.listar(),
+            url: 'api/listar.php',
             type: 'GET',
 
             // Enviar filtros al backend
@@ -47,9 +58,6 @@ function initTablaAsignaciones() {
 
             { data: 'estado' },
 
-            // ============================================================
-            // COLUMNA DE ACCIONES
-            // ============================================================
             {
                 data: 'id',
                 orderable: false,
