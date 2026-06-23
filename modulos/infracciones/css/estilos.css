@@ -1,6 +1,6 @@
 /* ============================================================
    ESTILOS BASE DEL MÓDULO INFRACCIONES
-   Archivo: /modulos/infracciones/css/estilos.css
+   Archivo: /modulos/infracciones/css/estilos.css -- OMMZ
    ============================================================ */
 
 /* Fondo general */
@@ -21,7 +21,8 @@ h4, h5 {
 }
 
 .btn-sm {
-    min-width: 90px;
+    min-width: auto !important;
+    padding: 4px 8px !important;
     text-align: center;
 }
 
@@ -57,29 +58,64 @@ h4, h5 {
     font-size: 0.92rem;
 }
 
-/* Estados visuales (si se usan más adelante) */
-.estado-grave {
-    background-color: #f8d7da;
-    color: #842029;
-}
-
-.estado-muy-grave {
-    background-color: #f5c2c7;
-    color: #58151c;
-}
-
-.estado-leve {
-    background-color: #d1e7dd;
-    color: #0f5132;
-}
+/* Estados visuales */
+.estado-grave { background-color: #f8d7da; color: #842029; }
+.estado-muy-grave { background-color: #f5c2c7; color: #58151c; }
+.estado-leve { background-color: #d1e7dd; color: #0f5132; }
 
 /* Responsive */
 @media (max-width: 768px) {
-    h4 {
-        font-size: 1.3rem;
-    }
+    h4 { font-size: 1.3rem; }
+    .btn { font-size: 0.9rem; }
+}
 
-    .btn {
-        font-size: 0.9rem;
-    }
+/* ============================================================
+   CONTROL REAL DE ANCHOS (CON SALTO DE LÍNEA)
+   ============================================================ */
+
+/* Tabla fija para respetar anchos */
+#tablaInfracciones {
+    table-layout: fixed !important;
+}
+
+/* Permitir salto de línea en TODAS las celdas */
+table.dataTable td {
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+}
+
+/* Cabeceras sin salto */
+#tablaInfracciones th {
+    white-space: nowrap !important;
+}
+
+/* Descripción con salto de línea (CF) */
+.col-descripcion {
+    width: 200px !important;
+    max-width: 200px !important;
+    white-space: normal !important;      /* PERMITE SALTO */
+    word-wrap: break-word !important;    /* ROMPE PALABRAS LARGAS */
+    word-break: break-word !important;   /* EVITA EXPANSIÓN */
+    overflow: hidden !important;
+}
+
+/* Entidad con salto */
+.col-entidad {
+    width: 150px !important;
+    max-width: 150px !important;
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+    overflow: hidden !important;
+}
+
+/* Acciones */
+.acciones-columna {
+    min-width: 180px !important;
+    white-space: nowrap !important;
+}
+
+#tablaInfracciones td .btn {
+    margin-right: 4px;
 }

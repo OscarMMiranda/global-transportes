@@ -1,4 +1,4 @@
-// archivo: /modulos/infracciones/assets/accion.js
+// archivo: /modulos/infracciones/assets/acciones.js
 // Acciones principales del módulo Infracciones
 
 const DEBUG_INF = true;
@@ -67,7 +67,6 @@ function editarInfraccion(id) {
             return;
         }
 
-        // Llenar formulario EDITAR
         $("#editar_id").val(data.id);
         $("#editar_codigo").val(data.codigo);
         $("#editar_descripcion").val(data.descripcion);
@@ -76,7 +75,6 @@ function editarInfraccion(id) {
         $("#editar_porcentaje_uit").val(data.porcentaje_uit);
         $("#editar_entidad_emisora_id").val(data.entidad_emisora_id);
 
-        // ABRIR MODAL
         $("#modalEditar").modal("show");
 
     }, "json").fail(function (xhr) {
@@ -157,6 +155,37 @@ $(document).on("submit", "#formEditarInfraccion", function (e) {
     }, "json");
 });
 
+
+/* ============================================================
+   SUBMIT: ELIMINAR (DESACTIVAR)
+   ============================================================ */
+$(document).on("submit", "#formEliminarInfraccion", function(e) {
+    e.preventDefault();
+
+    console.log("ACCION: submit formEliminarInfraccion");
+
+    $.post("ajax/desactivar.php", $(this).serialize(), function(res) {
+
+        console.log("RESPUESTA DESACTIVAR:", res);
+
+        if (res.ok) {
+            Swal.fire("Desactivado", "La infracción fue desactivada correctamente", "success");
+            $("#modalEliminar").modal("hide");
+            recargarTabla();
+        } else {
+            Swal.fire("Error", res.msg || "No se pudo desactivar", "error");
+        }
+
+    }, "json").fail(function(xhr) {
+        console.error("ERROR AJAX DESACTIVAR:", xhr.responseText);
+        Swal.fire("Error", "Error al desactivar la infracción", "error");
+    });
+});
+
+
+
+
+
 /* ============================================================
    RECARGAR DATATABLES SIN REINICIALIZAR
    ============================================================ */
@@ -164,4 +193,48 @@ function recargarTabla() {
     if ($.fn.DataTable.isDataTable("#tablaInfracciones")) {
         $("#tablaInfracciones").DataTable().ajax.reload(null, false);
     }
+}
+
+/* ============================================================
+   VER (solo lectura)
+   ============================================================ */
+function verInfraccion(id) {
+
+    console.log("ACCION: verInfraccion(", id, ")");
+
+    $.ajax({
+        url: 'ajax/ver.php',   // ARCHIVO MODULAR CORRECTO
+        type: 'POST',
+        dataType: 'json',
+        data: { id: id },
+
+        success: function(respuesta){
+
+            console.log("RESPUESTA VER:", respuesta);
+
+            if (!respuesta || respuesta.status !== "ok") {
+                Swal.fire("Error", respuesta.mensaje || "No se encontraron datos", "error");
+                return;
+            }
+
+            let d = respuesta.data;
+
+            // LLENAR MODAL
+            $("#ver_codigo").text(d.codigo);
+            $("#ver_descripcion").text(d.descripcion);
+            $("#ver_gravedad").text(d.gravedad);
+            $("#ver_puntos").text(d.puntos);
+            $("#ver_porcentaje_uit").text(d.porcentaje_uit + "%");
+            $("#ver_entidad").text(d.entidad_nombre || d.entidad_emisora_id);
+            $("#ver_monto_base").text("S/ " + d.monto_base);
+
+            // ABRIR MODAL
+            $("#modalVer").modal("show");
+        },
+
+        error: function(xhr){
+            console.error("ERROR AJAX VER:", xhr.responseText);
+            Swal.fire("Error", "No se pudo obtener la infracción", "error");
+        }
+    });
 }

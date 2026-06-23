@@ -1,0 +1,49 @@
+/Users/oscarmiranda/.vscode/extensions/ruakr.ftp-kr-1.4.5
+
+[ftp-kr Reporting]
+Task: config loading
+platform: darwin
+arch: arm64
+
+[Error]
+message: getaddrinfo ENOTFOUND globaltransportes.com[ENOTFOUND]
+code: ENOTFOUND
+errno: -3008
+
+[Stack Trace]
+Error: getaddrinfo ENOTFOUND globaltransportes.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+    at promiseErrorWrap (/Users/oscarmiranda/.vscode/extensions/ruakr.ftp-kr-1.4.5/src/util/util.ts:211:16)
+    at FtpConnection.connect (/Users/oscarmiranda/.vscode/extensions/ruakr.ftp-kr-1.4.5/src/vsutil/fileinterface.ts:43:26)
+    at tryToConnect (/Users/oscarmiranda/.vscode/extensions/ruakr.ftp-kr-1.4.5/src/ftpmgr.ts:263:46)
+    at FtpManager.connect (/Users/oscarmiranda/.vscode/extensions/ruakr.ftp-kr-1.4.5/src/ftpmgr.ts:333:11)
+    at FtpCacher._list (/Users/oscarmiranda/.vscode/extensions/ruakr.ftp-kr-1.4.5/src/ftpcacher.ts:851:21)
+    at /Users/oscarmiranda/.vscode/extensions/ruakr.ftp-kr-1.4.5/src/ftpcacher.ts:875:19
+    at Scheduler.task (/Users/oscarmiranda/.vscode/extensions/ruakr.ftp-kr-1.4.5/src/vsutil/work.ts:272:11)
+    at FtpCacher.ftpList (/Users/oscarmiranda/.vscode/extensions/ruakr.ftp-kr-1.4.5/src/ftpcacher.ts:873:25)
+    at /Users/oscarmiranda/.vscode/extensions/ruakr.ftp-kr-1.4.5/src/ftpcacher.ts:201:16
+    at Scheduler.task (/Users/oscarmiranda/.vscode/extensions/ruakr.ftp-kr-1.4.5/src/vsutil/work.ts:272:11)
+    at FtpCacher.init (/Users/oscarmiranda/.vscode/extensions/ruakr.ftp-kr-1.4.5/src/ftpcacher.ts:198:25)
+    at /Users/oscarmiranda/.vscode/extensions/ruakr.ftp-kr-1.4.5/src/watcher.ts:94:31
+    at processFire (/Users/oscarmiranda/.vscode/extensions/ruakr.ftp-kr-1.4.5/src/util/event.ts:50:18)
+
+[ftp-kr.json]
+{
+    "host": "*****************.***",
+    "port": 21,
+    "username": "wi010232@globaltransportes.com",
+    "password": "********",
+    "protocol": "ftp",
+    "passive": true,
+    "remotePath": "/",
+    "uploadOnSave": false,
+    "autoDelete": false,
+    "autoUpload": false,
+    "syncMode": "update",
+    "ignore": [
+        ".git",
+        ".vscode",
+        "node_modules"
+    ],
+    "timeout": 30000
+}

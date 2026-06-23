@@ -6,22 +6,46 @@ require_once __DIR__ . '/../../../includes/config.php';
 
 header('Content-Type: application/json');
 
+// Instanciar controlador
 $controller = new InfraccionesController($GLOBALS['db']);
 
-// Campos obligatorios
-$required = array("id","codigo","descripcion","gravedad","puntos","porcentaje_uit","entidad_emisora_id");
+// ============================================================
+// VALIDAR CAMPOS OBLIGATORIOS
+// ============================================================
+$required = array(
+    "id",
+    "codigo",
+    "descripcion",
+    "gravedad",
+    "puntos",
+    "porcentaje_uit",
+    "entidad_emisora_id"
+);
 
 foreach ($required as $r) {
     if (!isset($_POST[$r]) || trim($_POST[$r]) === "") {
-        echo json_encode(array("ok" => false, "msg" => "Campo obligatorio: $r"));
+        echo json_encode(array(
+            "ok" => false,
+            "msg" => "Campo obligatorio: $r"
+        ));
         exit;
     }
 }
 
-$id = intval($_POST["id"]);
-$codigo = trim($_POST["codigo"]);
+// ============================================================
+// SANITIZAR DATOS
+// ============================================================
+$id      = intval($_POST["id"]);
+$codigo  = trim($_POST["codigo"]);
+$desc    = trim($_POST["descripcion"]);
+$grav    = trim($_POST["gravedad"]);
+$puntos  = intval($_POST["puntos"]);
+$porc    = floatval($_POST["porcentaje_uit"]);
+$entidad = intval($_POST["entidad_emisora_id"]);
 
-// Validar código único excluyendo el ID actual
+// ============================================================
+// VALIDAR CÓDIGO ÚNICO EXCLUYENDO EL MISMO ID
+// ============================================================
 if ($controller->existeCodigo($codigo, $id)) {
     echo json_encode(array(
         "ok" => false,
@@ -30,19 +54,28 @@ if ($controller->existeCodigo($codigo, $id)) {
     exit;
 }
 
-// Sanitización
+// ============================================================
+// ARMAR DATA PARA ACTUALIZAR
+// ============================================================
 $data = array(
     "id" => $id,
     "codigo" => $codigo,
-    "descripcion" => trim($_POST["descripcion"]),
-    "gravedad" => trim($_POST["gravedad"]),
-    "puntos" => intval($_POST["puntos"]),
-    "porcentaje_uit" => floatval($_POST["porcentaje_uit"]),
-    "entidad_emisora_id" => intval($_POST["entidad_emisora_id"])
+    "descripcion" => $desc,
+    "gravedad" => $grav,
+    "puntos" => $puntos,
+    "porcentaje_uit" => $porc,
+    "entidad_emisora_id" => $entidad
 );
 
-// Actualizar
+// ============================================================
+// ACTUALIZAR
+// ============================================================
 $res = $controller->actualizar($data);
 
-echo json_encode(array("ok" => $res ? true : false));
+// ============================================================
+// RESPUESTA
+// ============================================================
+echo json_encode(array(
+    "ok" => $res ? true : false
+));
 exit;

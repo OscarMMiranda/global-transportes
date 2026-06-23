@@ -87,13 +87,19 @@ class InfraccionesModel {
     }
 
     /* ============================================================
-       VALIDAR CÓDIGO ÚNICO
+       VALIDAR CÓDIGO ÚNICO (CORREGIDO)
        ============================================================ */
-    public function existeCodigo($codigo, $excluirId = 0){
-        $codigo = $this->db->real_escape_string($codigo);
+    public function existeCodigo($codigo, $entidad_emisora_id, $excluirId = 0)
+    {
+        $codigo  = $this->db->real_escape_string($codigo);
+        $entidad = intval($entidad_emisora_id);
         $excluirId = intval($excluirId);
 
-        $sql = "SELECT id FROM infracciones WHERE codigo = '$codigo'";
+        $sql = "SELECT id 
+                FROM infracciones 
+                WHERE codigo = '$codigo'
+                AND entidad_emisora_id = $entidad
+                AND estado = 'Activo'";
 
         if ($excluirId > 0) {
             $sql .= " AND id <> $excluirId";

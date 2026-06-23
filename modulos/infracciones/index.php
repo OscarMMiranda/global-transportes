@@ -48,6 +48,8 @@ include __DIR__ . '/componentes/head.php';
 <?php include __DIR__ . '/modales/modal_crear.php'; ?>
 <?php include __DIR__ . '/modales/modal_editar.php'; ?>
 <?php include __DIR__ . '/modales/modal_eliminar.php'; ?>
+<?php include __DIR__ . '/modales/modal_ver.php'; ?>
+
 
 <?php include __DIR__ . '/componentes/scripts.php'; ?>
 

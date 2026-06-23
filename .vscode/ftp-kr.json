@@ -6,7 +6,12 @@
   "protocol": "ftp",
   "passive": true,
   "remotePath": "/",
-  "uploadOnSave": true,
+  
+  "uploadOnSave": false,
+  "autoDelete": false,
+  "autoUpload": false,
+  "syncMode": "update",
+
   "ignore": [
     ".git",
     ".vscode",

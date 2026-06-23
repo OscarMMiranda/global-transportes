@@ -19,6 +19,12 @@
       "lmtime": 0,
       "modified": false
     },
+    "acciones.js": {
+      "type": "-",
+      "size": 7566,
+      "lmtime": 0,
+      "modified": false
+    },
     "admin": {},
     "assets": {},
     "bootstrap_sitio.php": {
@@ -72,9 +78,9 @@
     },
     "error_log.txt": {
       "type": "-",
-      "size": 355607,
+      "size": 378991,
       "lmtime": 0,
-      "modified": false
+      "modified": true
     },
     "estructura.txt": {
       "type": "-",
@@ -124,7 +130,136 @@
       "lmtime": 0,
       "modified": false
     },
-    "modulos": {},
+    "modulos": {
+      "asignaciones": {},
+      "asignaciones_conductor": {},
+      "asistencias": {},
+      "assets": {},
+      "clientes": {},
+      "componentes": {},
+      "comunes": {},
+      "conductores": {},
+      "documentos": {},
+      "documentos_conductores": {},
+      "documentos_empresas": {},
+      "documentos_vehiculos": {},
+      "empleados": {},
+      "infracciones": {
+        "ajax": {
+          "actualizar.php": {
+            "type": "-",
+            "size": 1375,
+            "lmtime": 0,
+            "modified": false
+          },
+          "eliminar.php": {
+            "type": "-",
+            "size": 835,
+            "lmtime": 0,
+            "modified": false
+          },
+          "guardar.php": {
+            "type": "-",
+            "size": 1274,
+            "lmtime": 0,
+            "modified": false
+          },
+          "infraccionesAjax.php": {
+            "type": "-",
+            "size": 4299,
+            "lmtime": 1781570801931.8696,
+            "modified": false
+          },
+          "listar.php": {
+            "type": "-",
+            "size": 466,
+            "lmtime": 0,
+            "modified": false
+          },
+          "obtener.php": {
+            "type": "-",
+            "size": 2309,
+            "lmtime": 0,
+            "modified": false
+          }
+        },
+        "assets": {
+          "acciones.js": {
+            "type": "-",
+            "size": 7064,
+            "lmtime": 1781187784747.9707,
+            "modified": false
+          },
+          "datatables.js": {
+            "type": "-",
+            "size": 1166,
+            "lmtime": 0,
+            "modified": false
+          },
+          "form.js": {
+            "type": "-",
+            "size": 2481,
+            "lmtime": 0,
+            "modified": false
+          },
+          "modal.js": {
+            "type": "-",
+            "size": 1978,
+            "lmtime": 0,
+            "modified": false
+          },
+          "validaciones.js": {
+            "type": "-",
+            "size": 1672,
+            "lmtime": 0,
+            "modified": false
+          }
+        },
+        "componentes": {},
+        "controllers": {
+          "infraccionesController.php": {
+            "type": "-",
+            "size": 3614,
+            "lmtime": 1781877747886.5198,
+            "modified": false
+          }
+        },
+        "css": {
+          "estilos.css": {
+            "type": "-",
+            "size": 2640,
+            "lmtime": 1781570360566.7832,
+            "modified": false
+          }
+        },
+        "error_log.txt": {
+          "type": "-",
+          "size": 3354,
+          "lmtime": 0,
+          "modified": false
+        },
+        "index.php": {
+          "type": "-",
+          "size": 1393,
+          "lmtime": 0,
+          "modified": false
+        },
+        "js": {},
+        "modales": {},
+        "models": {},
+        "vistas": {}
+      },
+      "lugares": {},
+      "mantenimiento": {},
+      "ordenes": {},
+      "orden_trabajo": {},
+      "PRUEBAS": {},
+      "seguridad": {},
+      "ubicaciones": {},
+      "ubigeo": {},
+      "usuarios": {},
+      "vehiculos": {}
+    },
     "nosotros.html": {
       "type": "-",
       "size": 2374,

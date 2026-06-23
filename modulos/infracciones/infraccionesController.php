@@ -50,17 +50,35 @@ class InfraccionesController {
     }
 
     /* ============================================================
-       VALIDAR CÓDIGO ÚNICO (LLAMA AL MODELO)
+       VALIDAR CÓDIGO ÚNICO
        ============================================================ */
     /**
      * @param string $codigo
-     * @param int $entidad_emisora_id
      * @param int $excluirId
      * @return bool
      */
-    public function existeCodigo($codigo, $entidad_emisora_id, $excluirId = 0){
-        return $this->model->existeCodigo($codigo, $entidad_emisora_id, $excluirId);
+  public function existeCodigo($codigo, $entidad_emisora_id, $excluirId = 0)
+{
+    $codigo = $this->db->real_escape_string($codigo);
+    $entidad = intval($entidad_emisora_id);
+    $excluirId = intval($excluirId);
+
+    $sql = "SELECT id 
+            FROM infracciones 
+            WHERE codigo = '$codigo'
+            AND entidad_emisora_id = $entidad
+            AND estado = 'Activo'";
+
+    if ($excluirId > 0) {
+        $sql .= " AND id <> $excluirId";
     }
+
+    $sql .= " LIMIT 1";
+
+    $res = $this->db->query($sql);
+
+    return ($res && $res->num_rows > 0);
+}
 
     /* ============================================================
        GUARDAR
@@ -71,11 +89,10 @@ class InfraccionesController {
      */
     public function guardar($data){
 
-        // Validar duplicado al crear
-        if ($this->model->existeCodigo($data['codigo'], $data['entidad_emisora_id'])) {
+        if ($this->model->existeCodigo($data['codigo'])) {
             return array(
                 "ok" => false,
-                "msg" => "El código '{$data['codigo']}' ya está registrado como Activo para esta entidad."
+                "msg" => "El código '{$data['codigo']}' ya está registrado."
             );
         }
 
@@ -96,15 +113,13 @@ class InfraccionesController {
      */
     public function actualizar($data){
 
-        $id      = intval($data['id']);
-        $codigo  = $data['codigo'];
-        $entidad = intval($data['entidad_emisora_id']);
+        $id = intval($data['id']);
+        $codigo = $data['codigo'];
 
-        // Validar duplicado excluyendo el ID actual
-        if ($this->model->existeCodigo($codigo, $entidad, $id)) {
+        if ($this->model->existeCodigo($codigo, $id)) {
             return array(
                 "ok" => false,
-                "msg" => "El código '$codigo' ya está registrado como Activo para esta entidad."
+                "msg" => "El código '$codigo' ya está registrado en otra infracción."
             );
         }
 
