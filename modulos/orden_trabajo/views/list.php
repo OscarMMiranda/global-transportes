@@ -1,13 +1,21 @@
 <?php
-// archivo: /modulos/orden_trabajo/views/list.php
+/**
+ * Variables recibidas desde ListController.php
+ *
+ * @var array  $data
+ * @var array  $ordenesActivas
+ * @var array  $ordenesAnuladas
+ * @var array  $ordenesEliminadas
+ * @var array  $semanas
+ * @var string $semanaSeleccionada
+ */
 
-// Datos enviados desde ListController.php
-$ordenesActivas    = $data['activas'];
-$ordenesAnuladas   = $data['anuladas'];
-$ordenesEliminadas = $data['eliminadas'];
+$ordenesActivas       = $data['activas'];
+$ordenesAnuladas      = $data['anuladas'];
+$ordenesEliminadas    = $data['eliminadas'];
 
-$semanas            = $data['semanas'];      // 🔵 Semanas corporativas
-$semanaSeleccionada = $data['semana_sel'];   // 🔵 Semana seleccionada
+$semanas              = $data['semanas'];
+$semanaSeleccionada   = $data['semana_sel'];
 
 $pageTitle = '📋 Listado de Órdenes de Trabajo';
 ?>
@@ -21,21 +29,19 @@ $pageTitle = '📋 Listado de Órdenes de Trabajo';
 
     <?php include __DIR__ . '/../componentes/header.php'; ?>
 
-    <div class="container-fluid mt-4 px-4">
+    <div class="container-fluid mt-3 px-3">
 
-        <h4 class="text-center text-primary mb-4"><?= $pageTitle ?></h4>
+        <!-- TÍTULO -->
+        <h4 class="text-center text-primary mb-3"><?= $pageTitle ?></h4>
 
-        <!-- FILTROS -->
+        <!-- FILTROS + BOTONES (compactado) -->
         <?php include __DIR__ . '/../componentes/filtros.php'; ?>
-
-        <!-- BOTONES SUPERIORES -->
-        <?php include __DIR__ . '/../componentes/botones_superiores.php'; ?>
 
         <!-- TABS -->
         <?php include __DIR__ . '/../componentes/tabs.php'; ?>
 
         <!-- CONTENIDO DE TABS -->
-        <div class="tab-content border rounded shadow-sm p-3 bg-white">
+        <div class="tab-content border rounded shadow-sm p-2 bg-white">
 
             <div class="tab-pane fade show active" id="activas">
                 <?php include __DIR__ . '/partials/tabla_activa.php'; ?>
@@ -59,9 +65,8 @@ $pageTitle = '📋 Listado de Órdenes de Trabajo';
 
     </div>
 
-    <!-- SCRIPTS CORRECTOS PARA EL LISTADO -->
+    <!-- SCRIPTS -->
     <?php include __DIR__ . '/../componentes/scripts_listado.php'; ?>
-
     <?php include __DIR__ . '/../componentes/footer.php'; ?>
 
 </body>

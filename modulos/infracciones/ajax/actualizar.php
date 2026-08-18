@@ -46,12 +46,32 @@ $entidad = intval($_POST["entidad_emisora_id"]);
 // ============================================================
 // VALIDAR CÓDIGO ÚNICO EXCLUYENDO EL MISMO ID
 // ============================================================
-if ($controller->existeCodigo($codigo, $id)) {
+if ($controller->existeCodigo($codigo, $entidad, $id)) {
     echo json_encode(array(
         "ok" => false,
         "msg" => "El código '$codigo' ya está registrado en otra infracción."
     ));
     exit;
+}
+
+// ============================================================
+// OBTENER VALOR ACTUAL DE LA INFRACCIÓN (para monto_base)
+// ============================================================
+$infActual = $controller->obtener($id);
+$monto_guardado = isset($infActual["monto_base"]) ? floatval($infActual["monto_base"]) : 0;
+
+// ============================================================
+// OBTENER UIT VIGENTE
+// ============================================================
+$uit = $controller->model->getUitVigente();
+
+// ============================================================
+// CALCULAR MONTO BASE SEGÚN REGLA
+// ============================================================
+if ($porc > 0 && $uit > 0) {
+    $monto_base = ($porc / 100) * $uit;
+} else {
+    $monto_base = $monto_guardado;
 }
 
 // ============================================================
@@ -64,6 +84,7 @@ $data = array(
     "gravedad" => $grav,
     "puntos" => $puntos,
     "porcentaje_uit" => $porc,
+    "monto_base" => $monto_base,
     "entidad_emisora_id" => $entidad
 );
 

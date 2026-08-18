@@ -52,6 +52,12 @@
       "modified": false
     },
     "css": {},
+    "dashboard.php": {
+      "type": "-",
+      "size": 5113,
+      "lmtime": 0,
+      "modified": false
+    },
     "debug.log": {
       "type": "-",
       "size": 0,
@@ -78,7 +84,7 @@
     },
     "error_log.txt": {
       "type": "-",
-      "size": 378991,
+      "size": 452935,
       "lmtime": 0,
       "modified": true
     },
@@ -127,6 +133,12 @@
     "manifest.json": {
       "type": "-",
       "size": 1112,
+      "lmtime": 0,
+      "modified": false
+    },
+    "modal_nueva_papeleta.php": {
+      "type": "-",
+      "size": 3133,
       "lmtime": 0,
       "modified": false
     },
@@ -275,12 +287,6 @@
     "ommz": {},
     "paneles": {},
     "partials": {},
-    "prueba.php": {
-      "type": "-",
-      "size": 22,
-      "lmtime": 0,
-      "modified": false
-    },
     "public": {},
     "README.md": {
       "type": "-",
@@ -295,27 +301,9 @@
       "modified": false
     },
     "sistema": {},
-    "test_info.php": {
+    "tarjeta_papeletas.php": {
       "type": "-",
-      "size": 17,
-      "lmtime": 0,
-      "modified": false
-    },
-    "test_pdf.php": {
-      "type": "-",
-      "size": 260,
-      "lmtime": 0,
-      "modified": false
-    },
-    "test_permisos.php": {
-      "type": "-",
-      "size": 104,
-      "lmtime": 0,
-      "modified": false
-    },
-    "test_ruta.php": {
-      "type": "-",
-      "size": 56,
+      "size": 400,
       "lmtime": 0,
       "modified": false
     },

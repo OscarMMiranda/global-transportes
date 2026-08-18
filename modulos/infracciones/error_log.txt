@@ -1,0 +1,19 @@
+[24-May-2026 11:49:01 America/Argentina/Buenos_Aires] PHP Warning:  require_once(\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\infracciones/includes/db.php): failed to open stream: No such file or directory in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\infracciones\index.php on line 27
+[24-May-2026 11:49:01 America/Argentina/Buenos_Aires] PHP Fatal error:  require_once(): Failed opening required '\\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\infracciones/includes/db.php' (include_path='.;E:\PHP5.6\ext') in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\infracciones\index.php on line 27
+[24-May-2026 09:58:20 America/Lima] ✅ Conexión establecida correctamente
+[24-May-2026 09:58:20 America/Lima] PHP Warning:  require_once(models/infraccionesModel.php): failed to open stream: No such file or directory in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\infracciones\controllers\infraccionesController.php on line 4
+[24-May-2026 09:58:20 America/Lima] PHP Fatal error:  require_once(): Failed opening required 'models/infraccionesModel.php' (include_path='.;E:\PHP5.6\ext') in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\infracciones\controllers\infraccionesController.php on line 4
+[24-May-2026 10:01:00 America/Lima] ✅ Conexión establecida correctamente
+[24-May-2026 10:01:00 America/Lima] PHP Fatal error:  Call to a member function query() on null in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\infracciones\models\infraccionesModel.php on line 51
+[24-May-2026 10:19:43 America/Lima] ✅ Conexión establecida correctamente
+[24-May-2026 10:19:43 America/Lima] PHP Fatal error:  Call to a member function query() on null in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\infracciones\models\infraccionesModel.php on line 51
+[24-May-2026 10:26:41 America/Lima] ✅ Conexión establecida correctamente
+[24-May-2026 10:26:41 America/Lima] PHP Fatal error:  Cannot redeclare class InfraccionesController in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\infracciones\models\infraccionesModel.php on line 6
+[24-May-2026 10:26:42 America/Lima] ✅ Conexión establecida correctamente
+[24-May-2026 10:26:42 America/Lima] PHP Fatal error:  Cannot redeclare class InfraccionesController in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\infracciones\models\infraccionesModel.php on line 6
+[24-May-2026 10:26:42 America/Lima] ✅ Conexión establecida correctamente
+[24-May-2026 10:26:42 America/Lima] PHP Fatal error:  Cannot redeclare class InfraccionesController in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\infracciones\models\infraccionesModel.php on line 6
+[24-May-2026 10:26:43 America/Lima] ✅ Conexión establecida correctamente
+[24-May-2026 10:26:43 America/Lima] PHP Fatal error:  Cannot redeclare class InfraccionesController in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\infracciones\models\infraccionesModel.php on line 6
+[24-May-2026 10:26:43 America/Lima] ✅ Conexión establecida correctamente
+[24-May-2026 10:26:43 America/Lima] PHP Fatal error:  Cannot redeclare class InfraccionesController in \\HMFS2\WEB\DTCWIN001\wi010232.ferozo.com\public_html\modulos\infracciones\models\infraccionesModel.php on line 6

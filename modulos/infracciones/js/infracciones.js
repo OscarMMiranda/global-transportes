@@ -85,5 +85,126 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    /* ------------------------------------------------------------
+       4) VER INFRACCIÓN
+       ------------------------------------------------------------ */
+    $(document).on("click", ".btnVerInfraccion", function () {
+
+        var id = $(this).data("id");
+        infLog("Ver infracción ID: " + id);
+
+        $.post("ajax/obtener.php", { id: id }, function (res) {
+
+            if (!res) {
+                Swal.fire("Error", "No se pudo cargar la infracción", "error");
+                return;
+            }
+
+            $("#ver_codigo").text(res.codigo);
+            $("#ver_descripcion").text(res.descripcion);
+            $("#ver_gravedad").text(res.gravedad);
+            $("#ver_puntos").text(res.puntos);
+            $("#ver_porcentaje_uit").text(res.porcentaje_uit + " %");
+            $("#ver_monto_base").text("S/ " + res.monto_base);
+            $("#ver_entidad").text(res.entidad_nombre);
+
+            $("#modalVer").modal("show");
+
+        }, "json");
+    });
+
+    /* ============================================================
+       5) DESACTIVAR INFRACCIÓN
+       ============================================================ */
+    $(document).on("click", ".btnDesactivarInfraccion", function () {
+
+        var id = $(this).data("id");
+
+        Swal.fire({
+            title: "¿Desactivar infracción?",
+            text: "La infracción quedará inactiva pero no eliminada.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Sí, desactivar"
+        }).then(function (result) {
+
+            if (!result.isConfirmed) return;
+
+            $.post("ajax/desactivar.php", { id: id }, function (res) {
+
+                if (res.ok) {
+                    Swal.fire("Desactivada", res.msg, "success");
+                    recargarTabla();
+                } else {
+                    Swal.fire("Error", res.msg, "error");
+                }
+
+            }, "json");
+
+        });
+    });
+
+    /* ============================================================
+       6) REACTIVAR INFRACCIÓN
+       ============================================================ */
+    $(document).on("click", ".btnReactivarInfraccion", function () {
+
+        var id = $(this).data("id");
+
+        Swal.fire({
+            title: "¿Reactivar infracción?",
+            text: "La infracción volverá a estar activa.",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonText: "Sí, reactivar"
+        }).then(function (result) {
+
+            if (!result.isConfirmed) return;
+
+            $.post("ajax/reactivar.php", { id: id }, function (res) {
+
+                if (res.ok) {
+                    Swal.fire("Reactivada", res.msg, "success");
+                    recargarTabla();
+                } else {
+                    Swal.fire("Error", res.msg, "error");
+                }
+
+            }, "json");
+
+        });
+    });
+
+    /* ============================================================
+       7) RECUPERAR INFRACCIÓN ELIMINADA
+       ============================================================ */
+    $(document).on("click", ".btnRecuperarInfraccion", function () {
+
+        var id = $(this).data("id");
+
+        Swal.fire({
+            title: "¿Recuperar infracción eliminada?",
+            text: "La infracción será restaurada.",
+            icon: "info",
+            showCancelButton: true,
+            confirmButtonText: "Sí, recuperar"
+        }).then(function (result) {
+
+            if (!result.isConfirmed) return;
+
+            $.post("ajax/reactivar.php", { id: id }, function (res) {
+
+                if (res.ok) {
+                    Swal.fire("Recuperada", res.msg, "success");
+                    recargarTabla();
+                } else {
+                    Swal.fire("Error", res.msg, "error");
+                }
+
+            }, "json");
+
+        });
+    });
+
     infLog("Módulo Infracciones inicializado correctamente");
 });

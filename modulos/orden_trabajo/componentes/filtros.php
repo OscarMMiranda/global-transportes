@@ -1,20 +1,21 @@
 <?php
+/**
+ * @var array $semanas
+ * @var string $semana_sel
+ */
 // archivo: /modulos/orden_trabajo/componentes/filtros.php
-
-// Variables esperadas:
-// $semanas      → array de semanas disponibles
-// $semana_sel   → semana seleccionada (string o vacío)
 ?>
 
-<div class="card mb-3 shadow-sm">
-    <div class="card-body">
+<div class="card mb-2 shadow-sm">
+    <div class="card-body py-2">
 
-        <div class="row">
+        <div class="d-flex align-items-center justify-content-between flex-wrap">
 
-            <!-- FILTRO POR SEMANA -->
-            <div class="col-md-4 mb-2">
-                <label class="form-label fw-bold">Semana</label>
-                <select id="filtroSemana" class="form-select form-select-sm">
+            <!-- Filtro Semana -->
+            <div class="d-flex align-items-center" style="gap:8px;">
+                <label class="form-label fw-bold mb-0">Semana</label>
+
+                <select id="filtroSemana" class="form-select form-select-sm" style="width:130px;">
                     <option value="">Todas</option>
 
                     <?php if (!empty($semanas)): ?>
@@ -25,19 +26,28 @@
                             </option>
                         <?php endforeach; ?>
                     <?php endif; ?>
-
                 </select>
             </div>
 
-            <!-- ESPACIO PARA FUTUROS FILTROS -->
-            <!--
-            <div class="col-md-4 mb-2">
-                <label class="form-label fw-bold">Cliente</label>
-                <select id="filtroCliente" class="form-select form-select-sm">
-                    <option value="">Todos</option>
-                </select>
+            <!-- Botones superiores -->
+            <div class="d-flex align-items-center" style="gap:6px;">
+
+                <a href="/modulos/orden_trabajo/views/create.php"
+                   class="btn btn-outline-primary btn-sm px-2 py-1">
+                    <i class="fa-solid fa-plus fa-xs"></i> Crear
+                </a>
+
+                <button class="btn btn-outline-warning btn-sm px-2 py-1"
+                        onclick="abrirModalAnular()">
+                    <i class="fa-solid fa-ban fa-xs"></i> Anular
+                </button>
+
+                <button class="btn btn-outline-danger btn-sm px-2 py-1"
+                        onclick="abrirModalEliminar()">
+                    <i class="fa-solid fa-trash fa-xs"></i> Eliminar
+                </button>
+
             </div>
-            -->
 
         </div>
 

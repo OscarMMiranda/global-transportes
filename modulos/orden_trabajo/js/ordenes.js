@@ -1,15 +1,9 @@
 // archivo: /modulos/orden_trabajo/js/ordenes.js
 
-// ===============================
-// 🔵 CARGA INICIAL
-// ===============================
 $(document).ready(function () {
     cargarTablaOT();
 });
 
-// ===============================
-// 🔵 FUNCIÓN PRINCIPAL: CARGAR TABLA
-// ===============================
 function cargarTablaOT() {
 
     $("#tablaOT tbody").html(
@@ -34,21 +28,13 @@ function cargarTablaOT() {
 
                 $.each(res, function (i, ot) {
 
-                    // Sanitizar texto para evitar inyección visual
-                    var numero = escapeHtml(ot.numero_ot);
-                    var fecha = escapeHtml(ot.fecha);
-                    var cliente = escapeHtml(ot.cliente);
-                    var tipo = escapeHtml(ot.tipo_ot);
-                    var empresa = escapeHtml(ot.empresa);
-                    var estado = escapeHtml(ot.estado);
-
                     html += "<tr>" +
-                        "<td>" + numero + "</td>" +
-                        "<td>" + fecha + "</td>" +
-                        "<td>" + cliente + "</td>" +
-                        "<td>" + tipo + "</td>" +
-                        "<td>" + empresa + "</td>" +
-                        "<td>" + estado + "</td>" +
+                        "<td>" + escapeHtml(ot.numero_ot) + "</td>" +
+                        "<td>" + escapeHtml(ot.fecha) + "</td>" +
+                        "<td>" + escapeHtml(ot.cliente) + "</td>" +
+                        "<td>" + escapeHtml(ot.tipo_ot) + "</td>" +
+                        "<td>" + escapeHtml(ot.empresa) + "</td>" +
+                        "<td>" + escapeHtml(ot.estado) + "</td>" +
 
                         "<td class='text-center'>" +
                         "<button class='btn btn-info btn-sm me-1' onclick='editarOT(" + ot.id + ")'>" +
@@ -75,19 +61,15 @@ function cargarTablaOT() {
     });
 }
 
-// ===============================
-// 🔵 SANITIZAR TEXTO
-// ===============================
 function escapeHtml(texto) {
     if (!texto) return "";
-    return texto
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;");
+    return texto.replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;");
 }
 
 // ===============================
-// 🔵 ABRIR MODAL EDITAR
+// 🔵 ABRIR MODAL EDITAR (CORREGIDO)
 // ===============================
 function editarOT(id) {
 
@@ -96,7 +78,6 @@ function editarOT(id) {
         return;
     }
 
-    $("#editar_id_ot").val(id);
     $("#loaderEditarOT").show();
     $("#formEditarOT").hide();
 
@@ -108,60 +89,51 @@ function editarOT(id) {
 
         success: function (res) {
 
-            if (!res || !res.id) {
+            if (!res || res.estado !== "ok") {
                 alert("No se pudo cargar la información de la OT.");
                 return;
             }
 
-            $("#editar_numero_ot").val(res.numero_ot);
-            $("#editar_fecha").val(res.fecha);
-            $("#editar_cliente").val(res.cliente);
-            $("#editar_empresa").val(res.empresa);
-            $("#editar_tipo_ot").val(res.tipo_ot);
-            $("#editar_oc_cliente").val(res.oc_cliente);
-            $("#editar_descripcion").val(res.descripcion);
+            var d = res.data;
+
+            $("#editar_id_ot").val(d.id);
+            $("#editar_numero_ot").val(d.numero_ot);
+            $("#editar_fecha").val(d.fecha);
+
+            $("#editar_cliente_id").val(d.cliente_id);
+            $("#editar_empresa_id").val(d.empresa_id);
+            $("#editar_tipo_ot_id").val(d.tipo_ot_id);
+
+            $("#editar_oc_cliente").val(d.oc_cliente);
+            $("#editar_descripcion").val(d.descripcion);
 
             $("#loaderEditarOT").hide();
             $("#formEditarOT").show();
+
+            var modal = new bootstrap.Modal(document.getElementById("modalEditarOT"));
+            modal.show();
         },
 
         error: function () {
             alert("Error al obtener datos de la OT.");
         }
     });
-
-    var modal = new bootstrap.Modal(document.getElementById("modalEditarOT"));
-    modal.show();
 }
 
-// ===============================
-// 🔵 ABRIR MODAL ANULAR
-// ===============================
 function anularOT(id) {
-
     if (!id || isNaN(id)) {
         alert("ID inválido");
         return;
     }
-
     $("#anular_id_ot").val(id);
-
-    var modal = new bootstrap.Modal(document.getElementById("modalAnularOT"));
-    modal.show();
+    new bootstrap.Modal(document.getElementById("modalAnularOT")).show();
 }
 
-// ===============================
-// 🔵 ABRIR MODAL ELIMINAR
-// ===============================
 function eliminarOT(id) {
-
     if (!id || isNaN(id)) {
         alert("ID inválido");
         return;
     }
-
     $("#eliminar_id_ot").val(id);
-
-    var modal = new bootstrap.Modal(document.getElementById("modalEliminarOT"));
-    modal.show();
+    new bootstrap.Modal(document.getElementById("modalEliminarOT")).show();
 }

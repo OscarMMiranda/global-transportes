@@ -1,0 +1,7 @@
+/* archivo: /modulos/papeletas/css/pagos.css */
+#modalRegistrarPago .modal-content { border-radius: 8px; }
+#papeleta_estado_badge { font-size: 0.8rem; padding: 0.45rem 0.6rem; }
+.progress-bar.bg-success { background-color: #198754 !important; }
+.progress-bar.bg-warning { background-color: #ffc107 !important; }
+.progress-bar.bg-danger { background-color: #dc3545 !important; }
+.form-control[readonly] { background-color: #f8f9fa; }

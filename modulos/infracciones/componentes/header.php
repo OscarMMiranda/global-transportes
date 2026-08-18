@@ -1,4 +1,4 @@
-
+// modulos/infracciones/componentes/header.php
 
 <div class="d-flex justify-content-between align-items-center mb-2">
     <h4 class="m-0">

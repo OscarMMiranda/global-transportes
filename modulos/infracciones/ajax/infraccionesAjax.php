@@ -65,11 +65,23 @@ switch ($accion) {
        GUARDAR (CREAR)
        ============================================================ */
     case 'guardar':
+
         $data = $_POST;
 
         // Validación de código único
         if ($controller->existeCodigo($data['codigo'])) {
             respuesta_error('El código ya existe');
+        }
+
+        // Sanitización
+        $porcentaje = floatval($data['porcentaje_uit']);
+        $uit = $controller->model->getUitVigente();
+
+        // REGLA DE NEGOCIO
+        if ($porcentaje > 0 && $uit > 0) {
+            $data['monto_base'] = ($porcentaje / 100) * $uit;
+        } else {
+            $data['monto_base'] = 0.00; // monto fijo → se edita luego
         }
 
         $ok = $controller->guardar($data);
@@ -82,6 +94,7 @@ switch ($accion) {
        ACTUALIZAR
        ============================================================ */
     case 'actualizar':
+
         $data = $_POST;
 
         if (!isset($data['id'])) respuesta_error('ID no recibido');
@@ -89,6 +102,21 @@ switch ($accion) {
         // Validación de código único (excluyendo el ID actual)
         if ($controller->existeCodigo($data['codigo'], $data['id'])) {
             respuesta_error('El código ya existe');
+        }
+
+        // Obtener infracción actual
+        $infActual = $controller->obtener($data['id']);
+        $monto_guardado = floatval($infActual['monto_base']);
+
+        // Sanitización
+        $porcentaje = floatval($data['porcentaje_uit']);
+        $uit = $controller->model->getUitVigente();
+
+        // REGLA DE NEGOCIO
+        if ($porcentaje > 0 && $uit > 0) {
+            $data['monto_base'] = ($porcentaje / 100) * $uit;
+        } else {
+            $data['monto_base'] = $monto_guardado;
         }
 
         $ok = $controller->actualizar($data);

@@ -2,10 +2,10 @@
 // archivo: /modulos/orden_trabajo/componentes/scripts_listado.php
 ?>
 
-<!-- jQuery 3.7.1 -->
+<!-- jQuery (única carga) -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
-<!-- Bootstrap 5.3 -->
+<!-- Bootstrap (única carga) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <!-- SweetAlert2 -->
@@ -18,33 +18,45 @@
 <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
 
 <script>
-$(document).ready(function() {
+/**
+ * Inicializa DataTables sobre la tabla OT
+ * Se usa tanto en carga inicial como después del AJAX
+ */
+function inicializarTablaOT() {
 
-    const config = {
+    // Si ya existe una instancia previa → destruirla
+    if ($.fn.DataTable.isDataTable("#tablaOT")) {
+        $("#tablaOT").DataTable().destroy();
+    }
+
+    // Inicializar DataTables
+    $("#tablaOT").DataTable({
         language: {
             url: "https://cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json"
         },
-        order: [],
         pageLength: 25,
+        lengthMenu: [10, 25, 50, 100],
         responsive: true,
-        autoWidth: false
-    };
+        autoWidth: false,
+        order: []
+    });
+}
 
-    if ($('#tablaOrdenesActivas').length) {
-        $('#tablaOrdenesActivas').DataTable(config);
-    }
-    if ($('#tablaOrdenesAnuladas').length) {
-        $('#tablaOrdenesAnuladas').DataTable(config);
-    }
-    if ($('#tablaOrdenesEliminadas').length) {
-        $('#tablaOrdenesEliminadas').DataTable(config);
+$(document).ready(function() {
+
+    // Inicialización en carga inicial
+    if ($("#tablaOT").length) {
+        inicializarTablaOT();
     }
 
 });
 </script>
 
-<!-- JS del módulo OT (solo listado) -->
-<script src="/modulos/orden_trabajo/js/ordenes.js"></script>
-<script src="/modulos/orden_trabajo/js/filtros.js"></script>
-<script src="/modulos/orden_trabajo/js/modales.js"></script>
-<script src="/modulos/orden_trabajo/js/ajax.js"></script>
+<!-- JS del módulo OT -->
+<script src="/modulos/orden_trabajo/js/ordenes.js?v=1.0"></script>
+<script src="/modulos/orden_trabajo/js/filtros.js?v=1.0"></script>
+<script src="/modulos/orden_trabajo/js/modales.js?v=1.0"></script>
+<script src="/modulos/orden_trabajo/js/ajax.js?v=1.0"></script>
+
+<!-- ⭐ Cargar catálogos AL FINAL (crítico para que el modal EDITAR funcione) -->
+<script src="/modulos/orden_trabajo/js/catalogos.js?v=1.0"></script>

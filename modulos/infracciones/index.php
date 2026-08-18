@@ -41,6 +41,7 @@ include __DIR__ . '/componentes/head.php';
     <?php include __DIR__ . '/componentes/header.php'; ?>
     <?php include __DIR__ . '/componentes/tabs.php'; ?>
 
+    <?php include __DIR__ . '/componentes/menu.php'; ?>
     <?php include __DIR__ . '/componentes/tabla.php'; ?>
 
 </div>
@@ -49,7 +50,6 @@ include __DIR__ . '/componentes/head.php';
 <?php include __DIR__ . '/modales/modal_editar.php'; ?>
 <?php include __DIR__ . '/modales/modal_eliminar.php'; ?>
 <?php include __DIR__ . '/modales/modal_ver.php'; ?>
-
 
 <?php include __DIR__ . '/componentes/scripts.php'; ?>
 

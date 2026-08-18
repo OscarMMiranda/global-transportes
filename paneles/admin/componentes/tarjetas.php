@@ -1,5 +1,6 @@
 <?php
 // archivo: /paneles/admin/componentes/tarjetas.php
+// Tarjetas del dashboard
 
 // Seguridad mínima y validación estricta
 if (!isset($tarjetas) || !is_array($tarjetas) || count($tarjetas) === 0) {

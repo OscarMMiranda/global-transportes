@@ -18,9 +18,9 @@
 <script src="/includes/js/validaciones_globales.js"></script>
 <script src="/includes/js/modales_globales.js"></script>
 
-<!-- Scripts del módulo (RUTAS CORRECTAS) -->
-<script src="../infracciones/assets/datatables.js"></script>
-<script src="../infracciones/assets/acciones.js"></script>
-<script src="../infracciones/assets/modal.js"></script>
-<script src="../infracciones/assets/form.js"></script>
-<script src="../infracciones/js/infracciones.js"></script>
+<!-- Scripts del módulo (RUTAS CORRECTAS ABSOLUTAS) -->
+<script src="/modulos/infracciones/assets/datatables.js"></script>
+<script src="/modulos/infracciones/assets/acciones.js"></script>
+<script src="/modulos/infracciones/assets/modal.js"></script>
+<script src="/modulos/infracciones/assets/form.js"></script>
+<script src="/modulos/infracciones/js/infracciones.js"></script>

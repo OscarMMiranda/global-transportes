@@ -11,19 +11,21 @@ class InfraccionesController {
     public $model;
 
     /**
-     * @param mysqli $db
+     * @var mysqli
+     */
+    public $db;
+
+    /**
+     * Constructor
      */
     public function __construct($db){
+        $this->db = $db;                     // ← AHORA EL EDITOR RECONOCE $db
         $this->model = new InfraccionesModel($db);
     }
 
     /* ============================================================
-       LISTAR (con soporte para filtros GET)
+       LISTAR (ACTIVAS / INACTIVAS)
        ============================================================ */
-    /**
-     * @param array $filtros
-     * @return array
-     */
     public function listar($filtros = []){
         return $this->model->listar($filtros);
     }
@@ -31,9 +33,6 @@ class InfraccionesController {
     /* ============================================================
        ENTIDADES
        ============================================================ */
-    /**
-     * @return array
-     */
     public function entidades(){
         return $this->model->entidades();
     }
@@ -41,23 +40,13 @@ class InfraccionesController {
     /* ============================================================
        OBTENER POR ID
        ============================================================ */
-    /**
-     * @param int $id
-     * @return array|null
-     */
     public function obtener($id){
         return $this->model->obtener($id);
     }
 
     /* ============================================================
-       VALIDAR CÓDIGO ÚNICO (LLAMA AL MODELO)
+       VALIDAR CÓDIGO ÚNICO
        ============================================================ */
-    /**
-     * @param string $codigo
-     * @param int $entidad_emisora_id
-     * @param int $excluirId
-     * @return bool
-     */
     public function existeCodigo($codigo, $entidad_emisora_id, $excluirId = 0){
         return $this->model->existeCodigo($codigo, $entidad_emisora_id, $excluirId);
     }
@@ -65,18 +54,25 @@ class InfraccionesController {
     /* ============================================================
        GUARDAR
        ============================================================ */
-    /**
-     * @param array $data
-     * @return array
-     */
     public function guardar($data){
 
-        // Validar duplicado al crear
-        if ($this->model->existeCodigo($data['codigo'], $data['entidad_emisora_id'])) {
+        $codigo  = $data['codigo'];
+        $entidad = intval($data['entidad_emisora_id']);
+
+        if ($this->model->existeCodigo($codigo, $entidad)) {
             return array(
                 "ok" => false,
-                "msg" => "El código '{$data['codigo']}' ya está registrado como Activo para esta entidad."
+                "msg" => "El código '{$codigo}' ya está registrado como Activo para esta entidad."
             );
+        }
+
+        $porc = floatval($data['porcentaje_uit']);
+        $uit  = $this->model->getUitVigente();
+
+        if ($porc > 0 && $uit > 0) {
+            $data['monto_base'] = ($porc / 100) * $uit;
+        } else {
+            $data['monto_base'] = isset($data['monto_base']) ? floatval($data['monto_base']) : 0.00;
         }
 
         $ok = $this->model->guardar($data);
@@ -90,22 +86,29 @@ class InfraccionesController {
     /* ============================================================
        ACTUALIZAR
        ============================================================ */
-    /**
-     * @param array $data
-     * @return array
-     */
     public function actualizar($data){
 
         $id      = intval($data['id']);
         $codigo  = $data['codigo'];
         $entidad = intval($data['entidad_emisora_id']);
 
-        // Validar duplicado excluyendo el ID actual
         if ($this->model->existeCodigo($codigo, $entidad, $id)) {
             return array(
                 "ok" => false,
                 "msg" => "El código '$codigo' ya está registrado como Activo para esta entidad."
             );
+        }
+
+        $actual = $this->model->obtener($id);
+        $monto_guardado = floatval($actual['monto_base']);
+
+        $porc = floatval($data['porcentaje_uit']);
+        $uit  = $this->model->getUitVigente();
+
+        if ($porc > 0 && $uit > 0) {
+            $data['monto_base'] = ($porc / 100) * $uit;
+        } else {
+            $data['monto_base'] = $monto_guardado;
         }
 
         $ok = $this->model->actualizar($data);
@@ -117,36 +120,92 @@ class InfraccionesController {
     }
 
     /* ============================================================
-       HARD DELETE (NO USAR)
-       ============================================================ */
-    /**
-     * @param int $id
-     * @return bool
-     */
-    public function eliminar($id){
-        return $this->model->eliminar($id);
-    }
-
-    /* ============================================================
-       VALIDAR SI TIENE PAPELETAS ASOCIADAS
-       ============================================================ */
-    /**
-     * @param int $id
-     * @return bool
-     */
-    public function tienePapeletas($id){
-        return $this->model->tienePapeletas($id);
-    }
-
-    /* ============================================================
        SOFT DELETE (DESACTIVAR)
        ============================================================ */
-    /**
-     * @param int $id
-     * @return bool
-     */
     public function desactivar($id){
         return $this->model->desactivar($id);
     }
+
+    /* ============================================================
+       REACTIVAR
+       ============================================================ */
+    public function reactivar($id){
+        return $this->model->reactivar($id);
+    }
+
+    /* ============================================================
+       DESACTIVAR CON AUDITORÍA
+       ============================================================ */
+    public function desactivarConAuditoria($id, $usuario, $usuario_id, $ip, $host, $user_agent, $motivo)
+    {
+        $inf = $this->model->obtener($id);
+        if (!$inf) {
+            return false;
+        }
+
+        $sqlAud = "
+            INSERT INTO infracciones_auditoria (
+                infraccion_id,
+                usuario,
+                usuario_id,
+                ip,
+                host,
+                user_agent,
+                motivo,
+                fecha
+            ) VALUES (
+                $id,
+                '" . $this->db->real_escape_string($usuario) . "',
+                $usuario_id,
+                '" . $this->db->real_escape_string($ip) . "',
+                '" . $this->db->real_escape_string($host) . "',
+                '" . $this->db->real_escape_string($user_agent) . "',
+                '" . $this->db->real_escape_string($motivo) . "',
+                NOW()
+            )
+        ";
+
+        $this->db->query($sqlAud);
+
+        return $this->model->desactivar($id);
+    }
+
+    /* ============================================================
+       REACTIVAR CON AUDITORÍA
+       ============================================================ */
+    public function reactivarConAuditoria($id, $usuario, $usuario_id, $ip, $host, $user_agent, $motivo)
+    {
+        $inf = $this->model->obtener($id);
+        if (!$inf) {
+            return false;
+        }
+
+        $sqlAud = "
+            INSERT INTO infracciones_auditoria (
+                infraccion_id,
+                usuario,
+                usuario_id,
+                ip,
+                host,
+                user_agent,
+                motivo,
+                fecha
+            ) VALUES (
+                $id,
+                '" . $this->db->real_escape_string($usuario) . "',
+                $usuario_id,
+                '" . $this->db->real_escape_string($ip) . "',
+                '" . $this->db->real_escape_string($host) . "',
+                '" . $this->db->real_escape_string($user_agent) . "',
+                '" . $this->db->real_escape_string($motivo) . "',
+                NOW()
+            )
+        ";
+
+        $this->db->query($sqlAud);
+
+        return $this->model->reactivar($id);
+    }
+
 }
 ?>

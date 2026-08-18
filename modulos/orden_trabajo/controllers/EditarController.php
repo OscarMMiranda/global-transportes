@@ -3,26 +3,38 @@
 
 header('Content-Type: application/json');
 
+/**
+ * Controlador para actualizar una Orden de Trabajo
+ */
+
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/conexion.php';
 $conn = getConnection();
 
-// ===============================
+if (!$conn) {
+    echo json_encode(array(
+        "estado"  => "error",
+        "mensaje" => "Error de conexión a la base de datos"
+    ));
+    exit;
+}
+
+// ============================================================
 // 🔵 VALIDAR MÉTODO
-// ===============================
+// ============================================================
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo json_encode(array(
-        "estado" => "error",
+        "estado"  => "error",
         "mensaje" => "Método no permitido"
     ));
     exit;
 }
 
-// ===============================
+// ============================================================
 // 🔵 VALIDAR ID
-// ===============================
+// ============================================================
 if (!isset($_POST['id']) || !is_numeric($_POST['id'])) {
     echo json_encode(array(
-        "estado" => "error",
+        "estado"  => "error",
         "mensaje" => "ID inválido"
     ));
     exit;
@@ -30,42 +42,42 @@ if (!isset($_POST['id']) || !is_numeric($_POST['id'])) {
 
 $id = intval($_POST['id']);
 
-// ===============================
+// ============================================================
 // 🔵 VALIDAR CAMPOS OBLIGATORIOS
-// ===============================
-$campos = array('fecha', 'cliente_id', 'tipo_ot_id', 'empresa_id');
+// ============================================================
+$camposObligatorios = array('fecha', 'cliente_id', 'tipo_ot_id', 'empresa_id');
 
-foreach ($campos as $campo) {
+foreach ($camposObligatorios as $campo) {
     if (!isset($_POST[$campo]) || trim($_POST[$campo]) === '') {
         echo json_encode(array(
-            "estado" => "error",
+            "estado"  => "error",
             "mensaje" => "Falta el campo: " . $campo
         ));
         exit;
     }
 }
 
-// ===============================
+// ============================================================
 // 🔵 SANITIZAR DATOS
-// ===============================
-$fecha      = mysqli_real_escape_string($conn, trim($_POST['fecha']));
-$clienteID  = intval($_POST['cliente_id']);
-$tipoOTID   = intval($_POST['tipo_ot_id']);
-$empresaID  = intval($_POST['empresa_id']);
-$ocCliente  = isset($_POST['oc_cliente']) ? mysqli_real_escape_string($conn, trim($_POST['oc_cliente'])) : '';
+// ============================================================
+$fecha       = mysqli_real_escape_string($conn, trim($_POST['fecha']));
+$clienteID   = intval($_POST['cliente_id']);
+$tipoOTID    = intval($_POST['tipo_ot_id']);
+$empresaID   = intval($_POST['empresa_id']);
+$ocCliente   = isset($_POST['oc_cliente']) ? mysqli_real_escape_string($conn, trim($_POST['oc_cliente'])) : '';
 $descripcion = isset($_POST['descripcion']) ? mysqli_real_escape_string($conn, trim($_POST['descripcion'])) : '';
 
-// ===============================
-// 🔵 ACTUALIZAR OT
-// ===============================
+// ============================================================
+// 🔵 ACTUALIZAR ORDEN DE TRABAJO
+// ============================================================
 $sql = "
     UPDATE ordenes_trabajo
     SET 
-        fecha = ?,
-        cliente_id = ?,
-        tipo_ot_id = ?,
-        empresa_id = ?,
-        oc_cliente = ?,
+        fecha       = ?,
+        cliente_id  = ?,
+        tipo_ot_id  = ?,
+        empresa_id  = ?,
+        oc_cliente  = ?,
         descripcion = ?
     WHERE id = ?
 ";
@@ -74,7 +86,7 @@ $stmt = $conn->prepare($sql);
 
 if (!$stmt) {
     echo json_encode(array(
-        "estado" => "error",
+        "estado"  => "error",
         "mensaje" => "Error preparando consulta: " . $conn->error
     ));
     exit;
@@ -92,14 +104,17 @@ $stmt->bind_param(
 );
 
 if ($stmt->execute()) {
+
     echo json_encode(array(
-        "estado" => "ok",
+        "estado"  => "ok",
         "mensaje" => "Orden actualizada correctamente"
     ));
     exit;
+
 } else {
+
     echo json_encode(array(
-        "estado" => "error",
+        "estado"  => "error",
         "mensaje" => "Error al actualizar: " . $stmt->error
     ));
     exit;

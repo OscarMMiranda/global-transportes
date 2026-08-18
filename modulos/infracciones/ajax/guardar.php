@@ -18,25 +18,52 @@ foreach ($required as $r) {
     }
 }
 
-$codigo = trim($_POST["codigo"]);
+// Sanitización
+$codigo      = trim($_POST["codigo"]);
+$descripcion = trim($_POST["descripcion"]);
+$gravedad    = trim($_POST["gravedad"]);
+$puntos      = intval($_POST["puntos"]);
+$porcentaje  = floatval($_POST["porcentaje_uit"]);
+$entidad_id  = intval($_POST["entidad_emisora_id"]);
 
-// Validar código único
-if ($controller->existeCodigo($codigo)) {
+// ============================================================
+// VALIDAR CÓDIGO ÚNICO POR ENTIDAD
+// ============================================================
+if ($controller->existeCodigo($codigo, $entidad_id)) {
     echo json_encode(array(
         "ok" => false,
-        "msg" => "El código '$codigo' ya existe. Debe ser único."
+        "msg" => "El código '$codigo' ya está registrado como Activo para esta entidad."
     ));
     exit;
 }
 
-// Sanitización
+// ============================================================
+// OBTENER UIT VIGENTE
+// ============================================================
+$uit = $controller->model->getUitVigente();
+
+// ============================================================
+// CALCULAR MONTO BASE SEGÚN REGLA
+// ============================================================
+// porcentaje_uit > 0 → calcular
+// porcentaje_uit = 0 → monto_base = 0 (luego el usuario lo edita)
+if ($porcentaje > 0 && $uit > 0) {
+    $monto_base = ($porcentaje / 100) * $uit;
+} else {
+    $monto_base = 0.00;
+}
+
+// ============================================================
+// ARMAR DATA PARA GUARDAR
+// ============================================================
 $data = array(
     "codigo" => $codigo,
-    "descripcion" => trim($_POST["descripcion"]),
-    "gravedad" => trim($_POST["gravedad"]),
-    "puntos" => intval($_POST["puntos"]),
-    "porcentaje_uit" => floatval($_POST["porcentaje_uit"]),
-    "entidad_emisora_id" => intval($_POST["entidad_emisora_id"])
+    "descripcion" => $descripcion,
+    "gravedad" => $gravedad,
+    "puntos" => $puntos,
+    "porcentaje_uit" => $porcentaje,
+    "monto_base" => $monto_base,
+    "entidad_emisora_id" => $entidad_id
 );
 
 // Guardar

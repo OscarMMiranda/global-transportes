@@ -2,16 +2,6 @@
 // archivo: /modulos/orden_trabajo/controllers/ListController.php
 
 // ===============================
-// 🔧 Conexión BD
-// ===============================
-require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/conexion.php';
-$conn = getConnection();
-
-if (!$conn) {
-    die("Error de conexión a la base de datos");
-}
-
-// ===============================
 // 🔧 Modelo
 // ===============================
 require_once __DIR__ . '/../models/OrdenModel.php';
@@ -75,14 +65,9 @@ function cargarListado($conn)
         "activas"    => $model->obtenerActivasPorSemana($semana),
         "anuladas"   => $model->obtenerPorEstadoYSemana($ESTADO_ANULADA, $semana),
         "eliminadas" => $model->obtenerPorEstadoYSemana($ESTADO_ELIMINADA, $semana),
-        "semanas"    => $model->obtenerSemanas(),   // PROFESIONAL: semanas desde fecha
+        "semanas"    => $model->obtenerSemanas(),
         "semana_sel" => $semana
     );
 
     require __DIR__ . '/../views/list.php';
 }
-
-// ===============================
-// 🔵 EJECUTAR CONTROLADOR
-// ===============================
-cargarListado($conn);

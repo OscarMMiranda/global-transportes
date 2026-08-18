@@ -1,5 +1,7 @@
 // archivo: /modulos/orden_trabajo/js/filtros.js
 
+// archivo: /modulos/orden_trabajo/js/filtros.js
+
 $(document).ready(function () {
 
     // Cargar datos al iniciar
@@ -73,7 +75,7 @@ function cargarTabActivo() {
     );
 
     $.ajax({
-        url: "/modulos/orden_trabajo/controllers/ListController.php",
+        url: "/modulos/orden_trabajo/index.php",   // ✔ URL correcta
         type: "GET",
         data: {
             semana: semana,

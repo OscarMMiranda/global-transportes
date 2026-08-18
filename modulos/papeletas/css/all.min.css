@@ -1,0 +1,26 @@
+/* ============================
+   FONT AWESOME LITE (ERP)
+
+   Archivo: /modulos/papeletas/css/all.min.css
+   
+   ============================ */
+
+.fa {
+    font-family: Arial, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    display: inline-block;
+    margin-right: 4px;
+}
+
+/* Íconos usados en el módulo */
+.fa-plus:before { content: "+"; }
+.fa-search:before { content: "🔍"; }
+.fa-edit:before { content: "✎"; }
+.fa-file:before { content: "📄"; }
+.fa-history:before { content: "⏱"; }
+.fa-money-bill:before { content: "💵"; }
+.fa-percentage:before { content: "%"; }
+.fa-user:before { content: "👤"; }
+.fa-check:before { content: "✔"; }
+.fa-times:before { content: "✖"; }

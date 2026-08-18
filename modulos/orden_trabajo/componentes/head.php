@@ -5,34 +5,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title><?php echo isset($pageTitle) ? $pageTitle : 'Órdenes de Trabajo'; ?></title>
+    <!-- TÍTULO CORPORATIVO -->
+    <title>
+        <?= isset($pageTitle) ? htmlspecialchars($pageTitle) : 'ERP Corporativo - Órdenes de Trabajo'; ?>
+    </title>
 
-    <!-- BOOTSTRAP 5 (CDN) -->
+    <!-- FAVICON ERP -->
+    <link rel="icon" type="image/png" href="/assets/img/favicon.png">
+
+    <!-- BOOTSTRAP 5 -->
     <link 
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
         rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
         crossorigin="anonymous"
     >
 
-    <!-- FONT AWESOME (CDN) -->
+    <!-- FONT AWESOME -->
     <link 
-        rel="stylesheet" 
+        rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
         crossorigin="anonymous"
         referrerpolicy="no-referrer"
-    />
+    >
 
-    <!-- ANIMATE CSS (CDN) -->
+    <!-- ANIMATE CSS -->
     <link 
-        rel="stylesheet" 
+        rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-    />
+    >
 
-    <!-- GOOGLE FONTS -->
+    <!-- GOOGLE FONTS (Inter corporativo) -->
     <link 
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" 
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap"
         rel="stylesheet"
     >
+
+    <!-- ESTILOS GLOBALES ERP -->
+    <link rel="stylesheet" href="/assets/css/erp_global.css">
+
+    <!-- ESTILOS DEL MÓDULO OT -->
+    <link rel="stylesheet" href="/modulos/orden_trabajo/css/orden_trabajo.css">
 </head>

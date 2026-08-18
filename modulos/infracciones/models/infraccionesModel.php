@@ -1,5 +1,5 @@
 <?php
-// archivo: /modulos/infracciones/models/InfraccionesModel.php
+	//	modulos/infracciones/models/infraccionesModel.php
 
 class InfraccionesModel {
 
@@ -10,29 +10,28 @@ class InfraccionesModel {
     }
 
     /* ============================================================
-       OBTENER UIT VIGENTE
+       UIT VIGENTE
        ============================================================ */
-    public function getUitVigente()
-    {
-        $sql = "SELECT valor FROM uit ORDER BY anio DESC LIMIT 1";
+    public function getUitVigente(){
+        $sql = "SELECT valor FROM uit WHERE estado = 1 LIMIT 1";
         $res = $this->db->query($sql);
-
         if ($res && $res->num_rows > 0) {
-            $row = $res->fetch_assoc();
-            return floatval($row['valor']);
+            return floatval($res->fetch_assoc()['valor']);
         }
-
         return 0;
     }
 
     /* ============================================================
-       LISTAR (SOLO ACTIVAS)
+       LISTAR (ACTIVAS / INACTIVAS)
        ============================================================ */
-    public function listar(){
+    public function listar($filtros = array()){
+
+        $estado = isset($filtros['estado']) ? $this->db->real_escape_string($filtros['estado']) : 'Activo';
+
         $sql = "SELECT i.*, e.nombre AS entidad_nombre
                 FROM infracciones i
                 LEFT JOIN entidad_emisora e ON e.id = i.entidad_emisora_id
-                WHERE i.estado = 'Activo'
+                WHERE i.estado = '$estado'
                 ORDER BY i.codigo ASC";
 
         $res = $this->db->query($sql);
@@ -52,16 +51,9 @@ class InfraccionesModel {
        ============================================================ */
     public function entidades(){
         $sql = "SELECT * FROM entidad_emisora ORDER BY nombre ASC";
-
         $res = $this->db->query($sql);
         $data = array();
-
-        if ($res) {
-            while ($row = $res->fetch_assoc()) {
-                $data[] = $row;
-            }
-        }
-
+        if ($res) while ($row = $res->fetch_assoc()) $data[] = $row;
         return $data;
     }
 
@@ -70,27 +62,19 @@ class InfraccionesModel {
        ============================================================ */
     public function obtener($id){
         $id = intval($id);
-
         $sql = "SELECT i.*, e.nombre AS entidad_nombre
                 FROM infracciones i
                 LEFT JOIN entidad_emisora e ON e.id = i.entidad_emisora_id
                 WHERE i.id = $id
                 LIMIT 1";
-
         $res = $this->db->query($sql);
-
-        if ($res && $res->num_rows > 0) {
-            return $res->fetch_assoc();
-        }
-
-        return false;
+        return ($res && $res->num_rows > 0) ? $res->fetch_assoc() : false;
     }
 
     /* ============================================================
-       VALIDAR CÓDIGO ÚNICO (CORREGIDO)
+       VALIDAR CÓDIGO ÚNICO
        ============================================================ */
-    public function existeCodigo($codigo, $entidad_emisora_id, $excluirId = 0)
-    {
+    public function existeCodigo($codigo, $entidad_emisora_id, $excluirId = 0){
         $codigo  = $this->db->real_escape_string($codigo);
         $entidad = intval($entidad_emisora_id);
         $excluirId = intval($excluirId);
@@ -108,12 +92,11 @@ class InfraccionesModel {
         $sql .= " LIMIT 1";
 
         $res = $this->db->query($sql);
-
         return ($res && $res->num_rows > 0);
     }
 
     /* ============================================================
-       GUARDAR (USANDO % UIT)
+       GUARDAR
        ============================================================ */
     public function guardar($data){
 
@@ -122,18 +105,19 @@ class InfraccionesModel {
         $grav    = $this->db->real_escape_string($data['gravedad']);
         $puntos  = intval($data['puntos']);
         $porc    = floatval($data['porcentaje_uit']);
+        $monto   = floatval($data['monto_base']);
         $entidad = intval($data['entidad_emisora_id']);
 
         $sql = "INSERT INTO infracciones 
-                (codigo, descripcion, gravedad, puntos, porcentaje_uit, entidad_emisora_id, estado)
+                (codigo, descripcion, gravedad, puntos, porcentaje_uit, monto_base, entidad_emisora_id, estado, fecha_creacion)
                 VALUES 
-                ('$codigo', '$desc', '$grav', $puntos, $porc, $entidad, 'Activo')";
+                ('$codigo', '$desc', '$grav', $puntos, $porc, $monto, $entidad, 'Activo', NOW())";
 
         return $this->db->query($sql);
     }
 
     /* ============================================================
-       ACTUALIZAR (USANDO % UIT)
+       ACTUALIZAR
        ============================================================ */
     public function actualizar($data){
 
@@ -143,6 +127,7 @@ class InfraccionesModel {
         $grav    = $this->db->real_escape_string($data['gravedad']);
         $puntos  = intval($data['puntos']);
         $porc    = floatval($data['porcentaje_uit']);
+        $monto   = floatval($data['monto_base']);
         $entidad = intval($data['entidad_emisora_id']);
 
         $sql = "UPDATE infracciones SET
@@ -151,6 +136,7 @@ class InfraccionesModel {
                     gravedad = '$grav',
                     puntos = $puntos,
                     porcentaje_uit = $porc,
+                    monto_base = $monto,
                     entidad_emisora_id = $entidad,
                     fecha_modificacion = NOW()
                 WHERE id = $id";
@@ -159,47 +145,37 @@ class InfraccionesModel {
     }
 
     /* ============================================================
-       HARD DELETE (NO USAR)
-       ============================================================ */
-    public function eliminar($id){
-        $id = intval($id);
-        $sql = "DELETE FROM infracciones WHERE id = $id";
-        return $this->db->query($sql);
-    }
-
-    /* ============================================================
-       VALIDAR SI TIENE PAPELETAS ASOCIADAS
-       ============================================================ */
-    public function tienePapeletas($id)
-    {
-        $id = intval($id);
-        if ($id <= 0) return false;
-
-        $sql = "SELECT COUNT(*) AS total 
-                FROM papeletas 
-                WHERE infraccion_id = $id";
-
-        $res = $this->db->query($sql);
-        if (!$res) return false;
-
-        $row = $res->fetch_assoc();
-        return intval($row['total']) > 0;
-    }
-
-    /* ============================================================
        SOFT DELETE (DESACTIVAR)
        ============================================================ */
-    public function desactivar($id)
-    {
+    public function desactivar($id){
         $id = intval($id);
         if ($id <= 0) return false;
 
         $sql = "UPDATE infracciones 
                 SET estado = 'Inactivo',
+                    eliminado_por = '" . $this->db->real_escape_string($_SESSION['usuario']) . "',
+                    fecha_eliminacion = NOW(),
                     fecha_modificacion = NOW()
                 WHERE id = $id";
 
-        return $this->db->query($sql) ? true : false;
+        return $this->db->query($sql);
+    }
+
+    /* ============================================================
+       REACTIVAR
+       ============================================================ */
+    public function reactivar($id){
+        $id = intval($id);
+
+        $sql = "UPDATE infracciones 
+                SET estado = 'Activo',
+                    eliminado_por = NULL,
+                    fecha_eliminacion = NULL,
+                    fecha_modificacion = NOW()
+                WHERE id = $id
+                LIMIT 1";
+
+        return $this->db->query($sql);
     }
 }
 ?>

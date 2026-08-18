@@ -3,18 +3,30 @@
 
 header('Content-Type: application/json');
 
+/**
+ * @var OrdenModel $model  // ← evita subrayado en obtenerPorId()
+ */
+
 // ===============================
 // 🔧 Conexión
 // ===============================
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/conexion.php';
 $conn = getConnection();
 
+if (!$conn) {
+    echo json_encode(array(
+        "estado"  => "error",
+        "mensaje" => "Error de conexión a la base de datos"
+    ));
+    exit;
+}
+
 // ===============================
 // 🔵 VALIDAR MÉTODO
 // ===============================
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     echo json_encode(array(
-        "estado" => "error",
+        "estado"  => "error",
         "mensaje" => "Método no permitido"
     ));
     exit;
@@ -25,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 // ===============================
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     echo json_encode(array(
-        "estado" => "error",
+        "estado"  => "error",
         "mensaje" => "ID inválido"
     ));
     exit;
@@ -48,7 +60,7 @@ try {
 
     if (!$ot) {
         echo json_encode(array(
-            "estado" => "error",
+            "estado"  => "error",
             "mensaje" => "La orden no existe"
         ));
         exit;
@@ -68,7 +80,7 @@ try {
     error_log("Error en VerController.php: " . $e->getMessage());
 
     echo json_encode(array(
-        "estado" => "error",
+        "estado"  => "error",
         "mensaje" => "Error al obtener datos"
     ));
     exit;

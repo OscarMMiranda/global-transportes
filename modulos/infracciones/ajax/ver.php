@@ -53,6 +53,22 @@ if (!$data) {
 }
 
 // ============================================================
+// APLICAR REGLA DEL MONTO BASE
+// ============================================================
+$porcentaje = floatval($data['porcentaje_uit']);
+$monto_guardado = floatval($data['monto_base']);
+
+// Obtener UIT vigente
+$uit = $controller->model->getUitVigente();
+
+// Regla oficial del negocio
+if ($porcentaje > 0 && $uit > 0) {
+    $data['monto_base'] = ($porcentaje / 100) * $uit;
+} else {
+    $data['monto_base'] = $monto_guardado;
+}
+
+// ============================================================
 // RESPUESTA OK
 // ============================================================
 echo json_encode([

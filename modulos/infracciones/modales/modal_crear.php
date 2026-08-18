@@ -21,7 +21,7 @@
 
                         <div class="col-md-4 mb-3">
                             <label>Código</label>
-                            <input type="text" name="codigo" class="form-control">
+                            <input type="text" name="codigo" class="form-control" maxlength="10" style="text-transform:uppercase;">
                         </div>
 
                         <div class="col-md-8 mb-3">

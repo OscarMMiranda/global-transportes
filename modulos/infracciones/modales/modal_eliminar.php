@@ -89,6 +89,17 @@
 
                         </div>
 
+                        <hr>
+
+                        <!-- MOTIVO DE ELIMINACIÓN -->
+                        <div class="row">
+                            <div class="col-md-12 mb-2">
+                                <label class="fw-bold">Motivo de eliminación:</label>
+                                <textarea name="motivo" id="eliminar_motivo" class="form-control" rows="3"
+                                          placeholder="Describa el motivo de la eliminación"></textarea>
+                            </div>
+                        </div>
+
                     </div>
 
                 </div>

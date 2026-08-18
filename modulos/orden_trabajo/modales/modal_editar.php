@@ -6,7 +6,6 @@
     <div class="modal-dialog modal-lg modal-dialog-scrollable">
         <div class="modal-content">
 
-            <!-- HEADER -->
             <div class="modal-header bg-info text-white">
                 <h5 class="modal-title" id="modalEditarOTLabel">
                     <i class="fa-solid fa-pen-to-square"></i> Editar Orden de Trabajo
@@ -14,7 +13,6 @@
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
 
-            <!-- BODY -->
             <div class="modal-body">
 
                 <div id="loaderEditarOT" class="text-center my-3" style="display:none;">
@@ -29,7 +27,7 @@
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label class="fw-bold">Número OT:</label>
-                            <input type="text" id="editar_numero_ot" name="numero_ot" class="form-control form-control-sm">
+                            <input type="text" id="editar_numero_ot" name="numero_ot" class="form-control form-control-sm" readonly>
                         </div>
 
                         <div class="col-md-6">
@@ -41,19 +39,19 @@
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label class="fw-bold">Cliente:</label>
-                            <input type="text" id="editar_cliente" name="cliente" class="form-control form-control-sm">
+                            <select id="editar_cliente_id" name="cliente_id" class="form-control form-control-sm"></select>
                         </div>
 
                         <div class="col-md-6">
                             <label class="fw-bold">Empresa:</label>
-                            <input type="text" id="editar_empresa" name="empresa" class="form-control form-control-sm">
+                            <select id="editar_empresa_id" name="empresa_id" class="form-control form-control-sm"></select>
                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label class="fw-bold">Tipo OT:</label>
-                            <input type="text" id="editar_tipo_ot" name="tipo_ot" class="form-control form-control-sm">
+                            <select id="editar_tipo_ot_id" name="tipo_ot_id" class="form-control form-control-sm"></select>
                         </div>
 
                         <div class="col-md-6">
@@ -71,7 +69,6 @@
 
             </div>
 
-            <!-- FOOTER -->
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">
                     Cancelar

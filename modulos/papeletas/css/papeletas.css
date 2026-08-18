@@ -1,0 +1,117 @@
+/* ============================
+    ESTILOS DEL MÓDULO PAPELETAS
+    Archivo: /modulos/papeletas/css/papeletas.css
+   ============================ */
+
+/* Títulos */
+h3 {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+/* Tarjetas */
+.card {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-bottom: 15px;
+}
+
+.card-body {
+    padding: 15px 20px;
+}
+
+/* Botones */
+.btn {
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 4px;
+}
+
+/* Inputs */
+.form-control {
+    border: 1px solid #ccc;
+    padding: 6px 10px;
+    font-size: 14px;
+    border-radius: 4px;
+}
+
+/* Tabla general */
+#contenedorTablaPapeletas table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#contenedorTablaPapeletas th,
+#contenedorTablaPapeletas td {
+    padding: 8px;
+    border-bottom: 1px solid #e5e5e5;
+    font-size: 14px;
+}
+
+/* ============================
+   ENCABEZADO DE TABLA (CORPORATIVO)
+   ============================ */
+
+/* Forzar encabezado visible */
+#tablaPapeletas thead th {
+    background-color: #212529 !important; /* gris oscuro corporativo */
+    color: #ffffff !important;            /* texto blanco */
+    font-weight: bold;
+}
+
+/* Anular estilos de DataTables */
+table.dataTable thead > tr > th {
+    background-color: #212529 !important;
+    color: #ffffff !important;
+}
+
+/* Anular tu estilo anterior que lo hacía tenue */
+#contenedorTablaPapeletas th {
+    background-color: #212529 !important;
+    color: #ffffff !important;
+}
+
+/* ============================
+   ESTADOS
+   ============================ */
+
+.estado-pendiente {
+    color: #d9534f;
+    font-weight: bold;
+}
+
+.estado-reclamo {
+    color: #f0ad4e;
+    font-weight: bold;
+}
+
+.estado-pagada {
+    color: #5cb85c;
+    font-weight: bold;
+}
+
+.estado-anulada {
+    color: #777;
+    font-weight: bold;
+}
+
+/* ============================
+   MODALES
+   ============================ */
+
+.modal-header {
+    background: #f8f9fa;
+    border-bottom: 1px solid #ddd;
+}
+
+.modal-footer {
+    border-top: 1px solid #ddd;
+}
+
+/* Loader */
+.loader-text {
+    text-align: center;
+    padding: 40px 0;
+    color: #777;
+    font-size: 15px;
+}

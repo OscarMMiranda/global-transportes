@@ -13,18 +13,21 @@ body {
 h2 {
     font-weight: 600;
     letter-spacing: 0.5px;
+    margin-bottom: 10px; /* más compacto */
 }
 
 /* === Botones === */
 .btn-lg {
-    padding: 0.6rem 1.2rem;
-    font-size: 1.1rem;
+    padding: 0.45rem 0.9rem !important; /* más compacto */
+    font-size: 0.95rem !important;
     font-weight: 500;
-    border-radius: 0.4rem;
+    border-radius: 0.35rem;
 }
 
 .btn-sm {
-    min-width: 100px;
+    min-width: 80px; /* antes 100px */
+    padding: 2px 6px !important;
+    font-size: 11px !important;
     text-align: center;
 }
 
@@ -32,7 +35,7 @@ h2 {
 .btn-danger i,
 .btn-warning i,
 .btn-primary i {
-    margin-right: 0.4rem;
+    margin-right: 0.3rem;
 }
 
 /* ============================================
@@ -43,6 +46,8 @@ h2 {
     border: 1px solid #dee2e6;
     border-radius: 0.4rem;
     overflow: hidden;
+    font-size: 13px; /* tamaño global */
+    font-family: 'Segoe UI', Tahoma;
 }
 
 .ot-tabla th {
@@ -50,12 +55,21 @@ h2 {
     color: white;
     text-align: center;
     font-weight: 500;
+    font-size: 13px !important;
+    padding: 6px 8px !important; /* más compacto */
 }
 
 .ot-tabla td {
     text-align: center;
     vertical-align: middle;
-    font-size: 0.9rem;
+    font-size: 12px !important;
+    padding: 4px 6px !important; /* filas más pequeñas */
+}
+
+/* Botones dentro de la tabla */
+.ot-tabla .btn {
+    padding: 2px 4px !important;
+    font-size: 11px !important;
 }
 
 /* ============================================
@@ -83,8 +97,8 @@ h2 {
 
 .nav-tabs .nav-link {
     font-weight: 500;
-    font-size: 1.05rem;
-    padding: 0.6rem 1rem;
+    font-size: 13px !important;
+    padding: 4px 10px !important; /* más compacto */
 }
 
 .tab-content {
@@ -92,6 +106,33 @@ h2 {
     border-top: none;
     border-radius: 0 0 0.5rem 0.5rem;
     background-color: #fff;
+    padding-top: 10px !important; /* menos aire */
+}
+
+/* ============================================
+   FILTROS
+   ============================================ */
+
+.card.mb-3.shadow-sm .card-body {
+    padding: 10px 12px !important; /* compacto */
+}
+
+.card.mb-3.shadow-sm .card-header {
+    padding: 10px 12px !important;
+}
+
+#filtroSemana {
+    padding: 2px 6px !important;
+    height: 30px !important;
+    font-size: 13px !important;
+}
+
+/* ============================================
+   ESPACIADO GLOBAL
+   ============================================ */
+
+.mb-3 {
+    margin-bottom: 10px !important; /* menos aire */
 }
 
 /* ============================================
@@ -101,12 +142,12 @@ h2 {
 @media (max-width: 768px) {
 
     .btn-lg {
-        font-size: 1rem;
-        padding: 0.5rem 1rem;
+        font-size: 0.9rem !important;
+        padding: 0.4rem 0.8rem !important;
     }
 
     h2 {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
     }
 
     .d-flex.justify-content-end {

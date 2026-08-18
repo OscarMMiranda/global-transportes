@@ -12,16 +12,19 @@ $anioActual = date('y');
 $sqlUltima = "
     SELECT numero_ot 
     FROM ordenes_trabajo 
-    WHERE RIGHT(numero_ot, 2) = '$anioActual'
+    WHERE RIGHT(numero_ot, 2) = ?
     ORDER BY id DESC 
     LIMIT 1
 ";
 
-$res = $conn->query($sqlUltima);
+$stmt = $conn->prepare($sqlUltima);
+$stmt->bind_param("s", $anioActual);
+$stmt->execute();
+$res = $stmt->get_result();
 
 if ($res && $res->num_rows > 0) {
     $ultimoOT = $res->fetch_assoc()['numero_ot'];
-    $partes = explode('-', $ultimoOT);
+    $partes = explode('-', trim($ultimoOT));
     $correlativo = intval($partes[0]) + 1;
 } else {
     $correlativo = 1;
@@ -62,7 +65,6 @@ $pageTitle = "➕ Crear Nueva Orden de Trabajo";
             <div class="col-md-4 position-relative">
                 <label class="form-label fw-bold">Cliente</label>
 
-                <!-- AUTOCOMPLETADO AJAX -->
                 <input type="text" id="cliente_nombre" class="form-control" autocomplete="off"
                        placeholder="Buscar cliente...">
 
@@ -111,10 +113,7 @@ $pageTitle = "➕ Crear Nueva Orden de Trabajo";
 
 </div>
 
-<!-- MODAL NUEVO CLIENTE -->
 <?php include __DIR__ . '/../modales/modal_nuevo_cliente.php'; ?>
-
-<!-- SCRIPTS CORRECTOS PARA CREATE -->
 <?php include __DIR__ . '/../componentes/scripts_create.php'; ?>
 
 </body>
