@@ -1,17 +1,10 @@
 <?php
 // archivo: /modulos/orden_trabajo/controllers/ListController.php
 
-require_once __DIR__ . '/../../../includes/config.php';
+require_once __DIR__ . '/../../includes/config.php';
 require_once __DIR__ . '/../models/OrdenModel.php';
 
-// ===============================
-// 🔵 Conexión corporativa
-// ===============================
 $conn = getConnection();
-if (!$conn) {
-    die("❌ Error de conexión a la base de datos");
-}
-
 $model = new OrdenModel($conn);
 
 // ===============================
@@ -78,5 +71,4 @@ $data = array(
     "semana_sel" => $semana
 );
 
-// Cargar vista corporativa
 require __DIR__ . '/../views/list.php';

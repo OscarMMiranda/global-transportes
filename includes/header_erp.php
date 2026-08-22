@@ -23,13 +23,6 @@ if (session_status() === PHP_SESSION_NONE) {
           rel="stylesheet" crossorigin="anonymous" referrerpolicy="no-referrer">
 
     <!-- ❌ IMPORTANTE: NO CARGAR BOOTSTRAP JS AQUÍ -->
-    <!-- Bootstrap JS se carga en scripts.php DESPUÉS de jQuery -->
-
-    <!-- CSS ESPECÍFICO DEL MÓDULO (si existe) -->
-    <?php if (defined('MODULE_CSS')): ?>
-        <!-- <link rel="stylesheet" href="/modulos/orden_trabajo/css/<?php //echo MODULE_CSS; ?>"> -->
-    <?php endif; ?>
-
 </head>
 
 <body>

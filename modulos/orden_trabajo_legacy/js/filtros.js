@@ -1,7 +1,5 @@
 // archivo: /modulos/orden_trabajo/js/filtros.js
 
-// archivo: /modulos/orden_trabajo/js/filtros.js
-
 $(document).ready(function () {
 
     // Cargar datos al iniciar
@@ -34,10 +32,11 @@ function escapeHtml(texto) {
 // ===============================
 function obtenerTabActivo() {
 
-    let activo = $(".tab-pane.active.show").attr("id")
-        || $(".tab-pane.show.active").attr("id")
-        || $(".tab-pane.active").attr("id")
-        || $(".tab-pane.show").attr("id");
+    let activo =
+        $(".tab-pane.active.show").attr("id") ||
+        $(".tab-pane.show.active").attr("id") ||
+        $(".tab-pane.active").attr("id") ||
+        $(".tab-pane.show").attr("id");
 
     return activo;
 }
@@ -66,7 +65,7 @@ function cargarTabActivo() {
         estado = "ELIMINADA";
     }
 
-    // Spinner
+    // Spinner corporativo
     $(tbody).html(
         '<tr><td colspan="10" class="text-center py-4">' +
         '<div class="spinner-border text-primary"></div>' +
@@ -75,8 +74,8 @@ function cargarTabActivo() {
     );
 
     $.ajax({
-        url: "/modulos/orden_trabajo/index.php",   // ✔ URL correcta
-        type: "GET",
+        url: "/modulos/orden_trabajo/controllers/ListController.php",   // ✔ CONTROLADOR REAL
+        type: "POST",
         data: {
             semana: semana,
             estado: estado,
@@ -86,13 +85,20 @@ function cargarTabActivo() {
 
         success: function (res) {
 
+            if (!res || res.estado !== "ok") {
+                $(tbody).html(
+                    '<tr><td colspan="10" class="text-center text-danger">Error al cargar datos</td></tr>'
+                );
+                return;
+            }
+
             let html = "";
 
-            if (!res || res.length === 0) {
+            if (!res.data || res.data.length === 0) {
                 html = '<tr><td colspan="10" class="text-center">No hay registros</td></tr>';
             } else {
 
-                $.each(res, function (i, ot) {
+                $.each(res.data, function (i, ot) {
 
                     html += "<tr class='text-center'>" +
                         "<td class='fw-bold'>" + escapeHtml(ot.numero_ot) + "</td>" +

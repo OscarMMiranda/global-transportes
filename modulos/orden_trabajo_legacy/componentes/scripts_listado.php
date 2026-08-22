@@ -2,10 +2,10 @@
 // archivo: /modulos/orden_trabajo/componentes/scripts_listado.php
 ?>
 
-<!-- jQuery (única carga) -->
+<!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
-<!-- Bootstrap (única carga) -->
+<!-- Bootstrap -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <!-- SweetAlert2 -->
@@ -19,23 +19,20 @@
 
 <script>
 /**
- * Inicializa DataTables sobre la tabla OT
- * Se usa tanto en carga inicial como después del AJAX
+ * Inicializa DataTables sobre cualquier tabla OT
  */
-function inicializarTablaOT() {
+function inicializarTabla(selector) {
 
-    // Si ya existe una instancia previa → destruirla
-    if ($.fn.DataTable.isDataTable("#tablaOT")) {
-        $("#tablaOT").DataTable().destroy();
+    if ($.fn.DataTable.isDataTable(selector)) {
+        $(selector).DataTable().destroy();
     }
 
-    // Inicializar DataTables
-    $("#tablaOT").DataTable({
+    $(selector).DataTable({
         language: {
             url: "https://cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json"
         },
-        pageLength: 25,
-        lengthMenu: [10, 25, 50, 100],
+        pageLength: 15,
+        lengthMenu: [10, 15, 20, 25, 50, 100],
         responsive: true,
         autoWidth: false,
         order: []
@@ -44,9 +41,17 @@ function inicializarTablaOT() {
 
 $(document).ready(function() {
 
-    // Inicialización en carga inicial
-    if ($("#tablaOT").length) {
-        inicializarTablaOT();
+    // Inicializar todas las tablas del módulo OT
+    if ($("#tablaOrdenesActivas").length) {
+        inicializarTabla("#tablaOrdenesActivas");
+    }
+
+    if ($("#tablaOrdenesAnuladas").length) {
+        inicializarTabla("#tablaOrdenesAnuladas");
+    }
+
+    if ($("#tablaOrdenesEliminadas").length) {
+        inicializarTabla("#tablaOrdenesEliminadas");
     }
 
 });
@@ -58,5 +63,5 @@ $(document).ready(function() {
 <script src="/modulos/orden_trabajo/js/modales.js?v=1.0"></script>
 <script src="/modulos/orden_trabajo/js/ajax.js?v=1.0"></script>
 
-<!-- ⭐ Cargar catálogos AL FINAL (crítico para que el modal EDITAR funcione) -->
+<!-- Catálogos (crítico para modal EDITAR) -->
 <script src="/modulos/orden_trabajo/js/catalogos.js?v=1.0"></script>

@@ -1,0 +1,33 @@
+/modulos/orden_trabajo/
+├── index.php                  	← Vista principal (listado)
+├── api/
+│   ├── BuscarOrden.php			
+├── controllers/
+│   ├── CreateController.php   			← Procesa creación de orden
+│   ├── Edit.php     					← Procesa edición 
+│   ├── EditController.php     			← Procesa edición
+│   ├── GuardarViajeController.php		← 
+│   ├── ListController.php     			← 
+│   ├── DeleteController.php   			← Procesa eliminación
+│   ├── AnularController.php   			← Procesa anulación
+│   ├── RegistrarViajeController.php	← 
+│   └── RestoreController.php 			← 
+├── helpers/
+│   └── funciones.php         			← 
+├── models/
+│   └── OrdenModel.php         			← Encapsula consultas SQL
+├── views/	
+│   ├── form.php						← 
+│   ├── 
+│   ├── ver.php                			← Vista de detalle
+│   ├── detalle.php            			← Formulario de viaje
+│   └── partials/	
+│       ├── head.php           			← Encabezado HTML
+│       ├── scripts.php        			← JS y DataTables
+│       ├── formulario_viaje.php       	← 
+│       ├── viajes_orden.php			← 
+│       ├── tabla_activa.php   			← Tabla de órdenes activas
+│       ├── tabla_anulada.php  			← Tabla de órdenes anuladas
+│       └── tabla_eliminada.php			← Tabla de órdenes eliminadas
+├── css/
+│   └── orden_trabajo.css      	← Estilos personalizados
