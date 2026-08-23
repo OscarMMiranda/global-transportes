@@ -2,7 +2,6 @@
 // ======================================================
 //  ARCHIVO: /modulos/orden_trabajo/index.php
 //  MÓDULO: ÓRDENES DE TRABAJO
-//  ARCHIVO: index.php
 //  RESPONSABILIDAD: Punto de entrada del módulo
 // ======================================================
 
@@ -15,23 +14,21 @@ if (!$conn) {
 }
 
 // ======================================================
-//  CONTROLADOR PRINCIPAL (procedural)
-//  Este archivo procesa AJAX y carga la vista
-// ======================================================
-require_once __DIR__ . '/controllers/ListController.php';
-
-// ======================================================
-//  COMPONENTES CORPORATIVOS
+//  COMPONENTES CORPORATIVOS (SIEMPRE ARRIBA)
 // ======================================================
 include __DIR__ . "/componentes/head.php";
 include __DIR__ . "/componentes/header.php";
 
 // ======================================================
-//  La vista ya fue cargada por ListController.php
+//  CONTROLADOR PRINCIPAL
+//  Este archivo imprime la vista (list.php)
 // ======================================================
+require_once __DIR__ . '/controllers/ListController.php';
+
+
 
 // ======================================================
-//  FOOTER + SCRIPTS
+//  FOOTER + SCRIPTS (SIEMPRE AL FINAL)
 // ======================================================
 include __DIR__ . "/componentes/footer.php";
 include __DIR__ . "/componentes/scripts.php";

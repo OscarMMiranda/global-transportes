@@ -65,6 +65,71 @@ modales/
     └── modal_eliminar.php
 
 
+models/
+    ├── OrdenModel.php            ← listado + filtros
+    ├── OrdenCrudModel.php        ← crear / editar / eliminar / anular
+    ├── OrdenValidacionModel.php  ← validar código
+    └── OrdenSemanaModel.php      ← semanas
 
 
+
+
+
+
+
+modulos/
+└── orden_trabajo/
+    │
+    ├── index.php
+    │
+    ├── controllers/
+    │   ├── ListController.php
+    │   ├── CrearController.php
+    │   ├── EditarController.php
+    │   ├── AnularController.php
+    │   ├── EliminarController.php
+    │   ├── ObtenerController.php
+    │   └── ValidarCodigoController.php
+    │
+    ├── models/
+    │   ├── OrdenModel.php
+    │   ├── OrdenCrudModel.php
+    │   ├── OrdenValidacionModel.php
+    │   └── OrdenSemanaModel.php
+    │
+    ├── componentes/
+    │   ├── head.php
+    │   ├── header.php
+    │   ├── footer.php
+    │   └── scripts.php
+    │
+    ├── views/
+    │   ├── list.php
+    │   ├── create.php
+    │   ├── update.php
+    │   └── partials/
+    │       ├── filtros.php
+    │       ├── tabs.php
+    │       ├── tabla_activas.php
+    │       ├── tabla_anuladas.php
+    │       ├── tabla_eliminadas.php
+    │       └── scripts_listado.php
+    │
+    ├── js/
+    │   ├── ordenes.js
+    │   ├── ajax_listado.js
+    │   ├── ajax_crud.js
+    │   ├── modales.js
+    │   ├── filtros.js
+    │   └── util.js
+    │
+    ├── css/
+    │   ├── orden.css
+    │   └── tablas.css
+    │
+    └── modales/
+        ├── modal_crear.php
+        ├── modal_editar.php
+        ├── modal_anular.php
+        └── modal_eliminar.php
 

@@ -1,0 +1,32 @@
+/* ======================================================
+    ARCHIVO	:	/modulos/orden_trabajo/css/header.css    
+   CSS: header.css
+   RESPONSABILIDAD: Estilos del encabezado del módulo
+   ====================================================== */
+
+.modulo-header {
+    padding: 15px 10px;
+    background: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 15px;
+}
+
+.titulo-modulo {
+    margin: 0;
+    font-size: 22px;
+    font-weight: bold;
+    color: #333;
+}
+
+.modulo-subtitulo {
+    font-size: 13px;
+    color: #666;
+    margin-top: 3px;
+}
+
+.division-modulo {
+    margin-top: 10px;
+    margin-bottom: 0;
+    border: 0;
+    border-top: 1px solid #ccc;
+}

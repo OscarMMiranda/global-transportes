@@ -1,0 +1,147 @@
+/* ======================================================
+    ARCHIVO	:	/modulos/orden_trabajo/css/modales.css
+   CSS: modales.css
+   RESPONSABILIDAD: Estilos de los modales del módulo
+   ====================================================== */
+
+/* ------------------------------
+   Overlay corporativo
+   ------------------------------ */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.45);
+    display: none;
+    z-index: 900;
+}
+
+/* ------------------------------
+   Contenedor del modal
+   ------------------------------ */
+.modal-corp {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 450px;
+    max-width: 90%;
+    background: #ffffff;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    transform: translate(-50%, -50%);
+    padding: 15px;
+    display: none;
+    z-index: 1000;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
+}
+
+/* ------------------------------
+   Título del modal
+   ------------------------------ */
+.modal-titulo {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 12px;
+}
+
+/* ------------------------------
+   Cuerpo del modal
+   ------------------------------ */
+.modal-cuerpo {
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: #444;
+}
+
+/* ------------------------------
+   Inputs corporativos
+   ------------------------------ */
+.modal-corp input[type="text"],
+.modal-corp input[type="number"],
+.modal-corp select,
+.modal-corp textarea {
+    width: 100%;
+    padding: 6px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.modal-corp input:focus,
+.modal-corp select:focus,
+.modal-corp textarea:focus {
+    border-color: #0d6efd;
+    outline: none;
+}
+
+/* ------------------------------
+   Footer del modal
+   ------------------------------ */
+.modal-footer {
+    text-align: right;
+    margin-top: 10px;
+}
+
+/* ------------------------------
+   Botones corporativos
+   ------------------------------ */
+.btn-modal {
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.btn-modal-guardar {
+    background-color: #198754;
+    color: #fff;
+}
+
+.btn-modal-cerrar {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+.btn-modal-eliminar {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.btn-modal:hover {
+    opacity: 0.85;
+}
+
+/* ------------------------------
+   Mensajes dentro del modal
+   ------------------------------ */
+.modal-msg-ok {
+    background: #d1e7dd;
+    color: #0f5132;
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.modal-msg-error {
+    background: #f8d7da;
+    color: #842029;
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+/* ------------------------------
+   Utilidades
+   ------------------------------ */
+.modal-visible {
+    display: block;
+}
+
+.oculto {
+    display: none;
+}

@@ -1,0 +1,104 @@
+/* ======================================================
+    ARCHIVO	:	/modulos/orden_trabajo/css/tablas.css
+   CSS: tablas.css
+   RESPONSABILIDAD: Estilos de tablas del módulo
+   ====================================================== */
+
+/* ------------------------------
+   Contenedor general de tablas
+   ------------------------------ */
+.ot-tabla {
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    overflow: hidden;
+    background: #fff;
+    width: 100%;
+}
+
+/* ------------------------------
+   Encabezados
+   ------------------------------ */
+.ot-tabla th {
+    background-color: #0d6efd;
+    color: #fff;
+    text-align: center;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 8px;
+    border-bottom: 1px solid #0b5ed7;
+}
+
+/* ------------------------------
+   Filas
+   ------------------------------ */
+.ot-tabla td {
+    text-align: center;
+    vertical-align: middle;
+    font-size: 13px;
+    padding: 6px 8px;
+    border-bottom: 1px solid #e3e3e3;
+}
+
+/* ------------------------------
+   Hover corporativo
+   ------------------------------ */
+.ot-tabla tbody tr:hover {
+    background-color: #f2f6ff;
+}
+
+/* ------------------------------
+   Estados visuales
+   ------------------------------ */
+.ot-estado-activa {
+    background-color: #d1e7dd;
+    color: #0f5132;
+}
+
+.ot-estado-anulada {
+    background-color: #fff3cd;
+    color: #664d03;
+}
+
+.ot-estado-eliminada {
+    background-color: #f8d7da;
+    color: #842029;
+}
+
+/* ------------------------------
+   Botones dentro de tablas
+   ------------------------------ */
+.ot-tabla .btn {
+    font-size: 11px;
+    padding: 3px 6px;
+    border-radius: 3px;
+}
+
+/* ------------------------------
+   Compactación opcional
+   ------------------------------ */
+.ot-compact td {
+    padding: 4px 6px;
+    font-size: 12px;
+}
+
+.ot-compact th {
+    padding: 6px;
+    font-size: 13px;
+}
+
+/* ------------------------------
+   Alineaciones rápidas
+   ------------------------------ */
+.td-left   { text-align: left; }
+.td-right  { text-align: right; }
+.td-center { text-align: center; }
+
+/* ------------------------------
+   Sin registros
+   ------------------------------ */
+.ot-sin-registros {
+    text-align: center;
+    padding: 12px;
+    font-size: 13px;
+    color: #777;
+}

@@ -1,0 +1,144 @@
+/* ======================================================
+	ARCHIVO	:	/modulos/orden_trabajo/css/orden.css
+   	CSS		:	orden.css
+   	RESPONSABILIDAD: Estilos generales del módulo
+   ====================================================== */
+
+/* ------------------------------
+   Layout general del módulo
+   ------------------------------ */
+.contenedor-ordenes {
+    padding: 15px;
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+/* ------------------------------
+   Títulos internos
+   ------------------------------ */
+h2, h3 {
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+/* ------------------------------
+   Botones corporativos
+   ------------------------------ */
+.btn-corp {
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.btn-corp-primary {
+    background-color: #0d6efd;
+    color: #fff;
+}
+
+.btn-corp-success {
+    background-color: #198754;
+    color: #fff;
+}
+
+.btn-corp-warning {
+    background-color: #ffc107;
+    color: #333;
+}
+
+.btn-corp-danger {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.btn-corp:hover {
+    opacity: 0.85;
+}
+
+/* ------------------------------
+   Contenedores de sección
+   ------------------------------ */
+.seccion {
+    margin-bottom: 20px;
+}
+
+.seccion-titulo {
+    font-size: 16px;
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 8px;
+}
+
+/* ------------------------------
+   Inputs y selects
+   ------------------------------ */
+input[type="text"],
+input[type="number"],
+select,
+textarea {
+    border: 1px solid #ccc;
+    padding: 6px 8px;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 100%;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #0d6efd;
+    outline: none;
+}
+
+/* ------------------------------
+   Filtros corporativos
+   ------------------------------ */
+.filtros {
+    margin-bottom: 15px;
+}
+
+.filtros label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #444;
+    margin-right: 5px;
+}
+
+/* ------------------------------
+   Mensajes corporativos
+   ------------------------------ */
+.msg-ok {
+    background: #d1e7dd;
+    color: #0f5132;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.msg-error {
+    background: #f8d7da;
+    color: #842029;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+/* ------------------------------
+   Espaciados
+   ------------------------------ */
+.mt-10 { margin-top: 10px; }
+.mt-20 { margin-top: 20px; }
+.mb-10 { margin-bottom: 10px; }
+.mb-20 { margin-bottom: 20px; }
+
+/* ------------------------------
+   Utilidades
+   ------------------------------ */
+.text-center { text-align: center; }
+.text-right  { text-align: right; }
+.text-left   { text-align: left; }
