@@ -2,21 +2,21 @@
 /**
  * archivo: /modulos/orden_trabajo/views/list.php
  *
- * @var array  $semanas
- * @var string $semana_sel
+ * Recibe: $data["semanas"], $data["semana_sel"]
  */
+
+$semanas    = isset($data["semanas"]) ? $data["semanas"] : array();
+$semana_sel = isset($data["semana_sel"]) ? $data["semana_sel"] : "";
 ?>
 
-<div class="container mt-4">
+<!-- SOLO HTML — SIN HEAD, SIN HEADER, SIN SCRIPTS -->
 
-    <!-- ============================
-         FILTROS + BOTONES CORPORATIVOS
-         ============================ -->
+<div class="container-fluid mt-4 px-3">
+
+    <!-- FILTROS + BOTONES -->
     <?php include __DIR__ . '/../componentes/filtros_botones.php'; ?>
 
-    <!-- ============================
-         TABS DE ESTADOS
-         ============================ -->
+    <!-- TABS -->
     <ul class="nav nav-tabs mb-3">
         <li class="nav-item">
             <button class="nav-link btn-estado active" data-estado="ACTIVA">Activas</button>
@@ -29,19 +29,19 @@
         </li>
     </ul>
 
-    <!-- ============================
-         TABLA CORPORATIVA
-         ============================ -->
-    <table id="tablaOT" class="table table-bordered table-striped">
+    <!-- TABLA -->
+    <table id="tablaOT" class="table table-bordered table-striped w-100">
         <thead>
             <tr>
-                <th>ID</th>
+                <th>N°</th>
                 <th>Número OT</th>
                 <th>Fecha</th>
                 <th>Semana</th>
                 <th>Cliente</th>
-                <th>Vehículo</th>
+                <th>OC Cliente</th>
                 <th>Tipo OT</th>
+                <th>Empresa</th>
+                <th>N° Viajes</th>
                 <th>Estado</th>
                 <th>Acciones</th>
             </tr>
@@ -50,7 +50,5 @@
 
 </div>
 
-<!-- ============================
-     JS DEL LISTADO
-     ============================ -->
-<script src="js/listado.js"></script>
+<!-- MODAL VER -->
+<?php include __DIR__ . '/../modales/modal_ver.php'; ?>

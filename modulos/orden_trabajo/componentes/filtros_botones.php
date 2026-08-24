@@ -54,6 +54,12 @@
                     <i class="fa-solid fa-trash"></i> Eliminar
                 </button>
 
+                <!-- 🔙 VOLVER AL DASHBOARD -->
+                <a href="/paneles/admin/controladores/dashboard_controlador.php"
+                   class="btn btn-outline-secondary btn-sm px-3 py-1">
+                    <i class="fa-solid fa-arrow-left"></i> Dashboard
+                </a>
+
             </div>
 
         </div>

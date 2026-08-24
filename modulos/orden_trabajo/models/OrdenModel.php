@@ -1,52 +1,60 @@
 <?php
 
+// archivo: /modulos/orden_trabajo/models/OrdenModel.php
+
 class OrdenModel {
 
     /** @var mysqli */
     private $conn;
 
-    /** @param mysqli $conn */
     public function __construct($conn) {
         $this->conn = $conn;
     }
 
     // ============================================================
-    // BASE REUTILIZABLE
+    // BASE REUTILIZABLE (LISTADO CORPORATIVO)
     // ============================================================
     private function obtenerBase($where = "", $params = array(), $types = "") {
 
         $sql = "SELECT 
                     ot.id,
-                    ot.numero_ot,
+
+                    -- Formato corporativo 0000-YYYY
+                    CONCAT(
+                        LPAD(SUBSTRING_INDEX(ot.numero_ot, '-', 1), 4, '0'),
+                        '-',
+                        SUBSTRING_INDEX(ot.numero_ot, '-', -1)
+                    ) AS numero_ot,
+
                     ot.fecha,
                     CONCAT(YEAR(ot.fecha), '-W', LPAD(ot.semana_ot, 2, '0')) AS semana,
 
-                    -- Cliente
-                    c.nombre AS cliente,
+                    -- Cliente corporativo
+                    COALESCE(c.nombre_comercial, c.nombre) AS cliente,
 
-                    -- Empresa
-                    e.razon_social AS empresa,
-
-                    -- Orden de compra del cliente
                     ot.oc_cliente,
-
-                    -- Tipo de mercadería (vehículo en tu interfaz)
-                    COALESCE(tm.nombre, 'Sin vehículo') AS vehiculo,
-
-                    -- Tipo OT
                     tot.nombre AS tipo_ot,
 
-                    -- Estado
-                    eo.nombre AS estado
+                    -- Empresa corporativa
+                    COALESCE(e.nombre_comercial, e.razon_social) AS empresa,
+
+                    -- Estado corporativo (evita NULL)
+                    COALESCE(eo.nombre, 'Pendiente') AS estado,
+
+                    COUNT(DISTINCT ov.id) AS numero_viajes
 
                 FROM ordenes_trabajo ot
                 LEFT JOIN clientes c ON ot.cliente_id = c.id
                 LEFT JOIN empresa e ON ot.empresa_id = e.id
-                LEFT JOIN tipos_mercaderia tm ON ot.tipo_mercaderia_id = tm.id
                 LEFT JOIN tipo_ot tot ON ot.tipo_ot_id = tot.id
                 LEFT JOIN estado_orden_trabajo eo ON ot.estado_ot = eo.id
 
+                LEFT JOIN ordenes_viaje ov 
+                    ON ov.numero_ot = ot.numero_ot
+
                 $where
+
+                GROUP BY ot.id
                 ORDER BY ot.fecha DESC, ot.id DESC";
 
         $stmt = $this->conn->prepare($sql);
@@ -67,7 +75,8 @@ class OrdenModel {
     // ============================================================
     public function obtenerActivasPorSemana($semanaISO = "") {
 
-        $where = "WHERE ot.estado_ot NOT IN (7,8)";
+        // ACTIVA = Pendiente (1) + En proceso (2)
+        $where = "WHERE ot.estado_ot IN (1,2)";
         $params = array();
         $types  = "";
 
@@ -120,31 +129,45 @@ class OrdenModel {
     }
 
     // ============================================================
-    // OBTENER POR ID (NECESARIO PARA EDITAR)
+    // DETALLE CORPORATIVO
     // ============================================================
     public function obtenerPorId($id) {
 
         $sql = "SELECT 
                     ot.id,
-                    ot.numero_ot,
+
+                    -- Formato corporativo 0000-YYYY
+                    CONCAT(
+                        LPAD(SUBSTRING_INDEX(ot.numero_ot, '-', 1), 4, '0'),
+                        '-',
+                        SUBSTRING_INDEX(ot.numero_ot, '-', -1)
+                    ) AS numero_ot,
+
                     ot.fecha,
                     CONCAT(YEAR(ot.fecha), '-W', LPAD(ot.semana_ot, 2, '0')) AS semana,
-                    ot.oc_cliente,
 
-                    c.nombre AS cliente,
-                    e.razon_social AS empresa,
-                    COALESCE(tm.nombre, 'Sin vehículo') AS vehiculo,
+                    COALESCE(c.nombre_comercial, c.nombre) AS cliente,
+                    COALESCE(e.nombre_comercial, e.razon_social) AS empresa,
+
+                    ot.oc_cliente,
                     tot.nombre AS tipo_ot,
-                    eo.nombre AS estado
+
+                    -- Estado corporativo
+                    COALESCE(eo.nombre, 'Pendiente') AS estado,
+
+                    COUNT(DISTINCT ov.id) AS numero_viajes
 
                 FROM ordenes_trabajo ot
                 LEFT JOIN clientes c ON ot.cliente_id = c.id
                 LEFT JOIN empresa e ON ot.empresa_id = e.id
-                LEFT JOIN tipos_mercaderia tm ON ot.tipo_mercaderia_id = tm.id
                 LEFT JOIN tipo_ot tot ON ot.tipo_ot_id = tot.id
                 LEFT JOIN estado_orden_trabajo eo ON ot.estado_ot = eo.id
 
+                LEFT JOIN ordenes_viaje ov 
+                    ON ov.numero_ot = ot.numero_ot
+
                 WHERE ot.id = ?
+                GROUP BY ot.id
                 LIMIT 1";
 
         $stmt = $this->conn->prepare($sql);
@@ -159,3 +182,4 @@ class OrdenModel {
     }
 }
 ?>
+

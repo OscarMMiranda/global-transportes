@@ -1,6 +1,5 @@
 // ======================================================
 //  ARCHIVO: /modulos/orden_trabajo/js/filtros.js
-//  RESPONSABILIDAD: Control de filtros del módulo OT
 // ======================================================
 
 // -------------------------------
@@ -10,7 +9,6 @@ $("#filtro_semana").change(function() {
 
     var semana = $("#filtro_semana").val();
 
-    // Validación corporativa YYYY-WXX
     if (!validarSemana(semana)) {
         mostrarError("Semana inválida. Formato requerido: YYYY-WXX", "#msgFiltro");
         return;
@@ -18,8 +16,9 @@ $("#filtro_semana").change(function() {
 
     limpiarMensajes("#msgFiltro");
 
-    // Recargar listado según pestaña activa
-    var estado = $(".tab-item-activo").data("estado");
+    // USAR LA CLASE CORRECTA DEL HTML
+    var estado = $(".btn-estado.active").data("estado");
+
     cargarListado(estado);
 });
 
@@ -37,7 +36,8 @@ $("#btnRecargar").click(function() {
 
     limpiarMensajes("#msgFiltro");
 
-    var estado = $(".tab-item-activo").data("estado");
+    var estado = $(".btn-estado.active").data("estado");
+
     cargarListado(estado);
 });
 
