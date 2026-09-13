@@ -34,7 +34,11 @@
 .ot-tabla td {
     text-align: center;
     vertical-align: middle;
-    font-size: 13px;
+    font-size: 8px;
+    font-weight: 400;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    color: #333;
+    
     padding: 6px 8px;
     border-bottom: 1px solid #e3e3e3;
 }

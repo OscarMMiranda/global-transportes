@@ -31,7 +31,22 @@
 <!-- ===============================
      🔵 SCRIPTS DEL MÓDULO
      =============================== -->
+
 <script src="/modulos/orden_trabajo/js/orden.js"></script>
+
 <script src="/modulos/orden_trabajo/js/listado.js"></script>
+
+<!-- ⭐ ARCHIVO NUEVO NECESARIO PARA EL MODAL REGISTRAR VIAJE -->
+<script src="/modulos/orden_trabajo/js/registrar_viaje.js"></script>
+
+<script src="/modulos/orden_trabajo/js/catalogos.js"></script>
+
+
+<script src="/modulos/orden_trabajo/js/crear_ot.js"></script>
+
+<script src="/modulos/orden_trabajo/js/ver_ot.js"></script>
+<script src="/modulos/orden_trabajo/js/editar_ot.js"></script>
+<script src="/modulos/orden_trabajo/js/dinamicos.js"></script>
+
 <script src="/modulos/orden_trabajo/js/modales.js"></script>
 <script src="/modulos/orden_trabajo/js/util.js"></script>

@@ -4,7 +4,6 @@
 /** @var array $data */
 ?>
 
-
 <table class="table table-bordered">
 
     <tr>
@@ -19,7 +18,7 @@
 
     <tr>
         <th>Semana</th>
-        <td><?php echo $data['semana_ot']; ?></td>
+        <td><?php echo $data['semana_formateada']; ?></td>
     </tr>
 
     <tr>
@@ -47,19 +46,27 @@
         <td><?php echo $data['oc_cliente']; ?></td>
     </tr>
 
-    <tr>
-        <th>Número DAM</th>
-        <td><?php echo $data['numero_dam']; ?></td>
-    </tr>
+    <!-- CAMPOS SEGÚN TIPO DE ORDEN -->
+    <?php if ($data['tipo_ot_nombre'] === 'IMPORTACION' || $data['tipo_ot_nombre'] === 'IMPORTACIÓN'): ?>
+        <tr>
+            <th>Número DAM / DUA</th>
+            <td><?php echo $data['numero_dam']; ?></td>
+        </tr>
+    <?php endif; ?>
 
-    <tr>
-        <th>Número Booking</th>
-        <td><?php echo $data['numero_booking']; ?></td>
-    </tr>
+    <?php if ($data['tipo_ot_nombre'] === 'EXPORTACION' || $data['tipo_ot_nombre'] === 'EXPORTACIÓN'): ?>
+        <tr>
+            <th>Número Booking</th>
+            <td><?php echo $data['numero_booking']; ?></td>
+        </tr>
+    <?php endif; ?>
 
-    <tr>
-        <th>Otros</th>
-        <td><?php echo $data['otros']; ?></td>
-    </tr>
+    <?php if ($data['tipo_ot_nombre'] === 'NACIONAL'): ?>
+        <tr>
+            <th>Otros</th>
+            <td><?php echo $data['otros']; ?></td>
+        </tr>
+    <?php endif; ?>
 
 </table>
+

@@ -1,0 +1,100 @@
+/* ============================================================
+   MODAL CORPORATIVO ERP ICAZA
+   ============================================================ */
+
+#modalOverlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.55);
+    /* backdrop-filter: blur(3px); */
+    z-index: 9998;
+}
+
+.modal-corp {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.95);
+    width: 650px;
+    max-width: 95%;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 10px 35px rgba(0,0,0,0.25);
+    z-index: 9999;
+    opacity: 0;
+    transition: all 0.25s ease-out;
+    font-family: Arial, sans-serif;
+}
+
+.modal-visible {
+    display: block !important;
+    opacity: 1 !important;
+    transform: translate(-50%, -50%) scale(1) !important;
+}
+
+.modal-corp-header {
+    background: #004b8d;
+    color: #fff;
+    padding: 15px 20px;
+    border-radius: 10px 10px 0 0;
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 26px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.modal-close:hover {
+    color: #ffdddd;
+}
+
+.modal-corp-body {
+    padding: 20px;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.modal-corp-body label {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.modal-corp-body .form-control {
+    width: 100%;
+    padding: 8px 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    transition: border-color 0.2s;
+}
+
+.modal-corp-body .form-control:focus {
+    border-color: #004b8d;
+    outline: none;
+}
+
+.modal-corp-footer {
+    padding: 15px 20px;
+    text-align: right;
+    border-top: 1px solid #eee;
+}
+
+.modal-corp-footer .btn {
+    padding: 10px 18px;
+    font-size: 15px;
+    border-radius: 6px;
+}

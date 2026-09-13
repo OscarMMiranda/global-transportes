@@ -27,19 +27,23 @@
 <!-- =============================== -->
 
 <!-- Estilos generales del módulo -->
-<link rel="stylesheet" href="css/orden.css">
+<link rel="stylesheet" href="/modulos/orden_trabajo/css/orden.css">
 
 <!-- Estilos del header -->
-<link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="/modulos/orden_trabajo/css/header.css">
 
 <!-- Estilos del footer -->
-<link rel="stylesheet" href="css/footer.css">
+<link rel="stylesheet" href="/modulos/orden_trabajo/css/footer.css">
 
 <!-- Estilos de tablas -->
-<link rel="stylesheet" href="css/tablas.css">
+<link rel="stylesheet" href="/modulos/orden_trabajo/css/tablas.css">
 
 <!-- Estilos de filtros, tabs, etc. -->
-<link rel="stylesheet" href="css/listado.css">
+<link rel="stylesheet" href="/modulos/orden_trabajo/css/listado.css">
 
 <!-- Estilos de modales -->
-<link rel="stylesheet" href="css/modales.css">
+<link rel="stylesheet" href="/modulos/orden_trabajo/css/modales.css">
+
+<!-- <link rel="stylesheet" href="/css/modal_registrar_viaje.css"> -->
+<link rel="stylesheet" href="/modulos/orden_trabajo/css/modal_registrar_viaje.css">
+

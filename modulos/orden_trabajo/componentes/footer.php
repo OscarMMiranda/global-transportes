@@ -12,3 +12,6 @@
         © <?php echo date('Y'); ?> INVERSIONES ICAZA SAC
     </div>
 </div>
+
+<!-- Overlay corporativo para modales -->
+<div id="modalOverlay"></div>

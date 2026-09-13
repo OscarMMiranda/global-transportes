@@ -7,16 +7,16 @@
  */
 ?>
 
-<div class="card mb-2 shadow-sm">
+<div class="card card-corp mb-2">
     <div class="card-body py-2">
 
-        <div class="d-flex justify-content-between align-items-center flex-wrap" style="gap:12px;">
+        <div class="d-flex justify-content-between align-items-center flex-wrap">
 
             <!-- 🔵 Filtro Semana -->
-            <div class="d-flex align-items-center" style="gap:8px;">
-                <label class="form-label fw-bold mb-0">Semana</label>
+            <div class="d-flex align-items-center me-3">
+                <label class="form-label fw-bold mb-0 me-2">Semana</label>
 
-                <select id="filtro_semana" class="form-select form-select-sm" style="width:130px;">
+                <select id="filtro_semana" class="form-select form-select-sm filtro-corp">
                     <option value="">-- Todas --</option>
 
                     <?php if (!empty($semanas)): ?>
@@ -33,32 +33,36 @@
                 </select>
             </div>
 
-            <!-- 🔵 Botones -->
-            <div class="d-flex align-items-center" style="gap:8px;">
+            <!-- 🔵 Botones Corporativos -->
+            <div class="d-flex align-items-center" style="gap:10px;">
 
                 <!-- CREAR -->
-                <button class="btn btn-outline-primary btn-sm px-3 py-1"
-                        onclick="abrirModalCrear()">
-                    <i class="fa-solid fa-plus"></i> Crear
+                <button class="btn btn-corp-primary btn-sm"
+                        onclick="abrirModalCrear()"
+                        title="Crear nueva Orden de Trabajo">
+                    <i class="fa-solid fa-plus fa-sm fa-fw"></i> Crear
                 </button>
 
                 <!-- ANULAR -->
-                <button class="btn btn-outline-warning btn-sm px-3 py-1"
-                        onclick="abrirModalAnular()">
-                    <i class="fa-solid fa-ban"></i> Anular
+                <button class="btn btn-corp-warning btn-sm"
+                        onclick="abrirModalAnular()"
+                        title="Anular Orden de Trabajo">
+                    <i class="fa-solid fa-ban fa-sm fa-fw"></i> Anular
                 </button>
 
                 <!-- ELIMINAR -->
-                <button class="btn btn-outline-danger btn-sm px-3 py-1"
-                        onclick="abrirModalEliminar()">
-                    <i class="fa-solid fa-trash"></i> Eliminar
+                <button class="btn btn-corp-danger btn-sm"
+                        onclick="abrirModalEliminar()"
+                        title="Eliminar Orden de Trabajo">
+                    <i class="fa-solid fa-trash fa-sm fa-fw"></i> Eliminar
                 </button>
 
                 <!-- 🔙 VOLVER AL DASHBOARD -->
-                <a href="/paneles/admin/controladores/dashboard_controlador.php"
-                   class="btn btn-outline-secondary btn-sm px-3 py-1">
-                    <i class="fa-solid fa-arrow-left"></i> Dashboard
-                </a>
+                <button class="btn btn-corp-secondary btn-sm"
+                        onclick="window.location.href='/paneles/admin/controladores/dashboard_controlador.php'"
+                        title="Volver al Dashboard">
+                    <i class="fa-solid fa-arrow-left fa-sm fa-fw"></i> Dashboard
+                </button>
 
             </div>
 

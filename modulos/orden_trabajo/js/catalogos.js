@@ -12,8 +12,8 @@ function cargarCatalogo(url, params, target, campoId, campoNombre) {
 
             let html = '<option value="">Seleccione...</option>';
 
-            if (res && res.data && res.data.length > 0) {
-                $.each(res.data, function (i, item) {
+            if (res && res.length > 0) {
+                $.each(res, function (i, item) {
                     html += '<option value="' + item[campoId] + '">' + item[campoNombre] + '</option>';
                 });
             }
@@ -28,40 +28,107 @@ function cargarCatalogo(url, params, target, campoId, campoNombre) {
 }
 
 // ===============================
-// Catálogos
+// CLIENTES
 // ===============================
 function cargarClientes() {
+
+    // EDITAR
     cargarCatalogo(
-        "controllers/ClienteController.php",
+        "/modulos/orden_trabajo/controllers/ClienteController.php",
         { ajax: 1 },
         "#editar_cliente_id",
         "id",
         "nombre"
     );
-}
 
-function cargarEmpresas() {
+    // CREAR
     cargarCatalogo(
-        "controllers/CatalogosController.php",
-        { tipo: "empresa" },
-        "#editar_empresa_id",
-        "id",
-        "razon_social"
-    );
-}
-
-function cargarTiposOT() {
-    cargarCatalogo(
-        "controllers/CatalogosController.php",
-        { tipo: "tipo_ot" },
-        "#editar_tipo_ot_id",
+        "/modulos/orden_trabajo/controllers/ClienteController.php",
+        { ajax: 1 },
+        "#crear_cliente_id",
         "id",
         "nombre"
     );
 }
 
+// ===============================
+// EMPRESAS
+// ===============================
+function cargarEmpresas() {
+
+    // EDITAR
+    cargarCatalogo(
+        "/modulos/orden_trabajo/controllers/EmpresaListarController.php",
+        {},
+        "#editar_empresa_id",
+        "id",
+        "nombre"
+    );
+
+    // CREAR
+    cargarCatalogo(
+        "/modulos/orden_trabajo/controllers/EmpresaListarController.php",
+        {},
+        "#crear_empresa_id",
+        "id",
+        "nombre"
+    );
+}
+
+// ===============================
+// TIPOS DE OT
+// ===============================
+function cargarTiposOT() {
+
+    // EDITAR
+    cargarCatalogo(
+        "/modulos/orden_trabajo/controllers/TipoOTListarController.php",
+        {},
+        "#editar_tipo_ot",
+        "id",
+        "nombre"
+    );
+
+    // CREAR
+    cargarCatalogo(
+        "/modulos/orden_trabajo/controllers/TipoOTListarController.php",
+        {},
+        "#crear_tipo_ot",
+        "id",
+        "nombre"
+    );
+}
+
+// ===============================
+// ESTADOS
+// ===============================
+function cargarEstados() {
+
+    // EDITAR
+    cargarCatalogo(
+        "/modulos/orden_trabajo/controllers/EstadoListarController.php",
+        {},
+        "#editar_estado_id",
+        "id",
+        "nombre"
+    );
+
+    // CREAR
+    cargarCatalogo(
+        "/modulos/orden_trabajo/controllers/EstadoListarController.php",
+        {},
+        "#crear_estado_id",
+        "id",
+        "nombre"
+    );
+}
+
+// ===============================
+// INICIALIZAR
+// ===============================
 $(document).ready(function () {
     cargarClientes();
     cargarEmpresas();
     cargarTiposOT();
+    cargarEstados();
 });

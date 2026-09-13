@@ -1,5 +1,5 @@
 <?php
-	// archivo: /modulos/orden_trabajo/controllers/ListController.php
+// archivo: /modulos/orden_trabajo/controllers/ListController.php
 
 require_once __DIR__ . '/../../../includes/config.php';
 require_once __DIR__ . '/../models/OrdenModel.php';
@@ -11,39 +11,33 @@ $semana = isset($_POST['semana']) ? trim($_POST['semana']) : "";
 $estado = isset($_POST['estado']) ? trim($_POST['estado']) : "";
 $isAjax = (isset($_POST['ajax']) && $_POST['ajax'] == "1");
 
+// Validar formato de semana YYYY-Wxx
 if ($semana !== "" && !preg_match('/^[0-9]{4}-W[0-9]{2}$/', $semana)) {
     $semana = "";
 }
 
-$ESTADO_ACTIVA    = 1;
-$ESTADO_ANULADA   = 7;
-$ESTADO_ELIMINADA = 8;
-
 if ($isAjax) {
 
-    switch ($estado) {
-        case "ACTIVA":
-            $rs = $model->obtenerActivasPorSemana($semana);
-            break;
+    try {
 
-        case "ANULADA":
-            $rs = $model->obtenerPorEstadoYSemana($ESTADO_ANULADA, $semana);
-            break;
+        // El modelo se encarga de resolver el estado
+        $rs = $model->listarOT($estado, $semana);
 
-        case "ELIMINADA":
-            $rs = $model->obtenerPorEstadoYSemana($ESTADO_ELIMINADA, $semana);
-            break;
+        header("Content-Type: application/json; charset=UTF-8");
+        echo json_encode(["data" => $rs]);
+        exit;
 
-        default:
-            $rs = array();
-            break;
+    } catch (Exception $e) {
+
+        echo json_encode([
+            "data" => [],
+            "error" => "Error al obtener listado: " . $e->getMessage()
+        ]);
+        exit;
     }
-
-    header("Content-Type: application/json; charset=UTF-8");
-    echo json_encode(["data" => $rs]);
-    exit;
 }
 
+// Carga de vista
 $data = [
     "semanas"    => $model->obtenerSemanas(),
     "semana_sel" => $semana

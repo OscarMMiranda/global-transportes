@@ -85,3 +85,16 @@ function scrollToElemento(id) {
         scrollTop: $("#" + id).offset().top - 20
     }, 400);
 }
+
+// -------------------------------
+// Llenar SELECT corporativo
+// -------------------------------
+function cargarSelect(selector, lista, seleccionado) {
+    var html = "";
+    lista.forEach(function (item) {
+        html += '<option value="' + item.id + '" ' +
+                (item.id == seleccionado ? "selected" : "") +
+                '>' + item.nombre + '</option>';
+    });
+    $(selector).html(html);
+}
