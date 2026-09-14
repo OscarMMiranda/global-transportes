@@ -39,6 +39,9 @@
 <!-- ⭐ ARCHIVO NUEVO NECESARIO PARA EL MODAL REGISTRAR VIAJE -->
 <script src="/modulos/orden_trabajo/js/registrar_viaje.js"></script>
 
+<script src="/modulos/orden_trabajo/js/logistica_ot.js"></script>
+
+
 <script src="/modulos/orden_trabajo/js/catalogos.js"></script>
 
 

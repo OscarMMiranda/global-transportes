@@ -1,15 +1,15 @@
 <?php
 // ======================================================
 //  ARCHIVO: /modulos/orden_trabajo/componentes/head.php
-//  RESPONSABILIDAD: Cargar estilos del módulo
+//  RESPONSABILIDAD: Cargar estilos corporativos del módulo
 // ======================================================
 ?>
 
-<!-- =============================== -->
+<!-- ====================================================== -->
 <!-- 🔵 LIBRERÍAS EXTERNAS (CSS) -->
-<!-- =============================== -->
+<!-- ====================================================== -->
 
-<!-- Bootstrap CSS -->
+<!-- Bootstrap -->
 <link rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 
@@ -17,33 +17,36 @@
 <link rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-<!-- DataTables + Bootstrap -->
+<!-- DataTables -->
 <link rel="stylesheet"
       href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
 
 
-<!-- =============================== -->
-<!-- 🔵 ESTILOS CORPORATIVOS DEL MÓDULO -->
-<!-- =============================== -->
+<!-- ====================================================== -->
+<!-- 🔵 ESTILOS CORPORATIVOS DEL ERP -->
+<!-- ====================================================== -->
 
 <!-- Estilos generales del módulo -->
-<link rel="stylesheet" href="/modulos/orden_trabajo/css/orden.css">
+<link rel="stylesheet" href="/modulos/orden_trabajo/css/orden.css?v=2.0">
 
-<!-- Estilos del header -->
-<link rel="stylesheet" href="/modulos/orden_trabajo/css/header.css">
+<!-- Header corporativo -->
+<link rel="stylesheet" href="/modulos/orden_trabajo/css/header.css?v=2.0">
 
-<!-- Estilos del footer -->
-<link rel="stylesheet" href="/modulos/orden_trabajo/css/footer.css">
+<!-- Footer corporativo -->
+<link rel="stylesheet" href="/modulos/orden_trabajo/css/footer.css?v=2.0">
 
-<!-- Estilos de tablas -->
-<link rel="stylesheet" href="/modulos/orden_trabajo/css/tablas.css">
+<!-- Tablas corporativas -->
+<link rel="stylesheet" href="/modulos/orden_trabajo/css/tablas.css?v=2.0">
 
-<!-- Estilos de filtros, tabs, etc. -->
-<link rel="stylesheet" href="/modulos/orden_trabajo/css/listado.css">
+<!-- Filtros, tabs, botones superiores -->
+<link rel="stylesheet" href="/modulos/orden_trabajo/css/listado.css?v=2.0">
 
-<!-- Estilos de modales -->
-<link rel="stylesheet" href="/modulos/orden_trabajo/css/modales.css">
+<!-- Modales corporativos -->
+<link rel="stylesheet" href="/modulos/orden_trabajo/css/modales.css?v=2.0">
 
-<!-- <link rel="stylesheet" href="/css/modal_registrar_viaje.css"> -->
-<link rel="stylesheet" href="/modulos/orden_trabajo/css/modal_registrar_viaje.css">
+<!-- Modal crear orden de trabajo -->
+<link rel="stylesheet" href="/modulos/orden_trabajo/css/modal_crear.css">
 
+
+<!-- Modal editar viaje (reemplaza registrar viaje) -->
+<link rel="stylesheet" href="/modulos/orden_trabajo/css/modal_editar_viaje.css?v=2.0">

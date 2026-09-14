@@ -1,0 +1,87 @@
+/* ============================================================
+	Archivo: /modulos/orden_trabajo/css/modal_crear.css
+	MODAL CREAR OT — OPTIMIZACIÓN CORPORATIVA
+	============================================================ */
+
+/* Header */
+#modalCrearOT .modal-header {
+    background: #0d6efd;
+    color: #fff;
+    padding: 16px 22px;
+}
+
+#modalCrearOT .modal-title {
+    font-weight: 700;
+    font-size: 20px;
+}
+
+/* Body */
+#modalCrearOT .modal-body {
+    background: #f8f9fa;
+    padding: 25px 30px;
+}
+
+/* Etiquetas */
+#modalCrearOT .form-label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 6px;
+}
+
+/* Inputs */
+#modalCrearOT input.form-control,
+#modalCrearOT select.form-select {
+    border-radius: 6px;
+    border: 1px solid #bfc5d2;
+    padding: 10px;
+    font-size: 15px;
+}
+
+/* Espaciado entre filas */
+#modalCrearOT .row {
+    margin-bottom: 10px;
+}
+
+/* Footer */
+#modalCrearOT .modal-footer {
+    padding: 15px 22px;
+    background: #f1f1f1;
+    border-top: 1px solid #ddd;
+}
+
+/* Botones */
+#modalCrearOT .btn {
+    padding: 10px 18px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 6px;
+}
+
+/* Botón primario */
+#modalCrearOT .btn-primary {
+    background: #0d6efd;
+    border-color: #0d6efd;
+}
+
+/* Botón secundario */
+#modalCrearOT .btn-secondary {
+    background: #6c757d;
+    border-color: #6c757d;
+}
+
+/* Campos especiales (importación/exportación/nacional) */
+#modalCrearOT #crear_campo_importacion,
+#modalCrearOT #crear_campo_exportacion,
+#modalCrearOT #crear_campo_nacional {
+    background: #fff;
+    padding: 15px;
+    border-radius: 6px;
+    border: 1px solid #e3e3e3;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    #modalCrearOT .modal-body {
+        padding: 20px;
+    }
+}

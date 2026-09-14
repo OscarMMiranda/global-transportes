@@ -96,9 +96,9 @@ $(document).ready(function () {
     // ============================================================
     // EVENTO: VER OV
     // ============================================================
-    $("#tablaOT").on("click", ".btn-ver", function () {
-        verOV($(this).data("id"));
-    });
+    // $("#tablaOT").on("click", ".btn-ver", function () {
+    //     verOV($(this).data("id"));
+    // });
 
     // ============================================================
     // EVENTO: EDITAR OT

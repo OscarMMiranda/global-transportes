@@ -133,3 +133,79 @@ modulos/
         ├── modal_anular.php
         └── modal_eliminar.php
 
+
+modulos/
+└── orden_trabajo/
+    ├── componentes/
+    │   ├── head.php
+    │   ├── header.php
+    │   ├── botones_superiores.php
+    │   ├── filtros_botones.php
+    │   ├── filtro_semana.php
+    │   ├── tabs_estado.php
+    │   ├── tabla_ot.php
+    │   └── footer.php
+    │
+    ├── controllers/
+    │   ├── ListController.php
+    │   ├── GetOrdenController.php
+    │   ├── GetOrdenVehiculoController.php
+    │   ├── UpdateOrdenController.php
+    │   ├── UpdateViajeController.php
+    │   └── DeleteOrdenController.php
+    │
+    ├── models/
+    │   └── OrdenModel.php
+    │
+    ├── views/
+    │   └── list.php
+    │
+    ├── js/
+    │   ├── listado.js
+    │   ├── crear.js
+    │   ├── editar.js
+    │   ├── anular.js
+    │   ├── eliminar.js
+    │   └── viajes.js
+    │
+    ├── css/
+    │   ├── orden.css
+    │   ├── header.css
+    │   ├── footer.css
+    │   ├── tablas.css
+    │   ├── listado.css
+    │   ├── modales.css
+    │   └── modal_editar_viaje.css
+    │
+    └── modales/
+        ├── modal_ver.php
+        ├── modal_crear.php
+        ├── modal_editar.php
+        ├── modal_anular.php
+        ├── modal_eliminar.php
+        ├── modal_importar.php
+        └── modal_editar_viaje.php
+
+
+
+
+
+
+
+
+Evento				Acción				Nuevo estado
+Crear OT			Insert				1 (Pendiente)
+Registrar viaje		Insert viaje		2 (En proceso)
+Cerrar viajes		Update viajes		3 (Completada)
+Registrar factura	Update factura		4 (Facturada)
+Cancelar OT			Update estado		5 (Cancelada)
+Anular OT			Update estado		7 (Anulada)
+Eliminar OT			Update estado		8 (Eliminada)
+
+✔ CrearController.php (estado_id = 1)
+✔ RegistrarViajeController.php (estado_id = 2)
+✔ CerrarViajesController.php (estado_id = 3)
+✔ FacturarController.php (estado_id = 4)
+✔ CancelarController.php (estado_id = 5)
+✔ AnularController.php (estado_id = 7)
+✔ EliminarController.php (estado_id = 8)
