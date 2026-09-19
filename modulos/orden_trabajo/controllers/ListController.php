@@ -1,7 +1,7 @@
 <?php
 // ======================================================
 //  CONTROLADOR: ListController.php
-//  RESPONSABILIDAD: Listado de Órdenes de Trabajo
+//  RESPONSABILIDAD: Listado de Órdenes de Trabajo (OT)
 // ======================================================
 
 require_once __DIR__ . '/../../../includes/config.php';
@@ -9,6 +9,15 @@ require_once __DIR__ . '/../models/OrdenModel.php';
 
 $conn = getConnection();
 $model = new OrdenModel($conn);
+
+// ------------------------------------------------------
+//  VALIDAR SESIÓN (corporativo)
+// ------------------------------------------------------
+if (!isset($_SESSION['usuario_id'])) {
+    error_log("[ERP-OT] Acceso sin sesión: " . date('Y-m-d H:i:s'));
+    header("Location: /login.php");
+    exit;
+}
 
 // ------------------------------------------------------
 //  ENTRADAS
@@ -22,7 +31,7 @@ if ($semana !== "" && !preg_match('/^[0-9]{4}-W[0-9]{2}$/', $semana)) {
     $semana = "";
 }
 
-// Validar estado
+// Validar estado corporativo
 $estadosValidos = array(
     "TODAS", "PENDIENTE", "EN_PROCESO", "COMPLETADA",
     "FACTURADA", "CANCELADA", "OBSERVADA", "ANULADA", "ELIMINADA"
@@ -41,17 +50,29 @@ if ($isAjax) {
 
         $rs = $model->listarOT($estado, $semana);
 
+        $response = array(
+            "ok"   => true,
+            "msg"  => "Listado obtenido correctamente",
+            "data" => $rs
+        );
+
         header("Content-Type: application/json; charset=UTF-8");
-        echo json_encode(array("data" => $rs));
+        echo json_encode($response);
         exit;
 
     } catch (Exception $e) {
 
-        header("Content-Type: application/json; charset=UTF-8");
-        echo json_encode(array(
+        error_log("[ERP-OT] Error en listarOT: " . $e->getMessage());
+
+        $response = array(
+            "ok"   => false,
+            "msg"  => "Error al obtener listado",
             "data" => array(),
-            "error" => "Error al obtener listado: " . $e->getMessage()
-        ));
+            "error" => $e->getMessage()
+        );
+
+        header("Content-Type: application/json; charset=UTF-8");
+        echo json_encode($response);
         exit;
     }
 }

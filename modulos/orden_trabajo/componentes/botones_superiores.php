@@ -1,21 +1,23 @@
 <?php
 /**
  * archivo: /modulos/orden_trabajo/componentes/botones_superiores.php
+ * RESPONSABILIDAD: Acciones principales del módulo OT
  *
  * @var array  $semanas
  * @var string $semana_sel
  */
 ?>
 
-<div class="d-flex justify-content-between align-items-center flex-wrap mb-3">
+<div class="d-flex justify-content-between align-items-center flex-wrap mb-3"
+     data-componente="botones_superiores">
 
     <!-- 🔙 IZQUIERDA: VOLVER AL DASHBOARD -->
     <div class="mb-2">
-        <button class="btn btn-corp-secondary btn-sm"
-                onclick="window.location.href='/paneles/admin/controladores/dashboard_controlador.php'"
-                title="Volver al Dashboard">
+        <a href="/paneles/admin/controladores/dashboard_controlador.php"
+           class="btn btn-corp-secondary btn-sm"
+           title="Volver al Dashboard">
             <i class="fa-solid fa-arrow-left fa-sm fa-fw"></i> Dashboard
-        </button>
+        </a>
     </div>
 
     <!-- 🔵 DERECHA: ACCIONES + FILTRO SEMANA -->
@@ -31,6 +33,8 @@
         <!-- ANULAR -->
         <button class="btn btn-corp-warning btn-sm"
                 onclick="abrirModalAnular()"
+                id="btnAnularOT"
+                disabled
                 title="Anular Orden de Trabajo">
             <i class="fa-solid fa-ban fa-sm fa-fw"></i> Anular
         </button>
@@ -38,6 +42,8 @@
         <!-- ELIMINAR -->
         <button class="btn btn-corp-danger btn-sm"
                 onclick="abrirModalEliminar()"
+                id="btnEliminarOT"
+                disabled
                 title="Eliminar Orden de Trabajo">
             <i class="fa-solid fa-trash fa-sm fa-fw"></i> Eliminar
         </button>

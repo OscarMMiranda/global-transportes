@@ -1,6 +1,6 @@
-// archivo: registrar_viaje.js
 // ============================================================
-// LÓGICA COMPLETA DEL MODAL REGISTRAR VIAJE
+// ARCHIVO: registrar_viaje.js
+// RESPONSABILIDAD: Modal Registrar Viaje (ESCENARIO A)
 // ============================================================
 
 function abrirRegistrarViaje(ot_id) {
@@ -16,26 +16,38 @@ function abrirRegistrarViaje(ot_id) {
                 return;
             }
 
+            // ============================================================
+            // 1. FECHA DE LA OT (ESCENARIO A)
+            // ============================================================
             $("#rv_fecha_viaje").val(r.fecha_ot);
 
+            // ============================================================
+            // 2. NÚMERO DE VIAJE
+            // ============================================================
             var numeroViaje = parseInt(r.cantidad_viajes, 10) + 1;
             var numeroViajeFormateado = numeroViaje.toString().padStart(2, "0");
-
             $("#tituloRegistrarViaje").text("Registrar Viaje — Viaje N° " + numeroViajeFormateado);
 
+            // ============================================================
+            // 3. SEMANA ISO
+            // ============================================================
             var fecha = new Date(r.fecha_ot);
             var year = fecha.getFullYear();
             var semanaISO = parseInt(r.semana_ot, 10);
-
             $("#rv_semana_viaje").val("S" + semanaISO.toString().padStart(2, "0") + "-" + year);
 
+            // ============================================================
+            // 4. LIMPIAR SELECTS
+            // ============================================================
             $("#rv_vehiculo").empty();
             $("#rv_conductor").val("");
             $("#rv_origen").empty();
             $("#rv_destino").empty();
             $("#rv_observaciones").val("");
 
-            // Cargar ubicaciones
+            // ============================================================
+            // 5. CARGAR UBICACIONES
+            // ============================================================
             $.post("/modulos/orden_trabajo/controllers/GetUbicacionesController.php", {},
                 function (u) {
 
@@ -50,12 +62,12 @@ function abrirRegistrarViaje(ot_id) {
                         });
                     }
 
-                    $("#modalRegistrarViaje").addClass("modal-visible");
-                    $("#modalOverlay").addClass("modal-visible");
                 },
             "json");
 
-            // Cargar vehículos
+            // ============================================================
+            // 6. CARGAR VEHÍCULOS SEGÚN FECHA DE LA OT
+            // ============================================================
             $.post("/modulos/orden_trabajo/controllers/GetVehiculosController.php",
                 { fecha_viaje: $("#rv_fecha_viaje").val() },
                 function (v) {
@@ -69,13 +81,22 @@ function abrirRegistrarViaje(ot_id) {
                             );
                         });
                     }
+
+                    // ============================================================
+                    // 7. AHORA SÍ ABRIR EL MODAL (cuando todo está cargado)
+                    // ============================================================
+                    $("#modalRegistrarViaje").addClass("modal-visible");
+                    $("#modalOverlay").addClass("modal-visible");
+
                 },
             "json");
         },
     "json");
 }
 
+// ============================================================
 // CAMBIO DE VEHÍCULO → CARGAR CONDUCTOR
+// ============================================================
 $("#rv_vehiculo").on("change", function () {
 
     var vehiculo_id = $(this).val();
@@ -100,7 +121,9 @@ $("#rv_vehiculo").on("change", function () {
     "json");
 });
 
+// ============================================================
 // GUARDAR VIAJE
+// ============================================================
 $("#btnGuardarViaje").on("click", function () {
 
     var titulo = $("#tituloRegistrarViaje").text();

@@ -12,10 +12,26 @@ function cargarCatalogo(url, params, target, campoId, campoNombre) {
 
             let html = '<option value="">Seleccione...</option>';
 
-            if (res && res.length > 0) {
+            // -------------------------------
+            // COMPATIBILIDAD CON NUEVOS CONTROLADORES
+            // Si viene como { ok: true, data: [...] }
+            // -------------------------------
+            if (res && res.data && Array.isArray(res.data)) {
+                res = res.data;
+            }
+
+            // -------------------------------
+            // COMPATIBILIDAD CON CONTROLADORES ANTIGUOS
+            // Si viene como array directo [...]
+            // -------------------------------
+            if (Array.isArray(res) && res.length > 0) {
+
                 $.each(res, function (i, item) {
                     html += '<option value="' + item[campoId] + '">' + item[campoNombre] + '</option>';
                 });
+
+            } else {
+                html = '<option value="">Sin datos</option>';
             }
 
             $(target).html(html);

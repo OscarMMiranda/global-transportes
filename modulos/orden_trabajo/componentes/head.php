@@ -1,9 +1,15 @@
 <?php
 // ======================================================
 //  ARCHIVO: /modulos/orden_trabajo/componentes/head.php
-//  RESPONSABILIDAD: Cargar estilos corporativos del módulo
+//  RESPONSABILIDAD: Cargar estilos corporativos del módulo OT
 // ======================================================
 ?>
+
+<!-- ====================================================== -->
+<!-- 🔵 OPTIMIZACIÓN DE CARGA (PRECONNECT) -->
+<!-- ====================================================== -->
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com">
 
 <!-- ====================================================== -->
 <!-- 🔵 LIBRERÍAS EXTERNAS (CSS) -->
@@ -21,32 +27,20 @@
 <link rel="stylesheet"
       href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
 
-
 <!-- ====================================================== -->
 <!-- 🔵 ESTILOS CORPORATIVOS DEL ERP -->
 <!-- ====================================================== -->
 
-<!-- Estilos generales del módulo -->
+<!-- Base del módulo -->
 <link rel="stylesheet" href="/modulos/orden_trabajo/css/orden.css?v=2.0">
 
-<!-- Header corporativo -->
+<!-- Componentes -->
 <link rel="stylesheet" href="/modulos/orden_trabajo/css/header.css?v=2.0">
-
-<!-- Footer corporativo -->
 <link rel="stylesheet" href="/modulos/orden_trabajo/css/footer.css?v=2.0">
-
-<!-- Tablas corporativas -->
 <link rel="stylesheet" href="/modulos/orden_trabajo/css/tablas.css?v=2.0">
-
-<!-- Filtros, tabs, botones superiores -->
 <link rel="stylesheet" href="/modulos/orden_trabajo/css/listado.css?v=2.0">
-
-<!-- Modales corporativos -->
 <link rel="stylesheet" href="/modulos/orden_trabajo/css/modales.css?v=2.0">
 
-<!-- Modal crear orden de trabajo -->
+<!-- Modales específicos -->
 <link rel="stylesheet" href="/modulos/orden_trabajo/css/modal_crear.css">
-
-
-<!-- Modal editar viaje (reemplaza registrar viaje) -->
 <link rel="stylesheet" href="/modulos/orden_trabajo/css/modal_editar_viaje.css?v=2.0">

@@ -1,7 +1,9 @@
 <?php
 // ======================================================
 //  ARCHIVO: /modulos/orden_trabajo/componentes/scripts.php
-//  RESPONSABILIDAD: Cargar SOLO scripts JS del módulo
+//  RESPONSABILIDAD: Cargar SOLO scripts JS del módulo OT
+//  NOTA: Orden optimizado para evitar conflictos y asegurar
+//        que las dependencias se carguen correctamente.
 // ======================================================
 ?>
 
@@ -9,13 +11,13 @@
      🔵 LIBRERÍAS EXTERNAS (JS)
      =============================== -->
 
-<!-- jQuery -->
+<!-- jQuery (base del ERP) -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- DataTables JS -->
+<!-- DataTables -->
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
 
@@ -29,27 +31,29 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <!-- ===============================
-     🔵 SCRIPTS DEL MÓDULO
+     🔵 SCRIPTS BASE DEL MÓDULO OT
      =============================== -->
 
 <script src="/modulos/orden_trabajo/js/orden.js"></script>
-
 <script src="/modulos/orden_trabajo/js/listado.js"></script>
-
-<!-- ⭐ ARCHIVO NUEVO NECESARIO PARA EL MODAL REGISTRAR VIAJE -->
 <script src="/modulos/orden_trabajo/js/registrar_viaje.js"></script>
-
-<script src="/modulos/orden_trabajo/js/logistica_ot.js"></script>
-
-
-<script src="/modulos/orden_trabajo/js/catalogos.js"></script>
-
-
 <script src="/modulos/orden_trabajo/js/crear_ot.js"></script>
-
 <script src="/modulos/orden_trabajo/js/ver_ot.js"></script>
 <script src="/modulos/orden_trabajo/js/editar_ot.js"></script>
 <script src="/modulos/orden_trabajo/js/dinamicos.js"></script>
-
 <script src="/modulos/orden_trabajo/js/modales.js"></script>
 <script src="/modulos/orden_trabajo/js/util.js"></script>
+
+<!-- ===============================
+     🔵 SCRIPTS DE CATÁLOGOS (DEPENDENCIA)
+     =============================== -->
+
+<!-- ⚠️ IMPORTANTE: catalogos.js DEBE IR ANTES DE logística -->
+<script src="/modulos/orden_trabajo/js/catalogos.js"></script>
+
+<!-- ===============================
+     🔵 SCRIPTS DE LOGÍSTICA (DEPENDEN DE catalogos.js)
+     =============================== -->
+
+<script src="/modulos/orden_trabajo/js/logistica_selects.js"></script>
+<script src="/modulos/orden_trabajo/js/logistica_acciones.js"></script>

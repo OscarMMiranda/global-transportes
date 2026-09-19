@@ -1,8 +1,21 @@
 <?php
-// archivo: /modulos/orden_trabajo/controllers/CrearController.php
+//  archivo: modulos/orden_trabajo/controllers/CrearOTController.php
 
 require_once __DIR__ . '/../../../includes/config.php';
 $conn = getConnection();
+
+/* ============================================================
+   MENSAJES CORPORATIVOS
+   ============================================================ */
+$mensajes = array(
+    "numero_ot"  => "El número de OT es obligatorio.",
+    "fecha"      => "Debe seleccionar una fecha.",
+    "semana_ot"  => "La semana de la OT es obligatoria.",
+    "cliente_id" => "Debe seleccionar un cliente para continuar.",
+    "empresa_id" => "Debe seleccionar una empresa.",
+    "tipo_ot_id" => "Debe seleccionar el tipo de orden.",
+    "estado_id"  => "Debe seleccionar un estado."
+);
 
 /* ============================================================
    VALIDAR CAMPOS
@@ -16,7 +29,7 @@ foreach ($campos_obligatorios as $campo) {
     if (!isset($_POST[$campo]) || trim($_POST[$campo]) === "") {
         echo json_encode([
             "ok" => false,
-            "msg" => "El campo '$campo' es obligatorio."
+            "msg" => $mensajes[$campo]
         ]);
         exit;
     }
@@ -50,7 +63,7 @@ INSERT INTO ordenes_trabajo
     cliente_id,
     empresa_id,
     tipo_ot_id,
-    estado_ot,
+    estado_id,
     oc_cliente,
     numero_dam,
     numero_booking,
@@ -80,11 +93,11 @@ $ok = $conn->query($sql);
 if ($ok) {
     echo json_encode([
         "ok" => true,
-        "msg" => "Orden creada correctamente"
+        "msg" => "Orden creada correctamente."
     ]);
 } else {
     echo json_encode([
         "ok" => false,
-        "msg" => "Error al crear la Orden de Trabajo"
+        "msg" => "Error al crear la Orden de Trabajo."
     ]);
 }

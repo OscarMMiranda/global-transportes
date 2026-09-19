@@ -5,6 +5,18 @@ require_once __DIR__ . '/../../../includes/config.php';
 $conn = getConnection();
 
 /* ============================================================
+   MENSAJES CORPORATIVOS
+   ============================================================ */
+$mensajes = array(
+    "numero_ot"  => "El número de OT es obligatorio.",
+    "fecha"      => "Debe seleccionar una fecha.",
+    "semana_ot"  => "La semana de la OT es obligatoria.",
+    "cliente_id" => "Debe seleccionar un cliente para continuar.",
+    "empresa_id" => "Debe seleccionar una empresa.",
+    "tipo_ot_id" => "Debe seleccionar el tipo de orden."
+);
+
+/* ============================================================
    VALIDAR CAMPOS OBLIGATORIOS
    ============================================================ */
 $campos_obligatorios = array(
@@ -16,7 +28,7 @@ foreach ($campos_obligatorios as $campo) {
     if (!isset($_POST[$campo]) || trim($_POST[$campo]) === "") {
         echo json_encode([
             "ok" => false,
-            "msg" => "El campo '$campo' es obligatorio."
+            "msg" => $mensajes[$campo]
         ]);
         exit;
     }
@@ -32,6 +44,7 @@ $cliente_id     = intval($_POST["cliente_id"]);
 $empresa_id     = intval($_POST["empresa_id"]);
 $tipo_ot_id     = intval($_POST["tipo_ot_id"]);
 
+// Campos opcionales
 $oc_cliente     = isset($_POST["oc_cliente"]) ? trim($_POST["oc_cliente"]) : null;
 $numero_dam     = isset($_POST["numero_dam"]) ? trim($_POST["numero_dam"]) : null;
 $numero_booking = isset($_POST["numero_booking"]) ? trim($_POST["numero_booking"]) : null;
@@ -40,7 +53,7 @@ $otros          = isset($_POST["otros"]) ? trim($_POST["otros"]) : null;
 /* ============================================================
    ESTADO AUTOMÁTICO
    ============================================================ */
-// 1 = Pendiente
+// 1 = PENDIENTE
 $estado_id = 1;
 
 /* ============================================================
@@ -97,7 +110,7 @@ $ok = $stmt->execute();
 if ($ok) {
     echo json_encode([
         "ok" => true,
-        "msg" => "Orden creada correctamente"
+        "msg" => "Orden creada correctamente."
     ]);
 } else {
     echo json_encode([

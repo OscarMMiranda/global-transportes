@@ -1,11 +1,10 @@
 // archivo: /modulos/orden_trabajo/js/crear_ot.js
 
-// =======================================
+// ============================================================
 // CARGAR CATÁLOGOS PARA EL MODAL CREAR
-// =======================================
+// ============================================================
 function cargarCatalogosCrear() {
 
-    // CLIENTES
     cargarCatalogo(
         "/modulos/orden_trabajo/controllers/ClienteController.php",
         { ajax: 1 },
@@ -14,7 +13,6 @@ function cargarCatalogosCrear() {
         "nombre"
     );
 
-    // EMPRESAS
     cargarCatalogo(
         "/modulos/orden_trabajo/controllers/EmpresaListarController.php",
         {},
@@ -23,7 +21,6 @@ function cargarCatalogosCrear() {
         "nombre"
     );
 
-    // TIPOS OT
     cargarCatalogo(
         "/modulos/orden_trabajo/controllers/TipoOTListarController.php",
         {},
@@ -32,7 +29,6 @@ function cargarCatalogosCrear() {
         "nombre"
     );
 
-    // ESTADOS
     cargarCatalogo(
         "/modulos/orden_trabajo/controllers/EstadoListarController.php",
         {},
@@ -42,13 +38,13 @@ function cargarCatalogosCrear() {
     );
 }
 
-// =======================================
-// OBTENER CORRELATIVO SEGÚN FECHA
-// =======================================
-function obtenerCorrelativoOT(fecha) {
+// ============================================================
+// OBTENER CORRELATIVO SEGÚN FECHA (YYYY-MM-DD)
+// ============================================================
+function obtenerCorrelativoOT(fechaISO) {
 
     $.post("/modulos/orden_trabajo/controllers/GetNextOTController.php",
-        { fecha: fecha },
+        { fecha: fechaISO },
         function(r) {
 
             if (!r || !r.ok) {
@@ -61,21 +57,28 @@ function obtenerCorrelativoOT(fecha) {
     "json");
 }
 
-// =======================================
-// CALCULAR SEMANA ISO
-// =======================================
-function calcularSemana(fecha) {
-    var d = new Date(fecha);
+// ============================================================
+// CALCULAR SEMANA (FORMATO SXX-YYYY)
+// Recibe fecha YYYY-MM-DD
+// ============================================================
+function calcularSemana(fechaISO) {
+
+    var d = new Date(fechaISO);
     var dia = d.getUTCDay() || 7;
     d.setUTCDate(d.getUTCDate() + 4 - dia);
+
     var inicio = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
     var semana = Math.ceil((((d - inicio) / 86400000) + 1) / 7);
-    return semana;
+
+    return {
+        semana: ("0" + semana).slice(-2),
+        year: d.getUTCFullYear()
+    };
 }
 
-// =======================================
+// ============================================================
 // ABRIR MODAL Y LIMPIAR FORMULARIO
-// =======================================
+// ============================================================
 function abrirModalCrearOT() {
 
     $("#formCrearOT")[0].reset();
@@ -86,50 +89,53 @@ function abrirModalCrearOT() {
 
     cargarCatalogosCrear();
 
-    // Fecha actual del sistema
+    // Fecha actual del sistema en formato válido para input date
     var hoy = new Date();
-    var fechaActual = hoy.toISOString().split("T")[0];
+    var dd = ("0" + hoy.getDate()).slice(-2);
+    var mm = ("0" + (hoy.getMonth() + 1)).slice(-2);
+    var yyyy = hoy.getFullYear();
 
-    $("#crear_fecha").val(fechaActual);
+    var fechaISO = yyyy + "-" + mm + "-" + dd; // YYYY-MM-DD
 
-    // Obtener correlativo del año actual
-    obtenerCorrelativoOT(fechaActual);
+    $("#crear_fecha").val(fechaISO);
 
-    // Calcular semana inicial
-    var semana = calcularSemana(fechaActual);
-	var year = fechaActual.split("-")[0];
-	$("#crear_semana_ot").val("S" + semana + "-" + year);
+    // Obtener correlativo
+    obtenerCorrelativoOT(fechaISO);
 
+    // Calcular semana
+    var iso = calcularSemana(fechaISO);
 
+    // Visual
+    $("#crear_semana_ot").val("S" + iso.semana + "-" + iso.year);
+
+    // Real para BD
+    $("#crear_semana_ot_real").val(parseInt(iso.semana, 10));
 
     $("#modalCrearOT").modal("show");
 }
 
-// =======================================
+// ============================================================
 // SI CAMBIA LA FECHA → RECALCULAR CORRELATIVO Y SEMANA
-// =======================================
-	$("#crear_fecha").on("change", function () {
+// ============================================================
+$("#crear_fecha").on("change", function () {
 
-    var fecha = $(this).val();
-    if (!fecha) return;
+    var fechaISO = $(this).val();
+    if (!fechaISO) return;
 
-    // Recalcular correlativo según el año de la fecha seleccionada
-    obtenerCorrelativoOT(fecha);
+    obtenerCorrelativoOT(fechaISO);
 
-   // Calcular semana ISO
-	var semana = calcularSemana(fecha);
+    var iso = calcularSemana(fechaISO);
 
-	// Obtener año desde la fecha
-	var year = fecha.split("-")[0];
+    // Visual
+    $("#crear_semana_ot").val("S" + iso.semana + "-" + iso.year);
 
-	// Mostrar formato S00-YYYY
-	$("#crear_semana_ot").val("S" + semana + "-" + year);
-
+    // Real para BD
+    $("#crear_semana_ot_real").val(parseInt(iso.semana, 10));
 });
 
-// =======================================
+// ============================================================
 // CAMPOS DINÁMICOS SEGÚN TIPO OT
-// =======================================
+// ============================================================
 $("#crear_tipo_ot").on("change", function () {
 
     var tipo = $(this).find("option:selected").text().toUpperCase();
@@ -139,12 +145,15 @@ $("#crear_tipo_ot").on("change", function () {
     $("#crear_campo_nacional").toggle(tipo === "NACIONAL");
 });
 
-// =======================================
+// ============================================================
 // GUARDAR NUEVA OT (AJAX)
-// =======================================
+// ============================================================
 $("#formCrearOT").on("submit", function (e) {
 
     e.preventDefault();
+
+    // YA NO SE CONVIERTE LA FECHA, porque el input date usa YYYY-MM-DD
+    // y así debe enviarse al backend.
 
     $.post("/modulos/orden_trabajo/controllers/CrearController.php",
         $(this).serialize(),

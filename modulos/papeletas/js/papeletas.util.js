@@ -7,7 +7,7 @@ function plogUtil(msg) { if (DEBUG_PAP_UTIL) console.log("PAP-UTIL:", msg); }
    CARGAR SELECT DE VEHÍCULOS (JSON → OPTIONS)
    ============================================================ */
 function cargarVehiculosSelect() {
-    return $.post('/modulos/papeletas/acciones/lista_vehiculos.php', function(data) {
+    return $.post('/modulos/papeletas/controllers/GetVehiculosController.php', function(data) {
 
         let html = "<option value=''>-- Seleccione vehículo --</option>";
 

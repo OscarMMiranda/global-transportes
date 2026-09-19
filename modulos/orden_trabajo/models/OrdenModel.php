@@ -1,6 +1,9 @@
 <?php
 
-// archivo: /modulos/orden_trabajo/models/OrdenModel.php
+// ======================================================
+//  MODELO: OrdenModel.php
+//  RESPONSABILIDAD: Consultas corporativas del módulo OT
+// ======================================================
 
 class OrdenModel {
 
@@ -9,6 +12,19 @@ class OrdenModel {
 
     public function __construct($conn) {
         $this->conn = $conn;
+    }
+
+    // ============================================================
+    // ABREVIAR TIPO DE ORDEN (EXP, IMP, NAC)
+    // ============================================================
+    private function abreviarTipoOT($tipo) {
+        $tipo = strtoupper(trim($tipo));
+
+        if ($tipo === "EXPORTACION" || $tipo === "EXPORTACIÓN") return "EXP";
+        if ($tipo === "IMPORTACION" || $tipo === "IMPORTACIÓN") return "IMP";
+        if ($tipo === "NACIONAL") return "NAC";
+
+        return $tipo;
     }
 
     // ============================================================
@@ -47,7 +63,7 @@ class OrdenModel {
                 LEFT JOIN clientes c ON ot.cliente_id = c.id
                 LEFT JOIN empresa e ON ot.empresa_id = e.id
                 LEFT JOIN tipo_ot tot ON ot.tipo_ot_id = tot.id
-                LEFT JOIN estado_orden_trabajo eo ON ot.estado_ot = eo.id
+                LEFT JOIN estado_orden_trabajo eo ON ot.estado_id = eo.id
 
                 LEFT JOIN ordenes_vehiculo ov 
                     ON ov.orden_trabajo_id = ot.id
@@ -60,17 +76,34 @@ class OrdenModel {
                 GROUP BY ot.id
                 ORDER BY ot.fecha DESC, ot.id DESC";
 
+        // Preparar
         $stmt = $this->conn->prepare($sql);
-        if (!$stmt) return array();
+        if (!$stmt) {
+            error_log("[ERP-OT] Error preparar obtenerBase: " . $this->conn->error);
+            return array();
+        }
 
+        // Bind dinámico
         if (!empty($params)) {
             $stmt->bind_param($types, ...$params);
         }
 
-        if (!$stmt->execute()) return array();
+        // Ejecutar
+        if (!$stmt->execute()) {
+            error_log("[ERP-OT] Error ejecutar obtenerBase: " . $stmt->error);
+            return array();
+        }
 
+        // Resultado
         $result = $stmt->get_result();
-        return $result ? $result->fetch_all(MYSQLI_ASSOC) : array();
+        $rows   = $result ? $result->fetch_all(MYSQLI_ASSOC) : array();
+
+        // Abreviar tipo OT
+        foreach ($rows as &$r) {
+            $r["tipo_ot_abreviado"] = $this->abreviarTipoOT($r["tipo_ot"]);
+        }
+
+        return $rows;
     }
 
     // ============================================================
@@ -82,29 +115,14 @@ class OrdenModel {
         $params = array();
         $types  = "";
 
-        // ============================================================
-        // 1. Resolver estado por nombre (si no es TODAS)
-        // ============================================================
+        // 1. Filtro por estado (si no es TODAS)
         if ($estadoNombre !== "TODAS") {
-
-            $sqlEstado = "SELECT id FROM estado_orden_trabajo WHERE nombre = ?";
-            $stmt = $this->conn->prepare($sqlEstado);
-            $stmt->bind_param("s", $estadoNombre);
-            $stmt->execute();
-            $res = $stmt->get_result()->fetch_assoc();
-            $stmt->close();
-
-            if ($res) {
-                $estadoID = intval($res['id']);
-                $where .= " AND ot.estado_ot = ?";
-                $params[] = $estadoID;
-                $types   .= "i";
-            }
+            $where .= " AND eo.nombre = ?";
+            $params[] = $estadoNombre;
+            $types   .= "s";
         }
 
-        // ============================================================
         // 2. Filtro por semana (YYYY-Wxx)
-        // ============================================================
         if ($semanaISO !== "") {
             list($anio, $semana) = explode("-W", $semanaISO);
 
@@ -114,19 +132,35 @@ class OrdenModel {
             $types   .= "ii";
         }
 
-        // ============================================================
         // 3. Ejecutar consulta base corporativa
-        // ============================================================
         return $this->obtenerBase($where, $params, $types);
     }
 
     // ============================================================
-    // ACTIVAS POR SEMANA
+    // ESTADOS CORPORATIVOS (DINÁMICOS)
+    // ============================================================
+    public function obtenerEstadosOT() {
+
+        $sql = "SELECT id, nombre, descripcion
+                FROM estado_orden_trabajo
+                ORDER BY id ASC";
+
+        $rs = $this->conn->query($sql);
+
+        if (!$rs) {
+            error_log("[ERP-OT] Error SQL obtenerEstadosOT: " . $this->conn->error);
+            return array();
+        }
+
+        return $rs->fetch_all(MYSQLI_ASSOC);
+    }
+
+    // ============================================================
+    // ACTIVAS POR SEMANA (Pendiente + En proceso)
     // ============================================================
     public function obtenerActivasPorSemana($semanaISO = "") {
 
-        // ACTIVA = Pendiente (1) + En proceso (2)
-        $where = "WHERE ot.estado_ot IN (1,2)";
+        $where = "WHERE eo.nombre IN ('PENDIENTE','EN PROCESO')";
         $params = array();
         $types  = "";
 
@@ -162,11 +196,11 @@ class OrdenModel {
     }
 
     // ============================================================
-    // POR ESTADO Y SEMANA
+    // POR ESTADO Y SEMANA (ID)
     // ============================================================
     public function obtenerPorEstadoYSemana($estadoID, $semanaISO = "") {
 
-        $where  = "WHERE ot.estado_ot = ?";
+        $where  = "WHERE ot.estado_id = ?";
         $params = array(intval($estadoID));
         $types  = "i";
 
@@ -195,11 +229,17 @@ class OrdenModel {
         ";
 
         $res = $this->conn->query($sql);
-        return $res ? $res->fetch_all(MYSQLI_ASSOC) : array();
+
+        if (!$res) {
+            error_log("[ERP-OT] Error SQL obtenerSemanas: " . $this->conn->error);
+            return array();
+        }
+
+        return $res->fetch_all(MYSQLI_ASSOC);
     }
 
     // ============================================================
-    // DETALLE CORPORATIVO
+    // DETALLE CORPORATIVO POR ID
     // ============================================================
     public function obtenerPorId($id) {
 
@@ -229,7 +269,7 @@ class OrdenModel {
                 LEFT JOIN clientes c ON ot.cliente_id = c.id
                 LEFT JOIN empresa e ON ot.empresa_id = e.id
                 LEFT JOIN tipo_ot tot ON ot.tipo_ot_id = tot.id
-                LEFT JOIN estado_orden_trabajo eo ON ot.estado_ot = eo.id
+                LEFT JOIN estado_orden_trabajo eo ON ot.estado_id = eo.id
 
                 LEFT JOIN ordenes_vehiculo ov 
                     ON ov.orden_trabajo_id = ot.id
@@ -242,14 +282,26 @@ class OrdenModel {
                 LIMIT 1";
 
         $stmt = $this->conn->prepare($sql);
-        if (!$stmt) return null;
+        if (!$stmt) {
+            error_log("[ERP-OT] Error preparar obtenerPorId: " . $this->conn->error);
+            return null;
+        }
 
         $stmt->bind_param("i", $id);
 
-        if (!$stmt->execute()) return null;
+        if (!$stmt->execute()) {
+            error_log("[ERP-OT] Error ejecutar obtenerPorId: " . $stmt->error);
+            return null;
+        }
 
         $res = $stmt->get_result();
-        return ($res->num_rows > 0) ? $res->fetch_assoc() : null;
+        $row = ($res->num_rows > 0) ? $res->fetch_assoc() : null;
+
+        if ($row) {
+            $row["tipo_ot_abreviado"] = $this->abreviarTipoOT($row["tipo_ot"]);
+        }
+
+        return $row;
     }
 }
 

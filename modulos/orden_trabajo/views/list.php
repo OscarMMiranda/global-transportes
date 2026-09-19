@@ -1,15 +1,13 @@
 <?php
 /**
  * archivo: /modulos/orden_trabajo/views/list.php
+ * RESPONSABILIDAD: Vista principal del módulo OT
  *
  * Recibe: $data["semanas"], $data["semana_sel"]
  */
 
 $semanas    = isset($data["semanas"]) ? $data["semanas"] : array();
 $semana_sel = isset($data["semana_sel"]) ? $data["semana_sel"] : "";
-
-$GLOBALS['__semanas']    = $semanas;
-$GLOBALS['__semana_sel'] = $semana_sel;
 ?>
 
 <!-- HEAD (CSS + LIBRERÍAS) -->
@@ -39,7 +37,9 @@ $GLOBALS['__semana_sel'] = $semana_sel;
 <?php include __DIR__ . '/../modales/modal_eliminar.php'; ?>
 <?php include __DIR__ . '/../modales/modal_importar.php'; ?>
 <?php include __DIR__ . '/../modales/modal_editar_viaje.php'; ?>
+<?php include __DIR__ . "/../modales/modal_registrar_viaje_nuevo.php"; ?>
 
-<!-- FOOTER + SCRIPTS -->
+
+<!-- FOOTER + SCRIPTS (ÚNICA CARGA DE JS) -->
 <?php include __DIR__ . '/../componentes/footer.php'; ?>
 <?php include __DIR__ . '/../componentes/scripts.php'; ?>

@@ -1,6 +1,6 @@
 // archivo: /modulos/orden_trabajo/js/listado.js
 // ============================================================
-// LISTADO DE ORDENES DE TRABAJO (OPTIMIZADO)
+// LISTADO DE ORDENES DE TRABAJO (OPTIMIZADO CORPORATIVO)
 // ============================================================
 
 console.log("LISTADO JS CARGADO");
@@ -31,7 +31,7 @@ $(document).ready(function () {
     });
 
     // ============================================================
-    // DATATABLE PRINCIPAL
+    // DATATABLE PRINCIPAL (SIN DESTROY)
     // ============================================================
     window.tablaOT = $("#tablaOT").DataTable({
         processing: true,
@@ -58,30 +58,24 @@ $(document).ready(function () {
             { data: "fecha" },
             { data: "cliente" },
             { data: "oc_cliente" },
-            { data: "tipo_ot" },
+            { data: "tipo_ot_abreviado" },
             { data: "empresa" },
             { data: "numero_viajes" },
             { data: "estado" },
 
-            // ============================================================
-            // ACCIONES CORPORATIVAS
-            // ============================================================
             {
                 data: "id",
                 render: id => `
                     <div class="btn-group btn-group-sm">
 
-                        <!-- VER OV -->
                         <button class="btn btn-outline-primary btn-ver" data-id="${id}">
                             <i class="fa-solid fa-eye"></i>
                         </button>
 
-                        <!-- EDITAR OT -->
                         <button class="btn btn-outline-info btn-editar" data-id="${id}">
                             <i class="fa-solid fa-pen-to-square"></i>
                         </button>
 
-                        <!-- LOGÍSTICA -->
                         <button class="btn btn-outline-warning btn-logistica" data-id="${id}">
                             <i class="fa-solid fa-truck"></i>
                         </button>
@@ -90,26 +84,17 @@ $(document).ready(function () {
                 `
             }
         ],
-        language: { url: "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json" }
+        language: { url: "https://cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json" }
     });
 
     // ============================================================
-    // EVENTO: VER OV
+    // EVENTOS CORPORATIVOS
     // ============================================================
-    // $("#tablaOT").on("click", ".btn-ver", function () {
-    //     verOV($(this).data("id"));
+    // ❌ ESTE YA NO VA
+    // $("#tablaOT").on("click", ".btn-editar", function () {
+    //     editarOT($(this).data("id"));
     // });
 
-    // ============================================================
-    // EVENTO: EDITAR OT
-    // ============================================================
-    $("#tablaOT").on("click", ".btn-editar", function () {
-        editarOT($(this).data("id"));
-    });
-
-    // ============================================================
-    // EVENTO: LOGÍSTICA
-    // ============================================================
     $("#tablaOT").on("click", ".btn-logistica", function () {
         abrirLogistica($(this).data("id"));
     });

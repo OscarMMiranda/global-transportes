@@ -17,7 +17,7 @@ FROM ordenes_trabajo ot
 LEFT JOIN clientes c ON c.id = ot.cliente_id
 LEFT JOIN empresa e ON e.id = ot.empresa_id
 LEFT JOIN tipo_ot t ON t.id = ot.tipo_ot_id
-LEFT JOIN estado_orden_trabajo est ON est.id = ot.estado_ot   -- ✔ CORRECTO
+LEFT JOIN estado_orden_trabajo est ON est.id = ot.estado_id   -- ✔ CORRECTO
 WHERE ot.id = $id
 LIMIT 1
 ";
