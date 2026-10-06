@@ -1,0 +1,19 @@
+/* ======================================================
+   CSS: ot_modal_crear_component.css
+   RESPONSABILIDAD: Estilos del modal de creación OT
+   GLOBAL 2026 — Arquitectura Limpia
+====================================================== */
+
+#ot-modal-crear .modal-title {
+    font-size: 18px;
+}
+
+#ot-modal-crear label {
+    font-size: 13px;
+    color: var(--ot-color-primary);
+}
+
+#ot-modal-crear input,
+#ot-modal-crear select {
+    font-size: 13px;
+}

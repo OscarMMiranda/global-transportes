@@ -1,5 +1,9 @@
 <?php
-// archivo: modulos/orden_trabajo/controllers/CrearViajeController.php
+// ============================================================
+// CONTROLADOR: CrearViajeController.php
+// RESPONSABILIDAD: Registrar viaje simple asociado a una OT
+// ARQUITECTURA LIMPIA 2026 — PHP 5.6 COMPATIBLE
+// ============================================================
 
 require_once __DIR__ . '/../../../includes/config.php';
 $conn = getConnection();
@@ -7,75 +11,120 @@ $conn = getConnection();
 header('Content-Type: application/json');
 
 /* ============================================================
-   VALIDAR INPUT
+   FUNCIÓN: validarInput
    ============================================================ */
-$ot_id         = isset($_POST['orden_trabajo_id']) ? intval($_POST['orden_trabajo_id']) : 0;
-$fecha_viaje   = isset($_POST['fecha_viaje']) ? $_POST['fecha_viaje'] : null;
-$semana_viaje  = isset($_POST['semana_viaje']) ? $_POST['semana_viaje'] : null;
-$origen        = isset($_POST['origen']) ? trim($_POST['origen']) : "";
-$destino       = isset($_POST['destino']) ? trim($_POST['destino']) : "";
-$observaciones = isset($_POST['observaciones']) ? trim($_POST['observaciones']) : "";
+function validarInput()
+{
+    $data = array(
+        "ot_id"         => isset($_POST['orden_trabajo_id']) ? intval($_POST['orden_trabajo_id']) : 0,
+        "fecha_viaje"   => isset($_POST['fecha_viaje']) ? trim($_POST['fecha_viaje']) : "",
+        "semana_viaje"  => isset($_POST['semana_viaje']) ? intval($_POST['semana_viaje']) : 0,
+        "origen"        => isset($_POST['origen']) ? trim($_POST['origen']) : "",
+        "destino"       => isset($_POST['destino']) ? trim($_POST['destino']) : "",
+        "observaciones" => isset($_POST['observaciones']) ? trim($_POST['observaciones']) : ""
+    );
 
-if ($ot_id <= 0 || !$fecha_viaje || !$semana_viaje) {
-    echo json_encode(["ok" => false, "msg" => "Datos incompletos para registrar viaje"]);
+    if ($data["ot_id"] <= 0 || $data["fecha_viaje"] === "" || $data["semana_viaje"] <= 0) {
+        responder(false, "Datos incompletos para registrar viaje.");
+    }
+
+    return $data;
+}
+
+/* ============================================================
+   FUNCIÓN: validarOT
+   ============================================================ */
+function validarOT($conn, $ot_id)
+{
+    $sql = "SELECT id FROM ordenes_trabajo WHERE id = $ot_id LIMIT 1";
+    $res = $conn->query($sql);
+
+    if (!$res || $res->num_rows === 0) {
+        responder(false, "La OT no existe.");
+    }
+}
+
+/* ============================================================
+   FUNCIÓN: obtenerCorrelativoViaje
+   ============================================================ */
+function obtenerCorrelativoViaje($conn, $ot_id)
+{
+    $sql = "
+        SELECT COUNT(*) AS total
+        FROM ot_viajes
+        WHERE orden_trabajo_id = $ot_id
+    ";
+
+    $res = $conn->query($sql);
+    $row = $res->fetch_assoc();
+
+    return intval($row["total"]) + 1;
+}
+
+/* ============================================================
+   FUNCIÓN: insertarViaje
+   ============================================================ */
+function insertarViaje($conn, $data, $numero_viaje)
+{
+    $sql = "
+        INSERT INTO ot_viajes (
+            orden_trabajo_id,
+            numero_viaje,
+            fecha_viaje,
+            semana_viaje,
+            origen,
+            destino,
+            observaciones,
+            estado_viaje,
+            created_at
+        ) VALUES (
+            {$data['ot_id']},
+            $numero_viaje,
+            '{$data['fecha_viaje']}',
+            '{$data['semana_viaje']}',
+            '{$data['origen']}',
+            '{$data['destino']}',
+            '{$data['observaciones']}',
+            'pendiente',
+            NOW()
+        )
+    ";
+
+    if (!$conn->query($sql)) {
+        responder(false, "Error al crear viaje.");
+    }
+
+    return $conn->insert_id;
+}
+
+/* ============================================================
+   FUNCIÓN: responder
+   ============================================================ */
+function responder($ok, $msg, $extra = array())
+{
+    $resp = array("ok" => $ok, "msg" => $msg);
+
+    foreach ($extra as $k => $v) {
+        $resp[$k] = $v;
+    }
+
+    echo json_encode($resp);
     exit;
 }
 
 /* ============================================================
-   1. CALCULAR NÚMERO DE VIAJE (por OT)
+   EJECUCIÓN DEL CONTROLADOR
    ============================================================ */
-$sql_count = "
-SELECT COUNT(*) AS total
-FROM ot_viajes
-WHERE orden_trabajo_id = $ot_id
-";
 
-$res_count = $conn->query($sql_count);
-$row_count = $res_count->fetch_assoc();
-$numero_viaje = intval($row_count['total']) + 1;
+$data = validarInput();
+validarOT($conn, $data["ot_id"]);
 
-/* ============================================================
-   2. INSERTAR VIAJE EN ot_viajes
-   ============================================================ */
-$sql_insert = "
-INSERT INTO ot_viajes (
-    orden_trabajo_id,
-    numero_viaje,
-    fecha_viaje,
-    semana_viaje,
-    origen,
-    destino,
-    observaciones,
-    estado_viaje,
-    created_at
-) VALUES (
-    $ot_id,
-    $numero_viaje,
-    '$fecha_viaje',
-    '$semana_viaje',
-    '$origen',
-    '$destino',
-    '$observaciones',
-    'pendiente',
-    NOW()
-)
-";
+$numero_viaje = obtenerCorrelativoViaje($conn, $data["ot_id"]);
+$viaje_id     = insertarViaje($conn, $data, $numero_viaje);
 
-if (!$conn->query($sql_insert)) {
-    echo json_encode(["ok" => false, "msg" => "Error al crear viaje"]);
-    exit;
-}
-
-$viaje_id = $conn->insert_id;
-
-/* ============================================================
-   3. RESPUESTA
-   ============================================================ */
-echo json_encode([
-    "ok" => true,
-    "viaje_id" => $viaje_id,
-    "numero_viaje" => $numero_viaje,
-    "fecha_viaje" => $fecha_viaje,
-    "semana_viaje" => $semana_viaje
-]);
-exit;
+responder(true, "Viaje registrado correctamente.", array(
+    "viaje_id"      => $viaje_id,
+    "numero_viaje"  => $numero_viaje,
+    "fecha_viaje"   => $data["fecha_viaje"],
+    "semana_viaje"  => $data["semana_viaje"]
+));

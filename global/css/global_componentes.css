@@ -1,0 +1,133 @@
+/* ======================================================
+   CSS: global_componentes.css
+   RESPONSABILIDAD: Estilos globales para componentes del ERP
+   GLOBAL 2026 — Arquitectura Limpia
+====================================================== */
+
+/* Tarjetas corporativas */
+.card-global {
+    background: #ffffff;
+    border: 1px solid #dcdcdc;
+    border-radius: 6px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+/* Encabezados de tarjetas */
+.card-global-header {
+    font-size: 16px;
+    font-weight: 600;
+    color: #003366;
+    margin-bottom: 10px;
+}
+
+/* Subtítulos */
+.card-global-subtitle {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+/* Divisor corporativo */
+.card-global-divider {
+    border-bottom: 1px solid #e1e1e1;
+    margin: 12px 0;
+}
+
+/* Botones corporativos */
+.btn-global {
+    font-size: 13px;
+    padding: 6px 12px;
+    border-radius: 4px;
+}
+
+/* Botón primario */
+.btn-global-primary {
+    background-color: #0d6efd;
+    color: #fff;
+    border: 1px solid #0b5ed7;
+}
+
+/* Botón secundario */
+.btn-global-secondary {
+    background-color: #6c757d;
+    color: #fff;
+    border: 1px solid #5c636a;
+}
+
+/* Botón de advertencia */
+.btn-global-warning {
+    background-color: #ffc107;
+    color: #000;
+    border: 1px solid #e0a800;
+}
+
+/* Botón de peligro */
+.btn-global-danger {
+    background-color: #dc3545;
+    color: #fff;
+    border: 1px solid #bb2d3b;
+}
+
+/* Botón de éxito */
+.btn-global-success {
+    background-color: #198754;
+    color: #fff;
+    border: 1px solid #157347;
+}
+
+/* Inputs corporativos */
+.input-global {
+    font-size: 13px;
+    padding: 6px;
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+}
+
+/* Select corporativo */
+.select-global {
+    font-size: 13px;
+    padding: 6px;
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+}
+
+/* Alertas corporativas */
+.alert-global {
+    font-size: 13px;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+/* Alertas por tipo */
+.alert-global-info {
+    background-color: #cfe2ff;
+    color: #084298;
+}
+
+.alert-global-warning {
+    background-color: #fff3cd;
+    color: #664d03;
+}
+
+.alert-global-danger {
+    background-color: #f8d7da;
+    color: #842029;
+}
+
+.alert-global-success {
+    background-color: #d1e7dd;
+    color: #0f5132;
+}
+
+/* Loader global */
+.loader-global {
+    display: none;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.loader-global .spinner-border {
+    width: 1.8rem;
+    height: 1.8rem;
+}

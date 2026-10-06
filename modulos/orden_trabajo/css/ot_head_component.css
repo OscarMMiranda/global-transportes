@@ -1,0 +1,165 @@
+/* ======================================================
+   CSS: ot_head_component.css
+   RESPONSABILIDAD: Estilos globales del módulo OT
+   GLOBAL 2026 — Arquitectura Corporativa Internacional
+====================================================== */
+
+/* --- Paleta corporativa logística internacional --- */
+:root {
+    /* Colores principales (corporativo global) */
+    --ot-color-primary: #003049;      /* Azul petróleo */
+    --ot-color-secondary: #1B263B;    /* Azul acero */
+    --ot-color-accent: #2D6A4F;       /* Verde operativo */
+    --ot-color-danger: #D62828;       /* Rojo alerta */
+    --ot-color-warning: #F77F00;      /* Naranja observación */
+    --ot-color-info: #4D9DE0;         /* Azul proceso */
+
+    /* Colores de texto */
+    --ot-color-text: #1B263B;
+    --ot-color-muted: #6C757D;
+
+    /* Colores de fondo y bordes */
+    --ot-color-divider: #CED4DA;
+    --ot-color-background: #F8F9FA;
+    --ot-color-card-bg: #FFFFFF;
+    --ot-color-shadow: rgba(0,0,0,0.05);
+
+    /* Radios corporativos */
+    --ot-radius: 6px;
+
+    /* Sombras corporativas */
+    --ot-shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+    --ot-shadow-md: 0 2px 4px rgba(0,0,0,0.08);
+
+    /* Espaciados corporativos */
+    --ot-padding-sm: 8px;
+    --ot-padding-md: 16px;
+    --ot-padding-lg: 24px;
+}
+
+/* --- Tipografía corporativa --- */
+body {
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+    background-color: var(--ot-color-background);
+    color: var(--ot-color-text);
+    font-size: 14px;
+    letter-spacing: 0.2px;
+}
+
+/* --- Contenedores corporativos globales --- */
+.ot-card {
+    background: var(--ot-color-card-bg);
+    border: 1px solid var(--ot-color-divider);
+    border-radius: var(--ot-radius);
+    padding: var(--ot-padding-md);
+    box-shadow: var(--ot-shadow-sm);
+}
+
+/* --- Espaciado estándar del módulo --- */
+.ot-spacing-sm { margin-bottom: 10px; }
+.ot-spacing-md { margin-bottom: 18px; }
+.ot-spacing-lg { margin-bottom: 26px; }
+
+/* Espaciado vertical corporativo */
+.ot-vspace {
+    margin-top: var(--ot-padding-md);
+    margin-bottom: var(--ot-padding-md);
+}
+
+/* --- Títulos corporativos globales --- */
+.ot-title {
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--ot-color-primary);
+    margin: 0;
+    letter-spacing: 0.3px;
+}
+
+.ot-subtitle {
+    font-size: 14px;
+    color: var(--ot-color-muted);
+    margin-top: 4px;
+}
+
+/* --- Divisores corporativos --- */
+.ot-divider {
+    border-top: 1px solid var(--ot-color-divider);
+    margin: 14px 0;
+}
+
+/* --- Botones corporativos globales --- */
+.btn-ot-primary {
+    background-color: var(--ot-color-primary);
+    color: #fff;
+    border: none;
+    padding: 7px 14px;
+    border-radius: var(--ot-radius);
+    font-weight: 500;
+}
+
+.btn-ot-primary:hover {
+    background-color: #00263a;
+}
+
+/* Botón secundario */
+.btn-ot-secondary {
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #ccc;
+    padding: 7px 14px;
+    border-radius: var(--ot-radius);
+    font-weight: 500;
+}
+
+.btn-ot-secondary:hover {
+    background-color: #e6e6e6;
+}
+
+/* Botón outline corporativo */
+.btn-ot-outline {
+    background-color: transparent;
+    border: 1px solid var(--ot-color-primary);
+    color: var(--ot-color-primary);
+    padding: 7px 14px;
+    border-radius: var(--ot-radius);
+    font-weight: 500;
+}
+
+.btn-ot-outline:hover {
+    background-color: var(--ot-color-primary);
+    color: #fff;
+}
+
+/* --- Badges corporativos globales --- */
+.badge-ot {
+    padding: 6px 10px;
+    border-radius: var(--ot-radius);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.badge-ot-pendiente { background-color: var(--ot-color-warning); color: #000; }
+.badge-ot-proceso   { background-color: var(--ot-color-info); color: #fff; }
+.badge-ot-completa  { background-color: var(--ot-color-accent); color: #fff; }
+.badge-ot-anulada   { background-color: var(--ot-color-danger); color: #fff; }
+.badge-ot-observada { background-color: var(--ot-color-warning); color: #fff; }
+
+/* --- Estados corporativos globales --- */
+.ot-estado {
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: var(--ot-radius);
+    font-size: 12px;
+}
+
+.ot-estado-pendiente { background: var(--ot-color-warning); }
+.ot-estado-proceso   { background: var(--ot-color-info); }
+.ot-estado-completa  { background: var(--ot-color-accent); }
+.ot-estado-anulada   { background: var(--ot-color-danger); }
+
+/* --- Utilidades flex corporativas --- */
+.ot-flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

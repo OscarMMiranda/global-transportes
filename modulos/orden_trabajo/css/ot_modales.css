@@ -1,0 +1,63 @@
+/* ======================================================
+   CSS: ot_modales_base.css
+   RESPONSABILIDAD: Estilos compartidos por todos los
+   modales del módulo OT
+   GLOBAL 2026
+====================================================== */
+
+/* TITULOS */
+
+.ot-modal-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0;
+}
+
+/* TEXTO */
+
+.ot-modal-text {
+    font-size: 13px;
+    color: #495057;
+}
+
+/* ALERTAS */
+
+.ot-modal-alert {
+    padding: 10px 12px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    font-size: 13px;
+}
+
+/* FOOTER */
+
+.ot-modal-footer .btn {
+    border-radius: 8px;
+    font-size: 13px;
+}
+
+/* INPUTS */
+
+.ot-modal-input,
+.ot-modal-select,
+.ot-modal-textarea {
+
+    font-size: 13px;
+    border-radius: 8px;
+}
+
+/* LOADER */
+
+.ot-modal-loader {
+
+    display: none;
+    text-align: center;
+}
+
+/* SEPARADOR */
+
+.ot-modal-separator {
+
+    border-bottom: 1px solid #dee2e6;
+    margin: 12px 0;
+}

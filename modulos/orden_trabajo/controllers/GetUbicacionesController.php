@@ -1,23 +1,33 @@
 <?php
-//	archivo: modulos/orden_trabajo/controllers/GetUbicacionesController.php
+// ============================================================
+// CONTROLADOR: GetUbicacionesController.php
+// RESPONSABILIDAD: Unificar ENTIDADES + LOCALES + DESTINOS
+// ARQUITECTURA LIMPIA — PHP 5.6 COMPATIBLE
+// ============================================================
 
 require_once __DIR__ . '/../../../includes/config.php';
 $conn = getConnection();
 
 header('Content-Type: application/json');
 
-/*
-   UNIFICAR ENTIDADES + LOCALES + DESTINOS
-*/
+/* ============================================================
+   VALIDAR CONEXIÓN
+   ============================================================ */
+if (!$conn) {
+    echo json_encode(["ok" => false, "msg" => "Error de conexión"]);
+    exit;
+}
 
+/* ============================================================
+   SQL UNIFICADO
+   ============================================================ */
 $sql = "
-
 (
     SELECT 
         e.id,
         e.nombre,
         'entidad' AS tipo,
-        e.direccion AS direccion
+        e.direccion
     FROM entidades e
     WHERE e.estado = 'activo'
 )
@@ -29,7 +39,7 @@ UNION ALL
         l.id,
         l.nombre,
         'local' AS tipo,
-        l.direccion AS direccion
+        l.direccion
     FROM locales l
 )
 
@@ -40,7 +50,7 @@ UNION ALL
         d.id,
         d.nombre,
         'destino' AS tipo,
-        d.direccion AS direccion
+        d.direccion
     FROM destinos d
     WHERE d.estado = 'activo'
 )
@@ -48,24 +58,36 @@ UNION ALL
 ORDER BY nombre ASC
 ";
 
+/* ============================================================
+   EJECUTAR CONSULTA
+   ============================================================ */
 $res = $conn->query($sql);
 
 if (!$res) {
-    echo json_encode(["ok" => false, "msg" => $conn->error]);
+    echo json_encode([
+        "ok"  => false,
+        "msg" => "Error SQL: " . $conn->error
+    ]);
     exit;
 }
 
-$data = [];
+/* ============================================================
+   ARMAR RESPUESTA
+   ============================================================ */
+$data = array();
 
 while ($row = $res->fetch_assoc()) {
-    $data[] = [
+    $data[] = array(
         "id"        => intval($row["id"]),
         "nombre"    => $row["nombre"],
         "tipo"      => $row["tipo"],
         "direccion" => $row["direccion"]
-    ];
+    );
 }
 
+/* ============================================================
+   RESPUESTA FINAL
+   ============================================================ */
 echo json_encode([
     "ok"   => true,
     "data" => $data

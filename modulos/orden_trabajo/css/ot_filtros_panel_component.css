@@ -1,0 +1,20 @@
+/* ======================================================
+   CSS: ot_filtros_panel_component.css
+   RESPONSABILIDAD: Estilos del panel de filtros OT
+   GLOBAL 2026 — Arquitectura Limpia
+====================================================== */
+
+.ot-filtros-panel {
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+
+.ot-filtros-header h5 {
+    font-size: 16px;
+    color: var(--ot-color-primary);
+}
+
+.ot-filtros-body {
+    margin-top: 10px;
+}

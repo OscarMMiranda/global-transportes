@@ -1,0 +1,14 @@
+/* ======================================================
+   CSS: ot_modal_eliminar_component.css
+   RESPONSABILIDAD: Estilos del modal de eliminación OT
+   GLOBAL 2026 — Arquitectura Limpia
+====================================================== */
+
+#ot-modal-eliminar .modal-title {
+    font-size: 17px;
+}
+
+#ot-modal-eliminar p,
+#ot-modal-eliminar .alert {
+    font-size: 13px;
+}

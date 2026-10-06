@@ -1,211 +1,39 @@
+Flujo corporativo "Ver Orden de Trabajo” (GLOBAL 2026)
 
-
-1. 
-
-controllers/
-    ├── ListController.php          ← carga inicial + AJAX de listado
-    ├── CrearController.php         ← crear orden
-    ├── EditarController.php        ← editar orden
-    ├── AnularController.php        ← anular orden
-    ├── EliminarController.php      ← eliminar orden
-    ├── ObtenerController.php       ← obtener por ID
-    └── ValidarCodigoController.php ← validar duplicado
-
-
-
-2.
-models/
-    ├── OrdenModel.php
-    └── OrdenSemanaModel.php   ← si quieres separar lógica de semanas
-
-3.
-acciones/
-    ├── listar_activas.php
-    ├── listar_anuladas.php
-    ├── listar_eliminadas.php
-    ├── crear.php
-    ├── editar.php
-    ├── anular.php
-    ├── eliminar.php
-    ├── obtener.php
-    └── validar_codigo.php
-
-4.
-views/
-    ├── list.php
-    ├── create.php
-    ├── update.php
-    └── partials/
-        ├── filtros.php
-        ├── tabs.php
-        ├── tabla_activas.php
-        ├── tabla_anuladas.php
-        ├── tabla_eliminadas.php
-        └── scripts_listado.php
-
-5.
-js/
-    ├── ordenes.js      ← inicialización
-    ├── ajax_listado.js ← llamadas AJAX del listado
-    ├── ajax_crud.js    ← crear/editar/anular/eliminar
-    ├── modales.js      ← abrir y llenar modales
-    ├── filtros.js      ← cambio de semana
-    └── util.js         ← funciones auxiliares
-
-6.
-css/
-    ├── orden.css
-    └── tablas.css
-
-7.
-modales/
-    ├── modal_crear.php
-    ├── modal_editar.php
-    ├── modal_anular.php
-    └── modal_eliminar.php
-
-
-models/
-    ├── OrdenModel.php            ← listado + filtros
-    ├── OrdenCrudModel.php        ← crear / editar / eliminar / anular
-    ├── OrdenValidacionModel.php  ← validar código
-    └── OrdenSemanaModel.php      ← semanas
+[1] ot_tabla_actions.js
+        ↓ llama
+[2] ot_modals_ver.js
+        ↓ hace AJAX
+[3] ot_ver_api.php   ← CONTROLADOR PRINCIPAL
+        ↓ renderiza
+[4] ver_ot.php
+        ↓ devuelve HTML
+[5] modal_ver_ot_component.php
+        ↓ muestra HTML
+[6] scripts_ot_component.php
+        ↓ carga todos los JS
+[7] OrdenTrabajoModel.php
+        ↓ provee datos
 
 
 
+Flujo corporativo “Nueva Orden de Trabajo” (GLOBAL 2026)
 
-
-
-
-modulos/
-└── orden_trabajo/
-    │
-    ├── index.php
-    │
-    ├── controllers/
-    │   ├── ListController.php
-    │   ├── CrearController.php
-    │   ├── EditarController.php
-    │   ├── AnularController.php
-    │   ├── EliminarController.php
-    │   ├── ObtenerController.php
-    │   └── ValidarCodigoController.php
-    │
-    ├── models/
-    │   ├── OrdenModel.php
-    │   ├── OrdenCrudModel.php
-    │   ├── OrdenValidacionModel.php
-    │   └── OrdenSemanaModel.php
-    │
-    ├── componentes/
-    │   ├── head.php
-    │   ├── header.php
-    │   ├── footer.php
-    │   └── scripts.php
-    │
-    ├── views/
-    │   ├── list.php
-    │   ├── create.php
-    │   ├── update.php
-    │   └── partials/
-    │       ├── filtros.php
-    │       ├── tabs.php
-    │       ├── tabla_activas.php
-    │       ├── tabla_anuladas.php
-    │       ├── tabla_eliminadas.php
-    │       └── scripts_listado.php
-    │
-    ├── js/
-    │   ├── ordenes.js
-    │   ├── ajax_listado.js
-    │   ├── ajax_crud.js
-    │   ├── modales.js
-    │   ├── filtros.js
-    │   └── util.js
-    │
-    ├── css/
-    │   ├── orden.css
-    │   └── tablas.css
-    │
-    └── modales/
-        ├── modal_crear.php
-        ├── modal_editar.php
-        ├── modal_anular.php
-        └── modal_eliminar.php
-
-
-modulos/
-└── orden_trabajo/
-    ├── componentes/
-    │   ├── head.php
-    │   ├── header.php
-    │   ├── botones_superiores.php
-    │   ├── filtros_botones.php
-    │   ├── filtro_semana.php
-    │   ├── tabs_estado.php
-    │   ├── tabla_ot.php
-    │   └── footer.php
-    │
-    ├── controllers/
-    │   ├── ListController.php
-    │   ├── GetOrdenController.php
-    │   ├── GetOrdenVehiculoController.php
-    │   ├── UpdateOrdenController.php
-    │   ├── UpdateViajeController.php
-    │   └── DeleteOrdenController.php
-    │
-    ├── models/
-    │   └── OrdenModel.php
-    │
-    ├── views/
-    │   └── list.php
-    │
-    ├── js/
-    │   ├── listado.js
-    │   ├── crear.js
-    │   ├── editar.js
-    │   ├── anular.js
-    │   ├── eliminar.js
-    │   └── viajes.js
-    │
-    ├── css/
-    │   ├── orden.css
-    │   ├── header.css
-    │   ├── footer.css
-    │   ├── tablas.css
-    │   ├── listado.css
-    │   ├── modales.css
-    │   └── modal_editar_viaje.css
-    │
-    └── modales/
-        ├── modal_ver.php
-        ├── modal_crear.php
-        ├── modal_editar.php
-        ├── modal_anular.php
-        ├── modal_eliminar.php
-        ├── modal_importar.php
-        └── modal_editar_viaje.php
-
-
-
-
-
-
-
-
-Evento				Acción				Nuevo estado
-Crear OT			Insert				1 (Pendiente)
-Registrar viaje		Insert viaje		2 (En proceso)
-Cerrar viajes		Update viajes		3 (Completada)
-Registrar factura	Update factura		4 (Facturada)
-Cancelar OT			Update estado		5 (Cancelada)
-Anular OT			Update estado		7 (Anulada)
-Eliminar OT			Update estado		8 (Eliminada)
-
-✔ CrearController.php (estado_id = 1)
-✔ RegistrarViajeController.php (estado_id = 2)
-✔ CerrarViajesController.php (estado_id = 3)
-✔ FacturarController.php (estado_id = 4)
-✔ CancelarController.php (estado_id = 5)
-✔ AnularController.php (estado_id = 7)
-✔ EliminarController.php (estado_id = 8)
+[1] botones_superiores_component.php
+        ↓ dispara evento JS
+[2] ot_tabla_actions.js
+        ↓ llama función abrirNuevaOT()
+[3] ot_modals_nueva.js
+        ↓ hace AJAX
+[4] ot_nueva_form_api.php   ← CONTROLADOR PRINCIPAL (FORM)
+        ↓ renderiza
+[5] ot_nueva_form.php
+        ↓ devuelve HTML del formulario
+[6] modal_nueva_ot_component.php
+        ↓ muestra el formulario en modal
+[7] scripts_ot_component.php
+        ↓ carga todos los JS corporativos
+[8] ot_guardar_api.php
+        ↓ guarda la OT en BD
+[9] OrdenTrabajoModel.php
+        ↓ inserta la OT

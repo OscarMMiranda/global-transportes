@@ -1,0 +1,153 @@
+/* ======================================================
+   CSS: ot_listado.css
+   MÓDULO: Órdenes de Trabajo (OT)
+   RESPONSABILIDAD: Estilos del listado principal OT
+   GLOBAL 2026 — Arquitectura Limpia (Optimizado Visual)
+   Versión: 4.3
+====================================================== */
+
+/* CONTENEDOR PRINCIPAL */
+.ot-listado-container {
+    background: #ffffff;
+    padding: 14px 18px !important;
+    border-radius: 6px !important;
+    border: 1px solid #e3e3e3 !important;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+/* CABECERA DEL LISTADO */
+.ot-listado-header {
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    margin-bottom: 10px !important;
+    color: #2a2a2a;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.ot-listado-header i {
+    font-size: 14px !important;
+    color: var(--corp-primary, #0d6efd);
+}
+
+/* FILTROS SUPERIORES */
+.ot-listado-filtros {
+    margin-bottom: 12px !important;
+}
+
+/* BOTONES DE ESTADO */
+.btn-estado {
+    font-size: 12px !important;
+    padding: 4px 10px !important;
+    margin-right: 4px !important;
+    border-radius: 4px !important;
+    line-height: 1.1 !important;
+}
+
+.btn-estado.active {
+    font-weight: 700 !important;
+    border: 2px solid var(--corp-primary, #0d6efd) !important;
+    background-color: #eef4ff !important;
+}
+
+/* SELECT DE SEMANA */
+#filtro_semana {
+    font-size: 12px !important;
+    padding: 4px 8px !important;
+    border-radius: 4px !important;
+}
+
+/* CONTENEDOR DE LA TABLA */
+.ot-listado-tabla {
+    margin-top: 10px !important;
+}
+
+/* DATATABLES: ENCABEZADOS */
+#tablaOT thead th {
+    background-color: var(--corp-primary, #0d6efd) !important;
+    color: #fff !important;
+    font-size: 12px !important;
+    text-align: center !important;
+    padding: 6px !important;
+    white-space: nowrap !important;
+}
+
+/* DATATABLES: CELDAS */
+#tablaOT tbody td {
+    font-size: 12px !important;
+    text-align: center !important;
+    padding: 5px 6px !important;
+    vertical-align: middle !important;
+}
+
+/* HOVER CORPORATIVO */
+#tablaOT tbody tr:hover {
+    background-color: #f4f7ff !important;
+}
+
+/* BADGES CORPORATIVOS */
+.badge-ot {
+    font-size: 10px !important;
+    padding: 3px 5px !important;
+    border-radius: 4px !important;
+    font-weight: 600 !important;
+}
+
+/* ESTADOS OPERATIVOS */
+.badge-activa {
+    background-color: #198754 !important;
+    color: #fff !important;
+}
+
+.badge-pendiente {
+    background-color: #ffc107 !important;
+    color: #000 !important;
+}
+
+.badge-proceso {
+    background-color: #0dcaf0 !important;
+    color: #000 !important;
+}
+
+.badge-finalizada {
+    background-color: #0d6efd !important;
+    color: #fff !important;
+}
+
+.badge-anulada {
+    background-color: #6c757d !important;
+    color: #fff !important;
+}
+
+.badge-eliminada {
+    background-color: #dc3545 !important;
+    color: #fff !important;
+}
+
+/* BOTONES DE ACCIONES */
+.btn-group .btn {
+    font-size: 11px !important;
+    padding: 3px 6px !important;
+    border-radius: 4px !important;
+}
+
+/* MENSAJE SIN REGISTROS */
+.ot-sin-registros {
+    text-align: center !important;
+    padding: 10px !important;
+    font-size: 12px !important;
+    color: #777 !important;
+}
+
+/* PAGINACIÓN DATATABLES */
+.dataTables_paginate .paginate_button {
+    font-size: 11px !important;
+    padding: 4px 8px !important;
+    border-radius: 4px !important;
+}
+
+.dataTables_paginate .paginate_button.current {
+    background-color: var(--corp-primary, #0d6efd) !important;
+    color: #fff !important;
+}

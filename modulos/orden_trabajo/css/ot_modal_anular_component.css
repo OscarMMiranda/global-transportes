@@ -1,0 +1,14 @@
+/* ======================================================
+   CSS: ot_modal_anular_component.css
+   RESPONSABILIDAD: Estilos del modal de anulación OT
+   GLOBAL 2026 — Arquitectura Limpia
+====================================================== */
+
+#ot-modal-anular .modal-title {
+    font-size: 17px;
+}
+
+#ot-modal-anular p,
+#ot-modal-anular .alert {
+    font-size: 13px;
+}

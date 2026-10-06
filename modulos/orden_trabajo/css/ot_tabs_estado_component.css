@@ -1,0 +1,79 @@
+/* ======================================================
+   CSS: ot_tabs_estado_component.css
+   RESPONSABILIDAD: Estilos de los tabs de estado OT
+   GLOBAL 2026 — Arquitectura Corporativa Internacional (Compactado)
+   Versión: 4.3
+====================================================== */
+
+/* --- CONTENEDOR DE TABS CORPORATIVOS --- */
+.nav-tabs-corp {
+    border-bottom: 1px solid var(--ot-color-divider);
+    padding-bottom: 2px !important;
+    margin-bottom: 8px !important;
+    display: flex;
+    gap: 2px;
+}
+
+/* --- TAB CORPORATIVO (COMPACTADO) --- */
+.nav-tabs-corp .nav-link {
+    font-size: 11px !important;
+    font-weight: 500;
+    padding: 4px 10px !important;
+    color: var(--ot-color-muted);
+    background: transparent;
+    border: none;
+    border-radius: 4px 4px 0 0;
+    transition: all 0.15s ease-in-out;
+    line-height: 1.2;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* --- HOVER CORPORATIVO --- */
+.nav-tabs-corp .nav-link:hover {
+    color: var(--ot-color-primary);
+    background-color: #F1F5FA;
+}
+
+/* --- TAB ACTIVO CORPORATIVO --- */
+.nav-tabs-corp .nav-link.active {
+    font-weight: 600;
+    color: var(--ot-color-primary);
+    background-color: #FFFFFF;
+    border-bottom: 3px solid var(--ot-color-primary);
+}
+
+/* --- COLORES SUAVES POR ESTADO --- */
+.nav-tabs-corp .nav-link[data-estado="pendiente"] {
+    color: #F77F00;
+}
+
+.nav-tabs-corp .nav-link[data-estado="en_proceso"] {
+    color: #4D9DE0;
+}
+
+.nav-tabs-corp .nav-link[data-estado="finalizado"] {
+    color: #2D6A4F;
+}
+
+.nav-tabs-corp .nav-link[data-estado="anulado"] {
+    color: #D62828;
+}
+
+/* --- ACTIVO CON COLOR DE ESTADO --- */
+.nav-tabs-corp .nav-link.active[data-estado="pendiente"] {
+    border-bottom-color: #F77F00;
+}
+
+.nav-tabs-corp .nav-link.active[data-estado="en_proceso"] {
+    border-bottom-color: #4D9DE0;
+}
+
+.nav-tabs-corp .nav-link.active[data-estado="finalizado"] {
+    border-bottom-color: #2D6A4F;
+}
+
+.nav-tabs-corp .nav-link.active[data-estado="anulado"] {
+    border-bottom-color: #D62828;
+}

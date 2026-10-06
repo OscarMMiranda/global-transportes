@@ -1,0 +1,91 @@
+/* ======================================================
+   CSS: ot_header_component.css
+   RESPONSABILIDAD: Estilos del encabezado corporativo OT
+   GLOBAL 2026 — Arquitectura Limpia (Versión Internacional)
+====================================================== */
+
+/* --- Contenedor principal del header --- */
+.ot-header {
+    background: var(--ot-color-card-bg);
+    border: 1px solid var(--ot-color-divider);
+    border-radius: var(--ot-radius);
+    padding: var(--ot-padding-md);
+    box-shadow: var(--ot-shadow-sm);
+}
+
+/* --- Título del módulo --- */
+.titulo-modulo {
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--ot-color-primary);
+    margin: 0;
+    letter-spacing: 0.3px;
+}
+
+/* --- Subtítulo del módulo --- */
+.modulo-subtitulo {
+    font-size: 14px;
+    color: var(--ot-color-muted);
+    margin-top: 4px;
+    letter-spacing: 0.2px;
+}
+
+/* --- Línea divisoria corporativa --- */
+.card-corp-divider {
+    border-top: 1px solid var(--ot-color-divider);
+    margin-top: var(--ot-padding-md);
+    margin-bottom: 0;
+}
+
+/* --- Contenedor de acciones superiores --- */
+.card-corp-actions {
+    background: var(--ot-color-background);
+    border-top: 1px solid var(--ot-color-divider);
+    padding: var(--ot-padding-md);
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* --- Botones corporativos del header --- */
+.card-corp-actions button {
+    min-width: 120px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: var(--ot-radius);
+    padding: 7px 14px;
+}
+
+/* Botón principal */
+.btn-header-primary {
+    background-color: var(--ot-color-primary);
+    color: #fff;
+    border: none;
+}
+
+.btn-header-primary:hover {
+    background-color: #00263a;
+}
+
+/* Botón secundario */
+.btn-header-secondary {
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #ccc;
+}
+
+.btn-header-secondary:hover {
+    background-color: #e6e6e6;
+}
+
+/* Botón outline corporativo */
+.btn-header-outline {
+    background-color: transparent;
+    border: 1px solid var(--ot-color-primary);
+    color: var(--ot-color-primary);
+}   
+
+.btn-header-outline:hover {
+    background-color: var(--ot-color-primary);
+    color: #fff;
+}   

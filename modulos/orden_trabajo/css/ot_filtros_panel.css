@@ -1,0 +1,55 @@
+/* ======================================================
+   CSS: ot_filtros_panel.css
+   RESPONSABILIDAD: Compactación del panel de filtros OT
+   GLOBAL 2026 — Arquitectura Corporativa Internacional
+   Versión: 4.2
+====================================================== */
+
+/* PANEL GENERAL */
+.ot-filtros-panel {
+    margin-bottom: 8px !important;
+    padding: 6px 0 !important;
+    border-radius: 6px !important;
+    overflow: hidden; /* Evita saltos visuales del header */
+}
+
+/* HEADER CORPORATIVO */
+.ot-filtros-header {
+    padding: 6px 10px !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ot-filtros-header h6,
+.ot-filtros-header h5 {
+    font-size: 14px !important;
+    margin: 0 !important;
+    font-weight: 700 !important;
+}
+
+/* BODY CORPORATIVO */
+.ot-filtros-body {
+    padding: 6px 10px !important;
+    display: flex;
+    flex-direction: column;
+    gap: 6px !important; /* Reemplaza margin-bottom interno */
+}
+
+/* Compactación de los componentes internos */
+.ot-filtros-body > * {
+    margin-bottom: 0 !important; /* Eliminamos el margin heredado */
+}
+
+/* Línea corporativa inferior */
+.card-corp-divider {
+    margin-top: 6px !important;
+    margin-bottom: 0 !important;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .ot-filtros-body {
+        gap: 10px !important;
+    }
+}

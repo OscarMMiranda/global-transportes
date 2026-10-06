@@ -1,0 +1,65 @@
+/* ======================================================
+   CSS: ot_modal_editar_viaje_component.css
+   MÓDULO: Órdenes de Trabajo (OT)
+   RESPONSABILIDAD: Estilos del modal Editar Viaje
+   GLOBAL 2026 — Arquitectura Limpia
+====================================================== */
+
+/* Título del modal */
+#ot-modal-editar-viaje .modal-title {
+    font-size: 17px;
+    font-weight: bold;
+}
+
+/* Labels */
+#ot-modal-editar-viaje label {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* Inputs */
+#ot-modal-editar-viaje input,
+#ot-modal-editar-viaje select,
+#ot-modal-editar-viaje textarea {
+    font-size: 13px;
+    padding: 6px;
+    border-radius: 4px;
+}
+
+/* Separadores internos */
+.ot-editar-separator {
+    border-bottom: 1px solid #dcdcdc;
+    margin: 12px 0;
+}
+
+/* Loader corporativo */
+#loaderEditarViaje {
+    display: none;
+    text-align: center;
+    margin-top: 15px;
+}
+
+#loaderEditarViaje .spinner-border {
+    width: 1.8rem;
+    height: 1.8rem;
+}
+
+/* Botones inferiores */
+#ot-modal-editar-viaje .btn {
+    font-size: 13px;
+    padding: 6px 12px;
+}
+
+/* Alertas internas */
+.ot-editar-alert {
+    font-size: 13px;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+/* Ajustes responsive */
+@media (max-width: 600px) {
+    #ot-modal-editar-viaje .modal-dialog {
+        max-width: 95%;
+    }
+}

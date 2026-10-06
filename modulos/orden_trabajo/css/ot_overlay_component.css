@@ -1,0 +1,56 @@
+/* ======================================================
+   COMPONENTE: ot_overlay_component.css
+   RESPONSABILIDAD: Overlay corporativo global
+   GLOBAL 2026 — Arquitectura Limpia Corporativa
+====================================================== */
+
+/* Overlay base */
+.ot-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.35); /* tono corporativo */
+    backdrop-filter: blur(3px);          /* efecto premium */
+    -webkit-backdrop-filter: blur(3px);
+    display: none;
+    z-index: 2000;                       /* encima de todo */
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.25s ease-in-out;
+    opacity: 0;
+}
+
+/* Estado visible */
+.ot-overlay.visible {
+    display: flex;
+    opacity: 1;
+}
+
+/* Contenido interno (loader, texto, etc.) */
+.ot-overlay-content {
+    background: #ffffff;
+    padding: 16px 24px;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    text-align: center;
+    min-width: 260px;
+    max-width: 380px;
+    animation: overlayPop 0.25s ease-out;
+}
+
+/* Animación de entrada */
+@keyframes overlayPop {
+    0% { transform: scale(0.92); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Texto corporativo */
+.ot-overlay-content span {
+    display: block;
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #1e293b;
+}

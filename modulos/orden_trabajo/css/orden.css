@@ -1,118 +1,107 @@
 /* ======================================================
-	ARCHIVO	:	/modulos/orden_trabajo/css/orden.css
-   	CSS		:	orden.css
-   	RESPONSABILIDAD: Estilos generales del módulo
+   ERP ICAZA 2026 — MÓDULO ÓRDENES DE TRABAJO
+   Archivo: orden.css
+   Responsabilidad: Estilos generales del módulo OT
    ====================================================== */
 
 /* ------------------------------
-   Layout general del módulo
-   ------------------------------ */
-.contenedor-ordenes {
-    padding: 15px;
+   CONTENEDOR PRINCIPAL DEL MÓDULO
+--------------------------------*/
+.contenedor-ot {
+    padding: 20px;
     background: #ffffff;
-    border: 1px solid #e0e0e0;
-    border-radius: 4px;
+    border: 1px solid #e1e1e1;
+    border-radius: 6px;
     margin-bottom: 20px;
 }
 
 /* ------------------------------
-   Títulos internos
-   ------------------------------ */
-h2, h3 {
-    color: #333;
+   TÍTULOS INTERNOS DEL MÓDULO
+--------------------------------*/
+.ot-titulo {
+    font-size: 1.25rem;
     font-weight: 600;
+    color: #003366;
     margin-bottom: 10px;
 }
 
+.ot-subtitulo {
+    font-size: 0.90rem;
+    color: #666;
+    margin-bottom: 15px;
+}
+
 /* ------------------------------
-   Botones corporativos
-   ------------------------------ */
-.btn-corp {
+   BOTONES CORPORATIVOS DEL MÓDULO
+--------------------------------*/
+.btn-ot {
     padding: 6px 12px;
     font-size: 14px;
     border-radius: 4px;
-    border: none;
-    cursor: pointer;
     font-weight: 500;
+    cursor: pointer;
 }
 
-.btn-corp-primary {
-    background-color: #0d6efd;
+.btn-ot-primary {
+    background-color: #0066cc;
     color: #fff;
+    border: none;
 }
 
-.btn-corp-success {
-    background-color: #198754;
-    color: #fff;
+.btn-ot-primary:hover {
+    background-color: #005bb5;
 }
 
-.btn-corp-warning {
-    background-color: #ffc107;
+.btn-ot-secondary {
+    background-color: #f0f0f0;
     color: #333;
+    border: 1px solid #ccc;
 }
 
-.btn-corp-danger {
-    background-color: #dc3545;
-    color: #fff;
-}
-
-.btn-corp:hover {
-    opacity: 0.85;
+.btn-ot-secondary:hover {
+    background-color: #e6e6e6;
 }
 
 /* ------------------------------
-   Contenedores de sección
-   ------------------------------ */
-.seccion {
+   SECCIONES INTERNAS
+--------------------------------*/
+.ot-seccion {
     margin-bottom: 20px;
 }
 
-.seccion-titulo {
-    font-size: 16px;
+.ot-seccion-titulo {
+    font-size: 1rem;
     font-weight: 600;
     color: #444;
     margin-bottom: 8px;
 }
 
 /* ------------------------------
-   Inputs y selects
-   ------------------------------ */
-input[type="text"],
-input[type="number"],
-select,
-textarea {
+   FORMULARIOS DEL MÓDULO
+--------------------------------*/
+.ot-label {
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 4px;
+}
+
+.ot-input {
     border: 1px solid #ccc;
-    padding: 6px 8px;
     border-radius: 4px;
+    padding: 6px 8px;
     font-size: 14px;
     width: 100%;
 }
 
-input:focus,
-select:focus,
-textarea:focus {
-    border-color: #0d6efd;
+.ot-input:focus {
+    border-color: #0066cc;
     outline: none;
 }
 
 /* ------------------------------
-   Filtros corporativos
-   ------------------------------ */
-.filtros {
-    margin-bottom: 15px;
-}
-
-.filtros label {
-    font-size: 14px;
-    font-weight: 600;
-    color: #444;
-    margin-right: 5px;
-}
-
-/* ------------------------------
-   Mensajes corporativos
-   ------------------------------ */
-.msg-ok {
+   MENSAJES CORPORATIVOS
+--------------------------------*/
+.ot-msg-ok {
     background: #d1e7dd;
     color: #0f5132;
     padding: 10px;
@@ -120,7 +109,7 @@ textarea:focus {
     margin-bottom: 10px;
 }
 
-.msg-error {
+.ot-msg-error {
     background: #f8d7da;
     color: #842029;
     padding: 10px;
@@ -129,16 +118,30 @@ textarea:focus {
 }
 
 /* ------------------------------
-   Espaciados
-   ------------------------------ */
-.mt-10 { margin-top: 10px; }
-.mt-20 { margin-top: 20px; }
-.mb-10 { margin-bottom: 10px; }
-.mb-20 { margin-bottom: 20px; }
+   ESPACIADOS CORPORATIVOS
+--------------------------------*/
+.ot-mt-10 { margin-top: 10px; }
+.ot-mt-20 { margin-top: 20px; }
+.ot-mb-10 { margin-bottom: 10px; }
+.ot-mb-20 { margin-bottom: 20px; }
 
 /* ------------------------------
-   Utilidades
-   ------------------------------ */
-.text-center { text-align: center; }
-.text-right  { text-align: right; }
-.text-left   { text-align: left; }
+   UTILIDADES
+--------------------------------*/
+.ot-text-center { text-align: center; }
+.ot-text-right  { text-align: right; }
+.ot-text-left   { text-align: left; }
+
+/* ------------------------------
+   RESPONSIVE
+--------------------------------*/
+@media (max-width: 768px) {
+    .ot-titulo {
+        font-size: 1.15rem;
+    }
+
+    .btn-ot {
+        font-size: 13px;
+        padding: 5px 10px;
+    }
+}

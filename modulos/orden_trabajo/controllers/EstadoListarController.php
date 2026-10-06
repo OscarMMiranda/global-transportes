@@ -1,23 +1,26 @@
 <?php
-// archivo: /modulos/orden_trabajo/controllers/EstadoListarController.php
+// ======================================================
+//  CONTROLLER: EstadoListarController.php
+//  MÓDULO: Órdenes de Trabajo (OT)
+//  RESPONSABILIDAD: Listar estados corporativos OT
+//  GLOBAL 2026 — Arquitectura Limpia (Versión 4.6)
+// ======================================================
 
 require_once __DIR__ . '/../../../includes/config.php';
+
 $conn = getConnection();
 
-/*
-    Este controlador devuelve la lista de estados corporativos para:
+if (!$conn) {
 
-    - editar_ot.js
-    - list.php (filtros)
-    - cualquier módulo que necesite mostrar estados
+    error_log("[ERP-OT] Error de conexión en EstadoListarController: " . date('Y-m-d H:i:s'));
 
-    Formato esperado por cargarCatalogo():
-    [
-        { "id": 1, "nombre": "Pendiente" },
-        { "id": 2, "nombre": "En proceso" },
-        ...
-    ]
-*/
+    echo json_encode(array(
+        "ok"   => false,
+        "msg"  => "Error de conexión con la base de datos",
+        "data" => array()
+    ));
+    exit;
+}
 
 $sql = "
 SELECT 
@@ -37,4 +40,10 @@ if ($res && $res->num_rows > 0) {
     }
 }
 
-echo json_encode($estados);
+echo json_encode(array(
+    "ok"   => true,
+    "msg"  => "Estados obtenidos correctamente",
+    "data" => $estados
+));
+
+exit;

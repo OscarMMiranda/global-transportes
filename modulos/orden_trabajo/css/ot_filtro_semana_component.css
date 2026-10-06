@@ -1,0 +1,14 @@
+/* ======================================================
+   CSS: ot_filtro_semana_component.css
+   RESPONSABILIDAD: Estilos del filtro de semana OT
+   GLOBAL 2026 — Arquitectura Limpia
+====================================================== */
+
+.ot-filtro-semana label {
+    font-size: 14px;
+    color: var(--ot-color-primary);
+}
+
+#ot-filtro-semana {
+    min-width: 120px;
+}

@@ -34,11 +34,13 @@ $data = $res->fetch_assoc();
 /* ============================
    FORMATEAR SEMANA
    ============================ */
-$semana_num = intval($data["semana_ot"]);
-$anio = substr($data["fecha"], 0, 4);
-$data["semana_formateada"] = "S" . str_pad($semana_num, 2, "0", STR_PAD_LEFT) . "-" . $anio;
+$semana_raw = $data["semana_ot"];       // ej: 2024-W38
+$anio = substr($semana_raw, 0, 4);      // 2024
+$semana_num = substr($semana_raw, 6, 2); // 38
+
+$data["semana_formateada"] = "S" . $semana_num . "-" . $anio;
 
 /* ============================
    CARGAR VISTA
    ============================ */
-include __DIR__ . '/../views/ver.php';
+include __DIR__ . '/../views/ver_ot.php';

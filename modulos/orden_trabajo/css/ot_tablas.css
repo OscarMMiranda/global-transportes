@@ -1,0 +1,109 @@
+/* ======================================================
+   CSS: ot_tablas.css
+   MÓDULO: Órdenes de Trabajo (OT)
+   RESPONSABILIDAD: Estilos de tablas corporativas OT
+   GLOBAL 2026 — Arquitectura Corporativa Internacional
+   Versión: 4.3
+====================================================== */
+
+/* --- CONTENEDOR GENERAL --- */
+.ot-tabla {
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+/* --- ENCABEZADOS CORPORATIVOS --- */
+.ot-tabla thead th {
+    background-color: #003049; /* Azul petróleo corporativo */
+    color: #ffffff;
+    text-align: center;
+    font-weight: 600;
+    font-size: 13px !important;
+    padding: 8px 10px !important;
+    letter-spacing: 0.2px;
+    border-bottom: 1px solid #00263a;
+    white-space: nowrap;
+}
+
+/* --- FILAS CORPORATIVAS --- */
+.ot-tabla tbody td {
+    text-align: center;
+    vertical-align: middle;
+    font-size: 12px !important;
+    padding: 6px 8px !important;
+    border-bottom: 1px solid #e9ecef;
+    color: #1b263b;
+}
+
+/* --- FILAS ALTERNADAS --- */
+.ot-tabla tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+/* --- HOVER CORPORATIVO --- */
+.ot-tabla tbody tr:hover {
+    background-color: #eaf2fa;
+    cursor: pointer;
+}
+
+/* --- BADGES CORPORATIVOS (SUAVES) --- */
+.ot-estado-activa {
+    background-color: #d1e7dd;
+    color: #0f5132;
+}
+
+.ot-estado-anulada {
+    background-color: #fff3cd;
+    color: #664d03;
+}
+
+.ot-estado-eliminada {
+    background-color: #f8d7da;
+    color: #842029;
+}
+
+/* --- BOTONES DENTRO DE TABLAS --- */
+.ot-tabla .btn {
+    font-size: 11px !important;
+    padding: 3px 6px !important;
+    border-radius: 4px !important;
+    font-weight: 500 !important;
+    line-height: 1.1 !important;
+}
+
+/* --- COMPACTACIÓN CORPORATIVA --- */
+.ot-compact td {
+    padding: 4px 6px !important;
+    font-size: 11px !important;
+}
+
+.ot-compact th {
+    padding: 6px !important;
+    font-size: 12px !important;
+}
+
+/* --- ALINEACIONES RÁPIDAS --- */
+.td-left   { text-align: left !important; }
+.td-right  { text-align: right !important; }
+.td-center { text-align: center !important; }
+
+/* --- SIN REGISTROS --- */
+.ot-sin-registros {
+    text-align: center;
+    padding: 12px !important;
+    font-size: 12px !important;
+    color: #6c757d;
+}
+
+/* --- PAGINACIÓN CORPORATIVA --- */
+.ot-pagination .paginate_button {
+    font-size: 11px !important;
+    padding: 4px 8px !important;
+    border-radius: 4px !important;
+    font-weight: 500 !important;
+    line-height: 1.1 !important;
+}

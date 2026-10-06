@@ -1,0 +1,78 @@
+/* ======================================================
+   CSS: ot_base.css
+   MÓDULO: Órdenes de Trabajo (OT)
+   RESPONSABILIDAD: Estilos base del módulo OT
+   GLOBAL 2026 — Arquitectura Limpia (Optimizado Visual)
+   Versión: 4.3
+====================================================== */
+
+/* CONTENEDOR PRINCIPAL DEL MÓDULO */
+.ot-container {
+    padding: 14px 18px !important;
+    background-color: #f7f9fc !important;
+    border-radius: 6px !important;
+    min-height: 100%;
+}
+
+/* TÍTULOS CORPORATIVOS */
+.ot-title {
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    margin-bottom: 10px !important;
+    color: #2a2a2a !important;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.ot-title i {
+    font-size: 15px !important;
+    color: var(--corp-primary, #0d6efd);
+}
+
+/* SUBTÍTULOS CORPORATIVOS */
+.ot-subtitle {
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    margin-bottom: 8px !important;
+    color: #555 !important;
+}
+
+/* FILTROS SUPERIORES */
+.ot-filtros {
+    margin-bottom: 12px !important;
+}
+
+/* BOTONES CORPORATIVOS */
+.btn-ot {
+    font-size: 12px !important;
+    padding: 4px 10px !important;
+    border-radius: 4px !important;
+    line-height: 1.1 !important;
+}
+
+/* SEPARADORES CORPORATIVOS */
+.ot-separator {
+    border-bottom: 1px solid #dcdcdc !important;
+    margin: 10px 0 !important;
+}
+
+/* MENSAJES CORPORATIVOS */
+.ot-msg {
+    font-size: 12px !important;
+    margin-top: 8px !important;
+    color: #555 !important;
+}
+
+/* LOADER GENERAL DEL MÓDULO */
+#ot-loader-global {
+    display: none;
+    text-align: center !important;
+    margin-top: 14px !important;
+}
+
+#ot-loader-global .spinner-border {
+    width: 1.6rem !important;
+    height: 1.6rem !important;
+    color: var(--corp-primary, #0d6efd) !important;
+}

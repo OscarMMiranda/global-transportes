@@ -1,0 +1,14 @@
+/* ======================================================
+   CSS: ot_modal_restaurar_component.css
+   RESPONSABILIDAD: Estilos del modal de restauración OT
+   GLOBAL 2026 — Arquitectura Limpia
+====================================================== */
+
+#ot-modal-restaurar .modal-title {
+    font-size: 17px;
+}
+
+#ot-modal-restaurar p,
+#ot-modal-restaurar .alert {
+    font-size: 13px;
+}

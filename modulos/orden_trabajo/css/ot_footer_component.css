@@ -1,0 +1,32 @@
+/* ======================================================
+   CSS: ot_footer_component.css
+   RESPONSABILIDAD: Estilos del pie corporativo OT
+   GLOBAL 2026 — Arquitectura Limpia (Versión Internacional)
+====================================================== */
+
+/* --- Contenedor principal del footer --- */
+.ot-footer {
+    background: var(--ot-color-card-bg);
+    border: 1px solid var(--ot-color-divider);
+    border-radius: var(--ot-radius);
+    box-shadow: var(--ot-shadow-sm);
+}
+
+/* --- Contenido del footer --- */
+.ot-footer-content {
+    font-size: 13px;
+    color: var(--ot-color-muted);
+    padding: var(--ot-padding-md);
+}
+
+/* --- Información corporativa --- */
+.ot-footer-info span {
+    color: var(--ot-color-primary);
+    font-weight: 600;
+}
+
+/* --- Línea divisoria opcional (si se usa en el footer) --- */
+.ot-footer-divider {
+    border-top: 1px solid var(--ot-color-divider);
+    margin-top: var(--ot-padding-md);
+}

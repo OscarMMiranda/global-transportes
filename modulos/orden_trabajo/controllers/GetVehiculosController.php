@@ -1,23 +1,28 @@
 <?php
-	//	archivo: modulos/orden_trabajo/controllers/GetVehiculosController.php
+// ============================================================
+// CONTROLADOR: GetVehiculosController.php
+// RESPONSABILIDAD: Obtener tractos disponibles para una fecha
+// ARQUITECTURA LIMPIA — PHP 5.6 COMPATIBLE
+// ============================================================
 
 require_once __DIR__ . '/../../../includes/config.php';
 $conn = getConnection();
 
 header('Content-Type: application/json');
 
-$fecha_viaje = isset($_POST['fecha_viaje']) ? $_POST['fecha_viaje'] : null;
+/* ============================================================
+   VALIDAR INPUT
+   ============================================================ */
+$fecha_viaje = isset($_POST['fecha_viaje']) ? trim($_POST['fecha_viaje']) : "";
 
-if (!$fecha_viaje) {
+if ($fecha_viaje === "") {
     echo json_encode(["ok" => false, "msg" => "Fecha de viaje no recibida"]);
     exit;
 }
 
-/*
-   TRACTOS REALES SEGÚN TU BD:
-   tipo_id IN (7, 8)
-*/
-
+/* ============================================================
+   SQL: TRACTOS ACTIVOS + ASIGNACIÓN VÁLIDA EN LA FECHA
+   ============================================================ */
 $sql = "
 SELECT 
     v.id,
@@ -35,22 +40,34 @@ AND v.tipo_id IN (7, 8)
 ORDER BY v.placa ASC
 ";
 
+/* ============================================================
+   EJECUTAR CONSULTA
+   ============================================================ */
 $res = $conn->query($sql);
 
 if (!$res) {
-    echo json_encode(["ok" => false, "msg" => $conn->error]);
+    echo json_encode([
+        "ok"  => false,
+        "msg" => "Error SQL: " . $conn->error
+    ]);
     exit;
 }
 
-$data = [];
+/* ============================================================
+   ARMAR RESPUESTA
+   ============================================================ */
+$data = array();
 
 while ($row = $res->fetch_assoc()) {
-    $data[] = [
+    $data[] = array(
         "id"    => intval($row["id"]),
         "placa" => $row["placa"]
-    ];
+    );
 }
 
+/* ============================================================
+   RESPUESTA FINAL
+   ============================================================ */
 echo json_encode([
     "ok"   => true,
     "data" => $data

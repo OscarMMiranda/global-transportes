@@ -1,5 +1,10 @@
 <?php
-// ARCHIVO: /modulos/orden_trabajo/controllers/ActualizarController.php
+// ======================================================
+//  CONTROLADOR: ActualizarController.php
+//  MÓDULO: Órdenes de Trabajo (OT)
+//  RESPONSABILIDAD: Actualizar OT existente
+//  GLOBAL 2026 — Arquitectura Limpia
+// ======================================================
 
 require_once __DIR__ . '/../../../includes/config.php';
 $conn = getConnection();
@@ -49,36 +54,49 @@ $numero_booking = isset($_POST["numero_booking"]) ? trim($_POST["numero_booking"
 $otros          = isset($_POST["otros"]) ? trim($_POST["otros"]) : null;
 
 // ===============================
-// CALCULAR SEMANA ISO
+// CALCULAR SEMANA ISO CORPORATIVA
 // ===============================
-$semana_ot = intval(date('W', strtotime($fecha)));
-if ($semana_ot <= 0) { $semana_ot = 1; }
+$weekNumber = date('W', strtotime($fecha));     // 02
+$yearNumber = date('o', strtotime($fecha));     // 2026 (ISO year)
+
+$semana_ot = 'S' . str_pad($weekNumber, 2, '0', STR_PAD_LEFT) . '-' . $yearNumber;
+
+
+
+// ===============================
+// OBTENER NOMBRE DEL TIPO DE OT
+// ===============================
+$sqlTipo = "SELECT nombre FROM tipo_ot WHERE id = $tipo_ot_id LIMIT 1";
+$resTipo = $conn->query($sqlTipo);
+
+if (!$resTipo || $resTipo->num_rows === 0) {
+    echo json_encode(["ok" => false, "msg" => "Tipo de OT inválido."]);
+    exit;
+}
+
+$tmp = $resTipo->fetch_assoc();
+$tipoNombre = strtoupper($tmp["nombre"]);
 
 // ===============================
 // LIMPIAR CAMPOS SEGÚN TIPO DE OT
 // ===============================
-$sqlTipo = "SELECT nombre FROM tipo_ot WHERE id = $tipo_ot_id LIMIT 1";
-$resTipo = $conn->query($sqlTipo);
-$tipoNombre = "";
+switch ($tipoNombre) {
+    case "IMPORTACION":
+    case "IMPORTACIÓN":
+        $numero_booking = null;
+        $otros = null;
+        break;
 
-if ($resTipo && $resTipo->num_rows > 0) {
-    $tmp = $resTipo->fetch_assoc();
-    $tipoNombre = strtoupper($tmp["nombre"]);
-}
+    case "EXPORTACION":
+    case "EXPORTACIÓN":
+        $numero_dam = null;
+        $otros = null;
+        break;
 
-if ($tipoNombre === "IMPORTACION" || $tipoNombre === "IMPORTACIÓN") {
-    $numero_booking = null;
-    $otros = null;
-}
-
-if ($tipoNombre === "EXPORTACION" || $tipoNombre === "EXPORTACIÓN") {
-    $numero_dam = null;
-    $otros = null;
-}
-
-if ($tipoNombre === "NACIONAL") {
-    $numero_dam = null;
-    $numero_booking = null;
+    case "NACIONAL":
+        $numero_dam = null;
+        $numero_booking = null;
+        break;
 }
 
 // ===============================

@@ -1,0 +1,52 @@
+/* ======================================================
+   CSS: ot_botones_superiores.css
+   RESPONSABILIDAD: Compactación de botones superiores OT
+   GLOBAL 2026 — Arquitectura Corporativa Internacional
+   Versión: 4.2
+====================================================== */
+
+/* CONTENEDOR PRINCIPAL */
+[data-componente="botones_superiores"] {
+    margin-bottom: 6px !important;
+    padding: 4px 0 !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+/* CONTENEDORES INTERNOS */
+[data-componente="botones_superiores"] > div {
+    margin-bottom: 2px !important;
+}
+
+/* BOTONES CORPORATIVOS */
+[data-componente="botones_superiores"] .btn {
+    padding: 3px 8px !important;
+    font-size: 12px !important;
+    line-height: 1.1 !important;
+    border-radius: 4px !important;
+}
+
+/* ÍCONOS */
+[data-componente="botones_superiores"] .btn i {
+    margin-right: 3px !important;
+    font-size: 11px !important;
+}
+
+/* GAP CORPORATIVO ENTRE BOTONES */
+[data-componente="botones_superiores"] .gap-2 {
+    gap: 6px !important;
+}
+
+/* EVITAR WRAP EN ESCRITORIO */
+[data-componente="botones_superiores"] .d-flex {
+    flex-wrap: nowrap !important;
+}
+
+/* PERMITIR WRAP EN MÓVIL */
+@media (max-width: 768px) {
+    [data-componente="botones_superiores"] .d-flex {
+        flex-wrap: wrap !important;
+    }
+}
